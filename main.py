@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # This is a sample Python script.
 
 # Press Maiusc+F10 to execute it or replace it with your code.
@@ -16,3 +17,6 @@ if __name__ == '__main__':
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
 #riga di prova ATTENTION PLEASE
+=======
+ggggggg
+>>>>>>> 0fd3263dd6e36dc6bcd9cc5dca44091bcfbaaa5d
