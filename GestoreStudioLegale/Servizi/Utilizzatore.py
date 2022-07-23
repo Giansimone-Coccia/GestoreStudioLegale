@@ -6,27 +6,27 @@ class Utilizzatore:
     def __init__(self):
         self.codiceFiscale = codiceFiscale
         self.cognome = cognome
-        self.nome = nome
+        self.corsoAggiornamento = corsoAggiornamento
         self.dataNascita = datetime.datetime(year=1970, month=1, day=1)
         self.email = email
-        self.id = id
+        self.Id = Id
+        self.nome = nome
         self.numeroTelefono = numeroTelefono
         self.password = password
         self.udienza = udienza
-        self.corsoAggiornamento = corsoAggiornamento
 
-    def creaUtilizzatore(self, codiceFiscale, cognome, nome, dataNascita, email, id, numeroTelefono, password, udienza,
-                         corsoAggiornamento):
+    def creaUtilizzatore(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
+                         udienza,):
         self.codiceFiscale = codiceFiscale
         self.cognome = cognome
-        self.nome = nome
+        self.corsoAggiornamento = corsoAggiornamento
         self.dataNascita = dataNascita
         self.email = email
-        self.id = id
+        self.Id = Id
+        self.nome = nome
         self.numeroTelefono = numeroTelefono
         self.password = password
         self.udienza = udienza
-        self.corsoAggiornamento = corsoAggiornamento
 
     def getInfoUtilizzatore(self):
         return {
