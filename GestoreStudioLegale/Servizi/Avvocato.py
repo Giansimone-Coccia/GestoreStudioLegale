@@ -24,7 +24,7 @@ class Avvocato(Utilizzatore.Utilizzatore):
             with open('Dati\Avvocati.pickle', 'rb') as f:
                 avvocati = pickle.load(f)
         avvocati[Id] = self
-        with open('Dati\Bagnini.pickle', 'wb') as f:
+        with open('Dati\Avvocati.pickle', 'wb') as f:
             pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
     def getDatiAvvocato(self, avvocati):
