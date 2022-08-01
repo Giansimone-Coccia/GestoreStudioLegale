@@ -1,5 +1,9 @@
 import pickle
 import os.path
+from datetime import datetime,timedelta,time
+
+from Servizi.Udienza import Udienza
+from Servizi.Appuntamento import Appuntamento
 
 class Statistiche:
 
@@ -12,9 +16,69 @@ class Statistiche:
         self.numeroAppuntamenti = 0
 
     def calcolaStatistiche(self):
-        self.salvaSuFile()
 
-    def mostraGrafico(self):
+        nUdienzeAmminsitrative=0
+        nUdienzeCivili=0
+        nUdienzeMinorili=0
+        nUdienzePenali=0
+        nUdienze=0
+        nAppuntamenti=0
+
+        def breve(lista,tribunale,nUdienze,nGiorni):
+            for i in lista:
+                if i.getDatiUdienza['Tipo Tribunale'] == tribunale:
+                    a = str(datetime.now())
+                    b = str(i.getDatiUdienza['Data e Ora Inizio'])
+                    aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
+                    aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
+                    bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
+                    bbb = datetime.datetime.fromtimestamp(time.mktime(bb))
+                    if (aaa - bbb).days < nGiorni:
+                        nUdienze += 1
+
+        if os.path.isfile('Dati\Udienze.pickle'):
+            with open('Dati\Udienze.pickle', 'rb') as f:
+                udienze = dict(pickle.load(f))
+
+            breve(udienze,'Tribunale Amministrativo',nUdienzeAmminsitrative,365)
+            breve(udienze, 'Tribunale Civile', nUdienzeCivili, 365)
+            breve(udienze, 'Tribunale Penale', nUdienzePenali, 365)
+            breve(udienze, 'Tribunale Minorile', nUdienzeMinorili, 365)
+
+            self.mediaUdienzeCivili = nUdienzeCivili/12
+            self.mediaUdienzePenali = nUdienzePenali/12
+            self.mediaUdienzeMinorili = nUdienzeMinorili/12
+            self.mediaUdienzeAmministrative = nUdienzeAmminsitrative/12
+
+            for i in udienze:
+                a = str(datetime.now())
+                b = str(i.getDatiUdienza['Data e Ora Inizio'])
+                aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
+                aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
+                bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
+                bbb = datetime.datetime.fromtimestamp(time.mktime(bb))
+                if (aaa - bbb).days < 365:
+                    nUdienze += 1
+
+            self.mediaUdienzeMensile = nUdienze/12
+
+        if os.path.isfile('Dati\Appuntamenti.pickle'):
+        with open('Dati\Appuntamenti.pickle', 'rb') as f:
+            appuntamenti = dict(pickle.load(f))
+
+            for i in appuntamenti:
+                a = str(datetime.now())
+                b = str(i.getDatiAppuntamento['Data e Ora Inizio'])
+                aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
+                aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
+                bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
+                bbb = datetime.datetime.fromtimestamp(time.mktime(bb))
+                if (aaa - bbb).days < 365:
+                    nAppuntamenti += 1
+
+            self.numeroAppuntamenti=nAppuntamenti
+
+    def mostraGrafico(self): #non lo so
 
     def salvaSuFile (self):
         stats = {
@@ -27,7 +91,6 @@ class Statistiche:
         }
         with open('Dati\Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
-
 
     def mostraStatistiche(self):
         self.calcolaStatistiche()

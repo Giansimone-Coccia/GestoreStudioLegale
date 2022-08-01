@@ -39,7 +39,7 @@ class Avvocato(Utilizzatore.Utilizzatore):
             with open('Dati\Avvocati.pickle', 'rb') as f:
                 avvocati = dict(pickle.load(f))
                 for avvocato in avvocati.values():
-                    if avvocato.Id == Id:
+                    if avvocato.Id == id:
                         return avvocato
                 return None
         else:
