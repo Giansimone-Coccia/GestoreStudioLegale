@@ -2,8 +2,10 @@ import pickle
 import os.path
 from datetime import datetime,timedelta,time
 
-from Servizi.Udienza import Udienza
-from Servizi.Appuntamento import Appuntamento
+# from Servizi.Udienza import Udienza
+# from Servizi.Appuntamento import Appuntamento
+from GestoreStudioLegale.Servizi import Udienza
+from GestoreStudioLegale.Servizi import Appuntamento
 
 class Statistiche:
 

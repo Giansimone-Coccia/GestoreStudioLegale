@@ -1,4 +1,4 @@
-from Servizi.Utilizzatore import Utilizzatore
+import Utilizzatore
 import pickle
 import os.path
 
@@ -10,6 +10,7 @@ class Cliente(Utilizzatore):
         self.parcelle = []
 
     def aggiornaCliente(self): #Chiedi per questa
+
 
     def aggiungiCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                         appuntamentoCliente, parcelle):
@@ -64,7 +65,7 @@ class Cliente(Utilizzatore):
         else:
             return None
 
-    def rimuoviCliente(self, Id):   #Anche quì suppongo una ricerca per Id
+    def rimuoviCliente(self, Id):   #Anche quì suppongo una ricerca per Id oppure passo direttamente l'oggetto, da vedere
         if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'wb+') as f:
                 clienti = dict(pickle.load(f))
@@ -76,7 +77,7 @@ class Cliente(Utilizzatore):
             self.parcelle = None
             del self
 
-    def visualizzaCliente(self, Id):
+    def visualizzaCliente(self, Id): #Stessa cosa del metodo precedente
         if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'rb') as f:
                 clienti = dict(pickle.load(f))
