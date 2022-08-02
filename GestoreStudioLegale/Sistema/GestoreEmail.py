@@ -45,7 +45,7 @@ class GestoreEmail:
             time.sleep(300)
 
 
-        if now = dataInvio:
+        if now == dataInvio:
             #inizio la connesione con il server della mia email (ancora da definire)
             smtp = smtplib.SMTP('smtp.gmail.com', 587)
             smtp.ehlo()
