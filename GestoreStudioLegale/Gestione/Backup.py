@@ -3,7 +3,7 @@ import os.path
 import datetime
 import os
 
-class Backup:
+class Backup():
 
     def __init__(self):
         self.data = datetime.datetime(year=1970, month=1, day=1)

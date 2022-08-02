@@ -1,20 +1,20 @@
 import datetime
 
-from Servizi.Cliente import Cliente
-from Servizi.Avvocato import Avvocato
+import Cliente
+import Avvocato
 import pickle
 import os.path
 
-class Udienza(Udienza):
+class Udienza():
 
     def __init__(self):
        self.Cliente = Cliente
        self.Avvocato = Avvocato
-       self.cittaTribunale = []
-       self.ID = []
+       self.cittaTribunale = ''
+       self.ID = ''
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       self.tipoTribunale = []
+       self.tipoTribunale = ''
 
     def aggiornaUdienza
 

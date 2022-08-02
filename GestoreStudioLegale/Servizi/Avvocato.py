@@ -1,8 +1,8 @@
-from Servizi.Utilizzatore import Utilizzatore
+import Utilizzatore
 import pickle
 import os.path
 
-class Avvocato(Utilizzatore.Utilizzatore):
+class Avvocato(Utilizzatore):
 
     def __init__(self):
         super(Avvocato, self).__init__()
@@ -12,13 +12,15 @@ class Avvocato(Utilizzatore.Utilizzatore):
 
     def aggiornaAvvocato(self): #Chiedi per questa
 
+
     def aggiungiAvvocato(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
-                         udienza, clienti, licenza):
+                         udienza, clienti, licenza, appuntamentoAvvocato):
         self.creaUtilizzatore(codiceFiscale = codiceFiscale, cognome = cognome, corsoAggiornamento = corsoAggiornamento,
                               dataNascita = dataNascita, email = email, Id = Id, numeroTelefono = numeroTelefono,
                               password = password, udienza = udienza)
         self.clienti = clienti
         self.licenza = licenza
+        self.appuntamentiAvvocato = appuntamentoAvvocato
         avvocati = {}
         if os.path.isfile('Dati\Avvocati.pickle'):
             with open('Dati\Avvocati.pickle', 'rb') as f:
@@ -76,8 +78,9 @@ class Avvocato(Utilizzatore.Utilizzatore):
                     pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
             self.rimuoviUtilizzatore()
             self.licenza = None
-            self.udienza = None
+            #self.udienza = None #Vedere se aggiungere la lista delle udienze
             self.clienti = None
+            self.appuntamentiAvvocato = None
             del self
 
     def visualizzaAvvocato(self, Id): #Ricerca tramite Id, quindi modifica in EA

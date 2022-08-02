@@ -1,15 +1,15 @@
-from Servizi.Cliente import Cliente
+import Cliente
 import pickle
 import os.path
 
-class Parcella(Parcella):
+class Parcella():
 
     def __init__(self):
        self.Cliente = Cliente
-       self.ID = []
+       self.ID = ''
        self.identificativo = 0
        self.importo = 0
-       self.intestatario = []
+       self.intestatario = ''
 
     def aggiornaParcella
 
@@ -33,7 +33,7 @@ class Parcella(Parcella):
             'ID': self.ID,
         }
 
-    def ricercaParcellaCliente (self, Cliente):
+    def ricercaParcellaCliente (self, Cliente): #Prende una stringa come parametro, cambiare in EA
         if os.path.isfile('Dati\Parcelle.pickle'):
             with open('Dati\Parcelle.pickle', 'rb') as f:
                 parcelle = dict(pickle.load(f))

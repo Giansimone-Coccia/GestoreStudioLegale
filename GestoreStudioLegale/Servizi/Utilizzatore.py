@@ -4,19 +4,19 @@ from abc import abstractmethod
 class Utilizzatore:
 
     def __init__(self):
-        self.codiceFiscale = codiceFiscale
-        self.cognome = cognome
-        self.corsoAggiornamento = corsoAggiornamento
+        self.codiceFiscale = ''
+        self.cognome = ''
+        self.corsoAggiornamento = None
         self.dataNascita = datetime.datetime(year=1970, month=1, day=1)
-        self.email = email
-        self.Id = Id
-        self.nome = nome
-        self.numeroTelefono = numeroTelefono
-        self.password = password
-        self.udienza = udienza
+        self.email = ''
+        self.Id = ''
+        self.nome = ''
+        self.numeroTelefono = 0
+        self.password = ''
+        self.udienza = None
 
     def creaUtilizzatore(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
-                         udienza,):
+                         udienza, nome):
         self.codiceFiscale = codiceFiscale
         self.cognome = cognome
         self.corsoAggiornamento = corsoAggiornamento

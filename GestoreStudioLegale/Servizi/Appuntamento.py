@@ -1,17 +1,17 @@
 import datetime
 
-from Servizi.Cliente import Cliente
+import Cliente
 import pickle
 import os.path
 
-class Appuntamento(Appuntamento):
+class Appuntamento():
 
     def __init__(self):
        self.Cliente = Cliente
        self.ID = []
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       self.tipoProcedimento = []
+       self.tipoProcedimento = ''
 
     def aggiornaAppuntamento
 
@@ -38,7 +38,7 @@ class Appuntamento(Appuntamento):
             'Tipo Procedimento': self.tipoProcedimento
         }
 
-    def ricercaAppuntamentoCliente (self, Cliente):
+    def ricercaAppuntamentoCliente (self, Cliente): #Il parametro deve essere una stringa
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = dict(pickle.load(f))
