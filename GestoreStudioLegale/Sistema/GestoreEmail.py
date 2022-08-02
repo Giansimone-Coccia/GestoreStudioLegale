@@ -1,9 +1,10 @@
-import datetime
+from datetime import datetime, timedelta
 from Servizi.Cliente import Cliente
 from Servizi.Appuntamento import Appuntamento
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
+import time
 import os
 
 class GestoreEmail:
@@ -33,32 +34,41 @@ class GestoreEmail:
                 return None
         """
 
+
     #il cliente come attributo?
     def invioEmail(self):
 
-        #inizio la connesione con il server della mia email (ancora da definire)
-        smtp = smtplib.SMTP('smtp.gmail.com', 587)
-        smtp.ehlo()
-        smtp.starttls()
+        # dataInvio = appuntamento del cliente - timedelta(days=1)
 
-        #faccio il login
-        smtp.login('YourMail@gmail.com', 'Your Password')
+        while now != dataInvio:
+            now = datetime.now()
+            time.sleep(300)
 
-        msg = MIMEMultipart()
 
-        #oggetto dell'email
-        msg['Subject'] = subject
+        if now = dataInvio:
+            #inizio la connesione con il server della mia email (ancora da definire)
+            smtp = smtplib.SMTP('smtp.gmail.com', 587)
+            smtp.ehlo()
+            smtp.starttls()
 
-        #contenuto testuale
-        msg.attach(MIMEText(text))
+            #faccio il login
+            smtp.login('YourMail@gmail.com', 'Your Password')
 
-        #utilizzatore?
-        to = Cliente.email
+            msg = MIMEMultipart()
 
-        smtp.sendmail(from_addr="hello@gmail.com",
+            #oggetto dell'email
+            msg['Subject'] = subject
+
+            #contenuto testuale
+            msg.attach(MIMEText(text))
+
+            #utilizzatore?
+            to = Cliente.email
+
+            smtp.sendmail(from_addr="hello@gmail.com",
                       to_addrs=to, msg=msg.as_string())
 
-        smtp.quit()
+            smtp.quit()
 
 
 
