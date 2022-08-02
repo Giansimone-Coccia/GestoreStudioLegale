@@ -80,4 +80,13 @@ class CorsoAggiornamento:
         else:
             return None
 
+    #il codice è l'ID? (id=int, codice=str)
+    def rimuoviCorso (self, CorsoAggiornamento):
+        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
+            with open('Dati\CorsiAggiornamento.pickle', 'wb+') as f:
+                corsiAggiornamento = dict(pickle.load(f))
+                if self.ricercaUdienzaCodice(CorsoAggiornamento.codice()):
+                    del corsiAggiornamento[self.ID]
+                    pickle.dump(corsiAggiornamento, f, pickle.HIGHEST_PROTOCOL)
+
 
