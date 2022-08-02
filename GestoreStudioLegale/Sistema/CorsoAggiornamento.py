@@ -13,7 +13,22 @@ class CorsoAggiornamento:
        self.tipo = []
 
 
-    #non dovrebbe avere un ID?
+    #non manca la creazione del corso? il nome? il codice?
+    """
+        def aggiungiCorso(self, crediti, ID, dataOraInizio, dataOraFine, tipo ):
+        self.crediti = crediti
+        self.ID = ID
+        self.dataOraInizio = dataOraInizio
+        self.dataOraFine = dataOraFine
+        self.tipo = tipo
+        
+         if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
+            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+                corsiAggiornamento = pickle.load(f)
+            corsiAggiornamento[ID] = self
+        with open('Dati\CorsiAggiornamento.pickle', 'wb') as f:
+            pickle.dump(corsiAggiornamento, f, pickle.HIGHEST_PROTOCOL)
+    """
     def aggiungiCorso(self):
         if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
             with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
@@ -31,4 +46,38 @@ class CorsoAggiornamento:
             'Tipo Corso': self.tipo,
         }
 
-    def
+    #codice?
+    def ricercaCorsoCodice(self, codice):
+        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
+            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+                corsiAggiornamento = dict(pickle.load(f))
+                for corsiAggiornamento in corsiAggiornamento.values():
+                    if corsiAggiornamento.codice == codice:
+                        return corsoAggiornamento
+                return None
+        else:
+            return None
+
+    def ricercaCorsoNome(self, nome):
+        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
+            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+                corsiAggiornamento = dict(pickle.load(f))
+                for corsiAggiornamento in corsiAggiornamento.values():
+                    if corsiAggiornamento.nome == nome:
+                        return corsoAggiornamento
+                return None
+        else:
+            return None
+
+    def ricercaCorsoTipo(self, tipo):
+        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
+            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+                corsiAggiornamento = dict(pickle.load(f))
+                for corsiAggiornamento in corsiAggiornamento.values():
+                    if corsiAggiornamento.tipo == tipo:
+                        return corsoAggiornamento
+                return None
+        else:
+            return None
+
+
