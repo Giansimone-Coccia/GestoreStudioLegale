@@ -13,7 +13,7 @@ class Appuntamento():
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoProcedimento = ''
 
-    def aggiornaAppuntamento
+    def aggiornaAppuntamento(self):
 
     def creaAppuntamento(self, Cliente, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
         self.Cliente = Cliente
@@ -81,7 +81,7 @@ class Appuntamento():
                     pickle.dump(appuntamenti, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def visualizzaParcella (self, ID)
+    def visualizzaParcella (self, ID):
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = dict(pickle.load(f))

@@ -11,7 +11,7 @@ class Parcella():
        self.importo = 0
        self.intestatario = ''
 
-    def aggiornaParcella
+    def aggiornaParcella(self):
 
     def creaParcella(self, Cliente, ID, importo, intestatario ):
         self.Cliente = Cliente
@@ -75,7 +75,7 @@ class Parcella():
                     pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def visualizzaParcella (self, ID)
+    def visualizzaParcella (self, ID):
         if os.path.isfile('Dati\Parcelle.pickle'):
             with open('Dati\Parcelle.pickle', 'rb') as f:
                 parcelle = dict(pickle.load(f))

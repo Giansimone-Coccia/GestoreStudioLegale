@@ -16,7 +16,7 @@ class Udienza():
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoTribunale = ''
 
-    def aggiornaUdienza
+    def aggiornaUdienza(self):
 
     def creaUdienza(self, Avvocato, cittaTribunale, Cliente, dataOraInizio, dataOraFine, ID, tipoTribunale ):
         self.Avvocato = Avvocato
@@ -98,7 +98,7 @@ class Udienza():
                     pickle.dump(udienze, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def visualizzaParcella (self, ID)
+    def visualizzaParcella (self, ID):
         if os.path.isfile('Dati\Udienze.pickle'):
             with open('Dati\Udienze.pickle', 'rb') as f:
                 udienze = dict(pickle.load(f))
