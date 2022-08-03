@@ -1,6 +1,7 @@
-import Utilizzatore
+from GestoreStudioLegale.Servizi.Utilizzatore import Utilizzatore
 import pickle
 import os.path
+import datetime
 
 class Cliente(Utilizzatore):
 
@@ -9,22 +10,51 @@ class Cliente(Utilizzatore):
         self.appuntamentoCliente = []
         self.parcelle = []
 
-    def aggiornaCliente(self): #Chiedi per questa
+
+    #Vedere se può modificare tutti o solo alcuni attributi
+    def aggiornaCliente(self, codiceFiscale = '', cognome = '', dataNascita = datetime.datetime(year=1970, month=1, day=1),
+                        email = '', nome = '', numTelefono = 0, password = '',appuntamentoCliente = None): #Modifica in EA
+        if codiceFiscale != '':
+            self.codiceFiscale = codiceFiscale
+        elif cognome != '':
+            self.cognome = cognome
+        #elif corsoAggiornamento != None:
+            #self.corsoAggiornamento = corsoAggiornamento
+        elif dataNascita != datetime.datetime(year=1970, month=1, day=1):
+            self.dataNascita = dataNascita
+        elif email != '':
+            self.email = email
+        #elif Id != '':
+            #self.Id = Id
+        elif nome != '':
+            self.nome = nome
+        elif numTelefono != 0:
+            self.numeroTelefono = numTelefono
+        elif password != '':
+            self.password = password
+        #elif udienza is not None:
+            #self.udienza = udienza
+        #elif parcelle is not None:
+            #self.parcelle = parcelle
+        elif appuntamentoCliente is not None:
+            self.appuntamentoCliente = appuntamentoCliente
+        return self
 
 
     def aggiungiCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                         appuntamentoCliente, parcelle):
-        self.aggiungiUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
+        self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
                                   password) #Messi in ordine, così non utilizzo l'='
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
         clienti = {}
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 clienti = pickle.load(f)
         clienti[Id] = self
-        with open('Dati\Clienti.pickle', 'wb') as f:
+        with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+
 
     def getDatiCliente(self, clienti):
         d = self.getInfoUtilizzatore()
@@ -32,9 +62,10 @@ class Cliente(Utilizzatore):
         d['parcelle'] = self.parcelle
         return d
 
+
     def ricercaUtilizzatoreEmail(self, email):
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.email == email:
@@ -43,9 +74,10 @@ class Cliente(Utilizzatore):
         else:
             return None
 
+
     def ricercaUtilizzatoreId(self, Id):
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.Id == Id:
@@ -54,9 +86,10 @@ class Cliente(Utilizzatore):
         else:
             return None
 
+
     def ricercaUtilizzatoreNomeCognome(self, nome, cognome):
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.nome == nome and cliente.cognome == cognome:
@@ -65,9 +98,10 @@ class Cliente(Utilizzatore):
         else:
             return None
 
+
     def rimuoviCliente(self, Id):   #Anche quì suppongo una ricerca per Id oppure passo direttamente l'oggetto, da vedere
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'wb+') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb+') as f:
                 clienti = dict(pickle.load(f))
                 if self.ricercaUtilizzatoreId(Id):
                     del clienti[self.Id]
@@ -77,9 +111,10 @@ class Cliente(Utilizzatore):
             self.parcelle = None
             del self
 
+
     def visualizzaCliente(self, Id): #Stessa cosa del metodo precedente
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.Id == Id:

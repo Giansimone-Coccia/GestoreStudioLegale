@@ -1,4 +1,4 @@
-import Cliente
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 import pickle
 import os.path
 

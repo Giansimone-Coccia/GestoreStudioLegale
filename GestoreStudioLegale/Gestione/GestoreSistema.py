@@ -1,7 +1,7 @@
 import pickle
 import os.path
-from GestoreStudioLegale.Servizi import Cliente
-from GestoreStudioLegale.Servizi import Avvocato
+from GestoreStudioLegale.Servizi.Cliente import Cliente
+from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 
 class GestoreSistema:
 

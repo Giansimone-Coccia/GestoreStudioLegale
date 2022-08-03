@@ -4,8 +4,8 @@ from datetime import datetime,timedelta,time
 
 # from Servizi.Udienza import Udienza
 # from Servizi.Appuntamento import Appuntamento
-from GestoreStudioLegale.Servizi import Udienza
-from GestoreStudioLegale.Servizi import Appuntamento
+from GestoreStudioLegale.Servizi.Udienza import Udienza
+from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 
 class Statistiche:
 

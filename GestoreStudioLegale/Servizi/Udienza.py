@@ -1,11 +1,11 @@
 import datetime
 
-import Cliente
-import Avvocato
+from GestoreStudioLegale.Servizi.Cliente import Cliente
+from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 import pickle
 import os.path
 
-class Udienza():
+class Udienza:
 
     def __init__(self):
        self.Cliente = None
