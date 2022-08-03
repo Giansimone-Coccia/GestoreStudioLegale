@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from Servizi.Cliente import Cliente
-from Servizi.Appuntamento import Appuntamento
+from GestoreStudioLegale.Servizi.Cliente import Cliente
+from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
@@ -11,7 +11,7 @@ class GestoreEmail:
 
     def __init__(self):
        self.Cliente = Cliente
-       self.contenuto = []
+       self.contenuto = ''
        self.dataOra = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
 
     #se voglio fare la verifica sul cliente dovrei inserirlo negli attributi
@@ -21,25 +21,17 @@ class GestoreEmail:
 
         #cliente come parametro?
     def getDatiAppuntamento(self):
-
-        """
-            if os.path.isfile('Dati\Appuntamenti.pickle'):
-                with open('Dati\Appuntamenti.pickle', 'rb') as f:
-                    appuntamenti = dict(pickle.load(f))
-                    for appuntamento in appuntamenti.values():
-                        if appuntamento.Cliente is Cliente:
-                            return appuntamento
-                    return None
-            else:
-                return None
-        """
+        return self.Appuntamento.getDatiAppuntamento()
 
 
     #il cliente come attributo?
     def invioEmail(self):
 
-        # dataInvio = appuntamento del cliente - timedelta(days=1)
+        dataInvio = self.getDatiAppuntamento().get('Data e Ora Inizio', None) - timedelta(days=1) #riguarda il delta
 
+        now = datetime.now()
+
+        #metterlo nel main
         while now != dataInvio:
             now = datetime.now()
             time.sleep(300)
@@ -60,10 +52,10 @@ class GestoreEmail:
             msg['Subject'] = subject
 
             #contenuto testuale
-            msg.attach(MIMEText(text))
+            msg.attach(MIMEText('Le ricordiamo che il suo appuntamento è in data: ' + self.getDatiAppuntamento().get('Data e Ora Inizio', None)))
 
             #utilizzatore?
-            to = Cliente.email
+            to = self.Cliente.getInfoUtilizzatore().get('email', None)
 
             smtp.sendmail(from_addr="hello@gmail.com",
                       to_addrs=to, msg=msg.as_string())
