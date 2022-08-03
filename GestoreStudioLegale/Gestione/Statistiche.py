@@ -28,9 +28,9 @@ class Statistiche:
 
         def breve(lista,tribunale,nUdienze,nGiorni):
             for i in lista:
-                if i.getDatiUdienza['Tipo Tribunale'] == tribunale:
+                if i.getDatiUdienza.get('Tipo Tribunale',None) == tribunale:
                     a = str(datetime.now())
-                    b = str(i.getDatiUdienza['Data e Ora Inizio'])
+                    b = str(i.getDatiUdienza.get('Data e Ora Inizio',None))
                     aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
                     aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
                     bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
@@ -54,7 +54,7 @@ class Statistiche:
 
             for i in udienze:
                 a = str(datetime.now())
-                b = str(i.getDatiUdienza['Data e Ora Inizio'])
+                b = str(i.getDatiUdienza.get('Data e Ora Inizio',None))
                 aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
                 aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
                 bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
@@ -70,7 +70,7 @@ class Statistiche:
 
             for i in appuntamenti:
                 a = str(datetime.now())
-                b = str(i.getDatiAppuntamento['Data e Ora Inizio'])
+                b = str(i.getDatiAppuntamento.get('Data e Ora Inizio',None))
                 aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
                 aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
                 bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
@@ -94,10 +94,9 @@ class Statistiche:
         with open('Dati\Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
 
-    def mostraStatistiche(self):
+    def mostraStatistiche(self): #modificare
         self.calcolaStatistiche()
         if os.path.isfile('Dati\Statistiche.pickle'):
             with open('Dati\Statistiche.pickle', 'rb') as f:
                 stats = dict(pickle.load(f))
-                for key, value in stats.items():
-                    print(key, value)
+        return stats

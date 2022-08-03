@@ -1,7 +1,5 @@
 import pickle
 import os.path
-# from Servizi.Avvocato import Avvocato
-# from Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi import Cliente
 from GestoreStudioLegale.Servizi import Avvocato
 
@@ -17,16 +15,16 @@ class GestoreSistema:
         if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'rb') as f:
                 clienti = dict(pickle.load(f))
-                self.listClienti = []
-                self.listClienti.append(clienti.values())
+                self.listaClienti = []
+                self.listaClienti.append(clienti.values())
 
-    def aggiungiAvvocato(self, avvocato):
-        self.listaAvvocati.append(avvocato)
-        avvocati={}
+    def aggiungiAvvocato(self, Avvocato = None): #modifica
+        self.listaAvvocati.append(Avvocato)
+        avvocati = {}
         if os.path.isfile('Dati\Avvocati.pickle'):
             with open('Dati\Avvocati.pickle', 'rb') as f:
                 avvocati = pickle.load(f)
-        avvocati[avvocato.getInfoUtilizzatore()['id']]=avvocato
+        avvocati[Avvocato.id] = Avvocato
         with open('Dati\Avvocati.pickle', 'wb') as f:
             pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 

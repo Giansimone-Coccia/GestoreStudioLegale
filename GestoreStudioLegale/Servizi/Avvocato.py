@@ -13,7 +13,7 @@ class Avvocato(Utilizzatore):
     def aggiornaAvvocato(self): #Chiedi per questa
 
 
-    def aggiungiAvvocato(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
+    def creaAvvocato(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password, #modifica ea
                          udienza, clienti, licenza, appuntamentoAvvocato):
         self.creaUtilizzatore(codiceFiscale = codiceFiscale, cognome = cognome, corsoAggiornamento = corsoAggiornamento,
                               dataNascita = dataNascita, email = email, Id = Id, numeroTelefono = numeroTelefono,
@@ -21,13 +21,7 @@ class Avvocato(Utilizzatore):
         self.clienti = clienti
         self.licenza = licenza
         self.appuntamentiAvvocato = appuntamentoAvvocato
-        avvocati = {}
-        if os.path.isfile('Dati\Avvocati.pickle'):
-            with open('Dati\Avvocati.pickle', 'rb') as f:
-                avvocati = pickle.load(f)
-        avvocati[Id] = self
-        with open('Dati\Avvocati.pickle', 'wb') as f:
-            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
+
 
     def getDatiAvvocato(self, avvocati):
         d = self.getInfoUtilizzatore()
@@ -35,6 +29,7 @@ class Avvocato(Utilizzatore):
         d['clienti'] = self.clienti
         d['licenza'] = self.licenza
         return d
+
 
     def ricercaUtilizzatoreId(self, id):
         if os.path.isfile('Dati\Avvocati.pickle'):
