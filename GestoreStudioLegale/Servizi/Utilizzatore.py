@@ -30,16 +30,16 @@ class Utilizzatore:
 
     def getInfoUtilizzatore(self):
         return {
-            'nome' : self.nome,
-            'cognome': self.cognome,
-            'codice fiscale': self.codiceFiscale,
-            'data nascita': self.dataNascita,
-            'email': self.email,
-            'id': self.id,
-            'numero telefono': self.numeroTelefono,
-            'password': self.password,
-            'udienza': self.udienza,
-            'corso aggiornamento': self.corsoAggiornamento
+            'Nome' : self.nome,
+            'Cognome': self.cognome,
+            'Codice fiscale': self.codiceFiscale,
+            'Data nascita': self.dataNascita,
+            'Email': self.email,
+            'Id': self.Id,
+            'Numero telefono': self.numeroTelefono,
+            'Password': self.password,
+            'Udienza': self.udienza,
+            'Corso aggiornamento': self.corsoAggiornamento
         }
 
     @abstractmethod

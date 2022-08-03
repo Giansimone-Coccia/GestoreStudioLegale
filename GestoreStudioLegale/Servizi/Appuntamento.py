@@ -1,6 +1,6 @@
 import datetime
 
-import Cliente
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 import pickle
 import os.path
 
@@ -13,7 +13,7 @@ class Appuntamento():
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoProcedimento = ''
 
-    def aggiornaAppuntamento(self):
+    #def aggiornaAppuntamento(self):
 
     def creaAppuntamento(self, Cliente, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
         self.Cliente = Cliente

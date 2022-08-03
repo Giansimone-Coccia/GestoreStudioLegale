@@ -32,11 +32,11 @@ class Udienza:
         self.ID = ID
         self.tipoTribunale = tipoTribunale
 
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
             udienze[ID] = self
-        with open('Dati\Udienze.pickle', 'wb') as f:
+        with open('Dati/Udienze.pickle', 'wb') as f:
             pickle.dump(udienze, f, pickle.HIGHEST_PROTOCOL)
 
     def getDatiUdienza(self):
@@ -51,8 +51,8 @@ class Udienza:
         }
 
     def ricercaUdienzaCliente (self, Cliente):
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.Cliente is Cliente:
@@ -63,8 +63,8 @@ class Udienza:
             return None
 
     def ricercaUdienzaDataInizio (self, DataInizio):
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.DataInizio == DataInizio:
@@ -74,8 +74,8 @@ class Udienza:
             return None
 
     def ricercaUdienzaID(self, ID):
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.ID == ID:
@@ -85,8 +85,8 @@ class Udienza:
             return None
 
     def ricercaUdienzaTipo(self, tipoTribunale):
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.tipoTribunale == tipoTribunale:
@@ -97,8 +97,8 @@ class Udienza:
             return None
 
     def rimuoviUdienza (self, ID):
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'wb+') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'wb+') as f:
                 udienze = dict(pickle.load(f))
                 if self.ricercaUdienzaID(ID):
                     del udienze[self.ID]
@@ -106,8 +106,8 @@ class Udienza:
 
 
     def visualizzaParcella (self, ID):
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.ID == ID:

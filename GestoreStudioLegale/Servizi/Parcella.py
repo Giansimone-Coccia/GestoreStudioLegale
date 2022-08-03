@@ -11,7 +11,7 @@ class Parcella():
        self.importo = 0
        self.intestatario = ''
 
-    def aggiornaParcella(self):
+   # def aggiornaParcella(self):
 
     def creaParcella(self, Cliente, ID, importo, intestatario ):
         self.Cliente = Cliente

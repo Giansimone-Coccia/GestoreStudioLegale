@@ -44,7 +44,7 @@ class Backup():
         with open('Dati\Backup.pickle', 'wb') as f:
             pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
-            if os.path.isfile('Dati\Clienti.pickle'):
+        if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'rb') as f:
                 clienti = pickle.load(f)
         with open('Dati\Backup.pickle', 'wb') as f:

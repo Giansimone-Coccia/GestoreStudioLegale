@@ -38,20 +38,25 @@ class Cliente(Utilizzatore):
             #self.parcelle = parcelle
         elif appuntamentoCliente is not None:
             self.appuntamentoCliente = appuntamentoCliente
+        #self.aggiungiCliente(codiceFiscale, cognome,)
+        #self.rimuoviCliente()
         return self
 
 
     def aggiungiCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
-                        appuntamentoCliente, parcelle):
+                        appuntamentoCliente, parcelle, nome, udienza):
         self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
-                                  password) #Messi in ordine, così non utilizzo l'='
+                                  password, udienza, nome) #Messi in ordine, così non utilizzo l'='
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
         clienti = {}
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                clienti = pickle.load(f)
-        clienti[Id] = self
+        try:
+            if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                    clienti = pickle.load(f)
+            clienti[Id] = self
+        except Exception as e:
+            print("Errore durane l'acquisizione del file")
         with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
@@ -70,6 +75,7 @@ class Cliente(Utilizzatore):
                 for cliente in clienti.values():
                     if cliente.email == email:
                         return cliente
+                print("Nessun cliente trovato")
                 return None
         else:
             return None
@@ -82,6 +88,7 @@ class Cliente(Utilizzatore):
                 for cliente in clienti.values():
                     if cliente.Id == Id:
                         return cliente
+                print("Cliente non trovato")
                 return None
         else:
             return None
@@ -94,31 +101,40 @@ class Cliente(Utilizzatore):
                 for cliente in clienti.values():
                     if cliente.nome == nome and cliente.cognome == cognome:
                         return cliente
+                print("Cliente non trovato")
                 return None
         else:
             return None
 
 
     def rimuoviCliente(self, Id):   #Anche quì suppongo una ricerca per Id oppure passo direttamente l'oggetto, da vedere
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb+') as f:
-                clienti = dict(pickle.load(f))
-                if self.ricercaUtilizzatoreId(Id):
-                    del clienti[self.Id]
-                    pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
-            self.rimuoviUtilizzatore()
-            self.appuntamentoCliente = None
-            self.parcelle = None
-            del self
+        try:
+            if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb+') as f:
+                    clienti = dict(pickle.load(f))
+        except Exception as e:
+            print("Errore con la lettura/scrittura binaria")
+            if self.ricercaUtilizzatoreId(Id):
+                del clienti[self.Id]
+                pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+        self.rimuoviUtilizzatore()
+        self.appuntamentoCliente = None
+        self.parcelle = None
+        del self
 
 
     def visualizzaCliente(self, Id): #Stessa cosa del metodo precedente
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                clienti = dict(pickle.load(f))
-                for cliente in clienti.values():
-                    if cliente.Id == Id:
-                        return cliente
-                    else:
-                        return None
+                #print("ciao")
+                try:
+                    clienti = dict(pickle.load(f))
+                    #print("ciao")
+                except EOFError as e:
+                    clienti =dict()
+                    for cliente in clienti.values():
+                        if cliente.Id == Id:
+                            return cliente
+                        else:
+                            return None
 

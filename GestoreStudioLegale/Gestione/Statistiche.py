@@ -65,8 +65,8 @@ class Statistiche:
             self.mediaUdienzeMensile = nUdienze/12
 
         if os.path.isfile('Dati\Appuntamenti.pickle'):
-        with open('Dati\Appuntamenti.pickle', 'rb') as f:
-            appuntamenti = dict(pickle.load(f))
+            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+                appuntamenti = dict(pickle.load(f))
 
             for i in appuntamenti:
                 a = str(datetime.now())
@@ -80,7 +80,7 @@ class Statistiche:
 
             self.numeroAppuntamenti=nAppuntamenti
 
-    def mostraGrafico(self): #non lo so
+    #def mostraGrafico(self): #non lo so
 
     def salvaSuFile (self):
         stats = {
