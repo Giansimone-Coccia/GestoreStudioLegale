@@ -42,10 +42,11 @@ class Appuntamento():
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = dict(pickle.load(f))
-                for appuntamento in udienze.values():
+                for appuntamento in appuntamenti.values():
                     if appuntamento.Cliente is Cliente:
-                        return appuntamento
-                return None
+                        listaAppuntamenti = [appuntamento]
+                return listaAppuntamenti
+            return None
         else:
             return None
 
@@ -81,7 +82,7 @@ class Appuntamento():
                     pickle.dump(appuntamenti, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def visualizzaParcella (self, ID):
+    def visualizzaAppuntamento (self, ID):
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = dict(pickle.load(f))

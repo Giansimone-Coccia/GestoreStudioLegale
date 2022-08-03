@@ -8,15 +8,20 @@ import os.path
 class Udienza():
 
     def __init__(self):
-       self.Cliente = Cliente
-       self.Avvocato = Avvocato
+       self.Cliente = None
+       self.Avvocato = None
        self.cittaTribunale = ''
        self.ID = ''
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoTribunale = ''
 
-    def aggiornaUdienza(self):
+    def aggiornaUdienza(self, cittaTribunale = '', tipoTribunale = '', dataOraInizio = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
+                        dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
+                        Cliente = None, Avvoccato = None):
+        if cittaTribunale != '':
+            self.cittaTribunale = cittaTribunale
+            #da finire
 
     def creaUdienza(self, Avvocato, cittaTribunale, Cliente, dataOraInizio, dataOraFine, ID, tipoTribunale ):
         self.Avvocato = Avvocato
@@ -51,8 +56,9 @@ class Udienza():
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.Cliente is Cliente:
-                        return udienza
-                return None
+                        listaUdienze = [udienza]
+                return listaUdienze
+            return None
         else:
             return None
 
@@ -84,8 +90,9 @@ class Udienza():
                 udienze = dict(pickle.load(f))
                 for udienza in udienze.values():
                     if udienza.tipoTribunale == tipoTribunale:
-                        return tipoTribunale
-                return None
+                        listaUdienze = [udienza]
+                return listaUdienze
+            return None
         else:
             return None
 

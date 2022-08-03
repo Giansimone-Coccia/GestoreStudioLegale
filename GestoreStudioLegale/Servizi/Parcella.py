@@ -21,9 +21,9 @@ class Parcella():
         if os.path.isfile('Dati\Parcelle.pickle'):
             with open('Dati\Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
-        parcelle[ID] = self
-        with open('Dati\Parcelle.pickle', 'wb') as f:
-            pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
+                parcelle[ID] = self
+            with open('Dati\Parcelle.pickle', 'wb') as f:
+                pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
 
     def getDatiParcellaCliente(self):
         return{
@@ -39,8 +39,9 @@ class Parcella():
                 parcelle = dict(pickle.load(f))
                 for parcella in parcelle.values():
                     if parcella.Cliente is Cliente:
-                        return parcella
-                return None
+                        listaParcelle = [parcella]
+                return listaParcelle
+            return None
         else:
             return None
 
@@ -50,8 +51,9 @@ class Parcella():
                 parcelle = dict(pickle.load(f))
                 for parcella in parcelle.values():
                     if parcella.intestatario == intestatario:
-                        return parcella
-                return None
+                        listaParcelle = [parcella]
+                return listaParcelle
+            return None
         else:
             return None
 
@@ -61,8 +63,9 @@ class Parcella():
                 parcelle = dict(pickle.load(f))
                 for parcella in parcelle.values():
                     if parcella.identificativo == identificativo:
-                        return parcella
-                return None
+                        listaParcelle = [parcella]
+                return listaParcelle
+            return None
         else:
             return None
 
