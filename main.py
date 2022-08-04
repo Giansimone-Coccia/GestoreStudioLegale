@@ -25,7 +25,7 @@ listaClienti = [cliente1]
 #cliente1.ricercaUtilizzatoreId('C1234') #FUNZIONA
 #cliente1.ricercaUtilizzatoreNomeCognome("luca", "ndkndk")  #FUNZIONA
 #cliente1.ricercaUtilizzatoreNomeCognome("alessio", "djfsjc")  #FUNZIONA
-#cliente1.rimuoviCliente("5678")  #ERRORE
-cliente1.rimuoviCliente("C1234")  #ERRORE
+#cliente1.rimuoviCliente("5678")  #FUNZIONA
+#cliente1.rimuoviCliente("C1234")  #FUNZIONA
 #cliente1.visualizzaCliente("dandndisnkaj")  #FUNZIONA
 #cliente1.visualizzaCliente("C1234")  #COMPILA MA NON RITORNA

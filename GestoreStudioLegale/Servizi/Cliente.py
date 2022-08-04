@@ -49,17 +49,19 @@ class Cliente(Utilizzatore):
                                   password, udienza, nome) #Messi in ordine, così non utilizzo l'='
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
-        clienti = {}
-        try:
-            if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+        #clienti = {}
+        clienti = []
+        #try:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                     try:
                         clienti = pickle.load(f)
-                        clienti['Id'] = self
+                        #clienti['Id'] = self
+                        clienti.append(self)
                     except EOFError as er:
                         print("Errore")
-        except Exception as e:
-            print("Errore durane l'acquisizione del file")
+        #except Exception as e:
+        #print("Errore durane l'acquisizione del file")
         with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
@@ -74,8 +76,8 @@ class Cliente(Utilizzatore):
     def ricercaUtilizzatoreEmail(self, email):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                clienti = dict(pickle.load(f))
-                for cliente in clienti.values():
+                clienti = pickle.load(f)
+                for cliente in clienti:
                     if cliente.email == email:
                         print("Ok cliente")
                         return cliente
@@ -88,8 +90,8 @@ class Cliente(Utilizzatore):
     def ricercaUtilizzatoreId(self, Id):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                clienti = dict(pickle.load(f))
-                for cliente in clienti.values():
+                clienti = pickle.load(f)
+                for cliente in clienti:
                     if cliente.Id == Id:
                         print("Trovato")
                         return cliente
@@ -102,8 +104,8 @@ class Cliente(Utilizzatore):
     def ricercaUtilizzatoreNomeCognome(self, nome, cognome):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                clienti = dict(pickle.load(f))
-                for cliente in clienti.values():
+                clienti = pickle.load(f)
+                for cliente in clienti:
                     if cliente.nome == nome and cliente.cognome == cognome:
                         print("Trovato")
                         return cliente
@@ -113,26 +115,22 @@ class Cliente(Utilizzatore):
             return None
 
 
-    def rimuoviCliente(self, Id):   #Anche quì suppongo una ricerca per Id oppure passo direttamente l'oggetto, da vedere
+    @staticmethod
+    def rimuoviCliente(Id):   #Anche quì suppongo una ricerca per Id oppure passo direttamente l'oggetto, da vedere
         try:
+            clienti = []
             if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb+') as f:
-                    try:
-                        print("prima")
-                        clienti = dict(pickle.load(f))
-                    except EOFError as ef:
-                        print("File vuoto")
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                    clienti = pickle.load(f)
+            for cliente in clienti:
+                if cliente.Id == Id:
+                    clienti.remove(cliente)
+                else:
+                    print("Cliente non trovato")
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f1:
+                pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
-            print("Errore con la lettura/scrittura binaria")
-            if self.ricercaUtilizzatoreId(Id) is not None:
-                print("Eccoci")
-                #del clienti[self.Id]
-                pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
-                print("Siamo arrivati")
-        self.rimuoviUtilizzatore()
-        self.appuntamentoCliente = None
-        self.parcelle = None
-        del self
+                print("Finito")
 
 
     def visualizzaCliente(self, Id): #Stessa cosa del metodo precedente
@@ -140,12 +138,13 @@ class Cliente(Utilizzatore):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 #print("ciao")
                 try:
-                    clienti = dict(pickle.load(f))
+                    clienti = pickle.load(f)
                     #print("ciao")
                 except EOFError as e:
                     clienti =dict()
                     for cliente in clienti.values():
                         if cliente.Id == Id:
+                            print("Visualizzato")
                             return cliente
                         else:
                             return None
