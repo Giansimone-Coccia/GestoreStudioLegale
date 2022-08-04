@@ -33,14 +33,14 @@ class Udienza:
         self.tipoTribunale = tipoTribunale
 
         udienze = []
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 try:
                     udienze = pickle.load(f)
                     udienze.append(self)
                 except EOFError as er:
                     print("Errore")
-        with open('Dati/Udienze.pickle', 'wb') as f:
+        with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f:
             pickle.dump(udienze, f, pickle.HIGHEST_PROTOCOL)
 
     def getDatiUdienza(self): #errore dizionario
@@ -56,8 +56,8 @@ class Udienza:
         return d
 
     def ricercaUdienzaCliente (self, Cliente):
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.Cliente is Cliente:
@@ -68,8 +68,8 @@ class Udienza:
             return None
 
     def ricercaUdienzaDataInizio (self, DataInizio):
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.DataInizio == DataInizio:
@@ -79,8 +79,8 @@ class Udienza:
             return None
 
     def ricercaUdienzaID(self, ID):
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.ID == ID:
@@ -90,8 +90,8 @@ class Udienza:
             return None
 
     def ricercaUdienzaTipo(self, tipoTribunale):
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.tipoTribunale == tipoTribunale:
@@ -105,8 +105,8 @@ class Udienza:
     def rimuoviUdienza (ID):
         try:
             udienze = []
-            if os.path.isfile('Dati/Udienze.pickle'):
-                with open('Dati/Udienze.pickle', 'rb') as f:
+            if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+                with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                     udienze = pickle.load(f)
             for udienza in udienze:
                 if udienza.ID == ID:
@@ -121,8 +121,8 @@ class Udienza:
 
     def visualizzaParcella (self, ID):
         udienze = []
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.ID == ID:

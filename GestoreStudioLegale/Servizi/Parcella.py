@@ -42,8 +42,8 @@ class Parcella():
 
 
     def ricercaParcellaCliente (self, Cliente): #Prende una stringa come parametro, cambiare in EA
-        if os.path.isfile('Dati\Parcelle.pickle'):
-            with open('Dati\Parcelle.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.Cliente is Cliente:
@@ -55,8 +55,8 @@ class Parcella():
 
 
     def ricercaParcellaIntestatario (self, intestatario):
-        if os.path.isfile('Dati\Parcelle.pickle'):
-            with open('Dati\Parcelle.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.intestatario == intestatario:
@@ -68,8 +68,8 @@ class Parcella():
 
 
     def ricercaParcellaIdentificativo(self, identificativo):
-        if os.path.isfile('Dati\Parcelle.pickle'):
-            with open('Dati\Parcelle.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.identificativo == identificativo:
@@ -84,8 +84,8 @@ class Parcella():
     def rimuoviParcella (ID):
         try:
             parcelle = []
-            if os.path.isfile('Dati/Parcelle.pickle'):
-                with open('Dati/Parcelle.pickle', 'rb') as f:
+            if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+                with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                     parcelle = pickle.load(f)
             for parcella in parcelle:
                 if parcella.ID == ID:
@@ -99,8 +99,8 @@ class Parcella():
 
 
     def visualizzaParcella (self, ID):
-        if os.path.isfile('Dati\Parcelle.pickle'):
-            with open('Dati\Parcelle.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.ID == ID:

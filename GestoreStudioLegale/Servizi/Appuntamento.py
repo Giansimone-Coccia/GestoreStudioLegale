@@ -22,11 +22,11 @@ class Appuntamento():
         self.ID = ID
         self.tipoProcedimento = tipoProcedimento
 
-        if os.path.isfile('Dati\Appuntamenti.pickle'):
-            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
             appuntamenti[ID] = self
-        with open('Dati\Appuntamenti.pickle', 'wb') as f:
+        with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f:
             pickle.dump(appuntamenti, f, pickle.HIGHEST_PROTOCOL)
 
     def getDatiAppuntamento(self):
@@ -41,8 +41,8 @@ class Appuntamento():
 
 
     def ricercaAppuntamentoCliente (self, Cliente): #Il parametro deve essere una stringa
-        if os.path.isfile('Dati\Appuntamenti.pickle'):
-            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamento.pickle'):
+            with open('GestoreStudioLegale/Dati/Appuntamento.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
                 for appuntamento in appuntamenti:
                     if appuntamento.Cliente is Cliente:
@@ -53,8 +53,8 @@ class Appuntamento():
             return None
 
     def ricercaAppuntamentoDataInizio (self, DataInizio):
-        if os.path.isfile('Dati\Appuntamenti.pickle'):
-            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
+            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
                 for appuntamento in appuntamenti:
                     if appuntamento.DataInizio == DataInizio:
@@ -64,8 +64,8 @@ class Appuntamento():
             return None
 
     def ricercaAppuntamentoID(self, ID):
-        if os.path.isfile('Dati\Appuntamenti.pickle'):
-            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
+            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
                 for appuntamento in appuntamenti:
                     if appuntamento.ID == ID:
@@ -93,8 +93,8 @@ class Appuntamento():
 
 
     def visualizzaAppuntamento (self, ID):
-        if os.path.isfile('Dati\Appuntamenti.pickle'):
-            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
+            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
                 for appuntamento in appuntamenti:
                     if appuntamento.ID == ID:
