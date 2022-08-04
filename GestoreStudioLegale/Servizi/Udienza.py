@@ -32,29 +32,34 @@ class Udienza:
         self.ID = ID
         self.tipoTribunale = tipoTribunale
 
+        udienze = []
         if os.path.isfile('Dati/Udienze.pickle'):
             with open('Dati/Udienze.pickle', 'rb') as f:
-                udienze = pickle.load(f)
-            udienze[ID] = self
+                try:
+                    udienze = pickle.load(f)
+                    udienze.append(self)
+                except EOFError as er:
+                    print("Errore")
         with open('Dati/Udienze.pickle', 'wb') as f:
             pickle.dump(udienze, f, pickle.HIGHEST_PROTOCOL)
 
-    def getDatiUdienza(self):
-        return{
-            'Avvocato': self.Avvocato,
-            'Città Tribunale': self.cittaTribunale,
-            'Cliente': self.Cliente,
-            'Data e Ora Inizio': self.dataOraInizio,
-            'Data e Ora Fine': self.dataOraFine,
-            'ID': self.ID,
-            'Tipo Tribunale': self.tipoTribunale
-        }
+    def getDatiUdienza(self): #errore dizionario
+        d = {}
+        d['Avvocato'] = self.Avvocato
+        d['Città Tribunale'] = self.cittaTribunale
+        d['Cliente'] = self.Cliente
+        d['Data e Ora Inizio'] = self.dataOraInizio
+        d['Data e Ora Fine'] = self.dataOraFine
+        d['ID'] = self.ID
+        d['Tipo Tribunale'] = self.tipoTribunale
+        print(d)
+        return d
 
     def ricercaUdienzaCliente (self, Cliente):
         if os.path.isfile('Dati/Udienze.pickle'):
             with open('Dati/Udienze.pickle', 'rb') as f:
-                udienze = dict(pickle.load(f))
-                for udienza in udienze.values():
+                udienze = pickle.load(f)
+                for udienza in udienze:
                     if udienza.Cliente is Cliente:
                         listaUdienze = [udienza]
                 return listaUdienze
@@ -65,8 +70,8 @@ class Udienza:
     def ricercaUdienzaDataInizio (self, DataInizio):
         if os.path.isfile('Dati/Udienze.pickle'):
             with open('Dati/Udienze.pickle', 'rb') as f:
-                udienze = dict(pickle.load(f))
-                for udienza in udienze.values():
+                udienze = pickle.load(f)
+                for udienza in udienze:
                     if udienza.DataInizio == DataInizio:
                         return udienza
                 return None
@@ -76,8 +81,8 @@ class Udienza:
     def ricercaUdienzaID(self, ID):
         if os.path.isfile('Dati/Udienze.pickle'):
             with open('Dati/Udienze.pickle', 'rb') as f:
-                udienze = dict(pickle.load(f))
-                for udienza in udienze.values():
+                udienze = pickle.load(f)
+                for udienza in udienze:
                     if udienza.ID == ID:
                         return udienza
                 return None
@@ -87,8 +92,8 @@ class Udienza:
     def ricercaUdienzaTipo(self, tipoTribunale):
         if os.path.isfile('Dati/Udienze.pickle'):
             with open('Dati/Udienze.pickle', 'rb') as f:
-                udienze = dict(pickle.load(f))
-                for udienza in udienze.values():
+                udienze = pickle.load(f)
+                for udienza in udienze:
                     if udienza.tipoTribunale == tipoTribunale:
                         listaUdienze = [udienza]
                 return listaUdienze
@@ -96,20 +101,30 @@ class Udienza:
         else:
             return None
 
-    def rimuoviUdienza (self, ID):
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'wb+') as f:
-                udienze = dict(pickle.load(f))
-                if self.ricercaUdienzaID(ID):
-                    del udienze[self.ID]
-                    pickle.dump(udienze, f, pickle.HIGHEST_PROTOCOL)
+    @staticmethod
+    def rimuoviUdienza (ID):
+        try:
+            udienze = []
+            if os.path.isfile('Dati/Udienze.pickle'):
+                with open('Dati/Udienze.pickle', 'rb') as f:
+                    udienze = pickle.load(f)
+            for udienza in udienze:
+                if udienza.ID == ID:
+                    udienze.remove(udienza)
+                else:
+                    print("Udienza non trovato")
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:
+                pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
+        except Exception as e:
+                print("Finito")
 
 
     def visualizzaParcella (self, ID):
+        udienze = []
         if os.path.isfile('Dati/Udienze.pickle'):
             with open('Dati/Udienze.pickle', 'rb') as f:
-                udienze = dict(pickle.load(f))
-                for udienza in udienze.values():
+                udienze = pickle.load(f)
+                for udienza in udienze:
                     if udienza.ID == ID:
                         return udienza
                     else:
