@@ -10,12 +10,14 @@ udienza1 = Udienza()
 appuntamento1 = Appuntamento()
 parcella1 = Parcella()
 
-corsi = []
-appuntamentiAvvocato = []
+corsi = ['economia politica']
+appuntamentiAvvocato = ['martedì', 'mercoledì']
 licenze = []
-a = []
-b = []
+a = ['bo']
+b = ['non so']
 listaClienti = [cliente1]
+nuovaListaClienti = []
+corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 #cliente1.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente1.getDatiCliente()  #FUNZIONA FACENDO PRIMA AGGIUNGICLIENTE COSI' FA PRIMA CREAUTILIZZATORE
@@ -30,4 +32,17 @@ listaClienti = [cliente1]
 #cliente1.rimuoviCliente("C1234")  #FUNZIONA
 #cliente1.visualizzaCliente("dandndisnkaj")  #FUNZIONA
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
-cliente1.aggiornaCliente('almail@gmil.com')
+#cliente1.aggiornaCliente('almail@gmil.com')
+
+#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+#avvocato1.getDatiAvvocato() #FUNZIONA
+#avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
+#avvocato1.ricercaUtilizzatoreId('id non valido') #FUNZIONA
+#avvocato1.ricercaUtilizzatoreEmail('albe@outlook.com') #FUNZIONA
+#avvocato1.ricercaUtilizzatoreEmail('emailAcaso') #FUNZIONA
+#avvocato1.ricercaUtilizzatoreNomeCognome('alberto', 'dilio') #FUNZIONA
+#avvocato1.ricercaUtilizzatoreNomeCognome('alberto', 'sbagliato') #FUNZIONA
+#avvocato1.rimuoviAvvocato('A4783') #FUNZIONA
+#avvocato1.rimuoviAvvocato('errato') #FUNZIONA
+#avvocato1.visualizzaAvvocato('A4783') #FUNZIONA
+#avvocato1.aggiornaAvvocato(nuovaListaClienti, 3620988123)
