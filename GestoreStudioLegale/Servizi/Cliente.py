@@ -11,36 +11,21 @@ class Cliente(Utilizzatore):
         self.parcelle = []
 
 
-    #Vedere se può modificare tutti o solo alcuni attributi
-    def aggiornaCliente(self, codiceFiscale = '', cognome = '', dataNascita = datetime.datetime(year=1970, month=1, day=1),
-                        email = '', nome = '', numTelefono = 0, password = '',appuntamentoCliente = None): #Modifica in EA
-        if codiceFiscale != '':
-            self.codiceFiscale = codiceFiscale
-        elif cognome != '':
-            self.cognome = cognome
-        #elif corsoAggiornamento != None:
-            #self.corsoAggiornamento = corsoAggiornamento
-        elif dataNascita != datetime.datetime(year=1970, month=1, day=1):
-            self.dataNascita = dataNascita
-        elif email != '':
+    #Da vedere in seguito
+    def aggiornaCliente(self, email = '', numTelefono = 0, password = '',appuntamentoCliente = None): #Modifica in EA
+        if email != '':
             self.email = email
-        #elif Id != '':
-            #self.Id = Id
-        elif nome != '':
-            self.nome = nome
         elif numTelefono != 0:
             self.numeroTelefono = numTelefono
         elif password != '':
             self.password = password
-        #elif udienza is not None:
-            #self.udienza = udienza
-        #elif parcelle is not None:
-            #self.parcelle = parcelle
         elif appuntamentoCliente is not None:
             self.appuntamentoCliente = appuntamentoCliente
-        #self.aggiungiCliente(codiceFiscale, cognome,)
-        #self.rimuoviCliente()
-        return self
+        self.rimuoviCliente(self.Id)
+        self.aggiungiCliente(self.codiceFiscale, self.cognome, self.corsoAggiornamento, self.dataNascita, self.email,
+                             self.Id, self.numeroTelefono, self.password, self.appuntamentoCliente, self.parcelle,
+                             self.nome, self.udienza)
+        print("Aggiornato")
 
 
     def aggiungiCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
@@ -49,27 +34,23 @@ class Cliente(Utilizzatore):
                                   password, udienza, nome) #Messi in ordine, così non utilizzo l'='
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
-        #clienti = {}
         clienti = []
-        #try:
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                     try:
                         clienti = pickle.load(f)
-                        #clienti['Id'] = self
                         clienti.append(self)
                     except EOFError as er:
                         print("Errore")
-        #except Exception as e:
-        #print("Errore durane l'acquisizione del file")
         with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def getDatiCliente(self, clienti): #Provare lettura da file
+    def getDatiCliente(self):
         d = self.getInfoUtilizzatore()
         d['appuntamentoCliente'] = self.appuntamentoCliente
         d['parcelle'] = self.parcelle
+        print(d)
         return d
 
 
@@ -93,7 +74,7 @@ class Cliente(Utilizzatore):
                 clienti = pickle.load(f)
                 for cliente in clienti:
                     if cliente.Id == Id:
-                        print("Trovato")
+                        #print("Trovato")
                         return cliente
                 print("Cliente non trovato")
                 return None
@@ -134,18 +115,5 @@ class Cliente(Utilizzatore):
 
 
     def visualizzaCliente(self, Id): #Stessa cosa del metodo precedente
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                #print("ciao")
-                try:
-                    clienti = pickle.load(f)
-                    #print("ciao")
-                except EOFError as e:
-                    clienti =dict()
-                    for cliente in clienti.values():
-                        if cliente.Id == Id:
-                            print("Visualizzato")
-                            return cliente
-                        else:
-                            return None
-
+        if self.ricercaUtilizzatoreId(Id):
+            print(self.ricercaUtilizzatoreId(Id))

@@ -17,8 +17,9 @@ a = []
 b = []
 listaClienti = [cliente1]
 
-#cliente1.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, 25/9/2000, 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
-#cliente1.getDatiCliente(listaClienti)  #PROBLEMA, PROVA LETTURA FILE
+#cliente1.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.getDatiCliente()  #FUNZIONA FACENDO PRIMA AGGIUNGICLIENTE COSI' FA PRIMA CREAUTILIZZATORE
+#print(cliente1.dataNascita)
 #cliente1.ricercaUtilizzatoreEmail('albero@gmail.com') #FUNZIONA
 #cliente1.ricercaUtilizzatoreEmail('mail@gmail.com') #FUNZIONA
 #cliente1.ricercaUtilizzatoreId('1234')  #FUNZIONA
@@ -28,4 +29,5 @@ listaClienti = [cliente1]
 #cliente1.rimuoviCliente("5678")  #FUNZIONA
 #cliente1.rimuoviCliente("C1234")  #FUNZIONA
 #cliente1.visualizzaCliente("dandndisnkaj")  #FUNZIONA
-#cliente1.visualizzaCliente("C1234")  #COMPILA MA NON RITORNA
+#cliente1.visualizzaCliente("C1234")  #FUNZIONA
+cliente1.aggiornaCliente('almail@gmil.com')
