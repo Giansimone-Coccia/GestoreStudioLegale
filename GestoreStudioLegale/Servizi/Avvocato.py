@@ -12,67 +12,67 @@ class Avvocato(Utilizzatore):
         self.licenza = []
 
 
-        # Vedere se può modificare tutti o solo alcuni attributi
-        def aggiornaAvvocato(self, codiceFiscale='', cognome='',
-                            dataNascita=datetime.datetime(year=1970, month=1, day=1), clienti = None, licenza = None,
-                            email='', nome='', numTelefono=0, password='', appuntamentoCliente=None, udienza = None,
-                             corsoAggiornamento = None):  # Modifica in EA
-            if codiceFiscale != '':
-                self.codiceFiscale = codiceFiscale
-            elif cognome != '':
-                self.cognome = cognome
-            elif corsoAggiornamento != None:
-                self.corsoAggiornamento = corsoAggiornamento
-            elif dataNascita != datetime.datetime(year=1970, month=1, day=1):
-                self.dataNascita = dataNascita
-            elif email != '':
-                self.email = email
-            # elif Id != '':
-            # self.Id = Id
-            elif nome != '':
-                self.nome = nome
-            elif numTelefono != 0:
-                self.numeroTelefono = numTelefono
-            elif password != '':
-                self.password = password
-            elif udienza is not None:
-                self.udienza = udienza
-            # elif parcelle is not None:
-            # self.parcelle = parcelle
-            elif appuntamentoCliente is not None:
-                self.appuntamentoCliente = appuntamentoCliente
-            elif clienti is not None:
-                self.clienti = clienti
-            elif licenza is not None:
-                self.licenza = licenza
-            return self
+    def aggiornaAvvocato(self, clienti = None, email='', numTelefono=0, password='', appuntamentoAvvocato=None,
+                            udienza = None, corsoAggiornamento = None):  # Modifica in EA
+        if corsoAggiornamento != None:
+            self.corsoAggiornamento = corsoAggiornamento
+        elif email != '':
+            self.email = email
+        elif numTelefono != 0:
+            self.numeroTelefono = numTelefono
+        elif password != '':
+            self.password = password
+        elif udienza is not None:
+            self.udienza = udienza
+        elif appuntamentoAvvocato is not None:
+            self.appuntamentoAvvocato = appuntamentoAvvocato
+        elif clienti is not None:
+            self.clienti = clienti
+        self.rimuoviAvvocato(self.Id)
+        self.creaAvvocato(self.codiceFiscale, self.cognome, self.nome, self.corsoAggiornamento, self.dataNascita, self.email,
+                             self.Id, self.numeroTelefono, self.password, self.udienza, self.clienti, self.licenza,
+                              self.appuntamentiAvvocato)
+        print("Aggiornato")
 
 
-    def creaAvvocato(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password, #modifica ea
+    def creaAvvocato(self, codiceFiscale, cognome, nome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password, #modifica ea
                          udienza, clienti, licenza, appuntamentoAvvocato):
-        self.creaUtilizzatore(codiceFiscale = codiceFiscale, cognome = cognome, corsoAggiornamento = corsoAggiornamento,
+        self.creaUtilizzatore(codiceFiscale = codiceFiscale, cognome = cognome, nome = nome, corsoAggiornamento = corsoAggiornamento,
                               dataNascita = dataNascita, email = email, Id = Id, numeroTelefono = numeroTelefono,
                               password = password, udienza = udienza)
         self.clienti = clienti
         self.licenza = licenza
         self.appuntamentiAvvocato = appuntamentoAvvocato
+        avvocati = []
+        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
+                try:
+                    avvocati = pickle.load(f)
+                    avvocati.append(self)
+                except EOFError as er:
+                    print("Errore")
+        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f:
+            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def getDatiAvvocato(self, avvocati):
+    def getDatiAvvocato(self):
         d = self.getInfoUtilizzatore()
         d['udienza'] = self.udienza
         d['clienti'] = self.clienti
         d['licenza'] = self.licenza
+        print(d)
         return d
 
 
-    def ricercaUtilizzatoreId(self, id):
+    def ricercaUtilizzatoreId(self, Id):
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                avvocati = dict(pickle.load(f))
-                for avvocato in avvocati.values():
-                    if avvocato.Id == id:
+                avvocati = pickle.load(f)
+                for avvocato in avvocati:
+                    if avvocato.Id == Id:
+                        print("Trovato")
                         return avvocato
+                print("Avvocato non trovato")
                 return None
         else:
             return None
@@ -81,10 +81,12 @@ class Avvocato(Utilizzatore):
     def ricercaUtilizzatoreEmail(self, email):
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                avvocati = dict(pickle.load(f))
-                for avvocato in avvocati.values():
+                avvocati = pickle.load(f)
+                for avvocato in avvocati:
                     if avvocato.email == email:
+                        print("Ok avvocato")
                         return avvocato
+                print("Nessun avvocato trovato")
                 return None
         else:
             return None
@@ -93,36 +95,35 @@ class Avvocato(Utilizzatore):
     def ricercaUtilizzatoreNomeCognome(self, nome, cognome):
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                avvocati = dict(pickle.load(f))
-                for avvocato in avvocati.values():
+                avvocati = pickle.load(f)
+                for avvocato in avvocati:
                     if avvocato.nome == nome and avvocato.cognome == cognome:
+                        print("Trovato")
                         return avvocato
+                print("Avvocato non trovato")
                 return None
         else:
             return None
 
 
-    def rimuoviAvvocato(self, Id):      #Effettuo una ricerca tramite Id
-        if os.path.isfile('GestoreStudioLegale/Dati/Avvocato.pickle'):
-            with open('GestoreStudioLegale/Dati/Avvocato.pickle', 'wb+') as f:
-                avvocati = dict(pickle.load(f))
-                if self.ricercaUtilizzatoreId(Id):
-                    del avvocati[self.Id]
-                    pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
-            self.rimuoviUtilizzatore()
-            self.licenza = None
-            #self.udienza = None #Vedere se aggiungere la lista delle udienze
-            self.clienti = None
-            self.appuntamentiAvvocato = None
-            del self
+    @staticmethod
+    def rimuoviAvvocato(Id):      #Effettuo una ricerca tramite Id
+        try:
+            avvocati = []
+            if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+                with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
+                    avvocati = pickle.load(f)
+            for avvocato in avvocati:
+                if avvocato.Id == Id:
+                    avvocati.remove(avvocato)
+                else:
+                    print("Avvocato non trovato")
+            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f1:
+                pickle.dump(avvocati, f1, pickle.HIGHEST_PROTOCOL)
+        except Exception as e:
+            print("Finito")
 
 
     def visualizzaAvvocato(self, Id): #Ricerca tramite Id, quindi modifica in EA
-        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                avvocati = dict(pickle.load(f))
-                for avvocato in avvocati.values():
-                    if avvocato.Id == Id:
-                        return avvocato
-                    else:
-                        return None
+        if self.ricercaUtilizzatoreId(Id):
+            print(self.ricercaUtilizzatoreId(Id))
