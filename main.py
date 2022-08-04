@@ -46,3 +46,5 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #avvocato1.rimuoviAvvocato('errato') #FUNZIONA
 #avvocato1.visualizzaAvvocato('A4783') #FUNZIONA
 #avvocato1.aggiornaAvvocato(nuovaListaClienti, 3620988123)
+
+parcella1.creaParcella(cliente1, 'PP456', 1235, 'giorgio')

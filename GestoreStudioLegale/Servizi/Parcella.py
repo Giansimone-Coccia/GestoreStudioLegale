@@ -13,17 +13,23 @@ class Parcella():
 
    # def aggiornaParcella(self):
 
+
     def creaParcella(self, Cliente, ID, importo, intestatario ):
         self.Cliente = Cliente
         self.ID = ID
         self.importo = importo
         self.intestatario = intestatario
-        if os.path.isfile('Dati\Parcelle.pickle'):
-            with open('Dati\Parcelle.pickle', 'rb') as f:
-                parcelle = pickle.load(f)
-                parcelle[ID] = self
-            with open('Dati\Parcelle.pickle', 'wb') as f:
+        parcelle = []
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+                with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
+                    try:
+                        parcelle = pickle.load(f)
+                        parcelle.append(self)
+                    except EOFError as eo:
+                        print("Errore")
+        with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f:
                 pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
+
 
     def getDatiParcellaCliente(self): #errore dizionario
         d = {}
@@ -33,6 +39,7 @@ class Parcella():
         d['ID'] = self.ID
         print(d)
         return d
+
 
     def ricercaParcellaCliente (self, Cliente): #Prende una stringa come parametro, cambiare in EA
         if os.path.isfile('Dati\Parcelle.pickle'):
@@ -46,6 +53,7 @@ class Parcella():
         else:
             return None
 
+
     def ricercaParcellaIntestatario (self, intestatario):
         if os.path.isfile('Dati\Parcelle.pickle'):
             with open('Dati\Parcelle.pickle', 'rb') as f:
@@ -58,6 +66,7 @@ class Parcella():
         else:
             return None
 
+
     def ricercaParcellaIdentificativo(self, identificativo):
         if os.path.isfile('Dati\Parcelle.pickle'):
             with open('Dati\Parcelle.pickle', 'rb') as f:
@@ -69,6 +78,7 @@ class Parcella():
             return None
         else:
             return None
+
 
     @staticmethod
     def rimuoviParcella (ID):
