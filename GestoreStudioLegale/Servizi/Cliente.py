@@ -53,15 +53,18 @@ class Cliente(Utilizzatore):
         try:
             if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                    clienti = pickle.load(f)
-            clienti[Id] = self
+                    try:
+                        clienti = pickle.load(f)
+                        clienti['Id'] = self
+                    except EOFError as er:
+                        print("Errore")
         except Exception as e:
             print("Errore durane l'acquisizione del file")
         with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def getDatiCliente(self, clienti):
+    def getDatiCliente(self, clienti): #Provare lettura da file
         d = self.getInfoUtilizzatore()
         d['appuntamentoCliente'] = self.appuntamentoCliente
         d['parcelle'] = self.parcelle
@@ -74,6 +77,7 @@ class Cliente(Utilizzatore):
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.email == email:
+                        print("Ok cliente")
                         return cliente
                 print("Nessun cliente trovato")
                 return None
@@ -87,6 +91,7 @@ class Cliente(Utilizzatore):
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.Id == Id:
+                        print("Trovato")
                         return cliente
                 print("Cliente non trovato")
                 return None
@@ -100,6 +105,7 @@ class Cliente(Utilizzatore):
                 clienti = dict(pickle.load(f))
                 for cliente in clienti.values():
                     if cliente.nome == nome and cliente.cognome == cognome:
+                        print("Trovato")
                         return cliente
                 print("Cliente non trovato")
                 return None
@@ -111,12 +117,18 @@ class Cliente(Utilizzatore):
         try:
             if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb+') as f:
-                    clienti = dict(pickle.load(f))
+                    try:
+                        print("prima")
+                        clienti = dict(pickle.load(f))
+                    except EOFError as ef:
+                        print("File vuoto")
         except Exception as e:
             print("Errore con la lettura/scrittura binaria")
-            if self.ricercaUtilizzatoreId(Id):
-                del clienti[self.Id]
+            if self.ricercaUtilizzatoreId(Id) is not None:
+                print("Eccoci")
+                #del clienti[self.Id]
                 pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+                print("Siamo arrivati")
         self.rimuoviUtilizzatore()
         self.appuntamentoCliente = None
         self.parcelle = None
