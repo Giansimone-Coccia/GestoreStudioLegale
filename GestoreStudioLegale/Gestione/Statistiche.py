@@ -38,9 +38,13 @@ class Statistiche:
                     if (aaa - bbb).days < nGiorni:
                         nUdienze += 1
 
+        udienze = []
         if os.path.isfile('Dati\Udienze.pickle'):
             with open('Dati\Udienze.pickle', 'rb') as f:
-                udienze = dict(pickle.load(f))
+                try:
+                    udienze = pickle.load(f)
+                except EOFError as er:
+                    print("Errore")
 
             breve(udienze,'Tribunale Amministrativo',nUdienzeAmminsitrative,365)
             breve(udienze, 'Tribunale Civile', nUdienzeCivili, 365)

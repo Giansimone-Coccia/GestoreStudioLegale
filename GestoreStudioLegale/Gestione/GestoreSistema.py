@@ -6,19 +6,31 @@ from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 class GestoreSistema:
 
     def __init__(self):
+
+        avvocati = []
+        clienti = []
+        self.listaAvvocati = []
+        self.listaClienti = []
+
         if os.path.isfile('Dati\Avvocati.pickle'):
             with open('Dati\Avvocati.pickle', 'rb') as f:
-                avvocati = dict(pickle.load(f))
-                self.listaAvvocati = []
-                self.listaAvvocati.append(avvocati.values())
+                try:
+                    avvocati = pickle.load(f)
+                    self.listaAvvocati.append(avvocati)
+                except EOFError as er:
+                        print("Errore")
 
         if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'rb') as f:
-                clienti = dict(pickle.load(f))
-                self.listaClienti = []
-                self.listaClienti.append(clienti.values())
+                try:
+                    clienti = pickle.load(f)
+                    self.listaClienti.append(clienti)
+                except EOFError as er:
+                    print("Errore")
+
 
     def aggiungiAvvocato(self, Avvocato = None): #modifica
+
         self.listaAvvocati.append(Avvocato)
         avvocati = {}
         if os.path.isfile('Dati\Avvocati.pickle'):
@@ -29,6 +41,7 @@ class GestoreSistema:
             pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
     def aggiungiCliente(self, cliente):
+
         self.listaClienti.append(cliente)
         clienti={}
         if os.path.isfile('Dati\Clienti.pickle'):
@@ -38,7 +51,8 @@ class GestoreSistema:
         with open('Dati\Avvocati.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
-    def rimuoviAvvocato(self, avvocato):
+    def rimuoviAvvocato(self, avvocato): #usa funzione di rimozione di avvocato
+
         self.listaAvvocati.remove(avvocato)
         if os.path.isfile('Dati\Avvocati.pickle'):
             with open('Dati\Avvocati.pickle', 'wb+') as f:
@@ -47,7 +61,8 @@ class GestoreSistema:
                     del avvocati[avvocato.getInfoUtilizzatore()['id']]
                     pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
-    def rimuoviCliente(self, cliente):  # Effettuo una ricerca tramite Id
+    def rimuoviCliente(self, cliente):  #usa funzione di rimozione di cliente
+
         self.listaAvvocati.remove(cliente)
         if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'wb+') as f:
