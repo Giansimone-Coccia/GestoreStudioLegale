@@ -29,8 +29,8 @@ class Statistiche:
         def breve(lista,tribunale,nUdienze,nGiorni):
             for i in lista:
                 if i.getDatiUdienza.get('Tipo Tribunale',None) == tribunale:
-                    data=datetime.now()-timedelta(days = nGiorni)
-                    if i > data:
+                    date = datetime.now()-timedelta(days = nGiorni)
+                    if i > date:
                         nUdienze += 1
 
         udienze = []
@@ -52,12 +52,13 @@ class Statistiche:
             self.mediaUdienzeAmministrative = nUdienzeAmminsitrative/12
 
             for i in udienze:
-                data = datetime.now() - timedelta(days = 365)
-                if i > data:
+                date = datetime.now() - timedelta(days = 365)
+                if i > date:
                     nUdienze += 1
 
             self.mediaUdienzeMensili = nUdienze/12
 
+        appuntamenti=[]
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
                 try:
@@ -66,8 +67,8 @@ class Statistiche:
                     print("Errore")
 
             for i in appuntamenti:
-                data = datetime.now() - timedelta(days = 365)
-                if i > data:
+                date = datetime.now() - timedelta(days = 365)
+                if i > date:
                     nAppuntamenti += 1
 
             self.numeroAppuntamenti = nAppuntamenti
