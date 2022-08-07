@@ -29,13 +29,8 @@ class Statistiche:
         def breve(lista,tribunale,nUdienze,nGiorni):
             for i in lista:
                 if i.getDatiUdienza.get('Tipo Tribunale',None) == tribunale:
-                    a = str(datetime.now())
-                    b = str(i.getDatiUdienza.get('Data e Ora Inizio',None))
-                    aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
-                    aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
-                    bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
-                    bbb = datetime.datetime.fromtimestamp(time.mktime(bb))
-                    if (aaa - bbb).days < nGiorni:
+                    data=datetime.now()-timedelta(days = nGiorni)
+                    if i > data:
                         nUdienze += 1
 
         udienze = []
@@ -57,29 +52,22 @@ class Statistiche:
             self.mediaUdienzeAmministrative = nUdienzeAmminsitrative/12
 
             for i in udienze:
-                a = str(datetime.now())
-                b = str(i.getDatiUdienza.get('Data e Ora Inizio',None))
-                aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
-                aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
-                bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
-                bbb = datetime.datetime.fromtimestamp(time.mktime(bb))
-                if (aaa - bbb).days < 365:
+                data = datetime.now() - timedelta(days = 365)
+                if i > data:
                     nUdienze += 1
 
             self.mediaUdienzeMensili = nUdienze/12
 
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
-                appuntamenti = dict(pickle.load(f))
+                try:
+                    appuntamenti = pickle.load(f)
+                except EOFError as er:
+                    print("Errore")
 
             for i in appuntamenti:
-                a = str(datetime.now())
-                b = str(i.getDatiAppuntamento.get('Data e Ora Inizio',None))
-                aa = time.strptime(a, '%Y-%m-%d %H:%M:%S')
-                aaa = datetime.datetime.fromtimestamp(time.mktime(aa))
-                bb = time.strptime(b, '%Y-%m-%d %H:%M:%S')
-                bbb = datetime.datetime.fromtimestamp(time.mktime(bb))
-                if (aaa - bbb).days < 365:
+                data = datetime.now() - timedelta(days = 365)
+                if i > data:
                     nAppuntamenti += 1
 
             self.numeroAppuntamenti = nAppuntamenti
