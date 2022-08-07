@@ -29,44 +29,40 @@ class GestoreSistema:
                     print("Errore")
 
 
-    def aggiungiAvvocato(self, Avvocato = None): #modifica
+    def aggiungiAvvocato(self, avvocato = None): #modifica
 
-        self.listaAvvocati.append(Avvocato)
-        avvocati = {}
+        self.listaAvvocati.append(avvocato)
+        avvocati = []
         if os.path.isfile('Dati\Avvocati.pickle'):
             with open('Dati\Avvocati.pickle', 'rb') as f:
-                avvocati = pickle.load(f)
-        avvocati[Avvocato.id] = Avvocato
+                try:
+                    avvocati = pickle.load(f)
+                    avvocati.append(avvocato)
+                except EOFError as er:
+                    print("Errore")
         with open('Dati\Avvocati.pickle', 'wb') as f:
             pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
-    def aggiungiCliente(self, cliente):
+    def aggiungiCliente(self, cliente = None):
 
         self.listaClienti.append(cliente)
-        clienti={}
+        clienti=[]
         if os.path.isfile('Dati\Clienti.pickle'):
             with open('Dati\Clienti.pickle', 'rb') as f:
-                clienti = pickle.load(f)
-        clienti[cliente.getInfoUtilizzatore()['id']] = cliente
+                try:
+                    clienti = pickle.load(f)
+                    clienti.append(cliente)
+                except EOFError as er:
+                    print("Errore")
         with open('Dati\Avvocati.pickle', 'wb') as f:
             pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
-    def rimuoviAvvocato(self, avvocato): #usa funzione di rimozione di avvocato
+    def rimuoviAvvocato(self, avvocato = None): #usa funzione di rimozione di avvocato
 
         self.listaAvvocati.remove(avvocato)
-        if os.path.isfile('Dati\Avvocati.pickle'):
-            with open('Dati\Avvocati.pickle', 'wb+') as f:
-                avvocati = dict(pickle.load(f))
-                if avvocato in avvocati :
-                    del avvocati[avvocato.getInfoUtilizzatore()['id']]
-                    pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
+        Avvocato.rimuoviAvvocato(avvocato.Id)
 
-    def rimuoviCliente(self, cliente):  #usa funzione di rimozione di cliente
+    def rimuoviCliente(self, cliente = None):  #usa funzione di rimozione di cliente
 
         self.listaAvvocati.remove(cliente)
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'wb+') as f:
-                clienti = dict(pickle.load(f))
-                if cliente in clienti :
-                    del clienti[cliente.getInfoUtilizzatore()['id']]
-                    pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+        Cliente.rimuoviCliente(cliente.Id)

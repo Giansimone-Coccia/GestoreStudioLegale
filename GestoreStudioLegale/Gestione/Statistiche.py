@@ -13,7 +13,7 @@ class Statistiche:
         self.mediaUdienzeAmministrative = 0
         self.mediaUdienzeCivili = 0
         self.mediaUdienzeMinorili = 0
-        self.mediaUdienzeMensile = 0
+        self.mediaUdienzeMensili = 0
         self.mediaUdienzePenali = 0
         self.numeroAppuntamenti = 0
 
@@ -66,7 +66,7 @@ class Statistiche:
                 if (aaa - bbb).days < 365:
                     nUdienze += 1
 
-            self.mediaUdienzeMensile = nUdienze/12
+            self.mediaUdienzeMensili = nUdienze/12
 
         if os.path.isfile('Dati\Appuntamenti.pickle'):
             with open('Dati\Appuntamenti.pickle', 'rb') as f:
@@ -82,7 +82,7 @@ class Statistiche:
                 if (aaa - bbb).days < 365:
                     nAppuntamenti += 1
 
-            self.numeroAppuntamenti=nAppuntamenti
+            self.numeroAppuntamenti = nAppuntamenti
 
     #def mostraGrafico(self): #non lo so
 
@@ -91,16 +91,32 @@ class Statistiche:
             "mediaUdienzeAmminstrative" : self.mediaUdienzeAmministrative,
             "mediaUdienzeCivili" : self.mediaUdienzeCivili,
             "mediaUdienzeMinorili" : self.mediaUdienzeMinorili,
-            "mediaUdienzeMensile" : self.mediaUdienzeMensile,
+            "mediaUdienzeMensili" : self.mediaUdienzeMensile,
             "mediaUdienzePenali" : self.mediaUdienzePenali,
             "numeroAppuntamenti" : self.numeroAppuntamenti,
         }
         with open('Dati\Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
 
-    def mostraStatistiche(self): #modificare
+    def mostraStatistiche(self,statistica = ""): #modificare, c'è scritto void
         self.calcolaStatistiche()
+        statistica = statistica.lower()
+
         if os.path.isfile('Dati\Statistiche.pickle'):
             with open('Dati\Statistiche.pickle', 'rb') as f:
                 stats = dict(pickle.load(f))
-        return stats
+
+        if statistica == "udienze amministrative":
+            return stats["mediaUdienzeAmminstrative"]
+        elif statistica == "udienze civili":
+            return stats["mediaUdienzeCivili"]
+        elif statistica == "udienze minorili":
+            return stats["mediaUdienzeMinorili"]
+        elif statistica == "udienze penali":
+            return stats["mediaUdienzePenali"]
+        elif statistica == "udienze mensili":
+            return stats["mediaUdienzeMensili"]
+        elif statistica == "numero appuntamenti":
+            return stats["numeroAppuntamenti"]
+        else:
+            return stats
