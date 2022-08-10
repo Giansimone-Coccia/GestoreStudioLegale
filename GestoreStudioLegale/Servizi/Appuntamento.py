@@ -13,7 +13,23 @@ class Appuntamento():
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoProcedimento = ''
 
-    #def aggiornaAppuntamento(self):
+    def aggiornaAppuntamento(self, Cliente = None,
+                            dataOraInizio=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
+                            dataOraFine=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
+                            tipoProcedimento = ''):
+            if Cliente != None:
+                self.Cliente = Cliente
+            elif dataOraInizio != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
+                self.dataOraInizio = dataOraInizio
+            elif dataOraFine != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
+                self.dataOraFine = dataOraFine
+            elif tipoProcedimento != '':
+                self.tipoProcedimento = tipoProcedimento
+
+            self.rimuoviAppuntamento(self.ID)
+            self.creaAppuntamento( self.Cliente, self.dataOraInizio, self.dataOraFine,
+                             self.ID, self.tipoProcedimento)
+            print("Aggiornato")
 
     def creaAppuntamento(self, Cliente, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
         self.Cliente = Cliente

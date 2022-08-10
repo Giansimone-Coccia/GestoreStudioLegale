@@ -21,7 +21,20 @@ class Udienza:
                         Cliente = None, Avvoccato = None):
         if cittaTribunale != '':
             self.cittaTribunale = cittaTribunale
-            #da finire
+        elif tipoTribunale != '':
+            self.tipoTribunale = tipoTribunale
+        elif dataOraInizio != datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ):
+            self.dataOraInizio = dataOraInizio
+        elif dataOraFine != datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ):
+            self.dataOraFine = dataOraFine
+        elif Cliente != None:
+            self.Cliente = Cliente
+        elif Avvoccato != None:
+            self.Avvocato = Avvocato
+
+        self.rimuoviUdienza(self.ID)
+        self.creaUdienza(self.Avvocato, self.cittaTribunale, self.Cliente, self.dataOraInizio, self.dataOraFine, self.ID, self.tipoTribunale)
+        print("Aggiornato")
 
     def creaUdienza(self, Avvocato, cittaTribunale, Cliente, dataOraInizio, dataOraFine, ID, tipoTribunale ):
         self.Avvocato = Avvocato
