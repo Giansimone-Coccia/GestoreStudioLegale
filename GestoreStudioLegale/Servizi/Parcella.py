@@ -58,33 +58,31 @@ class Parcella():
 
 
     def ricercaParcellaCliente (self, Cliente): #Prende una stringa come parametro, cambiare in EA
-        listaParcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
+                listaParcelle = []
                 for parcella in parcelle:
                     if parcella.Cliente is Cliente:
                         print("Trovata")
                         listaParcelle.append(parcella)
-                        return listaParcelle
-            print("Niente")
-            return None
+                print(listaParcelle)
+                return listaParcelle
         else:
             return None
 
 
     def ricercaParcellaIntestatario (self, intestatario):
-        listaParcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
+                listaParcelle = []
                 for parcella in parcelle:
                     if parcella.intestatario == intestatario:
                         listaParcelle.append(parcella)
                         print("Trovata")
-                        return listaParcelle
-            print("Non trovata")
-            return None
+                print(listaParcelle)
+                return listaParcelle
         else:
             return None
 
