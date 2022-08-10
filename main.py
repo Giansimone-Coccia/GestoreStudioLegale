@@ -49,7 +49,7 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 #parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'giorgio') #FUNZIONA
 #parcella1.getDatiParcellaCliente() #FUNZIONA UTILIZZANDOLO INSIEME A creaParcella
-#parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
+parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
 #parcella1.ricercaParcellaIntestatario('giorgio') #FUNZIONA
 #parcella1.ricercaParcellaIntestatario('nomeAcaso') #FUNZIONA
 #parcella1.ricercaParcellaIdentificativo(123456789)
