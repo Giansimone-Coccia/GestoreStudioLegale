@@ -11,7 +11,21 @@ class Parcella():
        self.importo = 0
        self.intestatario = ''
 
-   # def aggiornaParcella(self):
+    def aggiornaParcella(self, Cliente = None, identificativo = 0, importo = 0, intestatario = ''):
+            if Cliente != None:
+                self.Cliente = Cliente
+            elif identificativo != 0:
+                self.identificativo = identificativo
+            elif importo != 0:
+                self.importo = importo
+            elif intestatario != '':
+                self.intestatario = intestatario
+
+            self.rimuoviParcella(self.ID)
+            self.creaParcella( self.Cliente, self.ID, self.importo,
+                             self.intestatario, self.identificativo)
+            print("Aggiornato")
+
 
 
     def creaParcella(self, Cliente, ID, importo, intestatario ):
