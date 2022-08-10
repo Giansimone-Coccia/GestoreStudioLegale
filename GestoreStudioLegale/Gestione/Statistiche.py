@@ -1,6 +1,7 @@
 import pickle
 import os.path
 from datetime import datetime, timedelta, time
+import matplotlib.pyplot as plt
 
 # from Servizi.Udienza import Udienza
 # from Servizi.Appuntamento import Appuntamento
@@ -73,7 +74,15 @@ class Statistiche:
 
             self.numeroAppuntamenti = nAppuntamenti
 
-    #def mostraGrafico(self): #non lo so
+    def mostraGrafico(self):
+        my_dict = self.mostraStatistiche()
+
+        myList = my_dict.items()
+        myList = sorted(myList)
+        x, y = zip(*myList)
+
+        plt.bar(x, y)
+        plt.show()
 
     def salvaSuFile (self):
         stats = {

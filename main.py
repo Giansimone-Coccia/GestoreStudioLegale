@@ -50,7 +50,7 @@ avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista,
 
 #parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'giorgio') #FUNZIONA
 #parcella1.getDatiParcellaCliente() #FUNZIONA UTILIZZANDOLO INSIEME A creaParcella
-parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
+#parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
 #parcella1.ricercaParcellaIntestatario('giorgio') #FUNZIONA
 #parcella1.ricercaParcellaIntestatario('nomeAcaso') #FUNZIONA
 #parcella1.ricercaParcellaIdentificativo(123456789)
@@ -58,8 +58,6 @@ parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
 #parcella1.rimuoviParcella('PP456') #FUNZIONA
 #parcella1.rimuoviParcella('PP0000') #FUNZIONA
 #parcella1.visualizzaParcella('PP456') #FUNZIONA
-
-
 
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','penale') #FUNZIONA
 #udienza2.creaUdienza(avvocato1, 'Roma', cliente1, '21/12/2021,15:00','21/12/2021,19:00','U2765','penale')
