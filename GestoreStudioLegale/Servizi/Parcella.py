@@ -11,14 +11,15 @@ class Parcella():
        self.importo = 0
        self.intestatario = ''
 
-   # def aggiornaParcella(self):
+    #def aggiornaParcella(self):
 
 
-    def creaParcella(self, Cliente, ID, importo, intestatario ):
+    def creaParcella(self, Cliente, ID, identificativo, importo, intestatario):
         self.Cliente = Cliente
         self.ID = ID
         self.importo = importo
         self.intestatario = intestatario
+        self.identificativo = identificativo
         parcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
                 with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
@@ -31,10 +32,11 @@ class Parcella():
                 pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
 
 
-    def getDatiParcellaCliente(self): #errore dizionario
+    def getDatiParcellaCliente(self):
         d = {}
         d['Cliente'] = self.Cliente
         d['intestatario'] = self.intestatario
+        d['identificativo'] = self.identificativo
         d['importo'] = self.importo
         d['ID'] = self.ID
         print(d)
@@ -47,8 +49,9 @@ class Parcella():
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.Cliente is Cliente:
-                        listaParcelle = [parcella]
-                return listaParcelle
+                        print("Trovata")
+                        return parcella
+            print("Niente")
             return None
         else:
             return None
@@ -60,8 +63,9 @@ class Parcella():
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.intestatario == intestatario:
-                        listaParcelle = [parcella]
-                return listaParcelle
+                        print("Trovata")
+                        return parcella
+            print("Non trovata")
             return None
         else:
             return None
@@ -73,8 +77,9 @@ class Parcella():
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.identificativo == identificativo:
-                        listaParcelle = [parcella]
-                return listaParcelle
+                        print("Trovata")
+                        return parcella
+            print("Niente")
             return None
         else:
             return None
@@ -91,7 +96,7 @@ class Parcella():
                 if parcella.ID == ID:
                     parcelle.remove(parcella)
                 else:
-                    print("Parcella non trovato")
+                    print("Parcella non trovata")
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f1:
                 pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
@@ -104,6 +109,7 @@ class Parcella():
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.ID == ID:
+                        print(parcella)
                         return parcella
                     else:
                         return None

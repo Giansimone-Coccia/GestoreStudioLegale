@@ -47,6 +47,15 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #avvocato1.visualizzaAvvocato('A4783') #FUNZIONA
 #avvocato1.aggiornaAvvocato(nuovaListaClienti, 3620988123)
 
-#parcella1.creaParcella(cliente1, 'PP456', 1235, 'giorgio') #FUNZIONA
-#parcella1.getDatiParcellaCliente()
+#parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'giorgio') #FUNZIONA
+#parcella1.getDatiParcellaCliente() #FUNZIONA UTILIZZANDOLO INSIEME A creaParcella
+#parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
+#parcella1.ricercaParcellaIntestatario('giorgio') #FUNZIONA
+#parcella1.ricercaParcellaIntestatario('nomeAcaso') #FUNZIONA
+#parcella1.ricercaParcellaIdentificativo(123456789)
+#parcella1.ricercaParcellaIdentificativo(48729852)
+#parcella1.rimuoviParcella('PP456') #FUNZIONA
+#parcella1.rimuoviParcella('PP0000') #FUNZIONA
+#parcella1.visualizzaParcella('PP456') #FUNZIONA
+
 
