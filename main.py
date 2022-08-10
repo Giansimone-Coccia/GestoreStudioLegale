@@ -7,6 +7,7 @@ from GestoreStudioLegale.Servizi.Udienza import Udienza
 cliente1 = Cliente()
 avvocato1 = Avvocato()
 udienza1 = Udienza()
+udienza2= Udienza()
 appuntamento1 = Appuntamento()
 parcella1 = Parcella()
 
@@ -19,7 +20,7 @@ listaClienti = [cliente1]
 nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
-#cliente1.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+cliente1.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente1.getDatiCliente()  #FUNZIONA FACENDO PRIMA AGGIUNGICLIENTE COSI' FA PRIMA CREAUTILIZZATORE
 #print(cliente1.dataNascita)
 #cliente1.ricercaUtilizzatoreEmail('albero@gmail.com') #FUNZIONA
@@ -34,7 +35,7 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
 #cliente1.aggiornaCliente('almail@gmil.com')
 
-#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
 #avvocato1.getDatiAvvocato() #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('id non valido') #FUNZIONA
@@ -50,3 +51,17 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #parcella1.creaParcella(cliente1, 'PP456', 1235, 'giorgio') #FUNZIONA
 #parcella1.getDatiParcellaCliente()
 
+
+#udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','penale') #FUNZIONA
+#udienza2.creaUdienza(avvocato1, 'Roma', cliente1, '21/12/2021,15:00','21/12/2021,19:00','U2765','penale')
+#udienza1.aggiornaUdienza('Ancona', 'Civile', '09/08/2022, 11:00')  #NON FUNZIONA
+#udienza1.getDatiUdienza() #FUNZIONA
+#udienza2.getDatiUdienza()
+#listaUdienze = udienza1.ricercaUdienzaCliente(cliente1)
+#print(listaUdienze)
+#udienzaTr= udienza1.ricercaUdienzaDataInizio('21/12/2021,15:00')
+#print(udienzaTr)
+#udienzaT=udienza1.ricercaUdienzaID('U2345')
+#print(udienzaT)
+#udienzaTro= udienza1.ricercaUdienzaTipo('penale')
+#print(udienzaTro)
