@@ -46,15 +46,17 @@ class Udienza:
         self.tipoTribunale = tipoTribunale
 
         udienze = []
+
         if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            #if os.path.isempty('GestoreStudioLegale/Dati/Udienze.pickle')
             with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 try:
                     udienze = pickle.load(f)
                     udienze.append(self)
                 except EOFError as er:
                     print("Errore")
-        with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f:
-            pickle.dump(udienze, f, pickle.HIGHEST_PROTOCOL)
+        with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:
+            pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
 
     def getDatiUdienza(self): #errore dizionario
         d = {}
@@ -74,7 +76,7 @@ class Udienza:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.Cliente is Cliente:
-                        listaUdienze = [udienza]
+                       listaUdienze = [udienza]
                 return listaUdienze
             return None
         else:
@@ -85,7 +87,7 @@ class Udienza:
             with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
-                    if udienza.DataInizio == DataInizio:
+                    if udienza.dataOraInizio == DataInizio:
                         return udienza
                 return None
         else:
@@ -103,12 +105,13 @@ class Udienza:
             return None
 
     def ricercaUdienzaTipo(self, tipoTribunale):
+        listaUdienze=[]
         if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
             with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 udienze = pickle.load(f)
                 for udienza in udienze:
                     if udienza.tipoTribunale == tipoTribunale:
-                        listaUdienze = [udienza]
+                        listaUdienze.append(udienza)
                 return listaUdienze
             return None
         else:
