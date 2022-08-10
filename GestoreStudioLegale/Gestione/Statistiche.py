@@ -1,6 +1,6 @@
 import pickle
 import os.path
-from datetime import datetime,timedelta,time
+from datetime import datetime, timedelta, time
 
 # from Servizi.Udienza import Udienza
 # from Servizi.Appuntamento import Appuntamento
@@ -28,14 +28,14 @@ class Statistiche:
 
         def breve(lista,tribunale,nUdienze,nGiorni):
             for i in lista:
-                if i.getDatiUdienza.get('Tipo Tribunale',None) == tribunale:
+                if i.getDatiUdienza.get('Tipo Tribunale', None) == tribunale:
                     date = datetime.now()-timedelta(days = nGiorni)
-                    if i > date:
+                    if i.getDatiUdienza.get('Data e Ora Inizio') > date:
                         nUdienze += 1
 
         udienze = []
-        if os.path.isfile('Dati\Udienze.pickle'):
-            with open('Dati\Udienze.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Udienze.pickle'):
+            with open('Dati/Udienze.pickle', 'rb') as f:
                 try:
                     udienze = pickle.load(f)
                 except EOFError as er:
@@ -53,14 +53,14 @@ class Statistiche:
 
             for i in udienze:
                 date = datetime.now() - timedelta(days = 365)
-                if i > date:
+                if i.getDatiUdienza.get('Data e Ora Inizio') > date:
                     nUdienze += 1
 
             self.mediaUdienzeMensili = nUdienze/12
 
         appuntamenti=[]
-        if os.path.isfile('Dati\Appuntamenti.pickle'):
-            with open('Dati\Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Appuntamenti.pickle'):
+            with open('Dati/Appuntamenti.pickle', 'rb') as f:
                 try:
                     appuntamenti = pickle.load(f)
                 except EOFError as er:
@@ -68,7 +68,7 @@ class Statistiche:
 
             for i in appuntamenti:
                 date = datetime.now() - timedelta(days = 365)
-                if i > date:
+                if i.getDatiUdienza.get('Data e Ora Inizio') > date:
                     nAppuntamenti += 1
 
             self.numeroAppuntamenti = nAppuntamenti
@@ -84,15 +84,15 @@ class Statistiche:
             "mediaUdienzePenali" : self.mediaUdienzePenali,
             "numeroAppuntamenti" : self.numeroAppuntamenti,
         }
-        with open('Dati\Statistiche.pickle', 'wb') as f:
+        with open('Dati/Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
 
-    def mostraStatistiche(self,statistica = ""): #modificare, c'è scritto void
+    def mostraStatistiche(self, statistica = ""): #modificare, c'è scritto void
         self.calcolaStatistiche()
         statistica = statistica.lower()
 
-        if os.path.isfile('Dati\Statistiche.pickle'):
-            with open('Dati\Statistiche.pickle', 'rb') as f:
+        if os.path.isfile('Dati/Statistiche.pickle'):
+            with open('Dati/Statistiche.pickle', 'rb') as f:
                 stats = dict(pickle.load(f))
 
         if statistica == "udienze amministrative":

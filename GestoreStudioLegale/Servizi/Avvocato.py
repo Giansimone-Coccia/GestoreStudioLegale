@@ -43,7 +43,7 @@ class Avvocato(Utilizzatore):
         self.clienti = clienti
         self.licenza = licenza
         self.appuntamentiAvvocato = appuntamentoAvvocato
-        avvocati = []
+        '''avvocati = []
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
                 try:
@@ -52,7 +52,7 @@ class Avvocato(Utilizzatore):
                 except EOFError as er:
                     print("Errore")
         with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f:
-            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)'''
 
 
     def getDatiAvvocato(self):

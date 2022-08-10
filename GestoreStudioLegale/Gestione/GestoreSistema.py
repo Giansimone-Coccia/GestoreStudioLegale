@@ -7,8 +7,6 @@ class GestoreSistema:
 
     def __init__(self):
 
-        avvocati = []
-        clienti = []
         self.listaAvvocati = []
         self.listaClienti = []
 
