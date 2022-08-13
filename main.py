@@ -3,6 +3,7 @@ from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Udienza import Udienza
+from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
 
 cliente1 = Cliente()
 cliente2 = Cliente()
@@ -11,6 +12,7 @@ udienza1 = Udienza()
 udienza2= Udienza()
 appuntamento1 = Appuntamento()
 parcella1 = Parcella()
+gestore1 = GestoreEmail()
 
 corsi = ['economia politica']
 appuntamentiAvvocato = ['martedì', 'mercoledì']
@@ -79,3 +81,5 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #udienzaTr.getDatiUdienza() #FUNZIONA
 #udienza1.rimuoviUdienza('U2345') #FUNZIONA
 #udienza1.rimuoviUdienza('U2765') #FUNZIONA
+
+gestore1.invioEmail()
