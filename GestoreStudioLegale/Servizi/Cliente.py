@@ -34,7 +34,7 @@ class Cliente(Utilizzatore):
                                   password, udienza, nome) #Messi in ordine, così non utilizzo l'='
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
-        '''clienti = []
+        clienti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                     try:
@@ -43,7 +43,7 @@ class Cliente(Utilizzatore):
                     except EOFError as er:
                         print("Errore")
         with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
-            pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)'''
+            pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
 
     def getDatiCliente(self):
