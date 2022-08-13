@@ -34,6 +34,7 @@ class Parcella():
         self.importo = importo
         self.intestatario = intestatario
         self.identificativo = identificativo
+
         parcelle = []
 
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):

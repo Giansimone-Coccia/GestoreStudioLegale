@@ -20,29 +20,37 @@ class CorsoAggiornamento:
         self.dataOraInizio = dataOraInizio
         self.dataOraFine = dataOraFine
         self.tipo = tipo
-        
-        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
-            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
-                corsiAggiornamento = pickle.load(f)
-            corsiAggiornamento[ID] = self
-        with open('Dati\CorsiAggiornamento.pickle', 'wb') as f:
-            pickle.dump(corsiAggiornamento, f, pickle.HIGHEST_PROTOCOL)
+
+        corsi = []
+
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
+            if os.path.getsize('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle') == 0:
+                corsi.append(self)
+                with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'wb') as f1:
+                    pickle.dump(corsi, f1, pickle.HIGHEST_PROTOCOL)
+            else:
+                if self.ricercaCorsoCodice(self.ID) is None:
+                    with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
+                        corsi = pickle.load(f)
+                        corsi.append(self)
+                    with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'wb') as f1:
+                        pickle.dump(corsi, f1, pickle.HIGHEST_PROTOCOL)
 
 
     def getDatiCorso(self):
-        return {
-            'Nome': self.nome,
-            'Crediti': self.crediti,
-            'ID': self.ID,
-            'Data e Ora Inizio': self.dataOraInizio,
-            'Data e Ora Fine': self.dataOraFine,
-            'Tipo Corso': self.tipo,
-        }
+        d = {}
+        d['Nome'] = self.nome
+        d['Crediti'] = self.crediti
+        d['ID'] = self.ID
+        d['Data e Ora Inizio'] = self.dataOraInizio
+        d['Data e Ora Fine'] = self.dataOraFine
+        d['Tipo Corso'] = self.tipo
+        return d
 
 
     def ricercaCorsoCodice(self, ID):
-        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
-            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
+            with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 corsiAggiornamento = dict(pickle.load(f))
                 for corsoAggiornamento in corsiAggiornamento.values():
                     if corsoAggiornamento.ID == ID:
@@ -52,8 +60,8 @@ class CorsoAggiornamento:
             return None
 
     def ricercaCorsoNome(self, nome): #aggiungi la variabile nome in ea
-        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
-            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
+            with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 corsiAggiornamento = dict(pickle.load(f))
                 for corsoAggiornamento in corsiAggiornamento.values():
                     if corsoAggiornamento.nome == nome:
@@ -63,21 +71,31 @@ class CorsoAggiornamento:
             return None
 
     def ricercaCorsoTipo(self, tipo):
-        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
-            with open('Dati\CorsiAggiornamento.pickle', 'rb') as f:
+        listaCorsi = []
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
+            with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 corsiAggiornamento = dict(pickle.load(f))
                 for corsoAggiornamento in corsiAggiornamento.values():
                     if corsoAggiornamento.tipo == tipo:
-                        listaCorsi = [corsoAggiornamento]
+                        listaCorsi.append(corsoAggiornamento)
                 return listaCorsi
             return None
         else:
             return None
 
-    def rimuoviCorso (self, CorsoAggiornamento):
-        if os.path.isfile('Dati\CorsiAggiornamento.pickle'):
-            with open('Dati\CorsiAggiornamento.pickle', 'wb+') as f:
-                corsiAggiornamento = dict(pickle.load(f))
-                if self.ricercaUdienzaCodice(CorsoAggiornamento.codice()):
-                    del corsiAggiornamento[self.ID]
-                    pickle.dump(corsiAggiornamento, f, pickle.HIGHEST_PROTOCOL)
+    @staticmethod
+    def rimuoviCorso (CorsoAggiornamento):
+        try:
+            corsi = []
+            if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
+                with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
+                    corsi = pickle.load(f)
+            for corso in corsi:
+                if corso.ID == ID:
+                    corsi.remove(corso)
+                else:
+                    print("Corso non trovato")
+            with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'wb') as f1:
+                pickle.dump(corsi, f1, pickle.HIGHEST_PROTOCOL)
+        except Exception as e:
+            print("Finito")

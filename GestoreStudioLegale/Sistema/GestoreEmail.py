@@ -14,7 +14,7 @@ class GestoreEmail:
        self.contenuto = ''
        self.dataOra = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
 
-    #se voglio fare la verifica sul cliente dovrei inserirlo negli attributi
+    #per gestire eventuali errori (es email non trovata)
     def gestoreEmail(self):
 
         #if ricercaUtilizzatoreId(self, Cliente.ID)
@@ -61,9 +61,3 @@ class GestoreEmail:
                       to_addrs=to, msg=msg.as_string())
 
             smtp.quit()
-
-
-
-
-
-
