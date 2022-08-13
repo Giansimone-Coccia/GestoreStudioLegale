@@ -28,7 +28,7 @@ class Cliente(Utilizzatore):
         print("Aggiornato")
 
 
-    def aggiungiCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
+    def creaCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                         appuntamentoCliente, parcelle, nome, udienza):
         self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
                                   password, udienza, nome) #Messi in ordine, così non utilizzo l'='
@@ -36,14 +36,22 @@ class Cliente(Utilizzatore):
         self.parcelle = parcelle
         clienti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                    try:
+            if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0:
+                clienti.append(self)
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f1:
+                    pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
+                    pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+            else:
+                if self.ricercaUtilizzatoreId(self.ID) is None:
+                    with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                    #try:
                         clienti = pickle.load(f)
                         clienti.append(self)
-                    except EOFError as er:
-                        print("Errore")
-        with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
-            pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+                    #except EOFError as er:
+                    #   print("Errore")
+                    with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f1:
+                        pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
 
 
     def getDatiCliente(self):

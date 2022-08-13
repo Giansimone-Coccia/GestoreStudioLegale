@@ -66,7 +66,7 @@ class Udienza:
                         pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
 
 
-    def getDatiUdienza(self): #errore dizionario
+    def getDatiUdienza(self):
         d = {}
         d['Avvocato'] = self.Avvocato
         d['Città Tribunale'] = self.cittaTribunale
@@ -122,7 +122,6 @@ class Udienza:
                     if udienza.tipoTribunale == tipoTribunale:
                         listaUdienze.append(udienza)
                 return listaUdienze
-            return None
         else:
             return None
 
