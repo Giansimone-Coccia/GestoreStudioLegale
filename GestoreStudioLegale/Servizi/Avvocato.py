@@ -43,16 +43,24 @@ class Avvocato(Utilizzatore):
         self.clienti = clienti
         self.licenza = licenza
         self.appuntamentiAvvocato = appuntamentoAvvocato
-        '''avvocati = []
+        avvocati = []
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                try:
-                    avvocati = pickle.load(f)
-                    avvocati.append(self)
-                except EOFError as er:
-                    print("Errore")
-        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f:
-            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)'''
+            #if os.stat('GestoreStudioLegale/Dati/Avvocati.pickle').st_size != 0:
+            if os.path.getsize('GestoreStudioLegale/Dati/Avvocati.pickle') == 0:
+                avvocati.append(self)
+                with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f1:
+                    pickle.dump(avvocati, f1, pickle.HIGHEST_PROTOCOL)
+                #raise EOFError
+            else:
+                if self.ricercaUtilizzatoreId(self.Id) is None:
+                    with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
+                    #try:
+                        avvocati = pickle.load(f)
+                        avvocati.append(self)
+                    #except EOFError as er:
+                    #   print("Errore")
+                    with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f1:
+                        pickle.dump(avvocati, f1, pickle.HIGHEST_PROTOCOL)
 
 
     def getDatiAvvocato(self):
