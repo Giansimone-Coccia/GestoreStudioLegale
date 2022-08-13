@@ -120,8 +120,3 @@ class Cliente(Utilizzatore):
                 pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
                 print("Finito")
-
-
-    def visualizzaCliente(self, Id): #Stessa cosa del metodo precedente
-        if self.ricercaUtilizzatoreId(Id):
-            print(self.ricercaUtilizzatoreId(Id))
