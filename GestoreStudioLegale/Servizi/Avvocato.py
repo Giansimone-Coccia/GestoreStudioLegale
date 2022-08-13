@@ -130,8 +130,3 @@ class Avvocato(Utilizzatore):
                 pickle.dump(avvocati, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
             print("Finito")
-
-
-    def visualizzaAvvocato(self, Id): #Ricerca tramite Id, quindi modifica in EA
-        if self.ricercaUtilizzatoreId(Id):
-            print(self.ricercaUtilizzatoreId(Id))
