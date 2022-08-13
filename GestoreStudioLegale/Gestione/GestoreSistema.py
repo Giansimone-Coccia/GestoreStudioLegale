@@ -10,16 +10,16 @@ class GestoreSistema:
         self.listaAvvocati = []
         self.listaClienti = []
 
-        if os.path.isfile('Dati\Avvocati.pickle'):
-            with open('Dati\Avvocati.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
                 try:
                     avvocati = pickle.load(f)
                     self.listaAvvocati.append(avvocati)
                 except EOFError as er:
                         print("Errore")
 
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 try:
                     clienti = pickle.load(f)
                     self.listaClienti.append(clienti)
@@ -27,33 +27,21 @@ class GestoreSistema:
                     print("Errore")
 
 
-    def aggiungiAvvocato(self, avvocato = None): #modifica
+    def loginCliente(self, pssw, codiceFiscale): #da modificare in Ea
+        for cliente in self.listaClienti:
+            if pssw==cliente.password and codiceFiscale==cliente.codiceFiscale:
+                print("Accesso effetuato")
+                return
+        print("Accesso fallito")
 
-        self.listaAvvocati.append(avvocato)
-        avvocati = []
-        if os.path.isfile('Dati\Avvocati.pickle'):
-            with open('Dati\Avvocati.pickle', 'rb') as f:
-                try:
-                    avvocati = pickle.load(f)
-                    avvocati.append(avvocato)
-                except EOFError as er:
-                    print("Errore")
-        with open('Dati\Avvocati.pickle', 'wb') as f:
-            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
-    def aggiungiCliente(self, cliente = None):
+    def loginAvvocato(self, pssw, codiceFiscale):
+        for avvocato in self.listaAvvocati:
+            if pssw==avvocato.password and codiceFiscale==avvocato.codiceFiscale:
+                print("Accesso effetuato")
+                return
+        print("Accesso fallito")
 
-        self.listaClienti.append(cliente)
-        clienti=[]
-        if os.path.isfile('Dati\Clienti.pickle'):
-            with open('Dati\Clienti.pickle', 'rb') as f:
-                try:
-                    clienti = pickle.load(f)
-                    clienti.append(cliente)
-                except EOFError as er:
-                    print("Errore")
-        with open('Dati\Avvocati.pickle', 'wb') as f:
-            pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
 
     def rimuoviAvvocato(self, avvocato = None): #usa funzione di rimozione di avvocato
 
