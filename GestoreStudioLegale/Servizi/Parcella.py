@@ -35,15 +35,20 @@ class Parcella():
         self.intestatario = intestatario
         self.identificativo = identificativo
         parcelle = []
+
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
-                with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
-                    try:
+
+            if os.path.getsize('GestoreStudioLegale/Dati/Parcelle.pickle') == 0:
+                parcelle.append(self)
+                with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f1:
+                    pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
+            else:
+                if self.ricercaParcellaIdentificativo(self.identificativo) is None:
+                    with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                         parcelle = pickle.load(f)
                         parcelle.append(self)
-                    except EOFError as eo:
-                        print("Errore")
-        with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f:
-                pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
+                    with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f1:
+                        pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
 
 
     def getDatiParcellaCliente(self):
@@ -58,13 +63,12 @@ class Parcella():
 
 
     def ricercaParcellaCliente (self, Cliente): #Prende una stringa come parametro, cambiare in EA
+        listaParcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
-                listaParcelle = []
                 for parcella in parcelle:
-                    if parcella.Cliente is Cliente:
-                        print("Trovata")
+                    if parcella.Cliente.Id == Cliente.Id:
                         listaParcelle.append(parcella)
                 print(listaParcelle)
                 return listaParcelle
@@ -73,14 +77,13 @@ class Parcella():
 
 
     def ricercaParcellaIntestatario (self, intestatario):
+        listaParcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 parcelle = pickle.load(f)
-                listaParcelle = []
                 for parcella in parcelle:
                     if parcella.intestatario == intestatario:
                         listaParcelle.append(parcella)
-                        print("Trovata")
                 print(listaParcelle)
                 return listaParcelle
         else:
@@ -117,17 +120,5 @@ class Parcella():
                 pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
             print("Finito")
-
-
-    def visualizzaParcella (self, ID):
-        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
-            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
-                parcelle = pickle.load(f)
-                for parcella in parcelle:
-                    if parcella.ID == ID:
-                        print(parcella)
-                        return parcella
-                    else:
-                        return None
 
 
