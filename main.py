@@ -77,5 +77,5 @@ cliente2.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.
 #print(udienza1)
 #udienzaT.getDatiUdienza() #FUNZIONA
 #udienzaTr.getDatiUdienza() #FUNZIONA
-
-
+#udienza1.rimuoviUdienza('U2345') #FUNZIONA
+#udienza1.rimuoviUdienza('U2765') #FUNZIONA

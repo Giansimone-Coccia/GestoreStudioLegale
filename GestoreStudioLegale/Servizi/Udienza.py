@@ -122,7 +122,6 @@ class Udienza:
                     if udienza.tipoTribunale == tipoTribunale:
                         listaUdienze.append(udienza)
                 return listaUdienze
-            return None
         else:
             return None
 
