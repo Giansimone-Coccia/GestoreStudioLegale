@@ -35,8 +35,8 @@ class Statistiche:
                         nUdienze += 1
 
         udienze = []
-        if os.path.isfile('Dati/Udienze.pickle'):
-            with open('Dati/Udienze.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 try:
                     udienze = pickle.load(f)
                 except EOFError as er:
@@ -60,8 +60,8 @@ class Statistiche:
             self.mediaUdienzeMensili = nUdienze/12
 
         appuntamenti=[]
-        if os.path.isfile('Dati/Appuntamenti.pickle'):
-            with open('Dati/Appuntamenti.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
+            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 try:
                     appuntamenti = pickle.load(f)
                 except EOFError as er:
@@ -89,19 +89,19 @@ class Statistiche:
             "mediaUdienzeAmminstrative" : self.mediaUdienzeAmministrative,
             "mediaUdienzeCivili" : self.mediaUdienzeCivili,
             "mediaUdienzeMinorili" : self.mediaUdienzeMinorili,
-            "mediaUdienzeMensili" : self.mediaUdienzeMensile,
+            "mediaUdienzeMensili" : self.mediaUdienzeMensili,
             "mediaUdienzePenali" : self.mediaUdienzePenali,
             "numeroAppuntamenti" : self.numeroAppuntamenti,
         }
-        with open('Dati/Statistiche.pickle', 'wb') as f:
+        with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
 
     def mostraStatistiche(self, statistica = ""): #modificare, c'è scritto void
         self.calcolaStatistiche()
         statistica = statistica.lower()
 
-        if os.path.isfile('Dati/Statistiche.pickle'):
-            with open('Dati/Statistiche.pickle', 'rb') as f:
+        if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
+            with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'rb') as f:
                 stats = dict(pickle.load(f))
 
         if statistica == "udienze amministrative":
