@@ -3,16 +3,27 @@ from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Udienza import Udienza
-from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
+#from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
+from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 
 cliente1 = Cliente()
 cliente2 = Cliente()
+cliente3 = Cliente()
+cliente4 = Cliente()
+cliente5 = Cliente()
+cliente6 = Cliente()
+cliente7 = Cliente()
 avvocato1 = Avvocato()
 udienza1 = Udienza()
-udienza2= Udienza()
+udienza2 = Udienza()
+udienza3 = Udienza()
+udienza4 = Udienza()
+udienza5 = Udienza()
+udienza6 = Udienza()
+udienza7 = Udienza()
 appuntamento1 = Appuntamento()
 parcella1 = Parcella()
-gestore1 = GestoreEmail()
+#gestore1 = GestoreEmail()
 
 corsi = ['economia politica']
 appuntamentiAvvocato = ['martedì', 'mercoledì']
@@ -24,8 +35,8 @@ nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 
-#cliente1.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
-#cliente2.aggiungiCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+cliente1.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente1.getDatiCliente()  #FUNZIONA FACENDO PRIMA AGGIUNGICLIENTE COSI' FA PRIMA CREAUTILIZZATORE
 #print(cliente1.dataNascita)
 #cliente1.ricercaUtilizzatoreEmail('albero@gmail.com') #FUNZIONA
@@ -40,7 +51,7 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
 #cliente1.aggiornaCliente('almail@gmil.com')
 
-#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
 #avvocato1.getDatiAvvocato() #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('id non valido') #FUNZIONA
@@ -65,7 +76,7 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #parcella1.visualizzaParcella('PP456') #FUNZIONA
 
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-#udienza2.creaUdienza(avvocato1, 'Roma', cliente2, '21/12/2021,15:00','21/12/2021,19:00','U2765','penale') #FUNZIONA
+#udienza2.creaUdienza(avvocato1, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U2765','penale') #FUNZIONA
 #udienza1.getDatiUdienza() #FUNZIONA
 #udienza2.getDatiUdienza() #FUNZIONA
 #listaUdienze = udienza1.ricercaUdienzaCliente(cliente1) #DA RICONTROLLARE DOPO AVER SISTEMATO LA CLASSE CLIENTE
@@ -82,4 +93,14 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #udienza1.rimuoviUdienza('U2345') #FUNZIONA
 #udienza1.rimuoviUdienza('U2765') #FUNZIONA
 
-gestore1.invioEmail()
+#udienza3.creaUdienza(avvocato1, 'Ascoli Piceno', cliente3, '9/08/2022,12:00','10/08/2022,13:00','U299345','civile')
+#udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
+#udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
+#udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
+#udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
+#stats = Statistiche()
+#stats.mostraGrafico() #FUNZIONA
+#print(stats.mostraStatistiche("udienze penali"))
+
+
+#gestore1.invioEmail()
