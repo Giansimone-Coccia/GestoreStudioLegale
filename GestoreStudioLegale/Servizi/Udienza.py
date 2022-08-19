@@ -18,7 +18,7 @@ class Udienza:
 
     def aggiornaUdienza(self, cittaTribunale = '', tipoTribunale = '', dataOraInizio = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
                         dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
-                        Cliente = None, Avvoccato = None):
+                        Cliente = None, Avvoccato = None): #modifica date con datetime
         if cittaTribunale != '':
             self.cittaTribunale = cittaTribunale
         elif tipoTribunale != '':
@@ -40,8 +40,8 @@ class Udienza:
         self.Avvocato = Avvocato
         self.cittaTribunale = cittaTribunale
         self.Cliente = Cliente
-        self.dataOraInizio = dataOraInizio
-        self.dataOraFine = dataOraFine
+        self.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
+        self.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
         self.ID = ID
         self.tipoTribunale = tipoTribunale
 
@@ -141,6 +141,3 @@ class Udienza:
                 pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
                 print("Finito")
-
-
-

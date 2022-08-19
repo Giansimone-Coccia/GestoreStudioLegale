@@ -3,8 +3,6 @@ import os.path
 from datetime import datetime, timedelta, time
 import matplotlib.pyplot as plt
 
-# from Servizi.Udienza import Udienza
-# from Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Servizi.Udienza import Udienza
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 
@@ -27,12 +25,12 @@ class Statistiche:
         nUdienze=0
         nAppuntamenti=0
 
-        def breve(lista,tribunale,nUdienze,nGiorni):
+        '''def breve(lista,tribunale,nUdienze,nGiorni):
             for i in lista:
-                if i.getDatiUdienza.get('Tipo Tribunale', None) == tribunale:
+                if i.getDatiUdienza().get('Tipo Tribunale', None) == tribunale:
                     date = datetime.now()-timedelta(days = nGiorni)
                     if i.getDatiUdienza.get('Data e Ora Inizio') > date:
-                        nUdienze += 1
+                        nUdienze += 1'''
 
         udienze = []
         if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
@@ -40,21 +38,41 @@ class Statistiche:
                 try:
                     udienze = pickle.load(f)
                 except EOFError as er:
-                    print("Errore")
+                    print("") #scrivere errore
 
-            breve(udienze,'Tribunale Amministrativo',nUdienzeAmminsitrative,365)
-            breve(udienze, 'Tribunale Civile', nUdienzeCivili, 365)
-            breve(udienze, 'Tribunale Penale', nUdienzePenali, 365)
-            breve(udienze, 'Tribunale Minorile', nUdienzeMinorili, 365)
+            #breve(udienze,'amministrativo',nUdienzeAmminsitrative,365)
+            for udienza in udienze:
+                if udienza.tipoTribunale == 'amministrativa':
+                    date = datetime.now() - timedelta(days=365)
+                    if udienza.dataOraInizio > date:
+                        nUdienzeAmminsitrative += 1
+            #breve(udienze, 'civile', nUdienzeCivili, 365)
+            for udienza in udienze:
+                if udienza.tipoTribunale == 'civile':
+                    date = datetime.now() - timedelta(days=365)
+                    if udienza.dataOraInizio > date:
+                        nUdienzeCivili += 1
+            #breve(udienze, 'penale', nUdienzePenali, 365)
+            for udienza in udienze:
+                if udienza.tipoTribunale == 'penale':
+                    date = datetime.now() - timedelta(days=365)
+                    if udienza.dataOraInizio > date:
+                        nUdienzePenali += 1
+            #breve(udienze, 'minorile', nUdienzeMinorili, 365)
+            for udienza in udienze:
+                if udienza.tipoTribunale == 'minorile':
+                    date = datetime.now() - timedelta(days=365)
+                    if udienza.dataOraInizio > date:
+                        nUdienzeMinorili += 1
 
             self.mediaUdienzeCivili = nUdienzeCivili/12
             self.mediaUdienzePenali = nUdienzePenali/12
             self.mediaUdienzeMinorili = nUdienzeMinorili/12
             self.mediaUdienzeAmministrative = nUdienzeAmminsitrative/12
 
-            for i in udienze:
+            for udienza in udienze:
                 date = datetime.now() - timedelta(days = 365)
-                if i.getDatiUdienza.get('Data e Ora Inizio') > date:
+                if udienza.dataOraInizio > date:
                     nUdienze += 1
 
             self.mediaUdienzeMensili = nUdienze/12
@@ -65,11 +83,11 @@ class Statistiche:
                 try:
                     appuntamenti = pickle.load(f)
                 except EOFError as er:
-                    print("Errore")
+                    print("") #scrivere errore
 
-            for i in appuntamenti:
+            for appuntamento in appuntamenti:
                 date = datetime.now() - timedelta(days = 365)
-                if i.getDatiUdienza.get('Data e Ora Inizio') > date:
+                if appuntamento.dataOraInizio > date:
                     nAppuntamenti += 1
 
             self.numeroAppuntamenti = nAppuntamenti
@@ -78,7 +96,7 @@ class Statistiche:
         my_dict = self.mostraStatistiche()
 
         myList = my_dict.items()
-        myList = sorted(myList)
+        #myList = sorted(myList)
         x, y = zip(*myList)
 
         plt.bar(x, y)
@@ -86,35 +104,40 @@ class Statistiche:
 
     def salvaSuFile (self):
         stats = {
-            "mediaUdienzeAmminstrative" : self.mediaUdienzeAmministrative,
-            "mediaUdienzeCivili" : self.mediaUdienzeCivili,
-            "mediaUdienzeMinorili" : self.mediaUdienzeMinorili,
-            "mediaUdienzeMensili" : self.mediaUdienzeMensili,
-            "mediaUdienzePenali" : self.mediaUdienzePenali,
-            "numeroAppuntamenti" : self.numeroAppuntamenti,
+            "Amminstrative" : self.mediaUdienzeAmministrative,
+            "Civili" : self.mediaUdienzeCivili,
+            "Minorili" : self.mediaUdienzeMinorili,
+            "Mensili" : self.mediaUdienzeMensili,
+            "Penali" : self.mediaUdienzePenali,
+            "Appuntamenti" : self.numeroAppuntamenti,
         }
         with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
 
     def mostraStatistiche(self, statistica = ""): #modificare, c'è scritto void
         self.calcolaStatistiche()
+        self.salvaSuFile()
         statistica = statistica.lower()
 
+        stats={}
         if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
             with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'rb') as f:
-                stats = dict(pickle.load(f))
+                try:
+                    stats = dict(pickle.load(f))
+                except EOFError as er:
+                    print("") #scrivere errore
 
         if statistica == "udienze amministrative":
-            return stats["mediaUdienzeAmminstrative"]
+            return stats["Amminstrative"]
         elif statistica == "udienze civili":
-            return stats["mediaUdienzeCivili"]
+            return stats["Civili"]
         elif statistica == "udienze minorili":
-            return stats["mediaUdienzeMinorili"]
+            return stats["Minorili"]
         elif statistica == "udienze penali":
-            return stats["mediaUdienzePenali"]
+            return stats["Penali"]
         elif statistica == "udienze mensili":
-            return stats["mediaUdienzeMensili"]
+            return stats["Mensili"]
         elif statistica == "numero appuntamenti":
-            return stats["numeroAppuntamenti"]
+            return stats["Appuntamenti"]
         else:
             return stats
