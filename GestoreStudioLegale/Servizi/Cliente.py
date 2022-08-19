@@ -38,12 +38,12 @@ class Cliente(Utilizzatore):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0:
                 clienti.append(self)
-                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f1:
-                    pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
+                #with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f1:
+                    #clienti=pickle.load(f1)
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
                     pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
             else:
-                if self.ricercaUtilizzatoreId(self.ID) is None:
+                if self.ricercaUtilizzatoreId(self.Id) is None:
                     with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                     #try:
                         clienti = pickle.load(f)
