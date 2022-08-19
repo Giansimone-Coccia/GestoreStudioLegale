@@ -34,7 +34,7 @@ class GestoreSistema:
 
     def loginCliente(self, pssw, codiceFiscale): #da modificare in Ea
         for cliente in self.listaClienti:
-            if pssw == cliente.getDatiCliente()['Password'] and codiceFiscale == cliente.getDatiCliente()['Codice fiscale']:
+            if pssw is cliente.getDatiCliente()['Password'] and codiceFiscale is cliente.getDatiCliente()['Codice fiscale'] :
                 print("Accesso effetuato")
                 return
         print("Accesso fallito")
