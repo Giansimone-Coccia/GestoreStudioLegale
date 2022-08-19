@@ -33,10 +33,19 @@ class GestoreSistema:
 
 
     def loginCliente(self, pssw, codiceFiscale): #da modificare in Ea
-        for cliente in self.listaClienti:
-            if pssw is cliente.getDatiCliente()['Password'] and codiceFiscale is cliente.getDatiCliente()['Codice fiscale'] :
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                try:
+                    clientiList = pickle.load(f)
+                    self.listaClienti.append(clientiList)
+                    #print(self.listaClienti)
+                except EOFError as er:
+                    print("Errore")
+        for cliente in clientiList:
+            if pssw == cliente.getDatiCliente()['Password'] and codiceFiscale == cliente.getDatiCliente()['Codice fiscale'] :
                 print("Accesso effetuato")
-                return
+                print(cliente)
+                return True
         print("Accesso fallito")
 
 
