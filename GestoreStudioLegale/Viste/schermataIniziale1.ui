@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>486</width>
+    <height>392</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+background: rgb(255, 240, 186);</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>30</y>
+     <width>221</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: italic 30pt &quot;Baskerville&quot;;</string>
+   </property>
+   <property name="text">
+    <string>STUDIO LEGALE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>150</y>
+     <width>181</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-width: 2px;
+
+border-color: black;
+font: bold 14px;
+min-width: 10em; 
+background-color: rgb(255, 255, 229);</string>
+   </property>
+   <property name="text">
+    <string>CLIENTE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>210</y>
+     <width>181</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-width: 2px;
+
+border-color: black;
+font: bold 14px;
+min-width: 10em; 
+background-color: rgb(255, 255, 229);</string>
+   </property>
+   <property name="text">
+    <string>AVVOCATO</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>270</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+border-width: 2px;
+border-color: black;
+font: bold 14px;
+min-width: 10em; 
+background-color: rgb(255, 255, 229);</string>
+   </property>
+   <property name="text">
+    <string>AMMINISTRATORE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>100</y>
+     <width>251</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/newPrefix/istockphoto-1077097764-1024x1024.jpeg);</string>
+   </property>
+   <property name="text">
+    <string>SELEZIONARE TIPOLOGIA UTENTE :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>20</y>
+     <width>101</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/newPrefix/giustizia-legalita.jpg);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>:/newPrefix/giustizia-legalita.jpg</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Immagine.qrc"/>
+ </resources>
+ <connections/>
+</ui>
