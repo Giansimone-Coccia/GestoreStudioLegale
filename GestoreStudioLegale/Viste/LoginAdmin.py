@@ -1,4 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
+from GestoreStudioLegale.Viste.LoginAvvocato import Ui_Form
 
 
 class Ui_Form(object):
@@ -50,3 +52,12 @@ class Ui_Form(object):
         self.label_5.setText(_translate("Form", "codice fiscale e/o password errata! "))
         self.pushButton.setText(_translate("Form", "ACCEDI"))
         self.label_4.setText(_translate("Form", "PASSWORD"))
+
+    window = Ui_Form()
+
+
+    def convalida(self):
+        username = str(self.textEdit)
+        password = str(self.textEdit_3)
+        #self.label_5(GestoreSistema.loginAdmin(username, password))
+        self.pushButton.clicked(GestoreSistema.loginAdmin(username, password))
