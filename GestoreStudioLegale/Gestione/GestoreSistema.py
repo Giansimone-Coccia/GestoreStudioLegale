@@ -5,7 +5,7 @@ from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 
 class GestoreSistema:
 
-    def __init__(self):
+    def _init_(self):
 
         self.listaAvvocati = []
         self.listaClienti = []
@@ -83,23 +83,10 @@ class GestoreSistema:
 
 
     def rimuoviAvvocato(self, avvocato = None): #usa funzione di rimozione di avvocato
-        avvLista = []
-        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f1:
-                avvLista = pickle.load(f1)
-                if avvocato is not None:
-
-                    Avvocato.rimuoviAvvocato(avvocato.Id)
-                    print("Rimosso")
-                    if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                            pickle.dump(self.listaAvvocati)
-                            print("Finito")
-                else:
-                    return
+        Avvocato.rimuoviAvvocato(avvocato.Id)
+        print("Fatto")
 
 
     def rimuoviCliente(self, cliente = None):  #usa funzione di rimozione di cliente
-        self.listaAvvocati.remove(cliente)
         Cliente.rimuoviCliente(cliente.Id)
         print("Fatto")
