@@ -12,24 +12,24 @@ class GestoreSistema:
         self.psswAmministratore = "password"
         self.userAmministratore = "admin"
 
-        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+        '''if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
                 try:
                     avvocati = pickle.load(f)
                     self.listaAvvocati.append(avvocati)
                     print(self.listaAvvocati)
                 except EOFError as er:
-                        print("Errore")
+                        print("Errore")'''
 
 
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+        '''if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 try:
                     clienti = pickle.load(f)
                     self.listaClienti.append(clienti)
                     print(self.listaClienti)
                 except EOFError as er:
-                    print("Errore")
+                    print("Errore")'''
 
 
     def loginCliente(self, pssw, codiceFiscale): #da modificare in Ea
@@ -50,10 +50,19 @@ class GestoreSistema:
 
 
     def loginAvvocato(self, pssw, codiceFiscale): #da modificare in Ea
-        for avvocato in self.listaAvvocati:
+        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
+                try:
+                    avvocatiList = pickle.load(f)
+                    self.listaAvvocati.append(avvocatiList)
+                    #print(self.listaAvvocati)
+                except EOFError as er:
+                    print("Errore")
+        for avvocato in avvocatiList:
             if pssw == avvocato.getDatiAvvocato()['Password'] and codiceFiscale == avvocato.getDatiAvvocato()['Codice fiscale']:
                 print("Accesso effetuato")
-                return
+                print(avvocato)
+                return True
         print("Accesso fallito")
 
 
@@ -64,18 +73,33 @@ class GestoreSistema:
             print("Accesso fallito")
 
 
-    def modificaCredenzialiAdmin(self,newPssw,newUser): #da modificare in Ea
-        self.psswAmministratore = newPssw
-        self.userAmministratore = newUser
+    def modificaCredenzialiAdmin(self, newPssw = '', newUser = ''): #da modificare in Ea
+        if newPssw != '':
+            self.psswAmministratore = newPssw
+        if newUser != '':
+            self.userAmministratore = newUser
+        print(self.psswAmministratore)
+        print(self.userAmministratore)
 
 
     def rimuoviAvvocato(self, avvocato = None): #usa funzione di rimozione di avvocato
+        avvLista = []
+        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f1:
+                avvLista = pickle.load(f1)
+                if avvocato is not None:
 
-        self.listaAvvocati.remove(avvocato)
-        Avvocato.rimuoviAvvocato(avvocato.Id)
+                    Avvocato.rimuoviAvvocato(avvocato.Id)
+                    print("Rimosso")
+                    if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
+                            pickle.dump(self.listaAvvocati)
+                            print("Finito")
+                else:
+                    return
 
 
     def rimuoviCliente(self, cliente = None):  #usa funzione di rimozione di cliente
-
         self.listaAvvocati.remove(cliente)
         Cliente.rimuoviCliente(cliente.Id)
+        print("Fatto")

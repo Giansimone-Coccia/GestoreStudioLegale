@@ -104,5 +104,15 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #print(stats.mostraStatistiche("udienze penali"))
 
 gestore = GestoreSistema()
-gestore.loginCliente('pswrd','dfskfjfsb') #NON FUNZIONA
+#gestore.loginCliente('pswrd','dfskfjfsb') #FUNZIONA
+#gestore.loginCliente('pswrdErrata','dfskfjfsb') #FUNZIONA
+#gestore.loginAvvocato('passAvv', 'jhsdkcdks') #FUNZIONA MA STAMPA OGGETTI
+#gestore.loginAvvocato('passAvv', 'CFErrato') #FUNZIONA MA STAMPA OGGETTI
+#gestore.loginAdmin('password', 'admin') #FUNZIONA
+#gestore.loginAdmin('passwordErrata', 'admin') #FUNZIONA
+#gestore.loginAdmin('password', 'Sbagliato') #FUNZIONA
+#gestore.modificaCredenzialiAdmin('nuova', 'newUs') #FUNZIONA
+#gestore.modificaCredenzialiAdmin('nuova') #FUNZIONA
+#gestore.rimuoviAvvocato(avvocato1) #FUNZIONA
+#gestore.rimuoviCliente(cliente1) #FUNZIONA
 #gestore1.invioEmail() #NON ACORA TESTATO
