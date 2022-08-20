@@ -9,6 +9,7 @@ from GestoreStudioLegale.Servizi.Udienza import Udienza
 #from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
 from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
+from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 
 cliente1 = Cliente()
 cliente2 = Cliente()
@@ -27,7 +28,7 @@ udienza6 = Udienza()
 udienza7 = Udienza()
 appuntamento1 = Appuntamento()
 parcella1 = Parcella()
-#gestore1 = GestoreEmail()
+corso1 = CorsoAggiornamento()
 
 corsi = ['economia politica']
 appuntamentiAvvocato = ['martedì', 'mercoledì']
@@ -121,6 +122,12 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #gestore.rimuoviCliente(cliente1) #FUNZIONA
 #gestore1.invioEmail() #NON ACORA TESTATO
 
+#corso1.creaCorso('matematica',3,'CR123','21/08/2022,15:00','21/08/2022,21:00','formazione') #FUNZIONA
+#corso1.getDatiCorso()
+#corso1.ricercaCorsoCodice('CR123') #FUNZIONA
+#corso1.ricercaCorsoNome('matematica') #FUNZIONA
+#corso1.ricercaCorsoTipo('formazione') #FUNZIONA
+#corso1.rimuoviCorso('CR123') #FUNZIONA
 
 '''app = QtWidgets.QApplication([])
 app.setStyle('Fusion')

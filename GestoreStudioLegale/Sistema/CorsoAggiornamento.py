@@ -45,15 +45,17 @@ class CorsoAggiornamento:
         d['Data e Ora Inizio'] = self.dataOraInizio
         d['Data e Ora Fine'] = self.dataOraFine
         d['Tipo Corso'] = self.tipo
+        print(d)
         return d
 
 
     def ricercaCorsoCodice(self, ID):
         if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
-                corsiAggiornamento = dict(pickle.load(f))
-                for corsoAggiornamento in corsiAggiornamento.values():
+                corsiAggiornamento = pickle.load(f)
+                for corsoAggiornamento in corsiAggiornamento:
                     if corsoAggiornamento.ID == ID:
+                        print("Ok")
                         return corsoAggiornamento
                 return None
         else:
@@ -62,9 +64,10 @@ class CorsoAggiornamento:
     def ricercaCorsoNome(self, nome): #aggiungi la variabile nome in ea
         if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
-                corsiAggiornamento = dict(pickle.load(f))
-                for corsoAggiornamento in corsiAggiornamento.values():
+                corsiAggiornamento = pickle.load(f)
+                for corsoAggiornamento in corsiAggiornamento:
                     if corsoAggiornamento.nome == nome:
+                        print("Va bene")
                         return corsoAggiornamento
                 return None
         else:
@@ -74,17 +77,18 @@ class CorsoAggiornamento:
         listaCorsi = []
         if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
-                corsiAggiornamento = dict(pickle.load(f))
-                for corsoAggiornamento in corsiAggiornamento.values():
+                corsiAggiornamento = pickle.load(f)
+                for corsoAggiornamento in corsiAggiornamento:
                     if corsoAggiornamento.tipo == tipo:
                         listaCorsi.append(corsoAggiornamento)
+                        print("Finito")
                 return listaCorsi
             return None
         else:
             return None
 
     @staticmethod
-    def rimuoviCorso (CorsoAggiornamento):
+    def rimuoviCorso (ID):
         try:
             corsi = []
             if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
