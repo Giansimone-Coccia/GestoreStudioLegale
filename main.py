@@ -1,5 +1,10 @@
 #from PyQt5.uic.properties import QtWidgets
 #from GestoreStudioLegale.Viste.LoginCliente import Ui_Form
+import sys
+from os import name
+
+from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
+from PyQt5.QtWidgets import QApplication
 
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
@@ -11,6 +16,12 @@ from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
+
+if name == 'main':
+    app = QApplication (sys.argv)
+    vista_home = GestoreSistema.loginAdmin()
+    vista_home.show()
+    sys.exit(app.exec())
 
 cliente1 = Cliente()
 cliente2 = Cliente()
@@ -130,10 +141,10 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #corso1.ricercaCorsoTipo('formazione') #FUNZIONA
 #corso1.rimuoviCorso('CR123') #FUNZIONA
 
-backup = Backup()
-backup.eseguiBackup()
-cliente8=backup.getDatiBakcup()['clienti'][0]
-print(cliente8)
+#backup = Backup()
+#backup.eseguiBackup()
+#cliente8=backup.getDatiBakcup()['clienti'][0]
+#print(cliente8)
 
 
 
