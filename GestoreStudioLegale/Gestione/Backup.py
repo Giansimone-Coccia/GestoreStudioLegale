@@ -26,71 +26,102 @@ class Backup():
         self.frequenza=nuovaFrequenza
 
     def salvaDatiAppuntamento(self):
+
+        backup = {}
         if os.path.isfile('GestoreStudioLegale/Dati/Backup.pickle'):
             with open('GestoreStudioLegale/Dati/Backup.pickle', 'rb') as f:
                 try:
-                    backup = pickle.load(f)
+                    backup = dict(pickle.load(f))
                 except EOFError as er:
                     print("Errore5")
+
         appuntamenti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
             with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 try:
                     appuntamenti = pickle.load(f)
+                    backup['appuntamenti'] = appuntamenti
                 except EOFError as er:
                     print("Errore1")
         with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
-            pickle.dump(appuntamenti, f, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(backup, f, pickle.HIGHEST_PROTOCOL)
 
     def salvaDatiParcella(self):
+        backup = {}
+        if os.path.isfile('GestoreStudioLegale/Dati/Backup.pickle'):
+            with open('GestoreStudioLegale/Dati/Backup.pickle', 'rb') as f:
+                try:
+                    backup = dict(pickle.load(f))
+                except EOFError as er:
+                    print("Errore5")
+
         parcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 try:
                     parcelle = pickle.load(f)
+                    backup['parcelle'] = parcelle
                 except EOFError as er:
                     print("Errore2")
         with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
-            pickle.dump(parcelle, f, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(backup, f, pickle.HIGHEST_PROTOCOL)
 
     def salvaDatiUtilizzatore(self):
+        backup = {}
+        if os.path.isfile('GestoreStudioLegale/Dati/Backup.pickle'):
+            with open('GestoreStudioLegale/Dati/Backup.pickle', 'rb') as f:
+                try:
+                    backup = dict(pickle.load(f))
+                except EOFError as er:
+                    print("Errore5")
+
         avvocati = []
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
                 try:
                     avvocati = pickle.load(f)
+                    backup['avvocati'] = avvocati
                 except EOFError as er:
                     print("Errore3")
-        with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
-            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
 
         clienti=[]
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 try:
                     clienti = pickle.load(f)
+                    backup['clienti'] = clienti
                 except EOFError as er:
                     print("Errore4")
+
         with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
-            pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(backup, f, pickle.HIGHEST_PROTOCOL)
 
     def salvaDatiCorsoAggiornamento(self):
+        backup = {}
+        if os.path.isfile('GestoreStudioLegale/Dati/Backup.pickle'):
+            with open('GestoreStudioLegale/Dati/Backup.pickle', 'rb') as f:
+                try:
+                    backup = dict(pickle.load(f))
+                except EOFError as er:
+                    print("Errore5")
+
         corsiAggiornamento = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 try:
                     corsiAggiornamento = pickle.load(f)
+                    backup['corsi aggiornamento'] = corsiAggiornamento
                 except EOFError as er:
                     print("Errore5")
         with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
-            pickle.dump(corsiAggiornamento, f, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(backup, f, pickle.HIGHEST_PROTOCOL)
 
     def getDatiBakcup(self):
-        backup = []
+        backup = {}
         if os.path.isfile('GestoreStudioLegale/Dati/Backup.pickle'):
             with open('GestoreStudioLegale/Dati/Backup.pickle', 'rb') as f:
                 try:
-                    backup = pickle.load(f)
+                    backup = dict(pickle.load(f))
                 except EOFError as er:
                     print("Errore5")
         return backup

@@ -9,6 +9,7 @@ from GestoreStudioLegale.Servizi.Udienza import Udienza
 #from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
 from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
+from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 
 cliente1 = Cliente()
@@ -128,6 +129,13 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #corso1.ricercaCorsoNome('matematica') #FUNZIONA
 #corso1.ricercaCorsoTipo('formazione') #FUNZIONA
 #corso1.rimuoviCorso('CR123') #FUNZIONA
+
+backup = Backup()
+backup.eseguiBackup()
+cliente8=backup.getDatiBakcup()['clienti'][0]
+print(cliente8)
+
+
 
 '''app = QtWidgets.QApplication([])
 app.setStyle('Fusion')
