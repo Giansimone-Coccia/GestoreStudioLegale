@@ -1,3 +1,6 @@
+#from PyQt5.uic.properties import QtWidgets
+#from GestoreStudioLegale.Viste.LoginCliente import Ui_Form
+
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
@@ -103,7 +106,7 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #stats.mostraGrafico() #FUNZIONA
 #print(stats.mostraStatistiche("udienze penali"))
 
-gestore = GestoreSistema()
+#gestore = GestoreSistema()
 #gestore.loginCliente('pswrd','dfskfjfsb') #FUNZIONA
 #gestore.loginCliente('pswrdErrata','dfskfjfsb') #FUNZIONA
 #gestore.loginAvvocato('passAvv', 'jhsdkcdks') #FUNZIONA MA STAMPA OGGETTI
@@ -116,3 +119,11 @@ gestore = GestoreSistema()
 #gestore.rimuoviAvvocato(avvocato1) #FUNZIONA
 #gestore.rimuoviCliente(cliente1) #FUNZIONA
 #gestore1.invioEmail() #NON ACORA TESTATO
+
+
+'''app = QtWidgets.QApplication([])
+app.setStyle('Fusion')
+
+widget1 = Ui_Form()
+widget1.resize(1280, 720)
+widget1.show()'''

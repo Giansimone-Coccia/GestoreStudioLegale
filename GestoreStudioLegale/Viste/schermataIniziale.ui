@@ -20,14 +20,14 @@ background: rgb(255, 240, 186);</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>10</x>
      <y>30</y>
-     <width>221</width>
-     <height>41</height>
+     <width>391</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: italic 30pt &quot;Baskerville&quot;;</string>
+    <string notr="true">font: italic 25pt &quot;Baskerville&quot;;</string>
    </property>
    <property name="text">
     <string>STUDIO LEGALE</string>
@@ -117,20 +117,21 @@ background-color: rgb(255, 255, 229);</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>340</x>
      <y>20</y>
-     <width>101</width>
-     <height>51</height>
+     <width>131</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/newPrefix/giustizia-legalita.jpg);</string>
+    <string notr="true">background-image: url(:/newPrefix/giustizia-legalita.jpg);
+</string>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>:/newPrefix/giustizia-legalita.jpg</pixmap>
+    <pixmap resource="Immagini.qrc">:/newPrefix/giustizia-legalita.jpg</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -138,7 +139,7 @@ background-color: rgb(255, 255, 229);</string>
   </widget>
  </widget>
  <resources>
-  <include location="Immagine.qrc"/>
+  <include location="Immagini.qrc"/>
  </resources>
  <connections/>
 </ui>
