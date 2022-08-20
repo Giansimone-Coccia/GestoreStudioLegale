@@ -58,6 +58,7 @@ class Cliente(Utilizzatore):
         d = self.getInfoUtilizzatore()
         d['appuntamentoCliente'] = self.appuntamentoCliente
         d['parcelle'] = self.parcelle
+        print(d)
         return d
 
 
