@@ -2,8 +2,9 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
-from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
-from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
+#from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
+#from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
+#from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 
 
@@ -34,22 +35,23 @@ class VistaHome(QWidget):
         return button
 
     def reachAvvocato(self):
-        wid = QWidget()
-        self.vistaLoginAvvocato = LoginAvvocato()
-        self.vistaLoginAvvocato.setupUi(wid)
-        # self.vistaLoginCliente.retranslateUi(wid)
-        wid.show()
+        pass
+        #wid = QWidget()
+        #self.vistaLoginAvvocato = LoginAvvocato()
+        #self.vistaLoginAvvocato.setupUi(wid)
+        #wid.show()
 
     def reachCliente(self):
-        wid = QWidget()
-        self.vistaLoginCliente = LoginCliente()
-        self.vistaLoginCliente.setupUi(wid)
-        #self.vistaLoginCliente.retranslateUi(wid)
-        wid.show()
+        self.vistaCliente = LoginCliente()
+        self.vistaCliente.show()
+        #wid = QWidget()
+        #self.vistaLoginCliente = LoginCliente()
+        #self.vistaLoginCliente.show()
+        #wid.show()
 
     def reachAmministratore(self):
-        wid = QWidget()
-        self.vistaLoginAdmin = LoginAdmin()
-        self.vistaLoginAdmin.setupUi(wid)
-        # self.vistaLoginCliente.retranslateUi(wid)
-        wid.show()
+        pass
+        #wid = QWidget()
+        #self.vistaLoginAdmin = LoginAdmin()
+        #self.vistaLoginAdmin.setupUi(wid)
+        #wid.show()

@@ -1,51 +1,70 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+import os.path
 
-class LoginCliente(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(399, 300)
-        Form.setStyleSheet("background-color: rgb(255, 240, 186);")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(140, 30, 101, 41))
-        self.label.setStyleSheet("font: 30pt \"Arial\";")
-        self.label.setObjectName("label")
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(140, 100, 241, 31))
-        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 229);")
-        self.textEdit.setObjectName("textEdit")
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setGeometry(QtCore.QRect(10, 110, 117, 16))
-        self.label_2.setStyleSheet("font: 14pt \"Arial\";")
-        self.label_2.setObjectName("label_2")
-        self.label_5 = QtWidgets.QLabel(Form)
-        self.label_5.setGeometry(QtCore.QRect(170, 200, 221, 20))
-        self.label_5.setObjectName("label_5")
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(140, 230, 174, 32))
-        self.pushButton.setStyleSheet("border-width: 2px;\n"
-"border-color: black;\n"
-"font: bold 14px;\n"
-"min-width: 10em; \n"
-"background-color: rgb(255, 255, 229);")
-        self.pushButton.setObjectName("pushButton")
-        self.label_4 = QtWidgets.QLabel(Form)
-        self.label_4.setGeometry(QtCore.QRect(20, 170, 91, 16))
-        self.label_4.setStyleSheet("font: 14pt \"Arial\";")
-        self.label_4.setObjectName("label_4")
-        self.textEdit_3 = QtWidgets.QTextEdit(Form)
-        self.textEdit_3.setGeometry(QtCore.QRect(140, 160, 241, 31))
-        self.textEdit_3.setStyleSheet("\n"
-"background-color: rgb(255, 255, 229);")
-        self.textEdit_3.setObjectName("textEdit_3")
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 
-    def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "LOGIN"))
-        self.label_2.setText(_translate("Form", "CODICE FISCALE"))
-        self.label_5.setText(_translate("Form", "codice fiscale e/o password errata! "))
-        self.pushButton.setText(_translate("Form", "ACCEDI"))
-        self.label_4.setText(_translate("Form", "PASSWORD"))
+
+class LoginCliente(QWidget):
+
+    def __init__(self, parent=None):
+        super(LoginCliente, self).__init__(parent)
+        self.setWindowTitle('Accesso Cliente')
+        self.resize(500, 120)
+
+        layout = QGridLayout()
+
+        self.labelName = QLabel('<font size="4"> Username </font>')
+        self.lineEditUsername = QLineEdit()
+        self.lineEditUsername.setPlaceholderText('Inserisci codice fiscale')
+        layout.addWidget(self.labelName, 0, 0)
+        layout.addWidget(self.lineEditUsername, 0, 1)
+
+        self.labelPassword = QLabel('<font size="4"> Password </font>')
+        self.lineEditPassword = QLineEdit()
+        self.lineEditPassword.setPlaceholderText('Inserisci password')
+        self.lineEditPassword.setEchoMode(QLineEdit.Password)
+        layout.addWidget(self.labelPassword, 1, 0)
+        layout.addWidget(self.lineEditPassword, 1, 1)
+
+        self.buttonLogin = QPushButton('Accedi')
+        layout.addWidget(self.buttonLogin, 2, 0, 1, 2)
+        layout.setRowMinimumHeight(2, 75)
+        self.buttonLogin.clicked.connect(self.convalidaPassw())
+
+        self.setLayout(layout)
+
+    def convalidaPassw(self):
+        try:
+            print("ecco")
+            clienti = []
+            cliente = Cliente()
+            cc = self.lineEditUsername
+            cliente.codiceFiscale = cc
+            print("Dopo")
+            if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+                print("presto")
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                    clienti = list(f.read())
+                    print("eccoci di nuovo")
+                    for cliente in clienti:
+                        if cliente.codiceFiscale == cc:
+                            print("Accesso eseguito")
+                        else:
+                            msg = QMessageBox()
+                            msg.setWindowTitle('ERRORE')
+                            msg.setText('Attenzione, Errore nella lettura del file, riprovare')
+                            msg.exec()
+                            return
+            '''print("Ciao")
+            cc = str(self.lineEditUsername)
+            cliente = Cliente.ricercaUtilizzatoreCC(cc)
+            if cliente:
+                if str(self.lineEditPassword) == cliente.password:
+                    print("Accesso eseguito")'''
+        except:
+            msg = QMessageBox()
+            msg.setWindowTitle('ERRORE')
+            msg.setText('Errore nella lettura del file, riprovare')
+            msg.exec()
+            return

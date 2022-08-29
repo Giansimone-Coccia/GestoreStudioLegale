@@ -75,6 +75,20 @@ class Cliente(Utilizzatore):
         else:
             return None
 
+    #Da aggiungere in EA
+    def ricercaUtilizzatoreCC(self, codiceFiscale):
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                clienti = pickle.load(f)
+                for cliente in clienti:
+                    if cliente.codiceFiscale == codiceFiscale:
+                        print("Ok cliente")
+                        return cliente
+                print("Nessun cliente trovato")
+                return None
+        else:
+            return None
+
 
     def ricercaUtilizzatoreId(self, Id):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
@@ -84,7 +98,7 @@ class Cliente(Utilizzatore):
                     if cliente.Id == Id:
                         #print("Trovato")
                         return cliente
-                print("Cliente non trovato")
+                #print("Cliente non trovato")
                 return None
         else:
             return None
