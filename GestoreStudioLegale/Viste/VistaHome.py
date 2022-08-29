@@ -2,6 +2,10 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
+from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
+from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
+from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
+
 
 class VistaHome(QWidget):
 
@@ -11,7 +15,7 @@ class VistaHome(QWidget):
         gLayout = QGridLayout()
         textLabel = QLabel()
         textLabel.setText("Accedi come:")
-        textLabel.setGeometry(QRect(100, 1200, 350, 40))
+        textLabel.setGeometry(QRect(100, 120, 350, 40))
         textLabel.setFont(QFont('Arial', 12))
         gLayout.addWidget(textLabel, 0, 0)
         gLayout.addWidget(self.createButton("Avvocato", self.reachAvvocato), 1, 0)
@@ -30,10 +34,22 @@ class VistaHome(QWidget):
         return button
 
     def reachAvvocato(self):
-        pass
+        wid = QWidget()
+        self.vistaLoginAvvocato = LoginAvvocato()
+        self.vistaLoginAvvocato.setupUi(wid)
+        # self.vistaLoginCliente.retranslateUi(wid)
+        wid.show()
 
     def reachCliente(self):
-        pass
+        wid = QWidget()
+        self.vistaLoginCliente = LoginCliente()
+        self.vistaLoginCliente.setupUi(wid)
+        #self.vistaLoginCliente.retranslateUi(wid)
+        wid.show()
 
     def reachAmministratore(self):
-        pass
+        wid = QWidget()
+        self.vistaLoginAdmin = LoginAdmin()
+        self.vistaLoginAdmin.setupUi(wid)
+        # self.vistaLoginCliente.retranslateUi(wid)
+        wid.show()
