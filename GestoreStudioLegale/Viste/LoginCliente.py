@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton
 
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
+from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 
 
 class LoginCliente(QWidget):

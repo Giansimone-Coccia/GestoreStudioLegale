@@ -2,6 +2,8 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Viste.VistaHomeAppuntamentiC import VistaHomeAppuntamenti
+
 
 class VistaHomeCliente(QWidget):
 
@@ -24,7 +26,9 @@ class VistaHomeCliente(QWidget):
         return button
 
     def reachAppuntamenti(self):
-        pass
+        self.vistaAppuntamenti = VistaHomeAppuntamenti()
+        self.vistaAppuntamenti.show()
+
         # wid = QWidget()
         # self.vistaLoginAvvocato = LoginAvvocato()
         # self.vistaLoginAvvocato.setupUi(wid)
@@ -45,6 +49,7 @@ class VistaHomeCliente(QWidget):
         # self.vistaLoginAdmin = LoginAdmin()
         # self.vistaLoginAdmin.setupUi(wid)
         # wid.show()
+
 
 
 
