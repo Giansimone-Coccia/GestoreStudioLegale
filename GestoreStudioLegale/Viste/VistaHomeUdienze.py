@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QSizePolicy
 
 
-class VistaHomeCliente(QWidget):
+class VistaHomeUdienze(QWidget):
 
     def __init__(self, parent=None):
         super(VistaHomeCliente, self).__init__(parent)
@@ -22,29 +22,3 @@ class VistaHomeCliente(QWidget):
         button.setFont(QFont('Arial', 10))
         button.clicked.connect(on_click)
         return button
-
-    def reachAppuntamenti(self):
-        pass
-        # wid = QWidget()
-        # self.vistaLoginAvvocato = LoginAvvocato()
-        # self.vistaLoginAvvocato.setupUi(wid)
-        # wid.show()
-
-    def reachParcelle(self):
-        pass
-        # self.vistaParcelle =
-        # self.vistaParcelle.show()
-        # wid = QWidget()
-        # self.vistaLoginCliente = LoginCliente()
-        # self.vistaLoginCliente.show()
-        # wid.show()
-
-    def reachUdienze(self):
-        pass
-        # wid = QWidget()
-        # self.vistaLoginAdmin = LoginAdmin()
-        # self.vistaLoginAdmin.setupUi(wid)
-        # wid.show()
-
-
-

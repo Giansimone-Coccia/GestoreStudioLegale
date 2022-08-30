@@ -1,6 +1,8 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Viste.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
+
 
 class VistaHomeAppuntamenti(QWidget):
 
@@ -29,7 +31,9 @@ class VistaHomeAppuntamenti(QWidget):
         # wid.show()
 
     def reachVisualizzaAppuntamento(self):
-        pass
+        self.vistaAppuntamento = VistaVisualizzaAppuntamento()
+        self.vistaAppuntamento.show()
+
         # self.vistaParcelle =
         # self.vistaParcelle.show()
         # wid = QWidget()

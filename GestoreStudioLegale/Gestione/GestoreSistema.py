@@ -71,11 +71,15 @@ class GestoreSistema:
         print("Accesso fallito")
 
 
-    def loginAdmin(self, pssw, user): #da modificare in Ea
-            if pssw == self.psswAmministratore and user == self.userAmministratore:
-                print("Accesso effetuato")
-                return
-            print("Accesso fallito")
+    def loginAdmin(self, pssw, user):#modifica in ea
+        print("sss")
+        if pssw == self.psswAmministratore and user == self.userAmministratore:
+            print("Accesso effetuato")
+            return True
+        print("Accesso fallito")
+        return False
+
+
 
 
     def modificaCredenzialiAdmin(self, newPssw = '', newUser = ''): #da modificare in Ea

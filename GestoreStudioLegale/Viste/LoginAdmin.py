@@ -5,21 +5,20 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton
 
 from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
-from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 
 
-class LoginCliente(QWidget):
+class LoginAdmin(QWidget):
 
     def __init__(self, parent=None):
-        super(LoginCliente, self).__init__(parent)
-        self.setWindowTitle('Accesso Cliente')
+        super(LoginAdmin, self).__init__(parent)
+        self.setWindowTitle('Accesso Admin')
         self.resize(500, 120)
 
         layout = QGridLayout()
 
         self.labelName = QLabel('<font size="4"> Username </font>')
         self.lineEditUsername = QLineEdit()
-        self.lineEditUsername.setPlaceholderText('Inserisci codice fiscale')
+        self.lineEditUsername.setPlaceholderText('Inserisci username')
         layout.addWidget(self.labelName, 0, 0)
         layout.addWidget(self.lineEditUsername, 0, 1)
 
@@ -38,12 +37,13 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def convalidaPassw(self):
-            cc = self.lineEditUsername.text()
+            user = self.lineEditUsername.text()
             pswrd = self.lineEditPassword.text()
             print("22222")
             gestore = GestoreSistema()
+            gestore.modificaCredenzialiAdmin("password","user")
 
-            if gestore.loginCliente(pswrd, cc):
+            if gestore.loginAdmin(pswrd,user):
                 print("Accesso eseguito")
                 self.show_new()
             else:
@@ -53,24 +53,6 @@ class LoginCliente(QWidget):
                 msg.exec()
                 return
 
-            '''
-            cliente.codiceFiscale = cc
-            print("Dopo")
-            if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-                print("presto")
-                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                    clienti = list(pickle.load(f))
-                    print("eccoci di nuovo")
-                    for cliente in clienti:
-                        if cliente.codiceFiscale == cc:
-                            print("Accesso eseguito")
-                        else:
-                            msg = QMessageBox()
-                            msg.setWindowTitle('ERRORE')
-                            msg.setText('Attenzione, Errore nella lettura del file, riprovare')
-                            msg.exec()
-                            return
-                            '''
 
     def show_new(self):
         self.vistaClienteH = VistaHomeCliente()
