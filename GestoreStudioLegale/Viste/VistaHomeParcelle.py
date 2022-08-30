@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout
 import pickle
 import os
 
-#from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
+from GestoreStudioLegale.Utilities.Utilitites import Tools
 
 
 class VistaHomeParcelle(QWidget):
@@ -35,21 +35,22 @@ class VistaHomeParcelle(QWidget):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
                 self.parcelleList = list(pickle.load(f))
 
-    def loadFateC(self):
+    def loadDateC(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 self.clientiList = list(pickle.load(f))
 
     def getDatiP(self):
         self.loadDateP()
+        tool = Tools()
         for parcella in self.parcelleList:
-            from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
-            if parcella.identificativo == LoginCliente().lineEditUsername.text():
+            if parcella.identificativo == str(tool.leggi):
                 return parcella
 
     def getDatiC(self):
-        self.loadFateC()
+        self.loadDateC()
+        tool = Tools()
         for cliente in self.clientiList:
-            from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
-            if cliente.codiceFiscale == LoginCliente().lineEditUsername.text():
+            #if cliente.codiceFiscale == str(tool.leggi()): #Non legge, ricontrollare il metodo
+            if cliente.codiceFiscale == 'cc':
                 return cliente

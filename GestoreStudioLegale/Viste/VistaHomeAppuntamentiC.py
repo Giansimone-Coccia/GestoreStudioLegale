@@ -29,3 +29,4 @@ class VistaHomeAppuntamenti(QWidget):
     def reachVisualizzaAppuntamento(self):
         self.vistaAppuntamento = VistaVisualizzaAppuntamento()
         self.vistaAppuntamento.show()
+        self.close()

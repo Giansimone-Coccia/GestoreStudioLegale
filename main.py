@@ -16,6 +16,7 @@ from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
+from GestoreStudioLegale.Utilities.Utilitites import Tools
 from GestoreStudioLegale.Viste.VistaHome import VistaHome
 
 
