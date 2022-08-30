@@ -59,7 +59,7 @@ class GestoreSistema:
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
                 try:
                     avvocatiList = pickle.load(f)
-                    self.listaAvvocati.append(avvocatiList)
+                    #self.listaAvvocati.append(avvocatiList)
                     #print(self.listaAvvocati)
                 except EOFError as er:
                     print("Errore")

@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
 #from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
-#from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
+from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
 #from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 
@@ -37,8 +37,8 @@ class VistaHome(QWidget):
     def reachAvvocato(self):
         pass
         #wid = QWidget()
-        #self.vistaLoginAvvocato = LoginAvvocato()
-        #self.vistaLoginAvvocato.setupUi(wid)
+        self.vistaAvvocato = LoginAvvocato()
+        self.vistaAvvocato.show()
         #wid.show()
 
     def reachCliente(self):

@@ -7,11 +7,11 @@ from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 
 
-class LoginCliente(QWidget):
+class LoginAvvocato(QWidget):
 
     def __init__(self, parent=None):
-        super(LoginCliente, self).__init__(parent)
-        self.setWindowTitle('Accesso Cliente')
+        super(LoginAvvocato, self).__init__(parent)
+        self.setWindowTitle('Accesso Avvocato')
         self.resize(500, 120)
 
         layout = QGridLayout()
@@ -42,7 +42,7 @@ class LoginCliente(QWidget):
             print("22222")
             gestore = GestoreSistema()
 
-            if gestore.loginCliente(pswrd,cc):
+            if gestore.loginAvvocato(pswrd,cc):
                 print("Accesso eseguito")
                 self.show_new()
             else:
