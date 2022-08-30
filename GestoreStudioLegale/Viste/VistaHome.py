@@ -2,7 +2,7 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
-#from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
+from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
 from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
 #from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
@@ -50,7 +50,8 @@ class VistaHome(QWidget):
         #wid.show()
 
     def reachAmministratore(self):
-        pass
+        self.vistaAdmin = LoginAdmin()
+        self.vistaAdmin.show()
         #wid = QWidget()
         #self.vistaLoginAdmin = LoginAdmin()
         #self.vistaLoginAdmin.setupUi(wid)
