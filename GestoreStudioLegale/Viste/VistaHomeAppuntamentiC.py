@@ -25,18 +25,7 @@ class VistaHomeAppuntamenti(QWidget):
 
     def reachPrenotaAppuntamento(self):
         pass
-        # wid = QWidget()
-        # self.vistaLoginAvvocato = LoginAvvocato()
-        # self.vistaLoginAvvocato.setupUi(wid)
-        # wid.show()
 
     def reachVisualizzaAppuntamento(self):
         self.vistaAppuntamento = VistaVisualizzaAppuntamento()
         self.vistaAppuntamento.show()
-
-        # self.vistaParcelle =
-        # self.vistaParcelle.show()
-        # wid = QWidget()
-        # self.vistaLoginCliente = LoginCliente()
-        # self.vistaLoginCliente.show()
-        # wid.show()

@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLab
 
 from GestoreStudioLegale.Viste.LoginAdmin import LoginAdmin
 from GestoreStudioLegale.Viste.LoginAvvocato import LoginAvvocato
-#from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 
 
@@ -35,24 +34,16 @@ class VistaHome(QWidget):
         return button
 
     def reachAvvocato(self):
-        pass
-        #wid = QWidget()
         self.vistaAvvocato = LoginAvvocato()
         self.vistaAvvocato.show()
-        #wid.show()
+        self.close()
 
     def reachCliente(self):
         self.vistaCliente = LoginCliente()
         self.vistaCliente.show()
-        #wid = QWidget()
-        #self.vistaLoginCliente = LoginCliente()
-        #self.vistaLoginCliente.show()
-        #wid.show()
+        self.close()
 
     def reachAmministratore(self):
         self.vistaAdmin = LoginAdmin()
         self.vistaAdmin.show()
-        #wid = QWidget()
-        #self.vistaLoginAdmin = LoginAdmin()
-        #self.vistaLoginAdmin.setupUi(wid)
-        #wid.show()
+        self.close()

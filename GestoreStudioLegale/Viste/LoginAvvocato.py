@@ -3,7 +3,6 @@ import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
-from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 
 
@@ -72,5 +71,6 @@ class LoginAvvocato(QWidget):
                             '''
 
     def show_new(self):
-        self.vistaClienteH = VistaHomeCliente()
-        self.vistaClienteH.show()
+        pass
+        #self.vistaAvvocatoH = VistaHomeAvvocato()
+        #self.vistaAvvocatoH.show()

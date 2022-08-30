@@ -3,7 +3,6 @@ import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
-from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
 
@@ -46,6 +45,7 @@ class LoginCliente(QWidget):
             if gestore.loginCliente(pswrd, cc):
                 print("Accesso eseguito")
                 self.show_new()
+                self.close()
             else:
                 msg = QMessageBox()
                 msg.setWindowTitle('ERRORE')

@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout
 import pickle
 import os
 
-#from GestoreStudioLegale.Servizi.Parcella import Parcella
 #from GestoreStudioLegale.Viste.LoginCliente import LoginCliente
 
 
@@ -27,7 +26,7 @@ class VistaHomeParcelle(QWidget):
         grifLayout.addWidget(textLabel1, 0, 1)
         grifLayout.addWidget(textLabel2, 0, 2)
         self.setLayout(grifLayout)
-        self.resize(500, 400)
+        self.resize(600, 500)
         self.setWindowTitle("Parcelle")
         self.show()
 

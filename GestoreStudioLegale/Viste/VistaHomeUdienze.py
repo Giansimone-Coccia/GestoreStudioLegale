@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QSizePoli
 class VistaHomeUdienze(QWidget):
 
     def __init__(self, parent=None):
-        super(VistaHomeCliente, self).__init__(parent)
+        super(VistaHomeUdienze, self).__init__(parent)
         gLayout = QGridLayout()
         gLayout.addWidget(self.createButton("Appuntamenti", self.reachAppuntamenti), 0, 0)
         gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 1, 0)
