@@ -18,14 +18,9 @@ from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 from GestoreStudioLegale.Viste.VistaHome import VistaHome
 
-if __name__ == '__main__':
-    app = QApplication (sys.argv)
-    app.setStyle('Fusion')
-    vista_home = VistaHome()
-    vista_home.show()
-    sys.exit(app.exec())
-'''
-cliente1 = Cliente()
+
+
+'''cliente1 = Cliente()
 cliente2 = Cliente()
 cliente3 = Cliente()
 cliente4 = Cliente()
@@ -51,8 +46,8 @@ a = ['bo']
 b = ['non so']
 listaClienti = [cliente1]
 nuovaListaClienti = []
-corsoAggiornamentiLista = ['matematica', 'analisi 2']
-'''
+corsoAggiornamentiLista = ['matematica', 'analisi 2']'''
+
 
 #cliente1.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
@@ -147,3 +142,10 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
+
+if __name__ == '__main__':
+    app = QApplication (sys.argv)
+    app.setStyle('Fusion')
+    vista_home = VistaHome()
+    vista_home.show()
+    sys.exit(app.exec())

@@ -1,4 +1,5 @@
 import os.path
+import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
@@ -30,7 +31,7 @@ class LoginCliente(QWidget):
         self.buttonLogin = QPushButton('Accedi')
         layout.addWidget(self.buttonLogin, 2, 0, 1, 2)
         layout.setRowMinimumHeight(2, 75)
-        self.buttonLogin.clicked.connect(self.convalidaPassw())
+        self.buttonLogin.clicked.connect(lambda: self.convalidaPassw())
 
         self.setLayout(layout)
 
@@ -39,13 +40,13 @@ class LoginCliente(QWidget):
             print("ecco")
             clienti = []
             cliente = Cliente()
-            cc = self.lineEditUsername
+            cc = self.lineEditUsername.text()
             cliente.codiceFiscale = cc
             print("Dopo")
             if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
                 print("presto")
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                    clienti = list(f.read())
+                    clienti = list(pickle.load(f))
                     print("eccoci di nuovo")
                     for cliente in clienti:
                         if cliente.codiceFiscale == cc:
@@ -56,12 +57,6 @@ class LoginCliente(QWidget):
                             msg.setText('Attenzione, Errore nella lettura del file, riprovare')
                             msg.exec()
                             return
-            '''print("Ciao")
-            cc = str(self.lineEditUsername)
-            cliente = Cliente.ricercaUtilizzatoreCC(cc)
-            if cliente:
-                if str(self.lineEditPassword) == cliente.password:
-                    print("Accesso eseguito")'''
         except:
             msg = QMessageBox()
             msg.setWindowTitle('ERRORE')
