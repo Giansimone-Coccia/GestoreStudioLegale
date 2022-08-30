@@ -42,7 +42,7 @@ class LoginCliente(QWidget):
             print("22222")
             gestore = GestoreSistema()
 
-            if gestore.loginCliente(pswrd,cc):
+            if gestore.loginCliente(pswrd, cc):
                 print("Accesso eseguito")
                 self.show_new()
             else:

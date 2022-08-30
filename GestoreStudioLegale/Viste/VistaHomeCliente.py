@@ -2,6 +2,8 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Viste.VistaHomeParcelle import VistaHomeParcelle
+
 
 class VistaHomeCliente(QWidget):
 
@@ -31,9 +33,8 @@ class VistaHomeCliente(QWidget):
         # wid.show()
 
     def reachParcelle(self):
-        pass
-        # self.vistaParcelle =
-        # self.vistaParcelle.show()
+        self.vistaParcelle = VistaHomeParcelle()
+        self.vistaParcelle.show()
         # wid = QWidget()
         # self.vistaLoginCliente = LoginCliente()
         # self.vistaLoginCliente.show()
