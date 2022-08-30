@@ -4,6 +4,7 @@ import pickle
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
 from GestoreStudioLegale.Servizi.Cliente import Cliente
+from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 
 
 class LoginCliente(QWidget):
@@ -36,11 +37,22 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def convalidaPassw(self):
-        try:
-            print("ecco")
-            clienti = []
-            cliente = Cliente()
             cc = self.lineEditUsername.text()
+            pswrd = self.lineEditPassword.text()
+            print("22222")
+            gestore = GestoreSistema()
+
+            if gestore.loginCliente(pswrd,cc):
+                print("Accesso eseguito")
+                self.show_new()
+            else:
+                msg = QMessageBox()
+                msg.setWindowTitle('ERRORE')
+                msg.setText('Credenziali errate')
+                msg.exec()
+                return
+
+            '''
             cliente.codiceFiscale = cc
             print("Dopo")
             if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
@@ -57,9 +69,8 @@ class LoginCliente(QWidget):
                             msg.setText('Attenzione, Errore nella lettura del file, riprovare')
                             msg.exec()
                             return
-        except:
-            msg = QMessageBox()
-            msg.setWindowTitle('ERRORE')
-            msg.setText('Errore nella lettura del file, riprovare')
-            msg.exec()
-            return
+                            '''
+
+    def show_new(self):
+        self.vistaClienteH = VistaHomeCliente()
+        self.vistaClienteH.show()

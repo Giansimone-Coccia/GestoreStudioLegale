@@ -33,20 +33,25 @@ class GestoreSistema:
 
 
     def loginCliente(self, pssw, codiceFiscale): #da modificare in Ea
+        print("shit")
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 try:
-                    clientiList = pickle.load(f)
-                    self.listaClienti.append(clientiList)
+                    print("7777")
+                    clientiList = list(pickle.load(f))
+                    #self.listaClienti.append(clientiList)
+                    print("9866")
+
                     #print(self.listaClienti)
                 except EOFError as er:
                     print("Errore")
         for cliente in clientiList:
             if pssw == cliente.getDatiCliente()['Password'] and codiceFiscale == cliente.getDatiCliente()['Codice fiscale'] :
                 print("Accesso effetuato")
-                print(cliente)
+                #print(cliente)
                 return True
         print("Accesso fallito")
+        return False
 
 
     def loginAvvocato(self, pssw, codiceFiscale): #da modificare in Ea
