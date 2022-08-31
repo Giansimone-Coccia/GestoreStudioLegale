@@ -1,10 +1,9 @@
-from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
-from GestoreStudioLegale.Viste.VistaHomeAppuntamentiC import VistaHomeAppuntamenti
-from GestoreStudioLegale.Viste.VistaHomeParcelle import VistaHomeParcelle
-from GestoreStudioLegale.Viste.VistaHomeUdienze import VistaHomeUdienze
+from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamenti
+from GestoreStudioLegale.Viste.VisteCliente.VistaHomeParcelle import VistaHomeParcelle
+from GestoreStudioLegale.Viste.VisteCliente.VistaHomeUdienze import VistaHomeUdienze
 
 
 class VistaHomeCliente(QWidget):

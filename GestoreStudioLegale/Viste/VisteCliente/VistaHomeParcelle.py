@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout
 import pickle
 import os
 
-from GestoreStudioLegale.Utilities.Utilitites import Tools
+from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class VistaHomeParcelle(QWidget):

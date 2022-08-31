@@ -10,6 +10,7 @@ class LoginAdmin(QWidget):
 
     def __init__(self, parent=None):
         super(LoginAdmin, self).__init__(parent)
+        self.gestore = GestoreSistema()
         self.setWindowTitle('Accesso Admin')
         self.resize(500, 120)
 
@@ -39,10 +40,8 @@ class LoginAdmin(QWidget):
             user = self.lineEditUsername.text()
             pswrd = self.lineEditPassword.text()
             print("22222")
-            gestore = GestoreSistema()
-            gestore.modificaCredenzialiAdmin("password","user")
 
-            if gestore.loginAdmin(pswrd,user):
+            if self.gestore.loginAdmin(pswrd,user):
                 print("Accesso eseguito")
                 self.show_new()
             else:

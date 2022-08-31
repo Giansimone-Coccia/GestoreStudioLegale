@@ -1,11 +1,8 @@
-import os.path
-import pickle
-
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
-from GestoreStudioLegale.Viste.VistaHomeCliente import VistaHomeCliente
-from GestoreStudioLegale.Utilities.Utilitites import Tools
+from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
+from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class LoginCliente(QWidget):

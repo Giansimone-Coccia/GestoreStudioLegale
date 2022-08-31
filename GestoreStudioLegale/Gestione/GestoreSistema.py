@@ -2,6 +2,7 @@ import pickle
 import os.path
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class GestoreSistema:
 
@@ -9,8 +10,10 @@ class GestoreSistema:
 
         self.listaAvvocati = []
         self.listaClienti = []
-        self.psswAmministratore = "password"
-        self.userAmministratore = "admin"
+        '''self.psswAmministratore = "password"
+        self.userAmministratore = "admin"'''
+
+
 
         '''if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
@@ -72,8 +75,10 @@ class GestoreSistema:
 
 
     def loginAdmin(self, pssw, user):#modifica in ea
-        print("sss")
-        if pssw == self.psswAmministratore and user == self.userAmministratore:
+        tool =Tools()
+        passEuser = tool.leggi('CredenzialiAdmin', 0).rsplit()
+        print(passEuser)
+        if pssw == passEuser[0] and user == passEuser[1]:
             print("Accesso effetuato")
             return True
         print("Accesso fallito")
@@ -83,12 +88,13 @@ class GestoreSistema:
 
 
     def modificaCredenzialiAdmin(self, newPssw = '', newUser = ''): #da modificare in Ea
+        tool = Tools()
         if newPssw != '':
-            self.psswAmministratore = newPssw
+            tool.salvaAppend(newPssw,'CredenzialiAdmin')
         if newUser != '':
-            self.userAmministratore = newUser
-        print(self.psswAmministratore)
-        print(self.userAmministratore)
+            tool.salvaAppend(newUser,'CredenzialiAdmin')
+        print(newPssw)
+        print(newUser)
 
 
     def rimuoviAvvocato(self, avvocato = None): #usa funzione di rimozione di avvocato
