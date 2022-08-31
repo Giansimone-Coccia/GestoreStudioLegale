@@ -76,7 +76,7 @@ class GestoreSistema:
 
     def loginAdmin(self, pssw, user):#modifica in ea
         tool =Tools()
-        passEuser = tool.leggi('CredenzialiAdmin', 0).rsplit()
+        passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
         print(passEuser)
         if pssw == passEuser[0] and user == passEuser[1]:
             print("Accesso effetuato")

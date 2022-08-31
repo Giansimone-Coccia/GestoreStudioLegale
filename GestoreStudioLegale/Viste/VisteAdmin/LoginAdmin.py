@@ -4,6 +4,7 @@ import pickle
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
+from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
 
 
 class LoginAdmin(QWidget):
@@ -54,5 +55,5 @@ class LoginAdmin(QWidget):
 
     def show_new(self):
         pass
-        #self.vistaAdminH = VistaHomeAdmin()
-        #self.vistaAdminH.show()
+        self.vistaAdminH = VistaHomeAdmin()
+        self.vistaAdminH.show()

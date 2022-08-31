@@ -1,6 +1,8 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
 
+from GestoreStudioLegale.Utilities.Utilities import Tools
+
 
 class VistaModificaPassword(QWidget):
 
@@ -12,10 +14,10 @@ class VistaModificaPassword(QWidget):
         layout = QGridLayout()
 
         self.labelOldPassword = QLabel('<font size="4"> Vecchia password </font>')
-        self.lineEditOldPassw = QLineEdit()
-        self.lineEditOldPassw.setPlaceholderText('Inserisci la vecchia password')
+        self.lineEditOldPassword = QLineEdit()
+        self.lineEditOldPassword.setPlaceholderText('Inserisci la vecchia password')
         layout.addWidget(self.labelOldPassword, 0, 0)
-        layout.addWidget(self.lineEditOldPassw, 0, 1)
+        layout.addWidget(self.lineEditOldPassword, 0, 1)
 
         self.labelNewPassword = QLabel('<font size="4"> Nuova Password </font>')
         self.lineEditNewPassword = QLineEdit()
@@ -32,21 +34,22 @@ class VistaModificaPassword(QWidget):
         self.setLayout(layout)
 
     def modificaPassw(self):
-        tool = Tools()
-        cc = self.lineEditUsername.text()
-        pswrd = self.lineEditPassword.text()
-        print("22222")
-        gestore = GestoreSistema()
-        tool.salva(str(self.lineEditUsername.text()))
-        #tool.salvaAppend(str(self.lineEditPassword.text()))
+        tool =Tools()
+        passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
+        print(passEuser)
 
-        if gestore.loginCliente(pswrd, cc):
-            print("Accesso eseguito")
-            self.show_new()
-            self.close()
+        if passEuser[0] == self.lineEditOldPassword.text():
+
+            tool.salva(f'{self.lineEditNewPassword.text()}\n{passEuser[1]}','CredenzialiAdmin')
+
+            msg = QMessageBox()
+            msg.setWindowTitle('Password modificata')
+            msg.setText('Password modificata con successo')
+            msg.exec()
+            return
         else:
             msg = QMessageBox()
             msg.setWindowTitle('ERRORE')
-            msg.setText('Credenziali errate')
+            msg.setText('Vecchia Password errata')
             msg.exec()
             return

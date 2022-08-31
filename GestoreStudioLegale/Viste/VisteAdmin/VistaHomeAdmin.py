@@ -1,6 +1,10 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaPassword import VistaModificaPassword
+from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
+from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
+
 
 class VistaHomeAdmin(QWidget):
 
@@ -23,8 +27,8 @@ class VistaHomeAdmin(QWidget):
         return button
 
     def reachModificaPassword(self):
-        self.vistaModPaasword = VistaModificaPassword()
-        self.vistaModPaasword.show()
+        self.vistaModPassword = VistaModificaPassword()
+        self.vistaModPassword.show()
         self.close()
 
     def reachAvvocati(self):
