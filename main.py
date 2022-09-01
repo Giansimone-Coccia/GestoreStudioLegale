@@ -143,6 +143,7 @@ cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C123
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
+appuntamento1.creaAppuntamento(cliente1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
 
 if __name__ == '__main__':
     app = QApplication (sys.argv)
