@@ -1,7 +1,7 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
-from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamenti
+from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamentiC
 from GestoreStudioLegale.Viste.VisteCliente.VistaHomeParcelle import VistaHomeParcelle
 from GestoreStudioLegale.Viste.VisteCliente.VistaHomeUdienze import VistaHomeUdienze
 
@@ -27,7 +27,7 @@ class VistaHomeCliente(QWidget):
         return button
 
     def reachAppuntamenti(self):
-        self.vistaAppuntamenti = VistaHomeAppuntamenti()
+        self.vistaAppuntamenti = VistaHomeAppuntamentiC()
         self.vistaAppuntamenti.show()
         self.close()
 
