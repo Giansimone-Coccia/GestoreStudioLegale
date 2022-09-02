@@ -45,6 +45,7 @@ class LoginAdmin(QWidget):
             if self.gestore.loginAdmin(pswrd,user):
                 print("Accesso eseguito")
                 self.show_new()
+                self.close()
             else:
                 msg = QMessageBox()
                 msg.setWindowTitle('ERRORE')
@@ -54,6 +55,5 @@ class LoginAdmin(QWidget):
 
 
     def show_new(self):
-        pass
         self.vistaAdminH = VistaHomeAdmin()
         self.vistaAdminH.show()

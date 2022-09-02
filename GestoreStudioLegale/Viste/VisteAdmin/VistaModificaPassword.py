@@ -46,6 +46,7 @@ class VistaModificaPassword(QWidget):
             msg.setWindowTitle('Password modificata')
             msg.setText('Password modificata con successo')
             msg.exec()
+            self.close()
             return
         else:
             msg = QMessageBox()

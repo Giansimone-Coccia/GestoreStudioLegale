@@ -44,13 +44,13 @@ class VistaHomeParcelle(QWidget):
         self.loadDateP()
         tool = Tools()
         for parcella in self.parcelleList:
-            if parcella.identificativo == str(tool.leggi):
+            if parcella.identificativo == str(tool.leggi()):
                 return parcella
 
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
         for cliente in self.clientiList:
-            #if cliente.codiceFiscale == str(tool.leggi()): #Non legge, ricontrollare il metodo
-            if cliente.codiceFiscale == 'cc':
+            if cliente.codiceFiscale == str(tool.leggi()): #Non legge, ricontrollare il metodo
+            #if cliente.codiceFiscale == 'cc':
                 return cliente
