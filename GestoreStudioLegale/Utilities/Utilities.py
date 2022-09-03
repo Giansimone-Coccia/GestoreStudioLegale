@@ -13,7 +13,7 @@ class Tools():
     def leggi(self,file = 'Credenziali',n = 5):
         if os.path.isfile(f'GestoreStudioLegale/Dati/{file}.pickle'):
             with open(f'GestoreStudioLegale/Dati/{file}.pickle', 'r') as f:
-                if n ==0 :
+                if n == 0 :
                     return f.read()
                 stringa1 = f.read(n)
                 #stringa1 = f.readline()

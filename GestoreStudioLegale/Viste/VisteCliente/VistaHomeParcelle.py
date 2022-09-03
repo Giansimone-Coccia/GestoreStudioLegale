@@ -17,16 +17,23 @@ class VistaHomeParcelle(QWidget):
         grifLayout = QGridLayout()
         textLabel1 = QLabel()
         textLabel2 = QLabel()
-        textLabel1.setText("Di seguito la lista delle parcelle con le relative informazioni")
-        textLabel1.setGeometry(QRect(100, 120, 350, 40))
-        textLabel1.setFont(QFont('Arial', 12))
-        textLabel2.setText(f"{self.getDatiC()}")
-        textLabel2.setGeometry(QRect(100, 120, 350, 40))
-        textLabel2.setFont(QFont('Arial', 10))
-        grifLayout.addWidget(textLabel1, 0, 1)
-        grifLayout.addWidget(textLabel2, 0, 2)
+        textLabel1.setText("Di seguito la lista delle parcelle con le relative informazioni relative al cliente")
+        textLabel1.setGeometry(QRect(0, 0, 200, 150))
+        textLabel1.setFont(QFont('Arial', 10))
+        textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
+        textLabel2.setGeometry(QRect(0, 0, 350, 10))
+        textLabel2.setFont(QFont('Times', 10))
+        textLabel2.setStyleSheet("border: 1px solid black;")
+        textLabel3 = QLabel()
+        textLabel3.setText('Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.getDatiP()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.getDatiP()['importo']}"+'€'+'\n'+'ID: '+f"{self.getDatiP()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.getDatiP()['identificativo']}")
+        textLabel3.setGeometry(QRect(0, 0, 350, 20))
+        textLabel3.setFont(QFont('Times', 10))
+        textLabel3.setStyleSheet("border: 1px solid black;")
+        grifLayout.addWidget(textLabel2, 0, 0)
+        grifLayout.addWidget(textLabel1, 1, 0)
+        grifLayout.addWidget(textLabel3, 2, 0)
         self.setLayout(grifLayout)
-        self.resize(600, 500)
+        self.resize(500, 400)
         self.setWindowTitle("Parcelle")
         self.show()
 
@@ -44,13 +51,17 @@ class VistaHomeParcelle(QWidget):
         self.loadDateP()
         tool = Tools()
         for parcella in self.parcelleList:
-            if parcella.identificativo == str(tool.leggi()):
-                return parcella
+            if parcella.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+                return parcella.getDatiParcellaCliente()
 
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
         print(tool.leggi())
         for cliente in self.clientiList:
+<<<<<<< HEAD
+            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+=======
             if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
+>>>>>>> ffd2d69efab453c20531fd393835bd774ee7fb4f
                 return cliente.getDatiCliente()

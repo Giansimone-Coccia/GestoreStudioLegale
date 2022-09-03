@@ -38,6 +38,7 @@ udienza6 = Udienza()
 udienza7 = Udienza()
 appuntamento1 = Appuntamento()
 parcella1 = Parcella()
+parcella2 = Parcella()
 corso1 = CorsoAggiornamento()
 
 corsi = ['economia politica']
@@ -50,7 +51,7 @@ nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 
-cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente1.getDatiCliente()  #FUNZIONA FACENDO PRIMA AGGIUNGICLIENTE COSI' FA PRIMA CREAUTILIZZATORE
 #print(cliente1.dataNascita)
@@ -80,7 +81,8 @@ cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C123
 #avvocato1.visualizzaAvvocato('A4783') #FUNZIONA
 #avvocato1.aggiornaAvvocato(nuovaListaClienti, 3620988123)
 
-#parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'giorgio') #FUNZIONA
+#parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'alessio') #FUNZIONA
+#parcella2.creaParcella(cliente2, 'PP123', 583928493, 2000, 'francesca')
 #parcella1.getDatiParcellaCliente() #FUNZIONA UTILIZZANDOLO INSIEME A creaParcella
 #parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
 #parcella1.ricercaParcellaIntestatario('giorgio') #FUNZIONA
@@ -143,7 +145,7 @@ cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C123
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
-appuntamento1.creaAppuntamento(cliente1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
+#appuntamento1.creaAppuntamento(cliente1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
 
 if __name__ == '__main__':
     app = QApplication (sys.argv)
