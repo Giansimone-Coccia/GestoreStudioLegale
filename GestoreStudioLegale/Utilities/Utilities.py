@@ -1,4 +1,5 @@
 import os
+from GestoreStudioLegale.Servizi import Cliente
 
 class Tools():
 
