@@ -1,4 +1,8 @@
 import os
+
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QPushButton
+
 from GestoreStudioLegale.Servizi import Cliente
 
 class Tools():
@@ -28,3 +32,11 @@ class Tools():
             with open(f'GestoreStudioLegale/Dati/{file}.pickle', 'a') as f:
                 f.write(stringa)
                 f.write('\n')
+
+
+    def rewindButton(self, rewind):
+        button1 = QPushButton("Indietro")
+        button1.setFont(QFont('Arial', 10))
+        button1.clicked.connect(rewind)
+        button1.setSizePolicy(150, 50)
+        return button1
