@@ -40,3 +40,4 @@ class VistaHomeCliente(QWidget):
         self.vistaUdienze = VistaHomeUdienze()
         self.vistaUdienze.show()
         self.close()
+

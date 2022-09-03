@@ -68,4 +68,7 @@ class VistaHomeParcelle(QWidget):
                     return cliente.getDatiCliente()
 
     def rewind1(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
+        self.vistaHome = VistaHomeCliente()
+        self.vistaHome.show()
+        self.close()
