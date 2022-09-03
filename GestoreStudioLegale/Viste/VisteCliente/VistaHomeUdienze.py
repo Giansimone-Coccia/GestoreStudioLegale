@@ -16,7 +16,7 @@ class VistaHomeUdienze(QWidget):
         super(VistaHomeUdienze, self).__init__(parent)
         tool = Tools()
         grifLayout = QGridLayout()
-        grifLayout.addWidget(tool.rewindButton(self.rewind1), 0, 0)
+        grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista delle udienze con le informazioni relative al cliente")
@@ -28,8 +28,7 @@ class VistaHomeUdienze(QWidget):
         textLabel2.setFont(QFont('Arial', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
         textLabel3 = QLabel()
-        textLabel3.setText(
-            'Udienza: ' + '\n' + 'INTESTATARIO: ' + f"{self.getDatiU()['intestatario']}" + '\n' + 'IMPORTO: ' + f"{self.getDatiU()['importo']}" + '€' + '\n' + 'ID: ' + f"{self.getDatiU()['ID']}" + '\n' + 'IDENTIFICATIVO: ' + f"{self.getDatiU()['identificativo']}")
+        textLabel3.setText('Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{self.getDatiU()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{self.getDatiU()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{self.getDatiU()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{self.getDatiU()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{self.getDatiU()['Data e Ora Fine']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
         textLabel3.setStyleSheet("border: 1px solid black;")
@@ -56,8 +55,10 @@ class VistaHomeUdienze(QWidget):
         self.loadDateU()
         tool = Tools()
         for udienza in self.udienzeList:
-            if udienza.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                return udienza.getDatiUdienza()
+           #if udienza.Cliente.getDatiCliente()['Codice fiscale'] == str(tool.leggi()).rsplit()[0]
+           if udienza.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+             return udienza.getDatiUdienza()
+
 
     def getDatiC(self):
         self.loadDateC()
