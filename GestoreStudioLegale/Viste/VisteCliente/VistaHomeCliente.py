@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamentiC
 from GestoreStudioLegale.Viste.VisteCliente.VistaHomeParcelle import VistaHomeParcelle
 from GestoreStudioLegale.Viste.VisteCliente.VistaHomeUdienze import VistaHomeUdienze
@@ -10,10 +11,12 @@ class VistaHomeCliente(QWidget):
 
     def __init__(self, parent=None):
         super(VistaHomeCliente, self).__init__(parent)
+        tool = Tools()
         gLayout = QGridLayout()
-        gLayout.addWidget(self.createButton("Appuntamenti", self.reachAppuntamenti), 0, 0)
-        gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 1, 0)
-        gLayout.addWidget(self.createButton("Udienze", self.reachUdienze), 2, 0, 1, 2)
+        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.createButton("Appuntamenti", self.reachAppuntamenti), 1, 0)
+        gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 2, 0)
+        gLayout.addWidget(self.createButton("Udienze", self.reachUdienze), 3, 0, 1, 3)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
@@ -39,5 +42,11 @@ class VistaHomeCliente(QWidget):
     def reachUdienze(self):
         self.vistaUdienze = VistaHomeUdienze()
         self.vistaUdienze.show()
+        self.close()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VistaHome import VistaHome
+        self.vistaH = VistaHome()
+        self.vistaH.show()
         self.close()
 
