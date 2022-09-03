@@ -57,6 +57,11 @@ class VistaHomeParcelle(QWidget):
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
+        print(tool.leggi())
         for cliente in self.clientiList:
+<<<<<<< HEAD
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+=======
+            if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
+>>>>>>> ffd2d69efab453c20531fd393835bd774ee7fb4f
                 return cliente.getDatiCliente()
