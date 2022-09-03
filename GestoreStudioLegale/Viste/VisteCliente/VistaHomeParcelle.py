@@ -14,7 +14,10 @@ class VistaHomeParcelle(QWidget):
 
     def __init__(self, parent=None):
         super(VistaHomeParcelle, self).__init__(parent)
+        tool = Tools()
         grifLayout = QGridLayout()
+
+        grifLayout.addWidget(tool.rewindButton(self.rewind1), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista delle parcelle con le relative informazioni relative al cliente")
@@ -29,9 +32,9 @@ class VistaHomeParcelle(QWidget):
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Times', 10))
         textLabel3.setStyleSheet("border: 1px solid black;")
-        grifLayout.addWidget(textLabel2, 0, 0)
-        grifLayout.addWidget(textLabel1, 1, 0)
-        grifLayout.addWidget(textLabel3, 2, 0)
+        grifLayout.addWidget(textLabel2, 1, 1)
+        grifLayout.addWidget(textLabel1, 2, 1)
+        grifLayout.addWidget(textLabel3, 3, 1)
         self.setLayout(grifLayout)
         self.resize(500, 400)
         self.setWindowTitle("Parcelle")
@@ -59,9 +62,10 @@ class VistaHomeParcelle(QWidget):
         tool = Tools()
         print(tool.leggi())
         for cliente in self.clientiList:
-<<<<<<< HEAD
+
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-=======
-            if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
->>>>>>> ffd2d69efab453c20531fd393835bd774ee7fb4f
-                return cliente.getDatiCliente()
+                if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
+                    return cliente.getDatiCliente()
+
+    def rewind1(self):
+        pass
