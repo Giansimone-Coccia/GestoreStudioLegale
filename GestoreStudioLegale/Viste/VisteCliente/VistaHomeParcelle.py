@@ -20,7 +20,7 @@ class VistaHomeParcelle(QWidget):
         grifLayout.addWidget(tool.rewindButton(self.rewind1), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
-        textLabel1.setText("Di seguito la lista delle parcelle con le relative informazioni relative al cliente")
+        textLabel1.setText("Di seguito la lista delle parcelle con le informazioni relative al cliente")
         textLabel1.setGeometry(QRect(0, 0, 200, 150))
         textLabel1.setFont(QFont('Arial', 10))
         textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
@@ -30,7 +30,7 @@ class VistaHomeParcelle(QWidget):
         textLabel3 = QLabel()
         textLabel3.setText('Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.getDatiP()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.getDatiP()['importo']}"+'€'+'\n'+'ID: '+f"{self.getDatiP()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.getDatiP()['identificativo']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
-        textLabel3.setFont(QFont('Times', 10))
+        textLabel3.setFont(QFont('Arial', 10))
         textLabel3.setStyleSheet("border: 1px solid black;")
         grifLayout.addWidget(textLabel2, 1, 1)
         grifLayout.addWidget(textLabel1, 2, 1)
@@ -62,7 +62,6 @@ class VistaHomeParcelle(QWidget):
         tool = Tools()
         print(tool.leggi())
         for cliente in self.clientiList:
-
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                 if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
                     return cliente.getDatiCliente()
