@@ -33,8 +33,8 @@ class Appuntamento():
 
     def creaAppuntamento(self, Cliente, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
         self.Cliente = Cliente
-        self.dataOraInizio = dataOraInizio
-        self.dataOraFine = dataOraFine
+        self.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
+        self.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
         self.ID = ID
         self.tipoProcedimento = tipoProcedimento
 
