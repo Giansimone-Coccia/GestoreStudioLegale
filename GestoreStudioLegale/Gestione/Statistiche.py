@@ -2,6 +2,8 @@ import pickle
 import os.path
 from datetime import datetime, timedelta, time
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_template import FigureCanvas
+from matplotlib.figure import Figure
 
 from GestoreStudioLegale.Servizi.Udienza import Udienza
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
@@ -92,15 +94,28 @@ class Statistiche:
 
             self.numeroAppuntamenti = nAppuntamenti
 
-    def mostraGrafico(self):
+    def mostraGrafico(self,a='a'):
         my_dict = self.mostraStatistiche()
 
         myList = my_dict.items()
         #myList = sorted(myList)
+        x = my_dict.keys()
+        y = my_dict.values()
+        if a == 'a':
+            return x
+        else:
+            return y
+
+        '''plt.bar(x, y)
+        return plt
+        
+        canvas = FigureCanvas(Figure(figsize=(5, 3)))
+        myList = my_dict.items()
+        # myList = sorted(myList)
         x, y = zip(*myList)
 
-        plt.bar(x, y)
-        plt.show()
+        ax = canvas.figure.subplots(plt.bar(x,y))
+        return ax'''
 
     def salvaSuFile (self):
         stats = {

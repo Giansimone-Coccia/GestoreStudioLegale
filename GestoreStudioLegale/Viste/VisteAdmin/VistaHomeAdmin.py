@@ -1,9 +1,11 @@
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaPassword import VistaModificaPassword
 from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
 from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
+from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 
 
 class VistaHomeAdmin(QWidget):
@@ -12,10 +14,11 @@ class VistaHomeAdmin(QWidget):
         super(VistaHomeAdmin, self).__init__(parent)
         gLayout = QGridLayout()
         gLayout.addWidget(self.createButton("Modifica Password", self.reachModificaPassword), 0, 0)
-        gLayout.addWidget(self.createButton("Avvocati", self.reachAvvocati), 1, 0)
-        gLayout.addWidget(self.createButton("Clienti", self.reachClienti), 2, 0, 1, 2)
+        gLayout.addWidget(self.createButton("Mostra Avvocati", self.reachAvvocati), 0, 1)
+        gLayout.addWidget(self.createButton("Mostra Clienti", self.reachClienti), 1, 0)
+        gLayout.addWidget(self.createButton("Mostra Statistiche", self.reachStatistiche), 1, 1)
         self.setLayout(gLayout)
-        self.resize(500, 400)
+        self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
@@ -39,4 +42,9 @@ class VistaHomeAdmin(QWidget):
     def reachClienti(self):
         self.vistaVisualizzaC = VistaVisualizzaClienti()
         self.vistaVisualizzaC.show()
+        self.close()
+
+    def reachStatistiche(self):
+        self.vistaVisualizzaS = VistaVisualizzaStatistiche()
+        self.show()
         self.close()
