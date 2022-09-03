@@ -40,3 +40,6 @@ class Tools():
         button1.clicked.connect(rewind)
         button1.setSizePolicy(150, 50)
         return button1
+
+
+
