@@ -8,26 +8,29 @@ class VistaModificaPassword(QWidget):
 
     def __init__(self, parent=None):
         super(VistaModificaPassword, self).__init__(parent)
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
+        tool = Tools()
         self.setWindowTitle('Modifica Password')
         self.resize(500, 120)
 
         layout = QGridLayout()
 
+        layout.addWidget(tool.rewindButton(self.rewindHomeAdmin), 0, 0)
         self.labelOldPassword = QLabel('<font size="4"> Vecchia password </font>')
         self.lineEditOldPassword = QLineEdit()
         self.lineEditOldPassword.setPlaceholderText('Inserisci la vecchia password')
-        layout.addWidget(self.labelOldPassword, 0, 0)
-        layout.addWidget(self.lineEditOldPassword, 0, 1)
+        layout.addWidget(self.labelOldPassword, 1, 0)
+        layout.addWidget(self.lineEditOldPassword, 1, 1)
 
         self.labelNewPassword = QLabel('<font size="4"> Nuova Password </font>')
         self.lineEditNewPassword = QLineEdit()
         self.lineEditNewPassword.setPlaceholderText('Inserisci nuova password')
         self.lineEditNewPassword.setEchoMode(QLineEdit.Password)
-        layout.addWidget(self.labelNewPassword, 1, 0)
-        layout.addWidget(self.lineEditNewPassword, 1, 1)
+        layout.addWidget(self.labelNewPassword, 2, 0)
+        layout.addWidget(self.lineEditNewPassword, 2, 1)
 
         self.buttonLogin = QPushButton('Conferma')
-        layout.addWidget(self.buttonLogin, 2, 0, 1, 2)
+        layout.addWidget(self.buttonLogin, 3, 0, 1, 3)
         layout.setRowMinimumHeight(2, 75)
         self.buttonLogin.clicked.connect(lambda: self.modificaPassw())
 
@@ -54,3 +57,9 @@ class VistaModificaPassword(QWidget):
             msg.setText('Vecchia Password errata')
             msg.exec()
             return
+
+    def rewindHomeAdmin(self):
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
+        self.vistaHome = VistaHomeAdmin()
+        self.vistaHome.show()
+        self.close()

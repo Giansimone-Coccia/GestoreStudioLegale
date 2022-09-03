@@ -9,7 +9,6 @@ from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import V
 class VistaHomeAppuntamentiC (QWidget):
 
     def __init__(self, parent=None):
-        from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
         super(VistaHomeAppuntamentiC, self).__init__(parent)
 
         tool=Tools()
