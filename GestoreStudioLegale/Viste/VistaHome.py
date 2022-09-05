@@ -2,7 +2,7 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
-from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin
+#from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin
 from GestoreStudioLegale.Viste.VisteAvvocato.LoginAvvocato import LoginAvvocato
 from GestoreStudioLegale.Viste.VisteCliente.LoginCliente import LoginCliente
 

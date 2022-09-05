@@ -6,7 +6,7 @@ import pyqtgraph as pg'''
 #from _curses import window
 
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout)
-from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
+#from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QPainter
 from numpy.distutils.fcompiler import pg

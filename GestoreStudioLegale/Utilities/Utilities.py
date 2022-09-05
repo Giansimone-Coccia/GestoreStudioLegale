@@ -33,7 +33,6 @@ class Tools():
                 f.write(stringa)
                 f.write('\n')
 
-
     def rewindButton(self, rewind):
         button1 = QPushButton("Indietro")
         button1.setFont(QFont('Arial', 10))
