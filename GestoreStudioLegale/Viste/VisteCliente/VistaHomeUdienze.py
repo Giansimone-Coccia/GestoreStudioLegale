@@ -57,7 +57,7 @@ class VistaHomeUdienze(QWidget):
         for udienza in self.udienzeList:
            #if udienza.Cliente.getDatiCliente()['Codice fiscale'] == str(tool.leggi()).rsplit()[0]
            if udienza.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-             return udienza.getDatiUdienza()
+              return udienza.getDatiUdienza()
 
 
     def getDatiC(self):

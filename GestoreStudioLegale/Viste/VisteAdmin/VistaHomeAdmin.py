@@ -46,5 +46,5 @@ class VistaHomeAdmin(QWidget):
 
     def reachStatistiche(self):
         self.vistaVisualizzaS = VistaVisualizzaStatistiche()
-        self.show()
+        self.vistaVisualizzaS.show()
         self.close()

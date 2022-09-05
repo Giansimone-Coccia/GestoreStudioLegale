@@ -8,8 +8,8 @@ import os.path
 class Udienza:
 
     def __init__(self):
-       self.Cliente = None
-       self.Avvocato = None
+       self.Cliente = Cliente
+       self.Avvocato = Avvocato
        self.cittaTribunale = ''
        self.ID = ''
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
