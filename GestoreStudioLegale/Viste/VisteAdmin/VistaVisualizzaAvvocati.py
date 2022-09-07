@@ -66,6 +66,3 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.vistaHome = VistaHomeAdmin()
         self.vistaHome.show()
         self.close()
-
-    def temp(self):
-        pass

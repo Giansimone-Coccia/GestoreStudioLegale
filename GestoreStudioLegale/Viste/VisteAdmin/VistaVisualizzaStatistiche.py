@@ -4,11 +4,11 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QMainWindow, QWidget, QGridLayout
 import pyqtgraph as pg'''
 #from _curses import window
-from _curses import window
+#from _curses import window
 
 #from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries
 #from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout)
-from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
+#from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout

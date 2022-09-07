@@ -36,6 +36,13 @@ class VistaModificaPassword(QWidget):
         passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
         print(passEuser)
 
+        if self.lineEditNewPassword.text() == self.lineEditOldPassword.text():
+            msg = QMessageBox()
+            msg.setWindowTitle('ERRORE')
+            msg.setText('La nuova password coincide con la vecchia password')
+            msg.exec()
+            return
+
         if passEuser[0] == self.lineEditOldPassword.text():
             tool.salva(f'{self.lineEditNewPassword.text()}\n{passEuser[1]}','CredenzialiAdmin')
             msg = QMessageBox()
