@@ -23,7 +23,6 @@ class VistaVisualizzaAppuntamento(QWidget):
         textLabel1.setText("Di seguito la lista degli appuntamenti con le informazioni relative al cliente")
         textLabel1.setGeometry(QRect(0, 0, 200, 150))
         textLabel1.setFont(QFont('Arial', 10))
-<<<<<<< HEAD
         textLabel2.setText(
             'Cliente: ' + '\n' + 'NOME: ' + f"{self.getDatiC()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.getDatiC()['Cognome']}" + '\n' + 'ID: ' + f"{self.getDatiC()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.getDatiC()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.getDatiC()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.getDatiC()['Numero telefono']}")
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
@@ -36,7 +35,6 @@ class VistaVisualizzaAppuntamento(QWidget):
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
         print("ciao90")
-=======
         textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Times', 10))
@@ -45,7 +43,6 @@ class VistaVisualizzaAppuntamento(QWidget):
         textLabel3.setText('Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
->>>>>>> 674fd9e49d1caafa9056736a7f96b19fe382bb0b
         textLabel3.setStyleSheet("border: 1px solid black;")
         grifLayout.addWidget(textLabel2, 1, 1)
         grifLayout.addWidget(textLabel1, 2, 1)
@@ -69,21 +66,18 @@ class VistaVisualizzaAppuntamento(QWidget):
         self.loadDateA()
         tool = Tools()
         for appuntamento in self.appuntamentiList:
-<<<<<<< HEAD
             if appuntamento.ID == str(tool.leggi):
                 return appuntamento.getDatiAppuntamento()
-=======
             #print(appuntamento.Cliente.Id)
             for appuntamento1 in self.getDatiC()['appuntamentoCliente']:
                if appuntamento1 == appuntamento:
                   return appuntamento.getDatiAppuntamento()
->>>>>>> 674fd9e49d1caafa9056736a7f96b19fe382bb0b
+
 
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
         for cliente in self.clientiList:
-<<<<<<< HEAD
             print("ciao1")
             #print(self.clientiList)
             #print(cliente.codiceFiscale)
@@ -92,11 +86,9 @@ class VistaVisualizzaAppuntamento(QWidget):
             #if 'cc' == str(tool.leggi()):
                 print('fatto')
                 #print(cliente.codiceFiscale)
-=======
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                 #if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
                 print('fuck')
->>>>>>> 674fd9e49d1caafa9056736a7f96b19fe382bb0b
                 return cliente.getDatiCliente()
 
     def rewindHomeCliente(self):

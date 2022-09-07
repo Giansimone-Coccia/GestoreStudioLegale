@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton
 
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
+from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
 
 
 class LoginAdmin(QWidget):

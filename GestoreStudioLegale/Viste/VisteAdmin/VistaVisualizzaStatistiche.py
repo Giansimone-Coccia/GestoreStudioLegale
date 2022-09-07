@@ -4,11 +4,14 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QMainWindow, QWidget, QGridLayout
 import pyqtgraph as pg'''
 #from _curses import window
+from _curses import window
 
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout)
-#from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
+#from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries
+#from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout)
+from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QPainter
+from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout
 from numpy.distutils.fcompiler import pg
 
 from GestoreStudioLegale.Gestione.Statistiche import Statistiche
@@ -17,6 +20,7 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaVisualizzaStatistiche, self).__init__(parent)
+
 
         self.setWindowTitle("Statistiche")
         stats =Statistiche()
@@ -67,45 +71,3 @@ class VistaVisualizzaStatistiche(QMainWindow):
         chartView = QChartView(chart)
         chartView.setRenderHint(QPainter.Antialiasing)
         self.setCentralWidget(chartView)
-
-        self.setGeometry(100, 100, 600, 500)
-
-        widget = QWidget()
-
-        stats=Statistiche()
-
-        plot = pg.plot()
-
-        bargraph = pg.BarGraphItem(height=stats.mostraGrafico(''), width=0.6, brush='g')
-
-        self.set = QBarSet()
-        self.set.append(stats.mostraStatistiche().values())
-        self._bar_series = QBarSeries()
-        self._bar_series.append(self.set)
-
-        self.chart = QChart()
-
-        self._axis_x = QBarCategoryAxis()
-        self._axis_x.append(stats.mostraStatistiche().keys())
-        self.chart.setAxisX(self._axis_x, self._bar_series)
-
-        self._axis_y = QValueAxis()
-        self.chart.setAxisY(self._axis_y, self._bar_series)
-        self._axis_y.setRange(0, 20)
-
-        self._chart_view = QChartView(self.chart)
-        self._chart_view.setRenderHint(QPainter.Antialiasing)
-
-        self.setCentralWidget(self._chart_view)
-
-        window.resize(440, 300)
-
-        plot.addItem(bargraph)
-
-        layout = QGridLayout()
-
-        widget.setLayout(layout)
-
-        layout.addWidget(plot, 0, 1, 3, 1)
-
-        self.setCentralWidget(widget)
