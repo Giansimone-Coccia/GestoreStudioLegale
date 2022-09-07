@@ -4,6 +4,7 @@ from abc import abstractmethod
 class Utilizzatore:
 
     def __init__(self):
+        from GestoreStudioLegale.Servizi.Udienza import Udienza
         self.codiceFiscale = ''
         self.cognome = ''
         self.corsoAggiornamento = None
@@ -13,7 +14,11 @@ class Utilizzatore:
         self.nome = ''
         self.numeroTelefono = 0
         self.password = ''
+<<<<<<< HEAD
         self.udienza = None
+=======
+        self.udienza = Udienza #non dovrebbe essere lista?
+>>>>>>> 674fd9e49d1caafa9056736a7f96b19fe382bb0b
 
     def creaUtilizzatore(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                          udienza, nome):
@@ -27,6 +32,8 @@ class Utilizzatore:
         self.numeroTelefono = numeroTelefono
         self.password = password
         self.udienza = udienza
+
+
 
     def getInfoUtilizzatore(self):
         return {

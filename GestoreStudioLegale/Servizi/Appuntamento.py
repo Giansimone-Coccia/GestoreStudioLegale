@@ -1,6 +1,5 @@
 import datetime
 
-from GestoreStudioLegale.Servizi import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 import pickle
 import os.path
@@ -9,20 +8,17 @@ class Appuntamento():
 
     def __init__(self):
        self.Cliente = Cliente
-       self.Avvocato = Avvocato
-       self.ID = ''
+       self.ID = []
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoProcedimento = ''
 
-    def aggiornaAppuntamento(self, Cliente = None, Avvocato = None,
+    def aggiornaAppuntamento(self, Cliente = None,
                             dataOraInizio=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
                             dataOraFine=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
                             tipoProcedimento = ''):
             if Cliente != None:
                 self.Cliente = Cliente
-            elif Avvocato != None:
-                self.Avvocato = Avvocato
             elif dataOraInizio != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
                 self.dataOraInizio = dataOraInizio
             elif dataOraFine != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
@@ -35,9 +31,8 @@ class Appuntamento():
                              self.ID, self.tipoProcedimento)
             print("Aggiornato")
 
-    def creaAppuntamento(self, Cliente, Avvocato, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
+    def creaAppuntamento(self, Cliente, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
         self.Cliente = Cliente
-        self.Avvocato = Avvocato
         self.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
         self.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
         self.ID = ID
@@ -61,7 +56,6 @@ class Appuntamento():
 
     def getDatiAppuntamento(self):
         d = {}
-        d['Avvocato'] = self.Avvocato
         d['Cliente'] = self.Cliente
         d['Data e Ora Inizio'] = self.dataOraInizio
         d['Data e Ora Fine'] = self.dataOraFine
