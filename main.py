@@ -29,6 +29,7 @@ cliente5 = Cliente()
 cliente6 = Cliente()
 cliente7 = Cliente()
 avvocato1 = Avvocato()
+avvocato2 = Avvocato()
 udienza1 = Udienza()
 udienza2 = Udienza()
 udienza3 = Udienza()
@@ -37,6 +38,7 @@ udienza5 = Udienza()
 udienza6 = Udienza()
 udienza7 = Udienza()
 appuntamento1 = Appuntamento()
+appuntamento2 = Appuntamento()
 parcella1 = Parcella()
 parcella2 = Parcella()
 corso1 = CorsoAggiornamento()
@@ -68,7 +70,8 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
 #cliente1.aggiornaCliente('almail@gmil.com')
 
-#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'B4783', 1233754, 'passAvv2', udienza2, listaClienti, licenze, appuntamentiAvvocato)
 #avvocato1.getDatiAvvocato() #FUNZIONA INISIME A CREAAVVOCATO
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('id non valido') #FUNZIONA
@@ -93,11 +96,10 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #parcella1.rimuoviParcella('PP0000') #FUNZIONA
 #parcella1.visualizzaParcella('PP456') #FUNZIONA
 
-<<<<<<< HEAD
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-=======
-udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
->>>>>>> 7065a45b044da9633eac0bc24b2ea46a1d57f40a
+
+#udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
+
 #udienza2.creaUdienza(avvocato1, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U2765','penale') #FUNZIONA
 #udienza1.getDatiUdienza() #FUNZIONA
 #udienza2.getDatiUdienza() #FUNZIONA
@@ -115,16 +117,16 @@ udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','1
 #udienza1.rimuoviUdienza('U2345') #FUNZIONA
 #udienza1.rimuoviUdienza('U2765') #FUNZIONA
 
-<<<<<<< HEAD
-udienza3.creaUdienza(avvocato1, 'Ascoli Piceno', cliente3, '9/08/2022,12:00','10/08/2022,13:00','U299345','civile')
-udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
+
+#udienza3.creaUdienza(avvocato1, 'Ascoli Piceno', cliente3, '9/08/2022,12:00','10/08/2022,13:00','U299345','civile')
+#udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
 #udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
 #udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
 #udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
-udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
-udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
-udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
-=======
+#udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
+#udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
+#udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
+
 #udienza3.creaUdienza(avvocato1, 'Ascoli Piceno', cliente3, '9/08/2022,12:00','10/08/2022,13:00','U299345','civile')
 #udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
 
@@ -136,7 +138,7 @@ udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,
 #udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
 #udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
 
->>>>>>> 7065a45b044da9633eac0bc24b2ea46a1d57f40a
+
 #stats = Statistiche()
 #stats.mostraGrafico() #FUNZIONA
 #print(stats.mostraStatistiche("udienze penali"))
@@ -166,7 +168,8 @@ udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
-#appuntamento1.creaAppuntamento(cliente1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
+appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
+appuntamento2.creaAppuntamento(cliente2, avvocato2,  '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile')
 
 if __name__ == '__main__':
     app = QApplication (sys.argv)
