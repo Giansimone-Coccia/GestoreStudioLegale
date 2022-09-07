@@ -8,8 +8,8 @@ import os.path
 class Udienza:
 
     def __init__(self):
-       self.Cliente = None
-       self.Avvocato = None
+       self.Cliente = Cliente
+       self.Avvocato = Avvocato
        self.cittaTribunale = ''
        self.ID = ''
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
@@ -48,20 +48,16 @@ class Udienza:
         udienze = []
 
         if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
-            #if os.stat('GestoreStudioLegale/Dati/Udienze.pickle').st_size != 0:
+
             if os.path.getsize('GestoreStudioLegale/Dati/Udienze.pickle') == 0:
                 udienze.append(self)
                 with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:
                     pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
-                #raise EOFError
             else:
                 if self.ricercaUdienzaID(self.ID) is None:
                     with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
-                    #try:
                         udienze = pickle.load(f)
                         udienze.append(self)
-                    #except EOFError as er:
-                    #   print("Errore")
                     with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:
                         pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
 

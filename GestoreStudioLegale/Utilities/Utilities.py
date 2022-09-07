@@ -10,7 +10,7 @@ class Tools():
     def __init__(self):
         pass
 
-    def leggi(self,file = 'Credenziali',n = 5):
+    def leggi(self,file = 'Credenziali',n = 20):
         if os.path.isfile(f'GestoreStudioLegale/Dati/{file}.pickle'):
             with open(f'GestoreStudioLegale/Dati/{file}.pickle', 'r') as f:
                 if n == 0 :

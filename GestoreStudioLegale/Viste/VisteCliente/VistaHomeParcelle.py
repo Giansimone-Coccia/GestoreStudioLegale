@@ -63,7 +63,6 @@ class VistaHomeParcelle(QWidget):
         print(tool.leggi())
         for cliente in self.clientiList:
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
                     return cliente.getDatiCliente()
 
     def rewind1(self):
