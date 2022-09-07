@@ -8,12 +8,12 @@ class Appuntamento():
 
     def __init__(self):
        self.Cliente = Cliente
-       self.ID = ''
-       #self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       #self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
+       self.ID = []
+       self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
+       self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.tipoProcedimento = ''
 
-    '''def aggiornaAppuntamento(self, Cliente = None,
+    def aggiornaAppuntamento(self, Cliente = None,
                             dataOraInizio=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
                             dataOraFine=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
                             tipoProcedimento = ''):
@@ -29,12 +29,12 @@ class Appuntamento():
             self.rimuoviAppuntamento(self.ID)
             self.creaAppuntamento( self.Cliente, self.dataOraInizio, self.dataOraFine,
                              self.ID, self.tipoProcedimento)
-            print("Aggiornato")'''
+            print("Aggiornato")
 
-    def creaAppuntamento(self, Cliente, ID, tipoProcedimento ):
+    def creaAppuntamento(self, Cliente, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
         self.Cliente = Cliente
-        #self.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
-        #self.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
+        self.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
+        self.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
         self.ID = ID
         self.tipoProcedimento = tipoProcedimento
 
@@ -57,8 +57,8 @@ class Appuntamento():
     def getDatiAppuntamento(self):
         d = {}
         d['Cliente'] = self.Cliente
-        #d['Data e Ora Inizio'] = self.dataOraInizio
-        #d['Data e Ora Fine'] = self.dataOraFine
+        d['Data e Ora Inizio'] = self.dataOraInizio
+        d['Data e Ora Fine'] = self.dataOraFine
         d['ID'] = self.ID
         d['Tipo Procedimento'] = self.tipoProcedimento
         print(d)

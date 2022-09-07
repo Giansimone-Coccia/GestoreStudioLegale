@@ -61,7 +61,7 @@ class GestoreSistema:
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
                 try:
-                    avvocatiList = pickle.load(f)
+                    avvocatiList = list(pickle.load(f))
                     #self.listaAvvocati.append(avvocatiList)
                     #print(self.listaAvvocati)
                 except EOFError as er:
@@ -69,9 +69,10 @@ class GestoreSistema:
         for avvocato in avvocatiList:
             if pssw == avvocato.getDatiAvvocato()['Password'] and codiceFiscale == avvocato.getDatiAvvocato()['Codice fiscale']:
                 print("Accesso effetuato")
-                print(avvocato)
+                #print(avvocato)
                 return True
         print("Accesso fallito")
+        return False
 
 
     def loginAdmin(self, pssw, user):#modifica in ea

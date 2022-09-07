@@ -3,13 +3,13 @@
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QMainWindow, QWidget, QGridLayout
 import pyqtgraph as pg'''
+#from _curses import window
 
-from PyQt5.QtWidgets import (QApplication, QMainWindow)
-from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QGridLayout)
+#from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis, QBarSeries
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QPainter
-
-
+from numpy.distutils.fcompiler import pg
 
 from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 
@@ -68,7 +68,7 @@ class VistaVisualizzaStatistiche(QMainWindow):
         chartView.setRenderHint(QPainter.Antialiasing)
         self.setCentralWidget(chartView)
 
-        '''self.setGeometry(100, 100, 600, 500)
+        self.setGeometry(100, 100, 600, 500)
 
         widget = QWidget()
 
@@ -76,9 +76,9 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
         plot = pg.plot()
 
-        bargraph = pg.BarGraphItem(height=stats.mostraGrafico(''), width=0.6, brush='g')'''
+        bargraph = pg.BarGraphItem(height=stats.mostraGrafico(''), width=0.6, brush='g')
 
-        '''self.set = QBarSet()
+        self.set = QBarSet()
         self.set.append(stats.mostraStatistiche().values())
         self._bar_series = QBarSeries()
         self._bar_series.append(self.set)
@@ -98,9 +98,9 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
         self.setCentralWidget(self._chart_view)
 
-        window.resize(440, 300)'''
+        window.resize(440, 300)
 
-        '''plot.addItem(bargraph)
+        plot.addItem(bargraph)
 
         layout = QGridLayout()
 
@@ -108,4 +108,4 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
         layout.addWidget(plot, 0, 1, 3, 1)
 
-        self.setCentralWidget(widget)'''
+        self.setCentralWidget(widget)
