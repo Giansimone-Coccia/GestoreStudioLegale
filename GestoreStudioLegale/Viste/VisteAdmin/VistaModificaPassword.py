@@ -15,7 +15,7 @@ class VistaModificaPassword(QWidget):
 
         layout = QGridLayout()
 
-        layout.addWidget(tool.rewindButton(self.rewindHomeAdmin), 0, 0)
+        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         self.labelOldPassword = QLabel('<font size="4"> Vecchia password </font>')
         self.lineEditOldPassword = QLineEdit()
         self.lineEditOldPassword.setPlaceholderText('Inserisci la vecchia password')
@@ -58,7 +58,7 @@ class VistaModificaPassword(QWidget):
             msg.exec()
             return
 
-    def rewindHomeAdmin(self):
+    def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
         self.vistaHome = VistaHomeAdmin()
         self.vistaHome.show()

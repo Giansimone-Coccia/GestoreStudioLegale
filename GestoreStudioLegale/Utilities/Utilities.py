@@ -1,7 +1,7 @@
 import os
 
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QSizePolicy
 
 from GestoreStudioLegale.Servizi import Cliente
 
@@ -40,5 +40,9 @@ class Tools():
         button1.setSizePolicy(150, 50)
         return button1
 
-
-
+    def createButton(self, nome, on_click):
+        button = QPushButton(nome)
+        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        button.setFont(QFont('Arial', 10))
+        button.clicked.connect(on_click)
+        return button

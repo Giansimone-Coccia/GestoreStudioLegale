@@ -73,6 +73,7 @@ class VistaVisualizzaAppuntamento(QWidget):
                if appuntamento1 == appuntamento:
                   return appuntamento.getDatiAppuntamento()
 
+
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
@@ -88,6 +89,7 @@ class VistaVisualizzaAppuntamento(QWidget):
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                 #if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
                 print('fuck')
+                return cliente.getDatiCliente()
 
     def rewindHomeCliente(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamentiC
