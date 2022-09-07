@@ -29,6 +29,7 @@ cliente5 = Cliente()
 cliente6 = Cliente()
 cliente7 = Cliente()
 avvocato1 = Avvocato()
+avvocato2 = Avvocato()
 udienza1 = Udienza()
 udienza2 = Udienza()
 udienza3 = Udienza()
@@ -70,6 +71,7 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #cliente1.aggiornaCliente('almail@gmil.com')
 
 #avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+#avvocato2.creaAvvocato('djskorfl', 'fgsgsd', 'angelo', corsoAggiornamentiLista, '2/4/1998', 'albe38273@outlook.com', 'A5683', 60482633, 'passAvv2', udienza1, listaClienti, licenze, appuntamentiAvvocato)
 #avvocato1.getDatiAvvocato() #FUNZIONA INISIME A CREAAVVOCATO
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('id non valido') #FUNZIONA
@@ -161,9 +163,9 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
-#appuntamento1.creaAppuntamento(cliente1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
+#appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
 #appuntamento1.creaAppuntamento(cliente2, '9/08/2022,12:00','10/08/2022,13:00', 'A3494', 'civile')
-#appuntamento2.creaAppuntamento(cliente2, '13/09/2021,12:00','10/08/2022,15:00', 'A6574', 'penale')
+#appuntamento2.creaAppuntamento(cliente2, avvocato2, '13/09/2021,12:00','10/08/2022,15:00', 'A6574', 'penale')
 
 if __name__ == '__main__':
     app = QApplication (sys.argv)

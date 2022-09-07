@@ -48,7 +48,7 @@ class LoginAvvocato(QWidget):
         pswrd = self.lineEditPassword.text()
         print("22222")
         gestore = GestoreSistema()
-        #tool.salva(str(self.lineEditUsername.text()))
+        tool.salva(str(self.lineEditUsername.text()))
 
         if gestore.loginAvvocato(pswrd, cc):
             print("Accesso eseguito")

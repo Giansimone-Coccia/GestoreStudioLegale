@@ -11,8 +11,8 @@ class VistaHomeAvvocato(QWidget):
         super(VistaHomeAvvocato, self).__init__(parent)
         gLayout = QGridLayout()
         gLayout.addWidget(self.createButton("Gestisci Appuntamenti", self.reachAppuntamenti), 0, 0)
-        # gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 1, 0)
-        # gLayout.addWidget(self.createButton("Udienze", self.reachUdienze), 2, 0, 1, 2)
+        gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 1, 0)
+        gLayout.addWidget(self.createButton("Udienze", self.reachUdienze), 2, 0, 1, 2)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
@@ -29,3 +29,15 @@ class VistaHomeAvvocato(QWidget):
         self.vistaAppuntamenti = VistaHomeAppuntamentiA()
         self.vistaAppuntamenti.show()
         self.close()
+
+    def reachParcelle(self):
+        pass
+        #self.vistaAppuntamenti = VistaHomeAppuntamentiA()
+        #self.vistaAppuntamenti.show()
+        #self.close()
+
+    def reachUdienze(self):
+        pass
+        #self.vistaAppuntamenti = VistaHomeAppuntamentiA()
+        #self.vistaAppuntamenti.show()
+        #self.close()
