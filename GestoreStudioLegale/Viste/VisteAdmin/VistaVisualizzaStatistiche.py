@@ -20,25 +20,19 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaVisualizzaStatistiche, self).__init__(parent)
-
-
         self.setWindowTitle("Statistiche")
         stats =Statistiche()
-
         self.resize(800, 600)
-
         set0 = QBarSet('X0')
         set1 = QBarSet('X1')
         set2 = QBarSet('X2')
         set3 = QBarSet('X3')
         set4 = QBarSet('X4')
-
         set0.append([1, 2, 3, 4, 5, 6])
         set1.append([5, 0, 0, 4, 0, 7])
         set2.append([3, 5, 8, 13, 8, 5])
         set3.append([5, 6, 7, 3, 4, 5])
         set4.append([9, 7, 5, 3, 1, 2])
-
         series = QHorizontalBarSeries()
         series.append(set0)
         series.append(set1)

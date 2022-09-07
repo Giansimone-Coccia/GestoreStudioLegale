@@ -16,7 +16,6 @@ class VistaHomeParcelle(QWidget):
         super(VistaHomeParcelle, self).__init__(parent)
         tool = Tools()
         grifLayout = QGridLayout()
-
         grifLayout.addWidget(tool.rewindButton(self.rewind1), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()

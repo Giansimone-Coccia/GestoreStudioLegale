@@ -13,7 +13,6 @@ class VistaHomeAdmin(QWidget):
     def __init__(self, parent=None):
         super(VistaHomeAdmin, self).__init__(parent)
         gLayout = QGridLayout()
-
         gLayout.addWidget(self.createButton("Modifica Password", self.reachModificaPassword), 0, 0)
         gLayout.addWidget(self.createButton("Mostra Avvocati", self.reachAvvocati), 0, 1)
         gLayout.addWidget(self.createButton("Mostra Clienti", self.reachClienti), 1, 0)

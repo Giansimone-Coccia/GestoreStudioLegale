@@ -30,9 +30,7 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.scroll.setWidget(self.widget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(700, 600)
-
         self.setCentralWidget(self.scroll)
-
         self.setWindowTitle("Avvocati")
 
     def loadDateA(self):
@@ -62,7 +60,6 @@ class VistaVisualizzaAvvocati(QMainWindow):
             self.grifLayout.addWidget(tool.createButton("Aggiorna",self.rewind),i,1)
             self.grifLayout.addWidget(tool.createButton("Elimina", self.rewind),i, 2)
             i+=1
-
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin

@@ -24,16 +24,12 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()  # Widget that contains the collection of Vertical Box
         self.vbox = QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of  labels and buttons
-
         self.outerLayout.addWidget(tool.rewindButton(self.rewind),1)
         self.outerLayout.addLayout(self.button_layout,2)
         self.outerLayout.addWidget(self.scroll,7)
-
         self.button_layout.addWidget(self.createButton("Inserisci", self.aggiungiAppuntamento))
         self.button_layout.addWidget(self.createButton("Cerca", self.cercaAppuntamento))
-
         self.cWidget.setLayout(self.outerLayout)
-
         supWidget = QWidget()
         button_layout2 = QHBoxLayout()
         button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento))

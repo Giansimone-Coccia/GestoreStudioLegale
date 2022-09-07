@@ -12,7 +12,6 @@ class VistaVisualizzaClienti(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaVisualizzaClienti, self).__init__(parent)
-
         tool = Tools()
         self.grifLayout = QGridLayout()
         self.scroll = QScrollArea()
@@ -28,15 +27,10 @@ class VistaVisualizzaClienti(QMainWindow):
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
-
         self.setCentralWidget(self.scroll)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(700, 600)
-
-
         self.setWindowTitle("Clienti")
-
-
 
     def loadDateC(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):

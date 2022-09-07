@@ -18,28 +18,23 @@ class LoginAvvocato(QWidget):
         self.setWindowTitle('Accesso Avvocato')
         self.resize(500, 120)
         tool = Tools()
-
         layout = QGridLayout()
-
         self.labelName = QLabel('<font size="4"> Username </font>')
         self.lineEditUsername = QLineEdit()
         self.lineEditUsername.setPlaceholderText('Inserisci codice fiscale')
         layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         layout.addWidget(self.labelName, 1, 0)
         layout.addWidget(self.lineEditUsername, 1, 1)
-
         self.labelPassword = QLabel('<font size="4"> Password </font>')
         self.lineEditPassword = QLineEdit()
         self.lineEditPassword.setPlaceholderText('Inserisci password')
         self.lineEditPassword.setEchoMode(QLineEdit.Password)
         layout.addWidget(self.labelPassword, 2, 0)
         layout.addWidget(self.lineEditPassword, 2, 1)
-
         self.buttonLogin = QPushButton('Accedi')
         layout.addWidget(self.buttonLogin, 3, 0, 1, 3)
         layout.setRowMinimumHeight(2, 75)
         self.buttonLogin.clicked.connect(lambda: self.convalidaPassw())
-
         self.setLayout(layout)
 
     def convalidaPassw(self):

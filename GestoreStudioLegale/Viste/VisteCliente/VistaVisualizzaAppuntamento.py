@@ -16,7 +16,6 @@ class VistaVisualizzaAppuntamento(QWidget):
         super(VistaVisualizzaAppuntamento, self).__init__(parent)
         tool = Tools()
         grifLayout = QGridLayout()
-
         grifLayout.addWidget(tool.rewindButton(self.rewindHomeCliente), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()

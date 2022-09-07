@@ -10,7 +10,6 @@ class VistaHomeAppuntamentiC (QWidget):
 
     def __init__(self, parent=None):
         super(VistaHomeAppuntamentiC, self).__init__(parent)
-
         tool=Tools()
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
