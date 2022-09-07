@@ -13,7 +13,7 @@ class Utilizzatore:
         self.nome = ''
         self.numeroTelefono = 0
         self.password = ''
-        self.udienza = None #non dovrebbe essere lista?
+        self.udienza = None
 
     def creaUtilizzatore(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                          udienza, nome):

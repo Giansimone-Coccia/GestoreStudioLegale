@@ -18,17 +18,27 @@ class VistaVisualizzaAppuntamento(QWidget):
         tool = Tools()
         textLabel1 = QLabel()
         textLabel2 = QLabel()
-        textLabel1.setText("Di seguito la lista delle parcelle con le relative informazioni")
-        textLabel1.setGeometry(QRect(100, 120, 350, 40))
-        textLabel1.setFont(QFont('Arial', 12))
-        textLabel2.setText(f"{self.getDatiC()}")
-        textLabel2.setGeometry(QRect(100, 120, 350, 40))
+        textLabel1.setText("Di seguito la lista degli appuntamenti con le informazioni relative al cliente")
+        textLabel1.setGeometry(QRect(0, 0, 200, 150))
+        textLabel1.setFont(QFont('Arial', 10))
+        textLabel2.setText(
+            'Cliente: ' + '\n' + 'NOME: ' + f"{self.getDatiC()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.getDatiC()['Cognome']}" + '\n' + 'ID: ' + f"{self.getDatiC()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.getDatiC()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.getDatiC()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.getDatiC()['Numero telefono']}")
+        textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Arial', 10))
-        grifLayout.addWidget(tool.rewindButton(self.rewindHomeCliente), 0, 1)
-        grifLayout.addWidget(textLabel1, 1, 1)
-        grifLayout.addWidget(textLabel2, 2, 2)
+        textLabel2.setStyleSheet("border: 1px solid black;")
+        textLabel3 = QLabel()
+        print("ciao3")
+        textLabel3.setText(
+            'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiA()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE'+f"{self.getDatiA()['Data e Ora Fine']}")
+        textLabel3.setGeometry(QRect(0, 0, 350, 20))
+        textLabel3.setFont(QFont('Arial', 10))
+        print("ciao90")
+        textLabel3.setStyleSheet("border: 1px solid black;")
+        grifLayout.addWidget(textLabel2, 1, 1)
+        grifLayout.addWidget(textLabel1, 2, 1)
+        grifLayout.addWidget(textLabel3, 3, 1)
         self.setLayout(grifLayout)
-        self.resize(600, 500)
+        self.resize(500, 400)
         self.setWindowTitle("Appuntamenti")
         self.show()
 
@@ -38,27 +48,40 @@ class VistaVisualizzaAppuntamento(QWidget):
                 self.appuntamentiList = list(pickle.load(f))
 
     def loadDateC(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
-            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
-                self.appuntamentiList = list(pickle.load(f))
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                self.clientiList = list(pickle.load(f))
 
     def getDatiA(self):
         self.loadDateA()
         tool = Tools()
         for appuntamento in self.appuntamentiList:
             if appuntamento.ID == str(tool.leggi):
-                return appuntamento
+                return appuntamento.getDatiAppuntamento()
 
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
         for cliente in self.clientiList:
-            #if cliente.codiceFiscale == str(tool.leggi()): #Non legge, ricontrollare il metodo
-            if cliente.codiceFiscale == 'cc':
-                return cliente
+            print("ciao1")
+            #print(self.clientiList)
+            #print(cliente.codiceFiscale)
+            if str(cliente.codiceFiscale) == str(tool.leggi()):
+            #print(tool.leggi())
+            #if 'cc' == str(tool.leggi()):
+                print('fatto')
+                #print(cliente.codiceFiscale)
+                return cliente.getDatiCliente()
 
     def rewindHomeCliente(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamentiC
         self.vistaHome = VistaHomeAppuntamentiC()
         self.vistaHome.show()
         self.close()
+
+    def getNum(self):
+        n = 0
+        self.loadDateA()
+        for appuntamento in self.appuntamentiList:
+            n+=1
+        return n
