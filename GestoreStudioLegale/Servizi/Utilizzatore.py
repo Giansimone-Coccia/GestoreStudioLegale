@@ -14,10 +14,8 @@ class Utilizzatore:
         self.nome = ''
         self.numeroTelefono = 0
         self.password = ''
-
         self.udienza = None
-
-        self.udienza = Udienza #non dovrebbe essere lista?
+        #self.udienza = Udienza #non dovrebbe essere lista?
 
 
     def creaUtilizzatore(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
@@ -32,8 +30,6 @@ class Utilizzatore:
         self.numeroTelefono = numeroTelefono
         self.password = password
         self.udienza = udienza
-
-
 
     def getInfoUtilizzatore(self):
         return {

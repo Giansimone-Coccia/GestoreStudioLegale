@@ -22,7 +22,7 @@ class Cliente(Utilizzatore):
         elif appuntamentoCliente is not None:
             self.appuntamentoCliente = appuntamentoCliente
         self.rimuoviCliente(self.Id)
-        self.aggiungiCliente(self.codiceFiscale, self.cognome, self.corsoAggiornamento, self.dataNascita, self.email,
+        self.creaCliente(self.codiceFiscale, self.cognome, self.corsoAggiornamento, self.dataNascita, self.email,
                              self.Id, self.numeroTelefono, self.password, self.appuntamentoCliente, self.parcelle,
                              self.nome, self.udienza)
         print("Aggiornato")
@@ -30,6 +30,7 @@ class Cliente(Utilizzatore):
 
     def creaCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                         appuntamentoCliente, parcelle, nome, udienza):
+
         self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
                                   password, udienza, nome) #Messi in ordine, così non utilizzo l'='
         self.appuntamentoCliente = appuntamentoCliente

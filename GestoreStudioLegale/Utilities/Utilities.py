@@ -19,7 +19,7 @@ class Tools():
                 #stringa1 = f.readline()
                 #stringa2 = f.readline()
                 #self.salvaAppend(stringa2)
-                return stringa1
+                return str(stringa1)
 
     def salva(self, stringa,file='Credenziali'):
         if os.path.isfile(f'GestoreStudioLegale/Dati/{file}.pickle'):

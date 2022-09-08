@@ -37,7 +37,6 @@ class LoginCliente(QWidget):
         tool = Tools()
         cc = self.lineEditUsername.text()
         pswrd = self.lineEditPassword.text()
-        print("22222")
         gestore = GestoreSistema()
         tool.salva(str(self.lineEditUsername.text()))
         #tool.salvaAppend(str(self.lineEditPassword.text()))
