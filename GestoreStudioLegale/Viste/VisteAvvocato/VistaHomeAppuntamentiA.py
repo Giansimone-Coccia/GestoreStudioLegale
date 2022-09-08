@@ -98,9 +98,9 @@ class VistaHomeAppuntamentiA(QMainWindow):
         tool = Tools()
         for appuntamento in self.appuntamentiList:
             print("ciao56")
-            # if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+            if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
             # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
+            #if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
                 print(appuntamento)
                 print("fatto")
                 return appuntamento.getDatiAppuntamento()

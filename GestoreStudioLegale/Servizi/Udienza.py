@@ -8,8 +8,8 @@ import os.path
 class Udienza:
 
     def __init__(self):
-       self.Cliente = Cliente
-       self.Avvocato = Avvocato
+       self.Cliente = None
+       self.Avvocato = None
        self.cittaTribunale = ''
        self.ID = ''
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
@@ -48,7 +48,6 @@ class Udienza:
         udienze = []
 
         if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
-
             if os.path.getsize('GestoreStudioLegale/Dati/Udienze.pickle') == 0:
                 udienze.append(self)
                 with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:

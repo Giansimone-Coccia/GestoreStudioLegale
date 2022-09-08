@@ -1,14 +1,15 @@
+from __future__ import print_function
+
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout
 import pickle
 import os
 
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
-
 class VistaVisualizzaAppuntamento(QWidget):
-
     appuntamentiList = []
     clientiList = []
 
@@ -28,12 +29,10 @@ class VistaVisualizzaAppuntamento(QWidget):
         textLabel2.setFont(QFont('Arial', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
         textLabel3 = QLabel()
-        print("ciao3")
         textLabel3.setText(
             'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiA()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE'+f"{self.getDatiA()['Data e Ora Fine']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
-        print("ciao90")
         textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Times', 10))
@@ -65,29 +64,15 @@ class VistaVisualizzaAppuntamento(QWidget):
         self.loadDateA()
         tool = Tools()
         for appuntamento in self.appuntamentiList:
-            if appuntamento.ID == str(tool.leggi):
+            if appuntamento.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                 return appuntamento.getDatiAppuntamento()
-            #print(appuntamento.Cliente.Id)
-            for appuntamento1 in self.getDatiC()['appuntamentoCliente']:
-               if appuntamento1 == appuntamento:
-                  return appuntamento.getDatiAppuntamento()
 
 
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
         for cliente in self.clientiList:
-            print("ciao1")
-            #print(self.clientiList)
-            #print(cliente.codiceFiscale)
-            if str(cliente.codiceFiscale) == str(tool.leggi()):
-            #print(tool.leggi())
-            #if 'cc' == str(tool.leggi()):
-                print('fatto')
-                #print(cliente.codiceFiscale)
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                #if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
-                print('fuck')
+            if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
                 return cliente.getDatiCliente()
 
     def rewindHomeCliente(self):
