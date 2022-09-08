@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBo
     QListWidget, QScrollBar, QListWidgetItem, QLabel, QMainWindow, QLineEdit
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
+from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
 import pickle
 import os
 
@@ -18,15 +19,15 @@ class VistaHomeAppuntamentiA(QMainWindow):
 
     def initUI(self):
         tool = Tools()
-        self.cWidget = QWidget() #contiene tutto
+        self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()  # Widget that contains the collection of Vertical Box
         self.vbox = QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of  labels and buttons
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind),1)
-        self.outerLayout.addLayout(self.button_layout,2)
-        self.outerLayout.addWidget(self.scroll,7)
+        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addLayout(self.button_layout, 2)
+        self.outerLayout.addWidget(self.scroll, 7)
         self.button_layout.addWidget(self.createButton("Inserisci", self.aggiungiAppuntamento))
         self.button_layout.addWidget(self.createButton("Cerca", self.cercaAppuntamento))
         self.cWidget.setLayout(self.outerLayout)
@@ -43,9 +44,8 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.getDatiAp()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.getDatiAp()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.getDatiAp()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.getDatiAp()['Data e Ora Fine']}")
             label.setFont(QFont('Arial', 10))
             print("ciao2")
-            self.vbox.addWidget(label,9)
-            self.vbox.addWidget(supWidget,1)
-
+            self.vbox.addWidget(label, 9)
+            self.vbox.addWidget(supWidget, 1)
 
         # self.vbox.addWidget(tool.rewindButton(self.rewind))
         self.widget.setLayout(self.vbox)
@@ -74,7 +74,8 @@ class VistaHomeAppuntamentiA(QMainWindow):
         pass
 
     def cercaAppuntamento(self):
-        pass
+        self.vistaAvvocatoR = RicercaAppuntamentoA()
+        self.vistaAvvocatoR.show()
 
     def aggiornaAppuntamento(self):
         pass
@@ -99,6 +100,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
         for appuntamento in self.appuntamentiList:
             print("ciao56")
             if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+            #if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
             # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
             #if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
                 print(appuntamento)
