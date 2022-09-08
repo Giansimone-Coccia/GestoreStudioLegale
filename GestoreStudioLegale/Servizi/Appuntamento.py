@@ -1,15 +1,13 @@
 import datetime
 
-from GestoreStudioLegale.Servizi.Cliente import Cliente
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 import pickle
 import os.path
 
 class Appuntamento():
 
     def __init__(self):
-       self.Cliente = Cliente
-       self.Avvocato = Avvocato
+       self.Cliente = None
+       self.Avvocato = None
        self.ID = ''
        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
@@ -31,7 +29,7 @@ class Appuntamento():
                 self.tipoProcedimento = tipoProcedimento
 
             self.rimuoviAppuntamento(self.ID)
-            self.creaAppuntamento( self.Cliente, self.dataOraInizio, self.dataOraFine,
+            self.creaAppuntamento( self.Cliente, self.Avvocato, self.dataOraInizio, self.dataOraFine,
                              self.ID, self.tipoProcedimento)
             print("Aggiornato")
 

@@ -28,6 +28,7 @@ class VistaHomeUdienze(QWidget):
         textLabel2.setFont(QFont('Arial', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
         textLabel3 = QLabel()
+        print("ciao879")
         textLabel3.setText('Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{self.getDatiU()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{self.getDatiU()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{self.getDatiU()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{self.getDatiU()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{self.getDatiU()['Data e Ora Fine']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
@@ -55,18 +56,16 @@ class VistaHomeUdienze(QWidget):
         self.loadDateU()
         tool = Tools()
         for udienza in self.udienzeList:
-           #if udienza.Cliente.getDatiCliente()['Codice fiscale'] == str(tool.leggi()).rsplit()[0]
            if udienza.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-             return udienza.getDatiUdienza()
+              return udienza.getDatiUdienza()
 
 
     def getDatiC(self):
         self.loadDateC()
         tool = Tools()
         for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
-                    return cliente.getDatiCliente()
+            if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
+                return cliente.getDatiCliente()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente

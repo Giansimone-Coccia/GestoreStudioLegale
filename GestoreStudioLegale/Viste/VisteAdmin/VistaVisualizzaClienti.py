@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox, QPushButton, \
+    QSizePolicy
 import pickle
 import os
 
@@ -58,8 +59,17 @@ class VistaVisualizzaClienti(QMainWindow):
             #widget.setLayout(layout)
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
+            '''
+            button = QPushButton("Elimina")
+            button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            button.setFont(QFont('Arial', 10))
+            button.setCheckable(True)
+            button.toggle()'''
             self.grifLayout.addWidget(tool.createButton("Aggiorna",self.aggiornaCliente),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina", self.eliminaCliente(cliente.getDatiCliente()['Id'])),i, 2)
+            self.grifLayout.addWidget(tool.createButton("Elimina",lambda: self.eliminaCliente(cliente.getDatiCliente()['Id'],cliente)),i, 2)
+            '''
+            button.clicked.connect(self.eliminaCliente(cliente.getDatiCliente()['Id']))
+            self.grifLayout.addWidget(button,i, 2)'''
             i+=1
 
     def rewind(self):
@@ -71,12 +81,11 @@ class VistaVisualizzaClienti(QMainWindow):
     def aggiungiCliente(self):
         pass
 
-    def eliminaCliente(self,id):
-        pass
-        '''elimina =VistaEliminaCliente()
-        self.vistaEliminaCliente = elimina.EliminaCliente(id)
-        self.vistaEliminaCliente.show()
-        self.close()'''
+    def eliminaCliente(self,id,cliente):
+        self.subWindow =VistaEliminaCliente()
+        self.subWindow.setData(id,cliente)
+        self.subWindow.show()
+        self.close()
 
 
     def aggiornaCliente(self):

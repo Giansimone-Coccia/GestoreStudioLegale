@@ -100,7 +100,11 @@ class VistaHomeAppuntamentiA(QMainWindow):
         for appuntamento in self.appuntamentiList:
             print("ciao56")
             if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+<<<<<<< HEAD
             #if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
+=======
+            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
+>>>>>>> bf06af49a2f34cbc8d0d434ae0f2c43a0506835a
             #if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
                 print(appuntamento)
                 print("fatto")
