@@ -1,13 +1,13 @@
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea
 import pickle
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
-class VistaHomeParcelle(QWidget):
+class VistaHomeParcelle(QMainWindow):
 
     parcelleList = []
     clientiList = []
@@ -15,6 +15,8 @@ class VistaHomeParcelle(QWidget):
     def __init__(self, parent=None):
         super(VistaHomeParcelle, self).__init__(parent)
         tool = Tools()
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
         grifLayout = QGridLayout()
         grifLayout.addWidget(tool.rewindButton(self.rewind1), 0, 0)
         textLabel1 = QLabel()
@@ -35,7 +37,14 @@ class VistaHomeParcelle(QWidget):
         grifLayout.addWidget(textLabel1, 2, 1)
         grifLayout.addWidget(textLabel3, 3, 1)
         self.setLayout(grifLayout)
-        self.resize(500, 400)
+        self.widget.setLayout(grifLayout)
+        self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setWidget(self.widget)
+        self.setCentralWidget(self.scroll)
+        self.setGeometry(600, 100, 1000, 900)
+        self.resize(800, 600)
         self.setWindowTitle("Parcelle")
         self.show()
 
