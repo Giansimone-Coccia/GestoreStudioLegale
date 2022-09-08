@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBo
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 #from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
+from GestoreStudioLegale.Viste.VisteCliente.VistaPrenotaAppuntamentiC import VistaPrenotaAppuntamentiC
 from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
 
 
@@ -13,23 +14,17 @@ class VistaHomeAppuntamentiC (QWidget):
         tool=Tools()
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(self.createButton("Prenota Appuntamento", self.reachPrenotaAppuntamento), 1, 0)
-        gLayout.addWidget(self.createButton("Visualizza Appuntamento", self.reachVisualizzaAppuntamento), 2, 0)
+        gLayout.addWidget(tool.createButton("Prenota Appuntamento", self.reachPrenotaAppuntamento), 1, 0)
+        gLayout.addWidget(tool.createButton("Visualizza Appuntamento", self.reachVisualizzaAppuntamento), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
-
-    def createButton(self, nome, on_click):
-        button = QPushButton(nome)
-        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.setFont(QFont('Arial', 10))
-        button.clicked.connect(on_click)
-        return button
-
     def reachPrenotaAppuntamento(self):
-        pass
+        self.vistaPrenotazione = VistaPrenotaAppuntamentiC()
+        self.vistaPrenotazione.show()
+        self.close()
 
     def reachVisualizzaAppuntamento(self):
         self.vistaAppuntamento = VistaVisualizzaAppuntamento()

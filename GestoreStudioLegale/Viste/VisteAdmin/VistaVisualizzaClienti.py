@@ -6,6 +6,7 @@ import pickle
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
+from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiornaCartella import VistaAggiornaCliente
 from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaCliente import VistaEliminaCliente
 from GestoreStudioLegale.Servizi.Cliente import *
 
@@ -47,29 +48,15 @@ class VistaVisualizzaClienti(QMainWindow):
         i=2
         print("222")
         for cliente in self.clientiList:
-            #widget =QWidget()
-            #layout=QGridLayout()
             textLabel = QLabel()
             textLabel.setText('Cliente: ' + '\n' + 'NOME: ' + f"{cliente.getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{cliente.getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{cliente.getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{cliente.getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{cliente.getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{cliente.getDatiCliente()['Numero telefono']}")
             textLabel.setGeometry(QRect(0, 0, 350, 20))
             textLabel.setFont(QFont('Arial', 10))
             textLabel.setStyleSheet("border: 1px solid black;")
-            #layout.addWidget(textLabel,0,1)
-            #layout.setRowStretch(0,2)
-            #widget.setLayout(layout)
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
-            '''
-            button = QPushButton("Elimina")
-            button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            button.setFont(QFont('Arial', 10))
-            button.setCheckable(True)
-            button.toggle()'''
-            self.grifLayout.addWidget(tool.createButton("Aggiorna",self.aggiornaCliente),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina",lambda: self.eliminaCliente(cliente.getDatiCliente()['Id'],cliente)),i, 2)
-            '''
-            button.clicked.connect(self.eliminaCliente(cliente.getDatiCliente()['Id']))
-            self.grifLayout.addWidget(button,i, 2)'''
+            self.grifLayout.addWidget(tool.createButton("Aggiorna",lambda: self.aggiornaCliente(cliente)),i,1)
+            self.grifLayout.addWidget(tool.createButton("Elimina",lambda: self.eliminaCliente(cliente.getDatiCliente()['Id'])),i, 2)
             i+=1
 
     def rewind(self):
@@ -81,12 +68,15 @@ class VistaVisualizzaClienti(QMainWindow):
     def aggiungiCliente(self):
         pass
 
-    def eliminaCliente(self,id,cliente):
-        self.subWindow =VistaEliminaCliente()
-        self.subWindow.setData(id,cliente)
+    def eliminaCliente(self,id):
+        self.subWindow = VistaEliminaCliente()
+        self.subWindow.setData(id)
         self.subWindow.show()
         self.close()
 
 
-    def aggiornaCliente(self):
-        pass
+    def aggiornaCliente(self,cliente):
+        self.subWindow = VistaAggiornaCliente()
+        self.subWindow.setData(cliente)
+        self.subWindow.show()
+        self.close()

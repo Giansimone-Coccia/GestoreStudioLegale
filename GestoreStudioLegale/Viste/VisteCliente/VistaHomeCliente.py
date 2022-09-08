@@ -14,20 +14,13 @@ class VistaHomeCliente(QWidget):
         tool = Tools()
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(self.createButton("Appuntamenti", self.reachAppuntamenti), 1, 0)
-        gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 2, 0)
-        gLayout.addWidget(self.createButton("Udienze", self.reachUdienze), 3, 0, 1, 3)
+        gLayout.addWidget(tool.createButton("Appuntamenti", self.reachAppuntamenti), 1, 0)
+        gLayout.addWidget(tool.createButton("Parcelle", self.reachParcelle), 2, 0)
+        gLayout.addWidget(tool.createButton("Udienze", self.reachUdienze), 3, 0, 1, 3)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
-
-    def createButton(self, nome, on_click):
-        button = QPushButton(nome)
-        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.setFont(QFont('Arial', 10))
-        button.clicked.connect(on_click)
-        return button
 
     def reachAppuntamenti(self):
         self.vistaAppuntamenti = VistaHomeAppuntamentiC()

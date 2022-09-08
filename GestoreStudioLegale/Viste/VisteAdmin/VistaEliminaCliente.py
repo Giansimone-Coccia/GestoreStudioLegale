@@ -10,7 +10,6 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaEliminaCliente(QWidget):
 
     id = ''
-    cliente = Cliente()
 
     def __init__(self,parent = None):
         super(VistaEliminaCliente, self).__init__(parent)
@@ -19,14 +18,16 @@ class VistaEliminaCliente(QWidget):
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
-        textLabel.setText(f"Sei sicuro di voler eliminare:{self.cliente.getDatiCliente()['Nome']}?")
+        textLabel.setText(f"Sei sicuro?")
         textLabel.setGeometry(QRect(100, 120, 350, 40))
         textLabel.setFont(QFont('Arial', 12))
-        gLayout.addWidget(textLabel, 1,1,1,2)
+        gLayout.addWidget(textLabel, 1,0)
         button1 = tool.createButton("No", self.rewind)
+        button2 = tool.createButton("Sì",lambda: self.eliminaCliente(self.id))
         button1.setMaximumSize(500,200)
+        button2.setMaximumSize(500, 200)
         gLayout.addWidget(button1, 2, 1)
-        gLayout.addWidget(tool.createButton("Sì",lambda: self.eliminaCliente(self.id)), 2, 0)
+        gLayout.addWidget(button2, 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")
@@ -49,6 +50,5 @@ class VistaEliminaCliente(QWidget):
         self.vistaHome.show()
         self.close()
 
-    def setData(self,id,cliente):
+    def setData(self,id):
         self.id = id
-        self.cliente = cliente

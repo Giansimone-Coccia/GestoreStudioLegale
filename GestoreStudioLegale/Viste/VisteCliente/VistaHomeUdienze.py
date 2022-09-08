@@ -1,13 +1,13 @@
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout
+from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout, QScrollArea, QMainWindow
 import pickle
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
-class VistaHomeUdienze(QWidget):
+class VistaHomeUdienze(QMainWindow):
 
     udienzeList = []
     clientiList = []
@@ -15,6 +15,8 @@ class VistaHomeUdienze(QWidget):
     def __init__(self, parent=None):
         super(VistaHomeUdienze, self).__init__(parent)
         tool = Tools()
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
         grifLayout = QGridLayout()
         grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         textLabel1 = QLabel()
@@ -38,8 +40,15 @@ class VistaHomeUdienze(QWidget):
         print("ciao3")
         grifLayout.addWidget(textLabel3, 3, 1)
         self.setLayout(grifLayout)
-        self.resize(500, 400)
-        self.setWindowTitle("Udienze")
+        self.widget.setLayout(grifLayout)
+        self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setWidget(self.widget)
+        self.setCentralWidget(self.scroll)
+        self.setGeometry(600, 100, 1000, 900)
+        self.setWindowTitle('Udienze')
+        self.resize(800, 600)
         self.show()
 
     def loadDateU(self):
