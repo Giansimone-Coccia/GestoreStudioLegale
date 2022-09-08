@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBo
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaAppuntamentoA import VistaEliminaAppuntamentoA
+from GestoreStudioLegale.Servizi.Appuntamento import *
 import pickle
 import os
 
@@ -28,16 +30,16 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 2)
         self.outerLayout.addWidget(self.scroll, 7)
-        self.button_layout.addWidget(self.createButton("Inserisci", self.aggiungiAppuntamento))
-        self.button_layout.addWidget(self.createButton("Cerca", self.cercaAppuntamento))
+        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiAppuntamento))
+        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaAppuntamento))
         self.cWidget.setLayout(self.outerLayout)
-        supWidget = QWidget()
-        button_layout2 = QHBoxLayout()
-        button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento))
-        button_layout2.addWidget(self.createButton("Rimuovi", self.rimuoviAppuntamento))
+        self.supWidget = QWidget()
+        self.button_layout2 = QGridLayout()
+        # button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento))
+        # button_layout2.addWidget(self.createButton("Rimuovi", self.rimuoviAppuntamento))
+        self.supWidget.setLayout(self.button_layout2)
 
-        for i in range(1, self.getNum()):
-            supWidget.setLayout(button_layout2)
+        """for i in range(1, self.getNum()):
             label = QLabel()
             print("ciao")
             label.setText(
@@ -46,7 +48,9 @@ class VistaHomeAppuntamentiA(QMainWindow):
             print("ciao2")
             self.vbox.addWidget(label, 9)
             self.vbox.addWidget(supWidget, 1)
-
+            button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento),i,1)
+            button_layout2.addWidget(self.createButton("Elimina",lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])),i,2)
+"""
         # self.vbox.addWidget(tool.rewindButton(self.rewind))
         self.widget.setLayout(self.vbox)
 
@@ -80,8 +84,11 @@ class VistaHomeAppuntamentiA(QMainWindow):
     def aggiornaAppuntamento(self):
         pass
 
-    def rimuoviAppuntamento(self):
-        pass
+    def rimuoviAppuntamento(self, id):
+        self.subWindow = VistaEliminaAppuntamentoA()
+        self.subWindow.setData(id)
+        self.subWindow.show()
+        self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
@@ -97,18 +104,30 @@ class VistaHomeAppuntamentiA(QMainWindow):
     def getDatiAp(self):
         self.loadDateAp()
         tool = Tools()
+        i = 0
         for appuntamento in self.appuntamentiList:
-            print("ciao56")
-            if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-<<<<<<< HEAD
-            #if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-=======
+            label = QLabel()
+            print("ciao")
+            label.setText(
+                'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}")
+            label.setFont(QFont('Arial', 10))
+            print("ciao2")
+            self.vbox.addWidget(label, 9)
+            self.vbox.addWidget(self.supWidget, 1)
+            self.button_layout2.addWidget(tool.createButton("Modifica", self.aggiornaAppuntamento), i, 1)
+            self.button_layout2.addWidget(
+                tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
+            i += 1
+
+            # print("ciao56")
+            # if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
             # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
->>>>>>> bf06af49a2f34cbc8d0d434ae0f2c43a0506835a
-            #if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
-                print(appuntamento)
-                print("fatto")
-                return appuntamento.getDatiAppuntamento()
+            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
+
+            # if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
+            # print(appuntamento)
+            # print("fatto")
+            # return appuntamento.getDatiAppuntamento()
 
     def getNum(self):
         n = 0
@@ -116,10 +135,3 @@ class VistaHomeAppuntamentiA(QMainWindow):
         for appuntamento in self.appuntamentiList:
             n += 1
         return n
-
-    def createButton(self, nome, on_click):
-        button = QPushButton(nome)
-        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.setFont(QFont('Arial', 10))
-        button.clicked.connect(on_click)
-        return button
