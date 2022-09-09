@@ -106,7 +106,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
         tool = Tools()
         i = 0
         for appuntamento in self.appuntamentiList:
-<<<<<<< HEAD
             label = QLabel()
             print("ciao")
             label.setText(
@@ -129,7 +128,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
             # print(appuntamento)
             # print("fatto")
             # return appuntamento.getDatiAppuntamento()
-=======
             print("ciao56")
             if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
             #if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
@@ -138,7 +136,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 print(appuntamento)
                 print("fatto")
                 return appuntamento.getDatiAppuntamento()
->>>>>>> 245e4355d4427cb256cb9af26ed87ef15a8a62ad
 
     def getNum(self):
         n = 0
