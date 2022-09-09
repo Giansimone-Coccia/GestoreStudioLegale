@@ -18,20 +18,20 @@ class VistaEliminaAppuntamentoA(QWidget):
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
-        textLabel.setText(f"Sei sicuro?")
+        textLabel.setText("Sei sicuro?")
         textLabel.setGeometry(QRect(100, 120, 350, 40))
         textLabel.setFont(QFont('Arial', 12))
         gLayout.addWidget(textLabel, 1,1,1,2)
         button1 = tool.createButton("No", self.rewind)
         button1.setMaximumSize(500,200)
         gLayout.addWidget(button1, 2, 1)
-        gLayout.addWidget(tool.createButton("Sì",lambda: self.eliminaCliente(self.id)), 2, 0)
+        gLayout.addWidget(tool.createButton("Sì",lambda: self.eliminaAppuntamento(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
-    def eliminaCliente(self,id):
+    def eliminaAppuntamento(self,id):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
         Appuntamento.rimuoviAppuntamento(id)
         self.vistaVisualizzaAppuntamento = VistaHomeAppuntamentiA()
