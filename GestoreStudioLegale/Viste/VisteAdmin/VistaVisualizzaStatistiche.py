@@ -3,7 +3,7 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QMainWindow, QWidget, QGridLayout
 import pyqtgraph as pg'''
 #from _curses import window
-from _curses import window
+#from _curses import window
 
 from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries, \
     QStackedBarSeries
