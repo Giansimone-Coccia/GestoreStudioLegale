@@ -36,7 +36,7 @@ class VistaHomeParcelle(QMainWindow):
         grifLayout.addWidget(textLabel2, 1, 1)
         grifLayout.addWidget(textLabel1, 2, 1)
         grifLayout.addWidget(textLabel3, 3, 1)
-        self.setLayout(grifLayout)
+        #self.setLayout(grifLayout)
         self.widget.setLayout(grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
