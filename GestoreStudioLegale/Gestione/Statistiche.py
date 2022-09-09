@@ -129,10 +129,10 @@ class Statistiche:
         with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'wb') as f:
             pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
 
-    def mostraStatistiche(self, statistica = ""): #modificare, c'è scritto void
+    def mostraStatistiche(self): #modificare, c'è scritto void
         self.calcolaStatistiche()
         self.salvaSuFile()
-        statistica = statistica.lower()
+        #statistica = statistica.lower()
 
         stats={}
         if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
@@ -140,19 +140,6 @@ class Statistiche:
                 try:
                     stats = dict(pickle.load(f))
                 except EOFError as er:
-                    print("") #scrivere errore
+                    print("errore!") #scrivere errore
+        return stats
 
-        if statistica == "udienze amministrative":
-            return stats["Amminstrative"]
-        elif statistica == "udienze civili":
-            return stats["Civili"]
-        elif statistica == "udienze minorili":
-            return stats["Minorili"]
-        elif statistica == "udienze penali":
-            return stats["Penali"]
-        elif statistica == "udienze mensili":
-            return stats["Mensili"]
-        elif statistica == "numero appuntamenti":
-            return stats["Appuntamenti"]
-        else:
-            return stats
