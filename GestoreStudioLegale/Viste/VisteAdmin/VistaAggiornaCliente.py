@@ -37,8 +37,8 @@ class VistaAggiornaCliente(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
-        self.layout.setRowMinimumHeight(3, 75)
-        self.buttonLogin.clicked.connect(lambda: self.invio())
+        #self.layout.setRowMinimumHeight(3, 75)
+        self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
     def createLine(self,name,n,l):
@@ -51,48 +51,78 @@ class VistaAggiornaCliente(QWidget):
     def invio(self):
 
         self.string = ""
+        print(self.cliente.getDatiCliente()["Data nascita"])
 
-        '''
-        appuntamenti = []
-        parcelle = []
-        udienza = []
-        corsiAgg = []
+        appuntamenti = self.cliente.appuntamentoCliente
+        parcelle = self.cliente.parcelle
+        udienze =self.cliente.udienza
+        corsiAgg = self.cliente.corsoAggiornamento
 
-        appuntamenti = self.cliente.getDatiCliente["appuntamentoCliente"]
-        parcelle = self.cliente.getDatiCliente['parcelle']
-        udienze =self.cliente.getDatiCliente['Udienze']
-        corsiAgg = self.cliente.getDatiCliente['Corso aggiornamento']'''
+        Cliente.rimuoviCliente(self.cliente.getDatiCliente()["Id"])
 
-        GestoreSistema.rimuoviCliente(self.cliente.Id)
+        x = self.breve('nome',self.cliente.getDatiCliente()["Nome"],1,'o')
+        if x is not False: self.cliente.nome = x
+        else: return
 
-        if self.breve('nome',self.cliente.getDatiCliente()["Nome"],1,'o'):
+        x = self.breve('cognome',self.cliente.getDatiCliente()["Cognome"],2,'o')
+        if x is not False: self.cliente.cognome = x
+        else: return
+
+        x = self.breve('codice fiscale',self.cliente.getDatiCliente()["Codice fiscale"],3,'o')
+        if x is not False:self.cliente.codiceFiscale = x
+        else: return
+
+        '''x = self.breve('data di nascita',self.cliente.getDatiCliente()["Data nascita"],4,'o')
+        if x is not False: self.cliente.dataNascita = x
+        else: return'''
+        item = self.layout.itemAtPosition(4, 1).widget()
+        if self.cliente.getDatiCliente()["Data nascita"] == item.text():
+            self.error(f"Hai inseirto la stessa data di nascita")
             return
-        if self.breve('cognome',self.cliente.getDatiCliente()["Cognome"],2,'o'):
-            return
-        if self.breve('codice fiscale',self.cliente.getDatiCliente()["Codice fiscale"],3,'o'):
-            return
-        if self.breve('data di nascita',self.cliente.getDatiCliente()["Data nascita"],4,'o'):
-            return
-        if self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a'):
-            return
-        if self.breve('id',self.cliente.getDatiCliente()["Id"],6,'o'):
-            return
-        if self.breve('numero di telefono',self.cliente.getDatiCliente()["Numero telefono"],7,'o'):
-            return
-        if self.breve('password',self.cliente.getDatiCliente()["Password"],8,'a'):
-            return
+        elif self.cliente.getDatiCliente()["Data nascita"]!= item.text() and item.text() != "":
+            x = item.text()
+            y = x[2] != "/" and x[5] != '/'
+            if y:
+                self.msg = QMessageBox()
+                self.msg.setWindowTitle('ERRORE')
+                self.msg.setText("Eroore formato data di nascita, il formato è DD/MM/YYYY")
+                self.msg.exec()
+                return
+            else:
+                self.string += f"data di nascita, "
+                self.cliente.dataNascita= x
+
+
+        x = self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a')
+        if x is not False: self.cliente.email = x
+        else: return
+
+        x = self.breve('id',self.cliente.getDatiCliente()["Id"],6,'o')
+        if x is not False: self.cliente.id = x
+        else: return
+
+        x = self.breve('numero di telefono',self.cliente.getDatiCliente()["Numero telefono"],7,'o')
+        if x is not False: self.cliente.numeroTelefono = x
+        else: return
+
+        x = self.breve('password',self.cliente.getDatiCliente()["Password"],8,'a')
+        if x is not False: self.cliente.password = x
+        else: return
 
         self.string = self.string[:-2]
+        print(self.cliente.nome)
         print(self.string)
         print(self.cliente.getDatiCliente())
 
-        #GestoreSistema.salvaCliente(self.cliente)
+        item = self.layout.itemAtPosition(1, 1).widget()
+        print(item.text())
+        cliente =Cliente()
 
-        '''Cliente.creaCliente(self.cliente.getDatiCliente()["Codice fiscale"],self.cliente.getDatiCliente()["Cognome"],corsiAgg,
+        cliente.creaCliente(self.cliente.getDatiCliente()["Codice fiscale"],self.cliente.getDatiCliente()["Cognome"],corsiAgg,
                             self.cliente.getDatiCliente()["Data nascita"],self.cliente.getDatiCliente()["Email"],
                             self.cliente.getDatiCliente()["Id"],self.cliente.getDatiCliente()["Numero telefono"],
                             self.cliente.getDatiCliente()["Password"],appuntamenti,parcelle,
-                            self.cliente.getDatiCliente()["Nome"],udienze)'''
+                            self.cliente.getDatiCliente()["Nome"],udienze)
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Modifica avvenuta con successo')
@@ -105,11 +135,12 @@ class VistaAggiornaCliente(QWidget):
         item = self.layout.itemAtPosition(n, 1).widget()
         if obj == item.text():
             self.error(f"Hai inseirto l{l} stess{l} {nome}")
-            return True
-        elif obj != item.text() and item.text()!="":
-            obj = item.text()
-            self.string += f"{nome}, "
             return False
+        elif obj != item.text() and item.text()!="":
+            self.string += f"{nome}, "
+            return item.text()
+        if item.text() == "":
+            return obj
 
 
 

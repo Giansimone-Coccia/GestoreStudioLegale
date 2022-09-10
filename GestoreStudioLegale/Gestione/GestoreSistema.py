@@ -108,7 +108,7 @@ class GestoreSistema:
         Cliente.rimuoviCliente(cliente.Id)
         print("Fatto")
 
-    def salvaCliente(self, cliente = None):
+    def salvaCliente(self, cliente):
         clienti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0:
