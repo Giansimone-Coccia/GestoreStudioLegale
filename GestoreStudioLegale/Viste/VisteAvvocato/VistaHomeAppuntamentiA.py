@@ -143,6 +143,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 print("fatto")
                 return appuntamento.getDatiAppuntamento()
 
+
     def getNum(self):
         n = 0
         self.loadDateAp()

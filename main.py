@@ -53,8 +53,9 @@ nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 
-#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/9/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
-#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '12/9/1999', 'alfa@gmail.com', 'C1254', 987887877, 'pswrd', appuntamento2, parcella2, 'fabrizio', udienza2)
+
+cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
+cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella1, 'angelo', udienza2)
 #cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
