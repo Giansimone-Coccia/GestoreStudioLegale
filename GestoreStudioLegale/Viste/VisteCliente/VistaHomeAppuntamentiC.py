@@ -9,13 +9,14 @@ from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import V
 
 class VistaHomeAppuntamentiC (QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaHomeAppuntamentiC, self).__init__(parent)
-        tool=Tools()
         gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(tool.createButton("Prenota Appuntamento", self.reachPrenotaAppuntamento), 1, 0)
-        gLayout.addWidget(tool.createButton("Visualizza Appuntamento", self.reachVisualizzaAppuntamento), 2, 0)
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.createButton("Prenota Appuntamento", self.reachPrenotaAppuntamento), 1, 0)
+        gLayout.addWidget(self.tool.createButton("Visualizza Appuntamento", self.reachVisualizzaAppuntamento), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")

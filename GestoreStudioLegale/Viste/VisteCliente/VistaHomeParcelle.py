@@ -11,14 +11,14 @@ class VistaHomeParcelle(QMainWindow):
 
     parcelleList = []
     clientiList = []
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaHomeParcelle, self).__init__(parent)
-        tool = Tools()
         self.scroll = QScrollArea()
         self.widget = QWidget()
         grifLayout = QGridLayout()
-        grifLayout.addWidget(tool.rewindButton(self.rewind1), 0, 0)
+        grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista delle parcelle con le informazioni relative al cliente")
@@ -48,25 +48,15 @@ class VistaHomeParcelle(QMainWindow):
         self.setWindowTitle("Parcelle")
         self.show()
 
-    def loadDateP(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
-            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
-                self.parcelleList = list(pickle.load(f))
-
-    def loadDateC(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                self.clientiList = list(pickle.load(f))
-
     def getDatiP(self):
-        self.loadDateP()
+        self.parcelleList = self.tool.loadParcelle()
         tool = Tools()
         for parcella in self.parcelleList:
             if parcella.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                 return parcella.getDatiParcellaCliente()
 
     def getDatiC(self):
-        self.loadDateC()
+        self.clientiList = self.tool.loadClienti()
         tool = Tools()
         print(tool.leggi())
         for cliente in self.clientiList:

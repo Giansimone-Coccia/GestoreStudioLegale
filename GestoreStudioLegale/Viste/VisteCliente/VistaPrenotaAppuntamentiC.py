@@ -1,10 +1,9 @@
 import datetime
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QGroupBox, QFormLayout, \
+    QComboBox, QMainWindow
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-import os
-import pickle
 
 from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
 
@@ -12,11 +11,13 @@ from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import V
 class VistaPrenotaAppuntamentiC(QWidget):
 
     appuntamentiList = []
+    avvocatiList = []
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaPrenotaAppuntamentiC, self).__init__(parent)
-        tool = Tools()
         gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         self.labelName3 = QLabel('<font size="4"> Il sistema controllerà la disponibilità della data inserita </font>')
         self.labelName3.setStyleSheet("border: 1px solid black;")
         self.labelName = QLabel('<font size="4"> Data appuntamento </font>')
@@ -26,14 +27,26 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.lineEditOra = QLineEdit()
         self.lineEditOra.setPlaceholderText('Inserisci orario appuntamento')
         confirmButton = QPushButton()
-        confirmButton = tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
-        #confirmButton.setSizePolicy(5, 5)
+        confirmButton = self.tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
+        '''self.avvocatiMenu = QComboBox()
+        self.avvocatiList = self.tool.loadAvvocati()
+        nomi = []
+        for avvocato in self.avvocatiList:
+            nomi = str(avvocato.nome+' '+avvocato.cognome)
+        self.avvocatiMenu.addItems(nomi)'''
+        self.menuOra = QComboBox()
+        orari = ['11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '18:30', '19:00', '19:30', '20:00', '20:30',
+                 '21:00', '21:30', '22:00', '22:30']
+        #     self.menuOra.clicked.connect(self.selezionaOra)
+        self.menuOra.addItems(orari)
         gLayout.addWidget(confirmButton, 3, 1)
         gLayout.addWidget(self.labelName3, 0, 1)
         gLayout.addWidget(self.labelName, 1, 0)
         gLayout.addWidget(self.labelName2, 2, 0)
         gLayout.addWidget(self.lineEditDate, 1, 1)
         gLayout.addWidget(self.lineEditOra, 2, 1)
+        gLayout.addWidget(self.menuOra, 3, 1)
+        #gLayout.addWidget(self.avvocatiMenu, 3, 1)
         self.setLayout(gLayout)
         self.resize(400, 200)
         self.setWindowTitle("Prenotazione appuntamenti")
@@ -45,8 +58,8 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.vistaAppuntameti.show()
         self.close()
 
-    def confermaAppuntamento(self):
-        self.loadDateA()
+    def confermaAppuntamento(self): #MANCA LA CREAZIONE DELL'APPUNTAMENTO CON LA SCRITTURA SU FILE
+        self.appuntamentiList = self.tool.loadAppuntamenti()
         if not self.convalida():
             date = self.lineEditDate.text()
             hour = self.lineEditOra.text()
@@ -58,13 +71,9 @@ class VistaPrenotaAppuntamentiC(QWidget):
                     self.problema()
                     return
                 else:
+                    #appuntamento.creaAppuntamento()
                     self.conferma()
                     return
-
-    def loadDateA(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
-            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
-                self.appuntamentiList = list(pickle.load(f))
 
     def conferma(self):
         msg = QMessageBox()

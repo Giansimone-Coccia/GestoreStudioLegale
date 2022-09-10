@@ -12,14 +12,14 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaVisualizzaAppuntamento(QMainWindow):
     appuntamentiList = []
     clientiList = []
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaVisualizzaAppuntamento, self).__init__(parent)
-        tool = Tools()
         self.scroll = QScrollArea()
         self.widget = QWidget()
         grifLayout = QGridLayout()
-        grifLayout.addWidget(tool.rewindButton(self.rewindHomeCliente), 0, 0)
+        grifLayout.addWidget(self.tool.rewindButton(self.rewindHomeCliente), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista degli appuntamenti con le informazioni relative al cliente")
@@ -35,14 +35,14 @@ class VistaVisualizzaAppuntamento(QMainWindow):
             'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiA()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE'+f"{self.getDatiA()['Data e Ora Fine']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
-        textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
+        '''textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Times', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
         textLabel3 = QLabel()
         textLabel3.setText('Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
-        textLabel3.setFont(QFont('Arial', 10))
+        textLabel3.setFont(QFont('Arial', 10))'''
         textLabel3.setStyleSheet("border: 1px solid black;")
         grifLayout.addWidget(textLabel2, 1, 1)
         grifLayout.addWidget(textLabel1, 2, 1)
@@ -59,29 +59,17 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.setWindowTitle("Appuntamenti")
         self.show()
 
-    def loadDateA(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
-            with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
-                self.appuntamentiList = list(pickle.load(f))
-
-    def loadDateC(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                self.clientiList = list(pickle.load(f))
-
     def getDatiA(self):
-        self.loadDateA()
-        tool = Tools()
+        self.appuntamentiList = self.tool.loadAppuntamenti()
         for appuntamento in self.appuntamentiList:
-            if appuntamento.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+            if appuntamento.Cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
                 return appuntamento.getDatiAppuntamento()
 
 
     def getDatiC(self):
-        self.loadDateC()
-        tool = Tools()
+        self.clientiList = self.tool.loadClienti()
         for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi(n=0)).rsplit()[0]:
+            if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
                 return cliente.getDatiCliente()
 
     def rewindHomeCliente(self):
@@ -92,7 +80,7 @@ class VistaVisualizzaAppuntamento(QMainWindow):
 
     def getNum(self):
         n = 0
-        self.loadDateA()
+        self.appuntamentiList = self.tool.loadAppuntamenti()
         for appuntamento in self.appuntamentiList:
             n+=1
         return n
