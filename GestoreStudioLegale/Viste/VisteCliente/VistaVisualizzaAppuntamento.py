@@ -32,7 +32,7 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         textLabel2.setStyleSheet("border: 1px solid black;")
         textLabel3 = QLabel()
         textLabel3.setText(
-            'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiA()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE'+f"{self.getDatiA()['Data e Ora Fine']}")
+            'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiA()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiA()['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiA()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiA()['Data e Ora Fine']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
         '''textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")

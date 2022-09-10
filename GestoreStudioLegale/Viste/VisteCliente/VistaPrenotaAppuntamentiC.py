@@ -1,8 +1,11 @@
 import datetime
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QGroupBox, QFormLayout, \
-    QComboBox, QMainWindow
+    QComboBox, QMainWindow, QCalendarWidget
 
+from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
+from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
@@ -12,6 +15,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
 
     appuntamentiList = []
     avvocatiList = []
+    nomi = []
     tool = Tools()
 
     def __init__(self, parent=None):
@@ -21,36 +25,46 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.labelName3 = QLabel('<font size="4"> Il sistema controllerà la disponibilità della data inserita </font>')
         self.labelName3.setStyleSheet("border: 1px solid black;")
         self.labelName = QLabel('<font size="4"> Data appuntamento </font>')
-        self.lineEditDate = QLineEdit()
-        self.lineEditDate.setPlaceholderText('Inserisci data appuntamento')
         self.labelName2 = QLabel('<font size="4"> Orario appuntamento </font>')
         self.lineEditOra = QLineEdit()
         self.lineEditOra.setPlaceholderText('Inserisci orario appuntamento')
         confirmButton = QPushButton()
         confirmButton = self.tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
-        '''self.avvocatiMenu = QComboBox()
-        self.avvocatiList = self.tool.loadAvvocati()
-        nomi = []
-        for avvocato in self.avvocatiList:
-            nomi = str(avvocato.nome+' '+avvocato.cognome)
-        self.avvocatiMenu.addItems(nomi)'''
-        self.menuOra = QComboBox()
-        orari = ['11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '18:30', '19:00', '19:30', '20:00', '20:30',
-                 '21:00', '21:30', '22:00', '22:30']
-        #     self.menuOra.clicked.connect(self.selezionaOra)
-        self.menuOra.addItems(orari)
-        gLayout.addWidget(confirmButton, 3, 1)
+        self.menuAvvocati = QComboBox()
+        self.menuAvvocati.addItems(self.sceltaAvv())
+        self.labelName4 = QLabel('<font size="4"> Avvocato appuntamento </font>')
+        self.lineEditType = QLineEdit()
+        self.lineEditType.setPlaceholderText('Inserisci tipo procedimento(Penale,  civile...)')
+        self.labelName5 = QLabel('<font size="4"> Tipo procedimento </font>')
+        self.calendar = QCalendarWidget()
+        self.calendar.clicked.connect(self.selezionaData)
+        self.dataSelezionata = None
+        gLayout.addWidget(confirmButton, 5, 1)
         gLayout.addWidget(self.labelName3, 0, 1)
         gLayout.addWidget(self.labelName, 1, 0)
         gLayout.addWidget(self.labelName2, 2, 0)
-        gLayout.addWidget(self.lineEditDate, 1, 1)
         gLayout.addWidget(self.lineEditOra, 2, 1)
-        gLayout.addWidget(self.menuOra, 3, 1)
-        #gLayout.addWidget(self.avvocatiMenu, 3, 1)
+        gLayout.addWidget(self.menuAvvocati, 4, 1)
+        gLayout.addWidget(self.labelName4, 4, 0)
+        gLayout.addWidget(self.lineEditType, 3, 1)
+        gLayout.addWidget(self.calendar, 1, 1)
+        gLayout.addWidget(self.labelName5, 3, 0)
         self.setLayout(gLayout)
-        self.resize(400, 200)
+        self.resize(800, 500)
         self.setWindowTitle("Prenotazione appuntamenti")
         self.show()
+
+    def sceltaAvv(self):
+        self.avvocatiList = self.tool.loadAvvocati()
+        for avvocato in self.avvocatiList:
+            self.nomi.append(avvocato.nome+' '+avvocato.cognome)
+        return self.nomi
+
+    def selezionaData(self):
+        self.dataSelezionata = self.calendar.selectedDate()
+        self.year = self.dataSelezionata.year()
+        self.day = self.dataSelezionata.day()
+        self.month = self.dataSelezionata.month()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeAppuntamentiC import VistaHomeAppuntamentiC
@@ -58,20 +72,29 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.vistaAppuntameti.show()
         self.close()
 
-    def confermaAppuntamento(self): #MANCA LA CREAZIONE DELL'APPUNTAMENTO CON LA SCRITTURA SU FILE
+    def confermaAppuntamento(self): #PERFETTO, FUNZIONA, AGGIUNGE AL FILE.pickle MA VEDERE PER ID E VISUALIZZAZIONE
+        appuntamento = Appuntamento()
+        client = Cliente()
+        avvocato = Avvocato()
+        avvocato = self.menuAvvocati.currentData(self.menuAvvocati.currentIndex())
+        print(avvocato)
         self.appuntamentiList = self.tool.loadAppuntamenti()
         if not self.convalida():
-            date = self.lineEditDate.text()
             hour = self.lineEditOra.text()
-            dateHour = date+' '+hour
-            dateHour1 = datetime.datetime.strptime(dateHour, "%d/%m/%Y %H:%M")
+            houtT = datetime.datetime.strptime(hour, "%H:%M")
+            oraFine = houtT+datetime.timedelta(hours = 1)
+            self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+            dateS = self.pyDate.strftime("%d/%m/%Y")
+            dataOraInizio = dateS+','+hour
+            dataOraFine = dateS+','+oraFine.strftime("%H:%M")
+            id = 1234 #provvisorio
             for appuntamento in self.appuntamentiList:
                 print(appuntamento.dataOraInizio)
-                if appuntamento.dataOraInizio == dateHour1:
+                if appuntamento.dataOraInizio == self.pyDate:
                     self.problema()
                     return
                 else:
-                    #appuntamento.creaAppuntamento()
+                    appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), avvocato, dataOraInizio, dataOraFine, id, self.lineEditType.text())
                     self.conferma()
                     return
 
@@ -93,16 +116,15 @@ class VistaPrenotaAppuntamentiC(QWidget):
         msg.exec_()
 
     def convalida(self):
-        date = self.lineEditDate.text()
+        date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
         hour = self.lineEditOra.text()
-        dateT = datetime.datetime.strptime(date, "%d/%m/%Y")
         hourT = datetime.datetime.strptime(hour, "%H:%M")
         timeMin = datetime.datetime.strptime('09:00', '%H:%M')
         timeMax = datetime.datetime.strptime('17:00', '%H:%M')
         condition = False
         #while condition:
         try:
-            if dateT < datetime.datetime.now():
+            if date < datetime.datetime.now():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Data precedente all'attuale, riprova")
@@ -110,7 +132,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 msg.exec_()
                 condition = True
                 return condition
-            elif not dateT.__format__("%d/%m/%Y"):
+            elif not date.__format__("%d/%m/%Y"):
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Formato data errato, riprova (%d/%m/%Y)")
@@ -134,7 +156,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 msg.exec_()
                 condition = True
                 return condition
-            elif dateT.weekday() == 5 or dateT == 6:
+            elif date.weekday() == 5 or date == 6:
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Lo studio è chiuso durante il week-end")
