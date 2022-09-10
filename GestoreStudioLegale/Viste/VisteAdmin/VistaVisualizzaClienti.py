@@ -6,7 +6,7 @@ import pickle
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiornaCartella import VistaAggiornaCliente
+from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiornaCliente import VistaAggiornaCliente
 from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaCliente import VistaEliminaCliente
 from GestoreStudioLegale.Servizi.Cliente import *
 
@@ -46,7 +46,6 @@ class VistaVisualizzaClienti(QMainWindow):
         self.loadDateC()
         tool=Tools()
         i=2
-        print("222")
         for cliente in self.clientiList:
             textLabel = QLabel()
             textLabel.setText('Cliente: ' + '\n' + 'NOME: ' + f"{cliente.getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{cliente.getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{cliente.getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{cliente.getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{cliente.getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{cliente.getDatiCliente()['Numero telefono']}")
@@ -77,6 +76,10 @@ class VistaVisualizzaClienti(QMainWindow):
 
     def aggiornaCliente(self,cliente):
         self.subWindow = VistaAggiornaCliente()
+        print('1234')
+        print(cliente.getDatiCliente())
         self.subWindow.setData(cliente)
+        print("77832")
+        print(self.subWindow.cliente.getDatiCliente())
         self.subWindow.show()
         self.close()

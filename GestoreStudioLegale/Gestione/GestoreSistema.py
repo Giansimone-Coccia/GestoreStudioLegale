@@ -2,6 +2,7 @@ import pickle
 import os.path
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Servizi.Utilizzatore import Utilizzatore
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class GestoreSistema:
@@ -106,3 +107,18 @@ class GestoreSistema:
     def rimuoviCliente(self, cliente = None):  #usa funzione di rimozione di cliente
         Cliente.rimuoviCliente(cliente.Id)
         print("Fatto")
+
+    def salvaCliente(self, cliente = None):
+        clienti = []
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0:
+                clienti.append(cliente)
+                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
+                    pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
+            else:
+                if cliente.ricercaUtilizzatoreId(cliente.getDatiCliente()["Id"]) is None:
+                    with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                        clienti = pickle.load(f)
+                        clienti.append(cliente)
+                    with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f1:
+                        pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
