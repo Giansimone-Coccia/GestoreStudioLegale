@@ -53,8 +53,25 @@ nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 
+<<<<<<< HEAD
 cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/9/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
 cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+=======
+#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/9/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '12/9/1999', 'alfa@gmail.com', 'C1254', 987887877, 'pswrd', appuntamento2, parcella2, 'fabrizio', udienza2)
+#cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella1, 'angelo', udienza2)
+#cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/9/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/9/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+
+>>>>>>> cb6fc5a52ad568cab53101ff4838e87432cbe1b3
 #cliente1.getDatiCliente()  #FUNZIONA FACENDO PRIMA AGGIUNGICLIENTE COSI' FA PRIMA CREAUTILIZZATORE
 #print(cliente1.dataNascita)
 #cliente2.getDatiCliente()
@@ -70,8 +87,8 @@ cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com'
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
 #cliente1.aggiornaCliente('almail@gmil.com')
 
-avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
-avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'B4783', 1233754, 'passAvv2', udienza2, listaClienti, licenze, appuntamentiAvvocato)
+#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+#avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '23/12/1995', 'albe4382@outlook.com', 'B4783', 1233754, 'passAvv2', udienza2, listaClienti, licenze, appuntamentiAvvocato)
 #avvocato1.getDatiAvvocato() #FUNZIONA INISIME A CREAAVVOCATO
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
 #avvocato1.ricercaUtilizzatoreId('id non valido') #FUNZIONA
@@ -98,7 +115,7 @@ avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2
 
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-#udienza2.creaUdienza(avvocato1, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
+#udienza2.creaUdienza(avvocato2, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
 #udienza1.getDatiUdienza() #FUNZIONA
 #udienza2.getDatiUdienza() #FUNZIONA
 #listaUdienze = udienza1.ricercaUdienzaCliente(cliente1) #DA RICONTROLLARE DOPO AVER SISTEMATO LA CLASSE CLIENTE
@@ -115,8 +132,7 @@ avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2
 #udienza1.rimuoviUdienza('U2345') #FUNZIONA
 #udienza1.rimuoviUdienza('U2765') #FUNZIONA
 
-
-#udienza3.creaUdienza(avvocato1, 'Ascoli Piceno', cliente3, '9/08/2022,12:00','10/08/2022,13:00','U299345','civile')
+#udienza3.creaUdienza(avvocato2, 'Bari', cliente3, '9/08/2022,12:00','10/08/2022,13:00','U299345','amministrativa')
 #udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
 #udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
 #udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
@@ -132,7 +148,6 @@ avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2
 #udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
 #udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
 #udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
-
 
 #stats = Statistiche()
 #stats.mostraGrafico() #FUNZIONA
@@ -163,9 +178,9 @@ avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
-appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
-appuntamento2.creaAppuntamento(cliente2, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
-appuntamento3.creaAppuntamento(cliente1, avvocato1,  '22/11/2022,12:00','10/08/2022,16:00', 'A7845', 'civile')
+#appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
+#appuntamento2.creaAppuntamento(cliente2, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
+#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '22/11/2022,12:00','10/08/2022,16:00', 'A7845', 'civile')
 
 if __name__ == '__main__':
     app = QApplication (sys.argv)

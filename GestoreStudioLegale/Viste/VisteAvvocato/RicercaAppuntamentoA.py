@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
                              QVBoxLayout)
 
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
+
 import sys
 
 
@@ -13,7 +14,7 @@ class RicercaAppuntamentoA(QDialog):
 
     def __init__(self):
         super(RicercaAppuntamentoA, self).__init__()
-        self.text = QLineEdit()
+        self.textIn = QLineEdit()
         self.combo = QComboBox()
 
         self.createFormGroupBox()
@@ -36,14 +37,23 @@ class RicercaAppuntamentoA(QDialog):
         self.combo.addItem("Nome cliente")
         self.combo.addItem("Data inizio")
         self.combo.addItem("ID appuntamento")
-        layout.addRow(QLabel("Ricerca:"), self.text)
+        layout.addRow(QLabel("Ricerca:"), self.textIn)
         layout.addRow(QLabel("Filtro:"), self.combo)
-        #self.combo.activated.connect(self.indexScelta)
+        self.combo.activated.connect(self.indexScelta)
         self.formGroupBox.setLayout(layout)
 
     def indexScelta(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.AppuntamentoRicercatoA import AppuntamentoRicercatoA
         cindex = self.combo.currentIndex()
+        code = self.textIn.text()
+
         if cindex == 2:
-            Appuntamento.ricercaAppuntamentoID(self.text)
+            print("2")
+            print(code)
+
+            self.subWindow = AppuntamentoRicercatoA()
+            self.subWindow.setData(lambda: Appuntamento.ricercaAppuntamentoID(code))
+            self.subWindow.show()
+            self.close()
         else:
             pass
