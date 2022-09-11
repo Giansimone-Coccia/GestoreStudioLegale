@@ -60,11 +60,11 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.show()
 
     def getDatiA(self):
+        print("ciao3")
         self.appuntamentiList = self.tool.loadAppuntamenti()
         for appuntamento in self.appuntamentiList:
             if appuntamento.Cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
                 return appuntamento.getDatiAppuntamento()
-
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

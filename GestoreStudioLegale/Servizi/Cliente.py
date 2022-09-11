@@ -32,12 +32,12 @@ class Cliente(Utilizzatore):
                         appuntamentoCliente, parcelle, nome, udienza):
 
         self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
-                                  password, udienza, nome) #Messi in ordine, così non utilizzo l'='
+                                  password, udienza, nome)
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
         clienti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0:
+            if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0: #UNA VOLTA MODIFICATO NON FUNZIONA PIU'
                 clienti.append(self)
                 #with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f1:
                     #clienti=pickle.load(f1)

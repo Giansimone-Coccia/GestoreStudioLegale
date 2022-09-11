@@ -72,29 +72,29 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.vistaAppuntameti.show()
         self.close()
 
-    def confermaAppuntamento(self): #PERFETTO, FUNZIONA, AGGIUNGE AL FILE.pickle MA VEDERE PER ID E VISUALIZZAZIONE
+    def confermaAppuntamento(self): #PERFETTO, AGGIUNGE AL FILE.pickle MA DOPO NON VISUALIZZA
         appuntamento = Appuntamento()
         client = Cliente()
         avvocato = Avvocato()
         avvocato = self.menuAvvocati.currentData(self.menuAvvocati.currentIndex())
-        print(avvocato)
+        #print(avvocato)
         self.appuntamentiList = self.tool.loadAppuntamenti()
         if not self.convalida():
             hour = self.lineEditOra.text()
-            houtT = datetime.datetime.strptime(hour, "%H:%M")
-            oraFine = houtT+datetime.timedelta(hours = 1)
+            hourDT = datetime.datetime.strptime(hour, "%H:%M")
+            oraFine = hourDT+datetime.timedelta(hours = 1)
             self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
             dateS = self.pyDate.strftime("%d/%m/%Y")
             dataOraInizio = dateS+','+hour
             dataOraFine = dateS+','+oraFine.strftime("%H:%M")
-            id = 1234 #provvisorio
+            #id = 1234 #provvisorio
             for appuntamento in self.appuntamentiList:
-                print(appuntamento.dataOraInizio)
+                print(appuntamento.getDatiAppuntamento())
                 if appuntamento.dataOraInizio == self.pyDate:
                     self.problema()
                     return
                 else:
-                    appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), avvocato, dataOraInizio, dataOraFine, id, self.lineEditType.text())
+                    appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), avvocato, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.lineEditType.text())
                     self.conferma()
                     return
 

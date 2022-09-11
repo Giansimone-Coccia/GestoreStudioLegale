@@ -83,3 +83,30 @@ class Tools():
             with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 self.appuntamenti = list(pickle.load(f))
                 return self.appuntamenti
+
+    def IdGenerator(self, stringa): #ID posto a 0000 nel file
+        if stringa == 'A':
+            stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
+            stringa = stringa+str(stringa1)
+            self.salva(str(stringa1), 'lastID')
+            return stringa
+        elif stringa == 'C':
+            stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
+            stringa = stringa + str(stringa1)
+            self.salva(str(stringa1), 'lastID')
+            return stringa
+        elif stringa == 'AP':
+            stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
+            stringa = stringa + str(stringa1)
+            self.salva(str(stringa1), 'lastID')
+            return stringa
+        elif stringa == 'UD':
+            stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
+            stringa = stringa + str(stringa1)
+            self.salva(str(stringa1), 'lastID')
+            return stringa
+        elif stringa == 'PA':
+            stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
+            stringa = stringa + str(stringa1)
+            self.salva(str(stringa1), 'lastID')
+            return stringa
