@@ -48,7 +48,7 @@ class VistaVisualizzaAvvocati(QMainWindow):
             #layout=QGridLayout()
             textLabel = QLabel()
             textLabel.setText(
-                'Avvocato: ' + '\n' + 'NOME: ' + f"{avvocato.getDatiAvvocato()['Nome']}" + '\n' + 'COGNOME: ' + f"{avvocato.getDatiAvvocato()['Cognome']}" + '\n' + 'ID: ' + f"{avvocato.getDatiAvvocato()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{avvocato.getDatiAvvocato()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{avvocato.getDatiAvvocato()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{avvocato.getDatiAvvocato()['Numero telefono']}")
+                'Avvocato: ' + '\n' + 'NOME: ' + f"{avvocato.getDatiAvvocato()['Nome']}" + '\n' + 'COGNOME: ' + f"{avvocato.getDatiAvvocato()['Cognome']}" + '\n'+ 'DATA DI NASCITA: ' + f"{avvocato.getDatiAvvocato()['Data nascita']}" + '\n' + 'ID: ' + f"{avvocato.getDatiAvvocato()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{avvocato.getDatiAvvocato()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{avvocato.getDatiAvvocato()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{avvocato.getDatiAvvocato()['Numero telefono']}")
             textLabel.setGeometry(QRect(0, 0, 350, 20))
             textLabel.setFont(QFont('Arial', 10))
             textLabel.setStyleSheet("border: 1px solid black;")
