@@ -1,6 +1,6 @@
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-
+from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -31,6 +31,7 @@ class VistaAggiornaCliente(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
+        #self.layout.setRowMinimumHeight(3, 75)
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
@@ -45,6 +46,7 @@ class VistaAggiornaCliente(QWidget):
 
         self.string = ""
         print(self.cliente.getDatiCliente()["Data nascita"])
+        cliente = Cliente()
 
         appuntamenti = self.cliente.appuntamentoCliente
         parcelle = self.cliente.parcelle
@@ -76,15 +78,23 @@ class VistaAggiornaCliente(QWidget):
             x = str(item.text())
             z = x.split("/")
             y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
-            print("22222")
             if(len(x)>5):
                 y = x[2] != "/" and x[5] != '/'
                 if y:
                     self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                     return
                 elif y1:
-                    self.string += f"data di nascita, "
-                    self.cliente.dataNascita= x
+                    try:
+                        date = datetime.datetime.strptime(x, "%d/%m/%Y")
+                        if date > datetime.now():
+                            self.error("Data non valida inserita, la data che hai inserito è futura")
+                            return
+                        self.string += f"data di nascita, "
+                        self.cliente.dataNascita= date.strftime("%d/%m/%Y")
+                    except ValueError:
+                        self.error("Data non valida inserita")
+                        return
+
                 else:
                     self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
                     return
@@ -98,9 +108,18 @@ class VistaAggiornaCliente(QWidget):
         if x is not False: self.cliente.email = x
         else: return
 
-        x = self.breve('id',self.cliente.getDatiCliente()["Id"],6,'o')
-        if x is not False: self.cliente.id = x
-        else: return
+        item = self.layout.itemAtPosition(6, 1).widget()
+        x = str(item.text())
+        if str(self.cliente.getDatiCliente()["Id"]) == item.text():
+            self.error("Hai inseirto lo stesso Id")
+            return
+        elif str(self.cliente.getDatiCliente()["Id"]) != item.text() and item.text() != "":
+            if cliente.ricercaUtilizzatoreId(item.text()) is None:
+                self.string += f"id, "
+                self.cliente.id = x
+            else:
+                self.error("Hai inserito l'id di un cliente già esistente")
+                return
 
         item = self.layout.itemAtPosition(7, 1).widget()
         x = str(item.text())
@@ -127,7 +146,6 @@ class VistaAggiornaCliente(QWidget):
 
         item = self.layout.itemAtPosition(1, 1).widget()
         print(item.text())
-        cliente =Cliente()
 
         cliente.creaCliente(self.cliente.getDatiCliente()["Codice fiscale"],self.cliente.getDatiCliente()["Cognome"],corsiAgg,
                             self.cliente.getDatiCliente()["Data nascita"],self.cliente.getDatiCliente()["Email"],

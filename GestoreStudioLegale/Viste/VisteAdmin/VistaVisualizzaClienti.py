@@ -55,8 +55,9 @@ class VistaVisualizzaClienti(QMainWindow):
             textLabel.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
-            self.grifLayout.addWidget(tool.createButton("Aggiorna",lambda: self.aggiornaCliente(cliente)),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina",lambda: self.eliminaCliente(cliente.getDatiCliente()['Id'])),i, 2)
+
+            self.grifLayout.addWidget(tool.createButton("Aggiorna", lambda checked, a=cliente: self.aggiornaCliente(a)),i,1)
+            self.grifLayout.addWidget(tool.createButton("Elimina", lambda checked, b=cliente.getDatiCliente()['Id']: self.eliminaCliente(b)),i,2)
             i+=1
 
     def rewind(self):
@@ -79,8 +80,6 @@ class VistaVisualizzaClienti(QMainWindow):
 
     def aggiornaCliente(self,cliente):
         self.subWindow = VistaAggiornaCliente()
-        print(cliente.getDatiCliente())
         self.subWindow.setData(cliente)
-        print(self.subWindow.cliente.getDatiCliente())
         self.subWindow.show()
         self.close()

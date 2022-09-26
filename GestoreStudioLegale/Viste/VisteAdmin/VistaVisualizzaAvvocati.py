@@ -46,23 +46,17 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.loadDateA()
         tool=Tools()
         i=2
-        print("222")
         for avvocato in self.avvocatiList:
-            #widget =QWidget()
-            #layout=QGridLayout()
             textLabel = QLabel()
             textLabel.setText(
                 'Avvocato: ' + '\n' + 'NOME: ' + f"{avvocato.getDatiAvvocato()['Nome']}" + '\n' + 'COGNOME: ' + f"{avvocato.getDatiAvvocato()['Cognome']}" + '\n'+ 'DATA DI NASCITA: ' + f"{avvocato.getDatiAvvocato()['Data nascita']}" + '\n' + 'ID: ' + f"{avvocato.getDatiAvvocato()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{avvocato.getDatiAvvocato()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{avvocato.getDatiAvvocato()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{avvocato.getDatiAvvocato()['Numero telefono']}")
             textLabel.setGeometry(QRect(0, 0, 350, 20))
             textLabel.setFont(QFont('Arial', 10))
             textLabel.setStyleSheet("border: 1px solid black;")
-            #layout.addWidget(textLabel,0,1)
-            #layout.setRowStretch(0,2)
-            #widget.setLayout(layout)
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
-            self.grifLayout.addWidget(tool.createButton("Aggiorna",self.aggiornaAvvocato),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina", self.eliminaAvvocato),i, 2)
+            self.grifLayout.addWidget(tool.createButton("Aggiorna",lambda checked, a=avvocato: self.aggiornaAvvocato(a)),i,1)
+            self.grifLayout.addWidget(tool.createButton("Elimina",lambda checked, b=avvocato.getDatiAvvocato()['Id']: self.eliminaAvvocato(b)),i, 2)
             i+=1
 
     def rewind(self):
@@ -76,12 +70,14 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.subWindow.show()
         self.close()
 
-    def aggiornaAvvocato(self):
-        self.subWindow = VistaAggiornaAvvocato()
+    def eliminaAvvocato(self,id):
+        self.subWindow = VistaEliminaAvvocato()
+        self.subWindow.setData(id)
         self.subWindow.show()
         self.close()
 
-    def eliminaAvvocato(self):
-        self.subWindow = VistaEliminaAvvocato()
+    def aggiornaAvvocato(self,avvocato):
+        self.subWindow = VistaAggiornaAvvocato()
+        self.subWindow.setData(avvocato)
         self.subWindow.show()
         self.close()
