@@ -49,7 +49,7 @@ class RicercaAppuntamentoA(QDialog):
         cindex = self.combo.currentIndex()
         code = self.textIn.text()
 
-        if cindex == 1:
+        #if cindex == 1:
 
 
         if cindex == 2:
@@ -65,5 +65,5 @@ class RicercaAppuntamentoA(QDialog):
 
     def view(self):
         cindex = self.combo.currentIndex()
-        if cindex == 1:
+        #if cindex == 1:
 

@@ -46,7 +46,7 @@ class VistaHomeAdmin(QWidget):
     def reachStatistiche(self):
         self.vistaVisualizzaS = VistaVisualizzaStatistiche()
         self.vistaVisualizzaS.show()
-        self.close()
+        #self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin
