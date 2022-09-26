@@ -1,14 +1,8 @@
-from PyQt5.QtCore import QRect
-from PyQt5.QtGui import QFont
+
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from PyQt5 import QtCore as qtc
 
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Cliente import Cliente
-from GestoreStudioLegale.Servizi.Udienza import Udienza
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
-from GestoreStudioLegale.Servizi.Parcella import Parcella
-from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
@@ -79,18 +73,21 @@ class VistaAggiornaCliente(QWidget):
         if self.cliente.getDatiCliente()["Data nascita"] == item.text():
             self.error(f"Hai inseirto la stessa data di nascita")
             return
-        elif self.cliente.getDatiCliente()["Data nascita"]!= item.text() and item.text() != "":
-            x = item.text()
+        elif str(self.cliente.getDatiCliente()["Data nascita"])!= item.text() and item.text() != "":
+            x = str(item.text())
             y = x[2] != "/" and x[5] != '/'
+            z = x.split("/")
+            y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
+            print("22222")
             if y:
-                self.msg = QMessageBox()
-                self.msg.setWindowTitle('ERRORE')
-                self.msg.setText("Eroore formato data di nascita, il formato è DD/MM/YYYY")
-                self.msg.exec()
+                self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
-            else:
+            elif y1:
                 self.string += f"data di nascita, "
                 self.cliente.dataNascita= x
+            else:
+                self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+                return
 
 
         x = self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a')
@@ -101,9 +98,19 @@ class VistaAggiornaCliente(QWidget):
         if x is not False: self.cliente.id = x
         else: return
 
-        x = self.breve('numero di telefono',self.cliente.getDatiCliente()["Numero telefono"],7,'o')
-        if x is not False: self.cliente.numeroTelefono = x
-        else: return
+        item = self.layout.itemAtPosition(7, 1).widget()
+        x = str(item.text())
+        if str(self.cliente.getDatiCliente()["Numero telefono"]) == item.text():
+            self.error("Hai inseirto lo stesso numero di telefono")
+            return
+        elif str(self.cliente.getDatiCliente()["Numero telefono"])!= item.text() and item.text() != "":
+            if len(str(item.text())) == 10 and str(item.text()).isdigit() :
+                self.string += f"numero di telefono, "
+                self.cliente.numeroTelefono = x
+            else:
+                self.error("Hai sbagliato il formato del numero di telefono, devi inserire 10 numeri")
+                return
+
 
         x = self.breve('password',self.cliente.getDatiCliente()["Password"],8,'a')
         if x is not False: self.cliente.password = x
