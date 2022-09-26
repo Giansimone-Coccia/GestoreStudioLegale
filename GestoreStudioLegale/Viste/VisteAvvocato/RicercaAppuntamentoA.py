@@ -15,6 +15,7 @@ class RicercaAppuntamentoA(QDialog):
     def __init__(self):
         super(RicercaAppuntamentoA, self).__init__()
         self.textIn = QLineEdit()
+        #self.dateIn = Q
         self.combo = QComboBox()
 
         self.createFormGroupBox()
@@ -34,18 +35,22 @@ class RicercaAppuntamentoA(QDialog):
     def createFormGroupBox(self):
         self.formGroupBox = QGroupBox("Cerca un appuntamento")
         layout = QFormLayout()
-        self.combo.addItem("Nome cliente")
+        #self.combo.addItem("Nome cliente")
         self.combo.addItem("Data inizio")
         self.combo.addItem("ID appuntamento")
         layout.addRow(QLabel("Ricerca:"), self.textIn)
         layout.addRow(QLabel("Filtro:"), self.combo)
         self.combo.activated.connect(self.indexScelta)
+        self.combo.currentIndexChanged.connect(view)
         self.formGroupBox.setLayout(layout)
 
     def indexScelta(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.AppuntamentoRicercatoA import AppuntamentoRicercatoA
         cindex = self.combo.currentIndex()
         code = self.textIn.text()
+
+        if cindex == 1:
+
 
         if cindex == 2:
             print("2")
@@ -57,3 +62,8 @@ class RicercaAppuntamentoA(QDialog):
             self.close()
         else:
             pass
+
+    def view(self):
+        cindex = self.combo.currentIndex()
+        if cindex == 1:
+
