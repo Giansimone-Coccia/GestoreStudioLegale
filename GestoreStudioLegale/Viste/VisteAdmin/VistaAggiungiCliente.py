@@ -50,40 +50,36 @@ class VistaAggiungiCliente(QWidget):
     def invio(self):
         i = 0
         item = self.layout.itemAtPosition(i+1, 1).widget()
-        list = []
-        print(item.text() == "")
-        print(f"sh{item.text()}it")
-        while (item.text() != "" and i < 8):
-            x = str(item.text())
-            print("88888")
-            list[i] = x
-            print("88888")
+
+        while i < 8:
+            if item.text() == "":
+                self.error("Devi riempire tutti gli spazi per poter creare un nuovo cliente")
+                return
             i+=1
             item = self.layout.itemAtPosition(i+1, 1).widget()
 
-        if len(list) < 8:
-            self.error("Devi riempire tutti gli spazi per potrìer creare un nuovo cliente")
-            return
-
-        x = list[3]
-        y = x[2] != "/" and x[5] != '/'
-        z = x.split("/")
-        y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
-        if y:
+        item = self.layout.itemAtPosition(4, 1).widget()
+        x = item.text()
+        if(len(x)>5):
+            y = x[2] != "/" and x[5] != '/'
+            if y:
+                self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
+                return
+        else:
             self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
             return
+
+        z = x.split("/")
+        y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
             return
 
-        '''x = list[5]
-        if not len(str(x)) == 10 and str(x).isdigit():
-            self.error("Il numero di telefono deve essere di 10 numeri")
-            return'''
-
-        x = list[6]
-        if not len(str(x)) == 10 and str(x).isdigit():
+        item = self.layout.itemAtPosition(7, 1).widget()
+        x = item.text()
+        print(str(x).isdigit())
+        if not (len(str(x)) == 10 and str(x).isdigit()):
             self.error("Il numero di telefono deve essere di 10 numeri")
             return
 
@@ -91,9 +87,13 @@ class VistaAggiungiCliente(QWidget):
         appuntamenti = []
         parcelle = []
         udienze = []
+        cliente = Cliente()
 
-        Cliente.creaCliente(list[2], list[1],corsiAgg,list[3], list[4],list[5], list[6],list[7], appuntamenti, parcelle,
-                            list[0], udienze)
+        cliente.creaCliente(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
+                            corsiAgg,self.layout.itemAtPosition(4, 1).widget().text(), self.layout.itemAtPosition(5, 1).widget().text(),
+                            self.layout.itemAtPosition(6, 1).widget().text(), self.layout.itemAtPosition(7, 1).widget().text(),
+                            self.layout.itemAtPosition(8, 1).widget().text(), appuntamenti, parcelle,
+                            self.layout.itemAtPosition(1, 1).widget().text(), udienze)
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Creazione avvenuta con successo')

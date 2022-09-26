@@ -31,7 +31,6 @@ class VistaAggiornaCliente(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
-        #self.layout.setRowMinimumHeight(3, 75)
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
@@ -75,19 +74,24 @@ class VistaAggiornaCliente(QWidget):
             return
         elif str(self.cliente.getDatiCliente()["Data nascita"])!= item.text() and item.text() != "":
             x = str(item.text())
-            y = x[2] != "/" and x[5] != '/'
             z = x.split("/")
             y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
             print("22222")
-            if y:
+            if(len(x)>5):
+                y = x[2] != "/" and x[5] != '/'
+                if y:
+                    self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
+                    return
+                elif y1:
+                    self.string += f"data di nascita, "
+                    self.cliente.dataNascita= x
+                else:
+                    self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+                    return
+            else:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
-            elif y1:
-                self.string += f"data di nascita, "
-                self.cliente.dataNascita= x
-            else:
-                self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
-                return
+
 
 
         x = self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a')

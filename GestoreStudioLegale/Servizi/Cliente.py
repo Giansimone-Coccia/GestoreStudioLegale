@@ -27,7 +27,6 @@ class Cliente(Utilizzatore):
                              self.nome, self.udienza)
         print("Aggiornato")
 
-
     def creaCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                         appuntamentoCliente, parcelle, nome, udienza):
 
