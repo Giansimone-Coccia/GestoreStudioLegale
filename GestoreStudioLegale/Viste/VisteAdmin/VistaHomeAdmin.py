@@ -7,7 +7,7 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVis
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 from GestoreStudioLegale.Utilities.Utilities import Tools
-#from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
+from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 
 
 class VistaHomeAdmin(QWidget):
@@ -19,9 +19,9 @@ class VistaHomeAdmin(QWidget):
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         gLayout.addWidget(tool.createButton("Modifica Password", self.reachModificaPassword), 1, 0)
-        gLayout.addWidget(tool.createButton("Mostra Avvocati", self.reachAvvocati), 2, 1)
+        gLayout.addWidget(tool.createButton("Mostra Avvocati", self.reachAvvocati), 1, 1)
         gLayout.addWidget(tool.createButton("Mostra Clienti", self.reachClienti), 2, 0)
-        gLayout.addWidget(tool.createButton("Mostra Statistiche", self.reachStatistiche), 1, 1)
+        gLayout.addWidget(tool.createButton("Mostra Statistiche", self.reachStatistiche), 2, 1)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
@@ -44,10 +44,9 @@ class VistaHomeAdmin(QWidget):
         self.close()
 
     def reachStatistiche(self):
-        pass
-        '''self.vistaVisualizzaS = VistaVisualizzaStatistiche()
+        self.vistaVisualizzaS = VistaVisualizzaStatistiche()
         self.vistaVisualizzaS.show()
-        self.close()'''
+        self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin

@@ -11,6 +11,7 @@ from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxi
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout
 from numpy.distutils.fcompiler import pg
+from GestoreStudioLegale.Utilities.Utilities import Tools
 
 from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 

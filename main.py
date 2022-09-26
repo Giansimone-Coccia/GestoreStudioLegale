@@ -16,6 +16,7 @@ from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
+from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VistaHome import VistaHome
 
@@ -39,9 +40,11 @@ udienza7 = Udienza()
 appuntamento1 = Appuntamento()
 appuntamento2 = Appuntamento()
 appuntamento3 = Appuntamento()
+appuntamento4 = Appuntamento()
 parcella1 = Parcella()
 parcella2 = Parcella()
 corso1 = CorsoAggiornamento()
+email = GestoreEmail()
 
 corsi = ['economia politica']
 appuntamentiAvvocato = ['martedì', 'mercoledì']
@@ -54,8 +57,8 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 
 
-cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
-cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella1, 'angelo', udienza2)
 #cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
@@ -176,8 +179,9 @@ cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com
 #print(cliente8)
 #appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
 #appuntamento2.creaAppuntamento(cliente2, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
-#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '22/11/2022,12:00','10/08/2022,16:00', 'A7845', 'civile')
-
+#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '25/09/2022,12:54','30/09/2022,16:00', 'A767y5', 'civile')
+#appuntamento4.creaAppuntamento(cliente2, avvocato1,  '25/09/2022,13:05','30/09/2022,16:00', 'A5825667', 'civile')
+email.invioEmail()
 if __name__ == '__main__':
     app = QApplication (sys.argv)
     app.setStyle('Fusion')
