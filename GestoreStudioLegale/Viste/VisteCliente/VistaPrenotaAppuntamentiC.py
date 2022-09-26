@@ -17,6 +17,9 @@ class VistaPrenotaAppuntamentiC(QWidget):
     avvocatiList = []
     nomi = []
     tool = Tools()
+    year = None
+    month = None
+    day = None
 
     def __init__(self, parent=None):
         super(VistaPrenotaAppuntamentiC, self).__init__(parent)
@@ -116,14 +119,22 @@ class VistaPrenotaAppuntamentiC(QWidget):
         msg.exec_()
 
     def convalida(self):
-        date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-        hour = self.lineEditOra.text()
-        hourT = datetime.datetime.strptime(hour, "%H:%M")
-        timeMin = datetime.datetime.strptime('09:00', '%H:%M')
-        timeMax = datetime.datetime.strptime('17:00', '%H:%M')
-        condition = False
+          if self.year == None and self.month == None and self.day == None:
+              msg = QMessageBox()
+              msg.setWindowTitle("ERRORE")
+              msg.setText("Data non selezionata, riprova")
+              msg.setIcon(QMessageBox.Critical)
+              msg.exec_()
+              return
+          try:
+            date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+            hour = self.lineEditOra.text()
+            hourT = datetime.datetime.strptime(hour, "%H:%M")
+            timeMin = datetime.datetime.strptime('09:00', '%H:%M')
+            timeMax = datetime.datetime.strptime('17:00', '%H:%M')
+            condition = False
         #while condition:
-        try:
+
             if date < datetime.datetime.now():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
@@ -133,6 +144,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 condition = True
                 return condition
             elif not date.__format__("%d/%m/%Y"):
+                print('ciaoooooo')
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Formato data errato, riprova (%d/%m/%Y)")
@@ -140,7 +152,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 msg.exec_()
                 condition = True
                 return condition
-            elif not hourT.__format__("%H:%M"):
+            elif not hourT.__format__('%H:%M'):
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Formato orario errato, riprova (%H:%M)")
@@ -164,7 +176,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 msg.exec_()
                 condition = True
                 return condition
-        except Exception as e:
+          except Exception as e:
             msg = QMessageBox()
             msg.setWindowTitle("ERRORE")
             msg.setText("Riprova")

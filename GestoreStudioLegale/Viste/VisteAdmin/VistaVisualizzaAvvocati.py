@@ -5,6 +5,10 @@ import pickle
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
+from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiornaAvvocato import VistaAggiornaAvvocato
+from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiungiAvvocato import VistaAggiungiAvvocato
+from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaAvvocato import VistaEliminaAvvocato
+
 
 class VistaVisualizzaAvvocati(QMainWindow):
 
@@ -16,7 +20,7 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(tool.createButton("Aggiungi", self.rewind), 0, 1,1,2)
+        self.grifLayout.addWidget(tool.createButton("Aggiungi", self.aggiungiAvvocato), 0, 1,1,2)
         self.grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText("Di seguito la lista degli avvocati")
@@ -57,12 +61,27 @@ class VistaVisualizzaAvvocati(QMainWindow):
             #widget.setLayout(layout)
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
-            self.grifLayout.addWidget(tool.createButton("Aggiorna",self.rewind),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina", self.rewind),i, 2)
+            self.grifLayout.addWidget(tool.createButton("Aggiorna",self.aggiornaAvvocato),i,1)
+            self.grifLayout.addWidget(tool.createButton("Elimina", self.eliminaAvvocato),i, 2)
             i+=1
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
         self.vistaHome = VistaHomeAdmin()
         self.vistaHome.show()
+        self.close()
+
+    def aggiungiAvvocato(self):
+        self.subWindow = VistaAggiungiAvvocato()
+        self.subWindow.show()
+        self.close()
+
+    def aggiornaAvvocato(self):
+        self.subWindow = VistaAggiornaAvvocato()
+        self.subWindow.show()
+        self.close()
+
+    def eliminaAvvocato(self):
+        self.subWindow = VistaEliminaAvvocato()
+        self.subWindow.show()
         self.close()
