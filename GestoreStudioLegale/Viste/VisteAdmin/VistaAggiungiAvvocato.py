@@ -1,13 +1,14 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-
+from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class VistaAggiungiAvvocato(QWidget):
 
-    avvocato = Avvocato()
+    cliente = Cliente()
 
     def __init__(self,parent = None):
         super(VistaAggiungiAvvocato, self).__init__(parent)
@@ -49,50 +50,68 @@ class VistaAggiungiAvvocato(QWidget):
     def invio(self):
         i = 0
         item = self.layout.itemAtPosition(i+1, 1).widget()
-        list = []
-        print(item.text() == "")
-        print(f"sh{item.text()}it")
-        while (item.text() != "" and i < 8):
-            x = str(item.text())
-            print("88888")
-            list[i] = x
-            print("88888")
+        avvocato = Avvocato()
+
+        while i < 8:
+            if item.text() == "":
+                self.error("Devi riempire tutti gli spazi per poter creare un nuovo cliente")
+                return
             i+=1
             item = self.layout.itemAtPosition(i+1, 1).widget()
 
-        if len(list) < 8:
-            self.error("Devi riempire tutti gli spazi per potrìer creare un nuovo cliente")
-            return
+        item = self.layout.itemAtPosition(4, 1).widget()
+        x = item.text()
+        date = None
+        if(len(x)>5):
+            y = x[2] != "/" and x[5] != '/'
+            if y:
+                self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
+                return
+            else:
+                try:
+                    date = datetime.datetime.strptime(item.text(), "%d/%m/%Y")
+                    if date > datetime.now():
+                        self.error("Data non valida inserita, la dat che hai inserito è futura")
+                        return
+                except ValueError:
+                    self.error("Data non valida inserita")
+                    return
 
-        x = list[3]
-        y = x[2] != "/" and x[5] != '/'
-        z = x.split("/")
-        y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
-        if y:
+
+        else:
             self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
             return
+
+        z = x.split("/")
+        y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
             return
 
-        '''x = list[5]
-        if not len(str(x)) == 10 and str(x).isdigit():
-            self.error("Il numero di telefono deve essere di 10 numeri")
-            return'''
+        item = self.layout.itemAtPosition(6, 1).widget()
+        if avvocato.ricercaUtilizzatoreId(item.text()) is not None:
+            self.error("Esiste già un cliente con questo id")
+            return
 
-        x = list[6]
-        if not len(str(x)) == 10 and str(x).isdigit():
+        item = self.layout.itemAtPosition(7, 1).widget()
+        x = item.text()
+        print(str(x).isdigit())
+        if not (len(str(x)) == 10 and str(x).isdigit()):
             self.error("Il numero di telefono deve essere di 10 numeri")
             return
 
         corsiAgg = []
-        appuntamenti = []
-        parcelle = []
-        udienze = []
+        udienza = []
+        clienti = []
+        licenza = []
+        appuntamento = []
 
-        Avvocato.creaAvvocato(list[2], list[1],corsiAgg,list[3], list[4],list[5], list[6],list[7], appuntamenti, parcelle,
-                            list[0], udienze)
+        avvocato.creaAvvocato(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
+                              self.layout.itemAtPosition(1, 1).widget().text(),corsiAgg,date.strftime("%d/%m/%Y"), self.layout.itemAtPosition(5, 1).widget().text(),
+                            self.layout.itemAtPosition(6, 1).widget().text(), self.layout.itemAtPosition(7, 1).widget().text(),
+                            self.layout.itemAtPosition(8, 1).widget().text(), udienza, clienti,
+                             licenza,appuntamento)
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Creazione avvenuta con successo')
@@ -103,7 +122,7 @@ class VistaAggiungiAvvocato(QWidget):
 
 
     def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
-        self.vistaVisualizza = VistaVisualizzaAvvocati()
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
+        self.vistaVisualizza = VistaVisualizzaClienti()
         self.vistaVisualizza.show()
         self.close()

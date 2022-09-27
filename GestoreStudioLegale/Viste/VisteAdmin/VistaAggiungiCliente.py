@@ -1,6 +1,6 @@
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-
+from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -50,6 +50,7 @@ class VistaAggiungiCliente(QWidget):
     def invio(self):
         i = 0
         item = self.layout.itemAtPosition(i+1, 1).widget()
+        cliente = Cliente()
 
         while i < 8:
             if item.text() == "":
@@ -60,11 +61,23 @@ class VistaAggiungiCliente(QWidget):
 
         item = self.layout.itemAtPosition(4, 1).widget()
         x = item.text()
+        date = None
         if(len(x)>5):
             y = x[2] != "/" and x[5] != '/'
             if y:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
+            else:
+                try:
+                    date = datetime.datetime.strptime(item.text(), "%d/%m/%Y")
+                    if date > datetime.now():
+                        self.error("Data non valida inserita, la dat che hai inserito è futura")
+                        return
+                except ValueError:
+                    self.error("Data non valida inserita")
+                    return
+
+
         else:
             self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
             return
@@ -74,6 +87,11 @@ class VistaAggiungiCliente(QWidget):
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+            return
+
+        item = self.layout.itemAtPosition(6, 1).widget()
+        if cliente.ricercaUtilizzatoreId(item.text()) is not None:
+            self.error("Esiste già un cliente con questo id")
             return
 
         item = self.layout.itemAtPosition(7, 1).widget()
@@ -87,10 +105,9 @@ class VistaAggiungiCliente(QWidget):
         appuntamenti = []
         parcelle = []
         udienze = []
-        cliente = Cliente()
 
         cliente.creaCliente(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
-                            corsiAgg,self.layout.itemAtPosition(4, 1).widget().text(), self.layout.itemAtPosition(5, 1).widget().text(),
+                            corsiAgg,date.strftime("%d/%m/%Y"), self.layout.itemAtPosition(5, 1).widget().text(),
                             self.layout.itemAtPosition(6, 1).widget().text(), self.layout.itemAtPosition(7, 1).widget().text(),
                             self.layout.itemAtPosition(8, 1).widget().text(), appuntamenti, parcelle,
                             self.layout.itemAtPosition(1, 1).widget().text(), udienze)
