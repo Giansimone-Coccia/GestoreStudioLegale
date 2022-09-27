@@ -117,7 +117,7 @@ class Statistiche:
         ax = canvas.figure.subplots(plt.bar(x,y))
         return ax'''
 
-    def salvaSuFile (self):
+    def salvaSuFile(self):
         stats = {
             "Amminstrative" : self.mediaUdienzeAmministrative,
             "Civili" : self.mediaUdienzeCivili,
@@ -126,8 +126,17 @@ class Statistiche:
             "Penali" : self.mediaUdienzePenali,
             "Appuntamenti" : self.numeroAppuntamenti,
         }
-        with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'wb') as f:
-            pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
+        if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
+            with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'wb') as f:
+                pickle.dump(stats, f, pickle.HIGHEST_PROTOCOL)
+
+    def leggiFile(self):
+        if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
+            with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'rb') as f:
+                #d = {}
+                d = pickle.load(f)
+                #pickle.load(f)
+                return d
 
     def mostraStatistiche(self): #modificare, c'è scritto void
         self.calcolaStatistiche()

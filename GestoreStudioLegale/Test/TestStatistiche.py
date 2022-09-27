@@ -43,6 +43,10 @@ class TestStatistiche(TestCase):
         self.assertEqual(self.stats.mediaUdienzeCivili, 0)
         #self.assertEqual(self.stats.numeroAppuntamenti, 12)
         self.assertEqual(self.stats.numeroAppuntamenti, 0)
+<<<<<<< HEAD
+=======
+
+>>>>>>> a74cd63d2c4265182da20a66538ffcc3d2d9e8e5
         d = self.stats.leggiFile()
         print(d)
         print(self.stats.mediaUdienzeCivili)

@@ -31,7 +31,7 @@ class GestoreEmail:
         email.sendmail("ProgettoStudioLegale0@gmail.com", "giansimone.coccia01@gmail.com", messaggio.encode('utf-8'))
         email.quit()
       except Exception:
-        print("")
+        print("eccezione")
 
     def getDatiApp(self):
         self.appuntamentiList = self.tool.loadAppuntamenti()

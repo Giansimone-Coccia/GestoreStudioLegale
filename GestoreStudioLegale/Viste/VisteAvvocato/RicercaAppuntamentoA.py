@@ -41,7 +41,7 @@ class RicercaAppuntamentoA(QDialog):
         layout.addRow(QLabel("Ricerca:"), self.textIn)
         layout.addRow(QLabel("Filtro:"), self.combo)
         self.combo.activated.connect(self.indexScelta)
-        self.combo.currentIndexChanged.connect(view)
+        self.combo.currentIndexChanged.connect(self.view)
         self.formGroupBox.setLayout(layout)
 
     def indexScelta(self):
@@ -64,6 +64,7 @@ class RicercaAppuntamentoA(QDialog):
             pass
 
     def view(self):
+        pass
         cindex = self.combo.currentIndex()
         #if cindex == 1:
 
