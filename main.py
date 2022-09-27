@@ -56,7 +56,6 @@ nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
 
 
-
 #cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella1, 'angelo', udienza2)
@@ -149,6 +148,9 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
 
 #stats = Statistiche()
+#stats.calcolaStatistiche()
+#stats.salvaSuFile()
+#print(stats.leggiFile())
 #stats.mostraGrafico() #FUNZIONA
 #print(stats.mostraStatistiche("udienze penali"))
 
@@ -181,7 +183,8 @@ corsoAggiornamentiLista = ['matematica', 'analisi 2']
 #appuntamento2.creaAppuntamento(cliente2, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
 #appuntamento3.creaAppuntamento(cliente2, avvocato1,  '25/09/2022,12:54','30/09/2022,16:00', 'A767y5', 'civile')
 #appuntamento4.creaAppuntamento(cliente2, avvocato1,  '25/09/2022,13:05','30/09/2022,16:00', 'A5825667', 'civile')
-email.invioEmail()
+#email.invioEmail()
+
 if __name__ == '__main__':
     app = QApplication (sys.argv)
     app.setStyle('Fusion')
