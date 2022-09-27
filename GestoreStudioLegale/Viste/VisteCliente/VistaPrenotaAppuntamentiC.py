@@ -31,6 +31,10 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.labelName2 = QLabel('<font size="4"> Orario appuntamento </font>')
         self.lineEditOra = QLineEdit()
         self.lineEditOra.setPlaceholderText('Inserisci orario appuntamento')
+        #self.ora = QComboBox()
+        #orari = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00',
+                 #'14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
+        #self.ora.addItems(orari)
         confirmButton = QPushButton()
         confirmButton = self.tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
         self.menuAvvocati = QComboBox()
@@ -38,6 +42,9 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.labelName4 = QLabel('<font size="4"> Avvocato appuntamento </font>')
         self.lineEditType = QLineEdit()
         self.lineEditType.setPlaceholderText('Inserisci tipo procedimento(Penale,  civile...)')
+        #self.procedimento = QComboBox()
+        #procedimenti = ['Penale', 'Civile', 'Amministrativo', 'Giudiziario', 'Minorile']
+        #self.procedimento.addItems(procedimenti)
         self.labelName5 = QLabel('<font size="4"> Tipo procedimento </font>')
         self.calendar = QCalendarWidget()
         self.calendar.clicked.connect(self.selezionaData)
@@ -83,6 +90,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
         #print(avvocato)
         self.appuntamentiList = self.tool.loadAppuntamenti()
         if not self.convalida():
+            #hour = str(self.ora.lineEdit().text())
             hour = self.lineEditOra.text()
             hourDT = datetime.datetime.strptime(hour, "%H:%M")
             oraFine = hourDT+datetime.timedelta(hours = 1)
@@ -128,6 +136,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
               return
           try:
             date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+            #hour = str(self.ora.lineEdit().text())
             hour = self.lineEditOra.text()
             hourT = datetime.datetime.strptime(hour, "%H:%M")
             timeMin = datetime.datetime.strptime('09:00', '%H:%M')
