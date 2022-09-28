@@ -8,6 +8,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 
+
+#modificare dimensioni tasti in utilities
 class VistaHomeParcelle(QMainWindow):
 
     parcelleList = []
@@ -80,6 +82,7 @@ class VistaHomeParcelle(QMainWindow):
             self.grifLayout.addWidget(
                 tool.createButton("Elimina", self.rimuoviParcella),i,2)
             i += 1
+
             print("cos")
 
     def aggiungiParcella(self):
