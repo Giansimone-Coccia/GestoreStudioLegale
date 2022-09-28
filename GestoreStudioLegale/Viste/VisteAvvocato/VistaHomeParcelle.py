@@ -41,12 +41,15 @@ class VistaHomeParcelle(QMainWindow):
         i=0
 
         print("ca")
+        print(self.parcelleList)
+        print(self.avvocatiList)
         #print(avvocato.getDatiAvvocato()['clienti'])
 
         for avvocato in self.avvocatiList:
             print("noia")
             print (self.tool.leggi().rsplit()[0])
             print (avvocato.codiceFiscale)
+            print(avvocato.getDatiAvvocato()['clienti'])
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                print("coglione")
                print(avvocato.getDatiAvvocato()['clienti'])
