@@ -91,8 +91,6 @@ class VistaHomeParcelle(QMainWindow):
                 tool.createButton("Elimina", self.rimuoviParcella),i,2)
             i += 1
 
-            print("cos")
-
     def aggiungiParcella(self):
         pass
 
