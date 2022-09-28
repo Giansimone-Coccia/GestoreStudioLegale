@@ -17,8 +17,8 @@ class VistaHomeParcelle(QMainWindow):
         super(VistaHomeParcelle, self).__init__(parent)
         self.scroll = QScrollArea()
         self.widget = QWidget()
-        grifLayout = QGridLayout()
-        grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
+        self.gridLayout = QGridLayout()
+        self.gridLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista delle parcelle con le informazioni relative al cliente")
@@ -28,16 +28,17 @@ class VistaHomeParcelle(QMainWindow):
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Times', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
-        textLabel3 = QLabel()
+        '''textLabel3 = QLabel()
         textLabel3.setText('Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.getDatiP()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.getDatiP()['importo']}"+'€'+'\n'+'ID: '+f"{self.getDatiP()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.getDatiP()['identificativo']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
-        textLabel3.setStyleSheet("border: 1px solid black;")
-        grifLayout.addWidget(textLabel2, 1, 1)
-        grifLayout.addWidget(textLabel1, 2, 1)
-        grifLayout.addWidget(textLabel3, 3, 1)
+        textLabel3.setStyleSheet("border: 1px solid black;")'''
+        self.gridLayout.addWidget(textLabel2, 1, 1)
+        self.gridLayout.addWidget(textLabel1, 2, 1)
+        #grifLayout.addWidget(textLabel3, 3, 1)
         #self.setLayout(grifLayout)
-        self.widget.setLayout(grifLayout)
+        self.getDatiP()
+        self.widget.setLayout(self.gridLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
@@ -51,9 +52,32 @@ class VistaHomeParcelle(QMainWindow):
     def getDatiP(self):
         self.parcelleList = self.tool.loadParcelle()
         tool = Tools()
+        parc = []
+        i = 3
         for parcella in self.parcelleList:
             if parcella.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                return parcella.getDatiParcellaCliente()
+                parc.append(parcella)
+                print("prova")
+                print(parc)
+        for p in parc:
+            label = QLabel()
+            print("prova")
+            print(p)
+            label.setText(
+                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{p.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{p.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{p.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{p.getDatiParcellaCliente()['identificativo']}")
+            label.setGeometry(QRect(0, 0, 350, 20))
+            label.setFont(QFont('Arial', 10))
+            label.setStyleSheet("border: 1px solid black;")
+            print("ciao2")
+            self.gridLayout.addWidget(label, i, 1, 1, 2)
+            i += 1
+
+
+    def rimuoviParcella(self):
+        pass
+
+    def aggiornaParcella(self):
+        pass
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

@@ -55,9 +55,9 @@ b = ['non so']
 listaClienti = [cliente1, cliente2, cliente3]
 nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
+parcelleL = [parcella1, parcella2, parcella3]
 
-
-cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
+cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcelleL, 'alesseio', udienza1)
 cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella2, 'alessio', udienza1)
 cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella3, 'angelo', udienza2)
 #cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
@@ -103,8 +103,10 @@ avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '2
 print(avvocato2.getDatiAvvocato()['clienti'])
 
 parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'alessio') #FUNZIONA
-parcella2.creaParcella(cliente2, 'PP123', 583928493, 2000, 'francesca')
-parcella3.creaParcella(cliente3, 'PP678', 432455653, 3444, 'marco')
+parcella2.creaParcella(cliente1, 'PP123', 583928493, 2000, 'francesca')
+parcella3.creaParcella(cliente1, 'PP678', 432455653, 3444, 'marco')
+print(cliente1.getDatiCliente()['parcelle'])
+print('si')
 #parcella1.getDatiParcellaCliente() #FUNZIONA UTILIZZANDOLO INSIEME A creaParcella
 #parcella1.ricercaParcellaCliente(cliente1) #FUNZIONA
 #parcella1.ricercaParcellaIntestatario('giorgio') #FUNZIONA
@@ -117,8 +119,8 @@ parcella1.getDatiParcellaCliente() #FUNZIONA
 parcella2.getDatiParcellaCliente()
 parcella3.getDatiParcellaCliente()
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-#udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-#udienza2.creaUdienza(avvocato2, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
+udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
+udienza2.creaUdienza(avvocato2, 'Roma', cliente1, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
 #udienza1.getDatiUdienza() #FUNZIONA
 #udienza2.getDatiUdienza() #FUNZIONA
 #listaUdienze = udienza1.ricercaUdienzaCliente(cliente1) #DA RICONTROLLARE DOPO AVER SISTEMATO LA CLASSE CLIENTE

@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
-
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
 
 class VistaHomeAvvocato(QWidget):
 
@@ -42,9 +42,9 @@ class VistaHomeAvvocato(QWidget):
 
     def reachUdienze(self):
         pass
-        #self.vistaAppuntamenti = VistaHomeAppuntamentiA()
-        #self.vistaAppuntamenti.show()
-        #self.close()
+        self.vistaUdienze = VistaHomeUdienze()
+        self.vistaUdienze.show()
+        self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VistaHome import VistaHome
