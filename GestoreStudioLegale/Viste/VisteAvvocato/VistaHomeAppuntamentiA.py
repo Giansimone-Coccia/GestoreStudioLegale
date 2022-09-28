@@ -125,25 +125,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
             i += 1
 
-            # print("ciao56")
-            # if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-
-            # if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
-            # print(appuntamento)
-            # print("fatto")
-            # return appuntamento.getDatiAppuntamento()
-            print("ciao56")
-            if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-            #if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            #if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
-                print(appuntamento)
-                print("fatto")
-                return appuntamento.getDatiAppuntamento()
-
-
     def getNum(self):
         n = 0
         self.loadDateAp()

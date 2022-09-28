@@ -5,7 +5,7 @@ import pyqtgraph as pg'''
 #from _curses import window
 #from _curses import window
 
-from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries, QStackedBarSeries
+'''from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries, QStackedBarSeries
 from PyQt5.Qt import Qt
 from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView
 from PyQt5.QtGui import QPainter
@@ -56,3 +56,4 @@ class VistaVisualizzaStatistiche(QMainWindow):
         chartView = QChartView(chart)
         chartView.setRenderHint(QPainter.Antialiasing)
         self.setCentralWidget(chartView)
+    '''

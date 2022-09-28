@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
                              QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
                              QVBoxLayout, QCalendarWidget)
 
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
+from GestoreStudioLegale.Servizi.Appuntamento import *
 
 import sys
 
@@ -15,9 +15,9 @@ class RicercaAppuntamentoA(QDialog):
     def __init__(self):
         super(RicercaAppuntamentoA, self).__init__()
         self.textIn = QLineEdit()
-
-        self.combo = QComboBox()
         self.calendar = QCalendarWidget()
+        self.combo = QComboBox()
+
         self.layout = QFormLayout()
 
         self.createFormGroupBox()
@@ -46,40 +46,48 @@ class RicercaAppuntamentoA(QDialog):
         self.layout.insertRow(1, "ID:", self.textIn)
         #self.combo.activated.connect(self.indexScelta)
         self.formGroupBox.setLayout(self.layout)
-        layout.addRow(QLabel("Ricerca:"), self.textIn)
-        layout.addRow(QLabel("Filtro:"), self.combo)
-        self.combo.activated.connect(self.indexScelta)
-        self.combo.currentIndexChanged.connect(self.view)
-        self.formGroupBox.setLayout(layout)
+        #self.layout.addRow(QLabel("Ricerca:"), self.textIn)
+        #self.layout.addRow(QLabel("Filtro:"), self.combo)
+        #self.combo.activated.connect(self.indexScelta)
+        #self.combo.currentIndexChanged.connect(self.view)
+        self.formGroupBox.setLayout(self.layout)
 
     def indexScelta(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.AppuntamentoRicercatoA import AppuntamentoRicercatoA
-        cindex = self.combo.currentIndex()
-        code = self.textIn.text()
+        self.cindex = self.combo.currentIndex()
+        self.code = self.textIn.text()
+        print(self.cindex)
 
-        if cindex == 0:
+        if self.cindex == 0:
             #code = self.textIn.text()
+            print(self.code)
             self.subWindow = AppuntamentoRicercatoA()
-            self.subWindow.setData(lambda: Appuntamento.ricercaAppuntamentoID(code))
-            self.subWindow.show()
-            self.close()
+            print("1")
+            print(Appuntamento.ricercaAppuntamentoID(self.code)) #VUOTO
+            #self.subWindow.setData(Appuntamento.ricercaAppuntamentoID(self.code))
+            print("2")
+            #self.subWindow.show()
+            #self.close()
 
-        elif cindex == 1:
-            self.dataSelezionata = self.calendar.selectedDate()
-            self.subWindow = AppuntamentoRicercatoA()
+        #elif self.cindex == 1:
+            #self.dataSelezionata = self.calendar.selectedDate()
+            #self.subWindow = AppuntamentoRicercatoA()
             #self.subWindow.setData(lambda: Appuntamento.ricercaAppuntamentoDataInizio(dataSelezionata))
-            self.subWindow.show()
-            self.close()
+            #self.subWindow.show()
+            #self.close()
 
     def changeview(self):
-        cindex = self.combo.currentIndex()
-        if cindex == 0:
+
+        self.cindex = self.combo.currentIndex()
+
+        if self.cindex == 0:
             #print(self.layout.getWidgetPosition(self.calendar))
-            self.layout.removeRow(1)
-            self.layout.insertRow(1,"ID:", self.textIn) #PROBLEMA INSERIMENTO QUI
+            self.layout.removeRow(self.calendar)
+            self.layout.insertRow(1,"ID:", self.textIn) #PROBLEMA QUI
             #print(self.layout.getWidgetPosition(self.calendar))
-        elif cindex == 1:
-            self.layout.removeRow(1)
+        elif self.cindex == 1:
+            #self.layout.removeRow(1)
+            self.layout.removeRow(self.textIn)
             self.layout.insertRow(1,"Calendario:", self.calendar)
 
 

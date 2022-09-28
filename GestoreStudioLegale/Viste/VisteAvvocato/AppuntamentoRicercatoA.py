@@ -79,6 +79,7 @@ class AppuntamentoRicercatoA(QMainWindow):
         from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
         self.vistaAvvocatoR = RicercaAppuntamentoA()
         self.vistaAvvocatoR.show()
+        self.close()
 
     def loadDateAp(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
@@ -89,40 +90,21 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.loadDateAp()
         tool = Tools()
         i = 0
-        for appuntamento in self.appuntamentiList:
-            label = QLabel()
-            print("ciao")
-            label.setText(
-                'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}")
-            label.setGeometry(QRect(0, 0, 350, 20))
-            label.setFont(QFont('Arial', 10))
-            label.setStyleSheet("border: 1px solid black;")
-            print("ciao2")
-            self.grid.addWidget(label,i,1,1,2)
-            i += 1
-            self.grid.addWidget(tool.createButton("Modifica", self.aggiornaAppuntamento), i, 1)
-            self.grid.addWidget(
-                tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
-            i += 1
-
-            # print("ciao56")
-            # if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-
-            # if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
-            # print(appuntamento)
-            # print("fatto")
-            # return appuntamento.getDatiAppuntamento()
-
-            print("ciao56")
-            if appuntamento.Avvocato.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-            #if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            # if 'jhsdkcdks' == str(tool.leggi(n=0)).rsplit()[0]:
-            #if 'djskorfl' == str(tool.leggi(n=0)).rsplit()[0]:
-                print(appuntamento)
-                print("fatto")
-                return appuntamento.getDatiAppuntamento()
+        #for appuntamento in self.appuntamentiList:
+        label = QLabel()
+        print("ciao")
+        label.setText(
+            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app.getDatiAppuntamento()['Data e Ora Fine']}")
+        label.setGeometry(QRect(0, 0, 350, 20))
+        label.setFont(QFont('Arial', 10))
+        label.setStyleSheet("border: 1px solid black;")
+        print("ciao2")
+        self.grid.addWidget(label,i,1,1,2)
+        i += 1
+        self.grid.addWidget(tool.createButton("Modifica", self.aggiornaAppuntamento), i, 1)
+        self.grid.addWidget(
+            tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
+        i += 1
 
     def setData(self,appuntamento):
-        self.appuntamento = appuntamento
+        self.app = appuntamento
