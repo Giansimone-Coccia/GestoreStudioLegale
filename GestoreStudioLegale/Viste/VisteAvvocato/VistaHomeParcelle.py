@@ -5,11 +5,13 @@ import pickle
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-
+from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 class VistaHomeParcelle(QMainWindow):
 
     parcelleList = []
+    avvocatiList = []
     clientiList = []
     tool = Tools()
 
@@ -17,27 +19,10 @@ class VistaHomeParcelle(QMainWindow):
         super(VistaHomeParcelle, self).__init__(parent)
         self.scroll = QScrollArea()
         self.widget = QWidget()
-        grifLayout = QGridLayout()
-        grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
-        textLabel1 = QLabel()
-        textLabel2 = QLabel()
-        textLabel1.setText("Di seguito la lista delle parcelle con le informazioni relative al cliente")
-        textLabel1.setGeometry(QRect(0, 0, 200, 150))
-        textLabel1.setFont(QFont('Arial', 10))
-        textLabel2.setText('Cliente: '+'\n'+ 'NOME: '+f"{self.getDatiC()['Nome']}"+ '\n'+'COGNOME: '+f"{self.getDatiC()['Cognome']}"+'\n'+'ID: '+f"{self.getDatiC()['Id']}"+'\n'+'CODICE FISCALE: '+f"{self.getDatiC()['Codice fiscale']}"+'\n'+'EMAIL: '+f"{self.getDatiC()['Email']}"+'\n'+'NUMERO TELEFONO: '+f"{self.getDatiC()['Numero telefono']}")
-        textLabel2.setGeometry(QRect(0, 0, 350, 10))
-        textLabel2.setFont(QFont('Times', 10))
-        textLabel2.setStyleSheet("border: 1px solid black;")
-        textLabel3 = QLabel()
-        textLabel3.setText('Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.getDatiP()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.getDatiP()['importo']}"+'€'+'\n'+'ID: '+f"{self.getDatiP()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.getDatiP()['identificativo']}")
-        textLabel3.setGeometry(QRect(0, 0, 350, 20))
-        textLabel3.setFont(QFont('Arial', 10))
-        textLabel3.setStyleSheet("border: 1px solid black;")
-        grifLayout.addWidget(textLabel2, 1, 1)
-        grifLayout.addWidget(textLabel1, 2, 1)
-        grifLayout.addWidget(textLabel3, 3, 1)
-        #self.setLayout(grifLayout)
-        self.widget.setLayout(grifLayout)
+        self.grifLayout = QGridLayout()
+        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
+        self.getDatiP()
+        self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
@@ -50,10 +35,58 @@ class VistaHomeParcelle(QMainWindow):
 
     def getDatiP(self):
         self.parcelleList = self.tool.loadParcelle()
+        self.avvocatiList = self.tool.loadAvvocati()
         tool = Tools()
-        for parcella in self.parcelleList:
-            if parcella.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                return parcella.getDatiParcellaCliente()
+        parc = []
+        i=0
+
+        print("ca")
+        #print(avvocato.getDatiAvvocato()['clienti'])
+
+        for avvocato in self.avvocatiList:
+            print("noia")
+            print (self.tool.leggi().rsplit()[0])
+            print (avvocato.codiceFiscale)
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
+               print("coglione")
+               print(avvocato.getDatiAvvocato()['clienti'])
+               clienti = avvocato.getDatiAvvocato()['clienti']
+               print("ciao")
+               print(clienti)
+               print("cag")
+               for cliente in clienti:
+                    print("cioooo")
+                    for parcella in self.parcelleList:
+                        if parcella.Cliente.codiceFiscale == cliente.codiceFiscale:
+                            print("cad")
+                            parc.append(parcella)
+                            print (parc)
+
+        for p in parc:
+            label = QLabel()
+            print(p)
+            label.setText(
+                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{p.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{p.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{p.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{p.getDatiParcellaCliente()['identificativo']}")
+            label.setGeometry(QRect(0, 0, 350, 20))
+            label.setFont(QFont('Arial', 10))
+            label.setStyleSheet("border: 1px solid black;")
+            print("ciao2")
+            self.grifLayout.addWidget(label,i,1,1,2)
+            i += 1
+            self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaParcella), i, 1)
+            self.grifLayout.addWidget(
+                tool.createButton("Elimina", self.rimuoviParcella),i,2)
+            i += 1
+            print("cos")
+
+    def aggiungiParcella(self):
+        pass
+
+    def aggiornaParcella(self):
+        pass
+
+    def rimuoviParcella(self):
+        pass
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
@@ -64,7 +97,7 @@ class VistaHomeParcelle(QMainWindow):
                     return cliente.getDatiCliente()
 
     def rewind1(self):
-        from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
-        self.vistaHome = VistaHomeCliente()
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
+        self.vistaHome = VistaHomeAvvocato()
         self.vistaHome.show()
         self.close()
