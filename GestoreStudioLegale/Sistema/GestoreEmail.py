@@ -16,6 +16,7 @@ class GestoreEmail:
         self.Appuntamento = None
         self.appuntamentiList = []
         self.tool = Tools()
+        self.destinatario = ""
 
     def invioEmail(self):
       try:
@@ -28,7 +29,10 @@ class GestoreEmail:
         email.ehlo()
         email.starttls()
         email.login("ProgettoStudioLegale0@gmail.com", "bzpklkbsziismfdv")
-        email.sendmail("ProgettoStudioLegale0@gmail.com", "giansimone.coccia01@gmail.com", messaggio.encode('utf-8'))
+
+
+        #emailDestinatari =
+        email.sendmail("ProgettoStudioLegale0@gmail.com", "destinatario" , messaggio.encode('utf-8'))
         email.quit()
       except Exception:
         print("eccezione")
@@ -36,7 +40,7 @@ class GestoreEmail:
     def getDatiApp(self):
         self.appuntamentiList = self.tool.loadAppuntamenti()
         for appuntamento in self.appuntamentiList:
-            if appuntamento.getDatiAppuntamento()['Data e Ora Inizio'] == datetime.now().replace(second=0, microsecond=0)- timedelta(days=1):
+            if appuntamento.getDatiAppuntamento()['Data e Ora Inizio'] == datetime.now().replace(second=0, microsecond=0) + timedelta(days=1):
                 return appuntamento.getDatiAppuntamento()
 
 

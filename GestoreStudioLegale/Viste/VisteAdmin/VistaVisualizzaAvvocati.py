@@ -20,7 +20,7 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(tool.createButton("Aggiungi", self.aggiungiAvvocato), 0, 1,1,2)
+        self.grifLayout.addWidget(tool.createButton("Aggiungi", self.aggiungiAvvocato,baseS=160*3,maxBase=160*4), 0, 1,1,2)
         self.grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText("Di seguito la lista degli avvocati")

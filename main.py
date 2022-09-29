@@ -188,8 +188,8 @@ parcelleL = [parcella1, parcella2, parcella3]
 #print(cliente8)
 #appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
 #appuntamento2.creaAppuntamento(cliente2, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
-#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '25/09/2022,12:54','30/09/2022,16:00', 'A767y5', 'civile')
-#appuntamento4.creaAppuntamento(cliente2, avvocato1,  '25/09/2022,13:05','30/09/2022,16:00', 'A5825667', 'civile')
+#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:26','30/09/2022,16:00', 'A76fry5', 'civile')
+#appuntamento4.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:21','30/09/2022,16:00', 'A5825667', 'civile')
 #email.invioEmail()
 
 if __name__ == '__main__':
