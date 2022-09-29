@@ -52,44 +52,37 @@ class VistaAggiornaCliente(QWidget):
         udienze =self.cliente.udienza
         corsiAgg = self.cliente.corsoAggiornamento
 
-        Cliente.rimuoviCliente(self.cliente.getDatiCliente()["Id"])
+        nome = self.breve('nome',self.cliente.getDatiCliente()["Nome"],1,'o')
 
-        x = self.breve('nome',self.cliente.getDatiCliente()["Nome"],1,'o')
-        if x is not False: self.cliente.nome = x
-        else: return
+        cognome = self.breve('cognome',self.cliente.getDatiCliente()["Cognome"],2,'o')
 
-        x = self.breve('cognome',self.cliente.getDatiCliente()["Cognome"],2,'o')
-        if x is not False: self.cliente.cognome = x
-        else: return
-
-        x = self.breve('codice fiscale',self.cliente.getDatiCliente()["Codice fiscale"],3,'o')
-        if x is not False:self.cliente.codiceFiscale = x
-        else: return
+        cd = self.breve('codice fiscale',self.cliente.getDatiCliente()["Codice fiscale"],3,'o')
 
         '''x = self.breve('data di nascita',self.cliente.getDatiCliente()["Data nascita"],4,'o')
         if x is not False: self.cliente.dataNascita = x
         else: return'''
         item = self.layout.itemAtPosition(4, 1).widget()
+        date = None
         if self.cliente.getDatiCliente()["Data nascita"] == item.text():
             self.error(f"Hai inseirto la stessa data di nascita")
             return
         elif str(self.cliente.getDatiCliente()["Data nascita"])!= item.text() and item.text() != "":
-            x = str(item.text())
-            z = x.split("/")
+            data = str(item.text())
+            z = data.split("/")
             y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
-            if(len(x)>5):
-                y = x[2] != "/" and x[5] != '/'
+            if(len(data)>6):
+                y = data[2] != "/" and data[5] != '/'
                 if y:
                     self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                     return
                 elif y1:
                     try:
-                        date = datetime.datetime.strptime(x, "%d/%m/%Y")
+                        date = datetime.strptime(data, "%d/%m/%Y")
                         if date > datetime.now():
                             self.error("Data non valida inserita, la data che hai inserito è futura")
                             return
                         self.string += f"data di nascita, "
-                        self.cliente.dataNascita= date.strftime("%d/%m/%Y")
+                        dataT = True
                     except ValueError:
                         self.error("Data non valida inserita")
                         return
@@ -103,40 +96,58 @@ class VistaAggiornaCliente(QWidget):
 
 
 
-        x = self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a')
-        if x is not False: self.cliente.email = x
-        else: return
+        email = self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a')
 
         item = self.layout.itemAtPosition(6, 1).widget()
-        x = str(item.text())
+        id = str(item.text())
         if str(self.cliente.getDatiCliente()["Id"]) == item.text():
             self.error("Hai inseirto lo stesso Id")
             return
         elif str(self.cliente.getDatiCliente()["Id"]) != item.text() and item.text() != "":
             if cliente.ricercaUtilizzatoreId(item.text()) is None:
                 self.string += f"id, "
-                self.cliente.id = x
             else:
                 self.error("Hai inserito l'id di un cliente già esistente")
                 return
 
         item = self.layout.itemAtPosition(7, 1).widget()
-        x = str(item.text())
+        number = str(item.text())
         if str(self.cliente.getDatiCliente()["Numero telefono"]) == item.text():
             self.error("Hai inseirto lo stesso numero di telefono")
             return
         elif str(self.cliente.getDatiCliente()["Numero telefono"])!= item.text() and item.text() != "":
             if len(str(item.text())) == 10 and str(item.text()).isdigit() :
                 self.string += f"numero di telefono, "
-                self.cliente.numeroTelefono = x
             else:
                 self.error("Hai sbagliato il formato del numero di telefono, devi inserire 10 numeri")
                 return
 
 
-        x = self.breve('password',self.cliente.getDatiCliente()["Password"],8,'a')
-        if x is not False: self.cliente.password = x
+        password = self.breve('password',self.cliente.getDatiCliente()["Password"],8,'a')
+
+        print("yolo")
+
+        Cliente.rimuoviCliente(self.cliente.getDatiCliente()["Id"])
+
+        if nome is not False: self.cliente.nome = nome
         else: return
+        if cognome is not False:self.cliente.cognome = cognome
+        else: return
+        if cd is not False:self.cliente.codiceFiscale = cd
+        else: return
+        if date is not None: self.cliente.dataNascita = date
+
+        if email is not False:self.cliente.email = email
+        else: return
+        if id != "":self.cliente.id = id
+
+        if number != "": self.cliente.numeroTelefono=number
+
+        if password is not False:self.cliente.password = password
+        else:return
+
+        print(self.cliente)
+
 
         self.string = self.string[:-2]
         print(self.cliente.nome)

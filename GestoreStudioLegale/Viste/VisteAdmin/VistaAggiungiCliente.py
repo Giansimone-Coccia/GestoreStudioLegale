@@ -15,7 +15,7 @@ class VistaAggiungiCliente(QWidget):
 
         tool = Tools()
         self.gestore = GestoreSistema()
-        self.setWindowTitle('Modifica cliente')
+        self.setWindowTitle('Aggiungi cliente')
         self.resize(500, 120)
         self.layout = QGridLayout()
         self.layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
@@ -62,22 +62,23 @@ class VistaAggiungiCliente(QWidget):
         item = self.layout.itemAtPosition(4, 1).widget()
         x = item.text()
         date = None
-        if(len(x)>5):
+        if (len(x) > 6):
             y = x[2] != "/" and x[5] != '/'
+            print("yup")
             if y:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
             else:
                 try:
-                    date = datetime.datetime.strptime(item.text(), "%d/%m/%Y")
+                    print("shit")
+                    date = datetime.strptime(item.text(), "%d/%m/%Y")
+                    print(date)
                     if date > datetime.now():
-                        self.error("Data non valida inserita, la dat che hai inserito è futura")
+                        self.error("Data non valida inserita, la data che hai inserito è futura")
                         return
                 except ValueError:
                     self.error("Data non valida inserita")
                     return
-
-
         else:
             self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
             return

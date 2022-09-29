@@ -1,3 +1,4 @@
+
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
 from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
@@ -15,7 +16,7 @@ class VistaAggiungiAvvocato(QWidget):
 
         tool = Tools()
         self.gestore = GestoreSistema()
-        self.setWindowTitle('Modifica avvocato')
+        self.setWindowTitle('Aggiungi avvocato')
         self.resize(500, 120)
         self.layout = QGridLayout()
         self.layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
@@ -31,6 +32,7 @@ class VistaAggiungiAvvocato(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
+        print("999")
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
@@ -51,6 +53,7 @@ class VistaAggiungiAvvocato(QWidget):
         i = 0
         item = self.layout.itemAtPosition(i+1, 1).widget()
         avvocato = Avvocato()
+        print("ioo")
 
         while i < 8:
             if item.text() == "":
@@ -58,32 +61,36 @@ class VistaAggiungiAvvocato(QWidget):
                 return
             i+=1
             item = self.layout.itemAtPosition(i+1, 1).widget()
+        print("ciao")
 
         item = self.layout.itemAtPosition(4, 1).widget()
         x = item.text()
+        print(x)
         date = None
-        if(len(x)>5):
+        if(len(x)>6):
             y = x[2] != "/" and x[5] != '/'
+            print("yup")
             if y:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
             else:
                 try:
-                    date = datetime.datetime.strptime(item.text(), "%d/%m/%Y")
+                    print("shit")
+                    date = datetime.strptime(item.text(), "%d/%m/%Y")
+                    print(date)
                     if date > datetime.now():
-                        self.error("Data non valida inserita, la dat che hai inserito è futura")
+                        self.error("Data non valida inserita, la data che hai inserito è futura")
                         return
                 except ValueError:
                     self.error("Data non valida inserita")
                     return
-
-
         else:
             self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
             return
 
         z = x.split("/")
         y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
+        print("888")
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
@@ -106,6 +113,7 @@ class VistaAggiungiAvvocato(QWidget):
         clienti = []
         licenza = []
         appuntamento = []
+        print("merda")
 
         avvocato.creaAvvocato(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
                               self.layout.itemAtPosition(1, 1).widget().text(),corsiAgg,date.strftime("%d/%m/%Y"), self.layout.itemAtPosition(5, 1).widget().text(),
@@ -115,14 +123,14 @@ class VistaAggiungiAvvocato(QWidget):
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Creazione avvenuta con successo')
-        self.msg.setText("Hai creato con successo un nuovo cliente")
+        self.msg.setText("Hai creato con successo un nuovo avvocato")
         self.msg.exec()
         self.rewind()
 
 
 
     def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
-        self.vistaVisualizza = VistaVisualizzaClienti()
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
+        self.vistaVisualizza = VistaVisualizzaAvvocati()
         self.vistaVisualizza.show()
         self.close()
