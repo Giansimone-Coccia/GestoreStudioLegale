@@ -16,7 +16,7 @@ class AppuntamentoRicercatoA(QMainWindow):
     #app = Appuntamento()
 
 
-    def _init_(self, parent=None):
+    def __init__(self, parent=None):
         super(AppuntamentoRicercatoA, self).__init__(parent)
         # super().init()
         self.initUI()
