@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox, QPushButton, \
-    QSizePolicy
+    QSizePolicy, QHBoxLayout
 import pickle
 import os
 
@@ -18,23 +18,30 @@ class VistaVisualizzaClienti(QMainWindow):
     def __init__(self, parent=None):
         super(VistaVisualizzaClienti, self).__init__(parent)
         tool = Tools()
-        self.scroll = QScrollArea()
+
+        self.cWidget = QWidget()  # contiene tutto
+        self.outerLayout = QVBoxLayout()
+        self.button_layout = QHBoxLayout()
+        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()
+
         self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(tool.createButton("Aggiungi Cliente", self.aggiungiCliente), 0, 1,1,2)
-        self.grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        textLabel = QLabel()
-        textLabel.setText("Di seguito la lista dei clienti")
-        textLabel.setGeometry(QRect(0, 0, 200, 150))
-        textLabel.setFont(QFont('Arial', 10))
+
+        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addLayout(self.button_layout, 1)
+        self.outerLayout.addWidget(self.scroll, 8)
+        self.button_layout.addWidget(tool.createButton("Aggiungi Cliente", self.aggiungiCliente))
+        self.cWidget.setLayout(self.outerLayout)
+
         self.getDatiC()
         self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
+        self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
-        self.resize(700, 600)
+        self.resize(800, 600)
         self.setCentralWidget(self.scroll)
         self.setWindowTitle("Clienti")
 
