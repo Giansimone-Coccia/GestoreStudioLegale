@@ -68,10 +68,10 @@ class RicercaAppuntamentoA(QDialog):
             self.subWindow = AppuntamentoRicercatoA()
             print("1")
             app = self.app1.ricercaAppuntamentoID(self.code)
-            #self.subWindow.setData(app)
+            self.subWindow.setData(app)
             print("2")
-            #self.subWindow.show()
-            #self.close()
+            self.subWindow.show()
+            self.close()
 
         #elif self.cindex == 1:
             #self.dataSelezionata = self.calendar.selectedDate()
