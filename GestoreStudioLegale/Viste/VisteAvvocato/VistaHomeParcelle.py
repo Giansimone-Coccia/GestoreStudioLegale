@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
 import pickle
 import os
 
@@ -19,17 +19,38 @@ class VistaHomeParcelle(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaHomeParcelle, self).__init__(parent)
-        self.scroll = QScrollArea()
+        tool = Tools()
+        '''self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
         self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
+
+        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella), 0, 1)
+        self.grifLayout.addWidget(
+            tool.createButton("Cerca", self.cercaParcella), 0, 2)'''
+
+        self.cWidget = QWidget()  # contiene tutto
+        self.outerLayout = QVBoxLayout()
+        self.button_layout = QHBoxLayout()
+        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+
+        self.grifLayout = QGridLayout()
+
+        self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addLayout(self.button_layout, 1)
+        self.outerLayout.addWidget(self.scroll, 8)
+        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
+        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
+        self.cWidget.setLayout(self.outerLayout)
+
         self.getDatiP()
         self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
-        self.setCentralWidget(self.scroll)
+        self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
         self.setWindowTitle("Parcelle")
@@ -40,7 +61,7 @@ class VistaHomeParcelle(QMainWindow):
         self.avvocatiList = self.tool.loadAvvocati()
         tool = Tools()
         parc = []
-        i=0
+        i=1
 
         print("ca")
         print(self.parcelleList)
@@ -92,6 +113,9 @@ class VistaHomeParcelle(QMainWindow):
             i += 1
 
     def aggiungiParcella(self):
+        pass
+
+    def cercaParcella(self):
         pass
 
     def aggiornaParcella(self):

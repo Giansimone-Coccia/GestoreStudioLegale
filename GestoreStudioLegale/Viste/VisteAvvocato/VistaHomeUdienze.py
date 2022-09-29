@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
 import pickle
 import os
 
@@ -19,17 +19,42 @@ class VistaHomeUdienze(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaHomeUdienze, self).__init__(parent)
-        self.scroll = QScrollArea()
+        tool = Tools()
+
+
+        '''self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
         self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
+
+        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiUdienza), 0, 1)
+        self.grifLayout.addWidget(
+            tool.createButton("Cerca", self.cercaUdienza), 0, 2)'''
+
+        self.cWidget = QWidget()  # contiene tutto
+        self.outerLayout = QVBoxLayout()
+        self.button_layout = QHBoxLayout()
+        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+
+        self.grifLayout = QGridLayout()
+
+        self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addLayout(self.button_layout, 1)
+        self.outerLayout.addWidget(self.scroll, 8)
+        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiUdienza))
+        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaUdienza))
+        self.cWidget.setLayout(self.outerLayout)
+
         self.getDatiU()
         self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
-        self.setCentralWidget(self.scroll)
+
+        #self.setCentralWidget(self.scroll)
+        self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
         self.setWindowTitle("Parcelle")
@@ -41,7 +66,7 @@ class VistaHomeUdienze(QMainWindow):
         tool = Tools()
         ud = []
         clientiL = []
-        i=0
+        i=1
 
         print("ca")
         print(self.udienzeList)
@@ -100,6 +125,9 @@ class VistaHomeUdienze(QMainWindow):
         pass
 
     def rimuoviUdienza(self):
+        pass
+
+    def cercaUdienza(self):
         pass
 
     def getDatiC(self):
