@@ -1,10 +1,15 @@
+import datetime
+import os
+import pickle
+
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox, QComboBox, \
     QCalendarWidget
-from datetime import datetime, timedelta, time
+#from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
 
 
 class VistaAggiornaAppuntamentoA(QWidget):
@@ -28,8 +33,8 @@ class VistaAggiornaAppuntamentoA(QWidget):
                  '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
         self.ora.addItems(orari)
         confirmButton = QPushButton()
-        #confirmButton = self.tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
-        confirmButton = self.tool.createButton('Conferma appuntamento', lambda checked, a = self.appuntamento: self.confermaAppuntamento(a))
+        confirmButton = self.tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
+        #confirmButton = self.tool.createButton('Conferma appuntamento', lambda checked, a = self.appuntamento: self.confermaAppuntamento(a))
         self.calendar = QCalendarWidget()
         self.calendar.clicked.connect(self.selezionaData)
         self.dataSelezionata = None
@@ -46,15 +51,9 @@ class VistaAggiornaAppuntamentoA(QWidget):
         self.show()
 
     def rewind(self):
-        self.vistaHome = VistaAggiornaAppuntamentoA()
+        self.vistaHome = VistaHomeAppuntamentiA()
         self.vistaHome.show()
         self.close()
-
-    def error(self, name):
-        self.msg = QMessageBox()
-        self.msg.setWindowTitle('ERRORE')
-        self.msg.setText(name)
-        self.msg.exec()
 
     def selezionaData(self):
         self.dataSelezionata = self.calendar.selectedDate()
@@ -65,4 +64,87 @@ class VistaAggiornaAppuntamentoA(QWidget):
     def confermaAppuntamento(self):
         for appuntamento in self.appuntamentiList:
             if appuntamento.ID == self.appuntamento.ID:
-                pass #finisci
+                hour = self.ora.currentText()
+                if not self.convalida():
+                    hourDT = datetime.datetime.strptime(hour, "%H:%M")
+                    #oraFine = hourDT+datetime.timedelta(hours = 1) #FAI MINUTI SE OGNI MEZZ'ORA
+                    oraFine = hourDT + datetime.timedelta(minutes=30)
+                    self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+                    dateS = self.pyDate.strftime("%d/%m/%Y")
+                    dataOraInizio = dateS + ',' + hour
+                    dataOraFine = dateS + ',' + oraFine.strftime("%H:%M")
+                    appuntamento.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
+                    appuntamento.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
+                    if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
+                        with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'wb') as f1:
+                            pickle.dump(self.appuntamentiList, f1, pickle.HIGHEST_PROTOCOL)
+                    self.conferma()
+
+    def conferma(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Appuntamento confermato")
+        msg.setText("Il suo appuntamento è stato modificato con successo")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+        self.vistaPrima = VistaHomeAppuntamentiA()
+        self.vistaPrima.show()
+        self.close()
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("ERRORE")
+        msg.setText("Non è possibile modificarlo per questo giorno, riprovi")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+        self.vistaPrec = VistaHomeAppuntamentiA()
+        self.vistaPrima.show()
+        self.close()
+
+    def convalida(self):
+            if self.year is None and self.month is None and self.day is None:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRORE")
+                msg.setText("Data non selezionata, riprova")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+                #self.rewind()
+                return True
+            try:
+                date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+                hour = self.ora.currentText()
+                hourT = datetime.datetime.strptime(hour, "%H:%M")
+                timeMin = datetime.datetime.strptime('09:00', '%H:%M')
+                timeMax = datetime.datetime.strptime('17:00', '%H:%M')
+                condition = False
+                #while condition:
+                if date < datetime.datetime.now():
+                    msg = QMessageBox()
+                    msg.setWindowTitle("ERRORE")
+                    msg.setText("Data precedente all'attuale, riprova")
+                    msg.setIcon(QMessageBox.Critical)
+                    msg.exec_()
+                    condition = True
+                    return condition
+                elif hourT < timeMin or hourT > timeMax:
+                    msg = QMessageBox()
+                    msg.setWindowTitle("ERRORE")
+                    msg.setText("Lo studio rimarrà aperto dalle 09:00 alle 17:00")
+                    msg.setIcon(QMessageBox.Critical)
+                    msg.exec_()
+                    condition = True
+                    return condition
+                elif date.weekday() == 5 or date == 6:
+                    msg = QMessageBox()
+                    msg.setWindowTitle("ERRORE")
+                    msg.setText("Lo studio è chiuso durante il week-end")
+                    msg.setIcon(QMessageBox.Critical)
+                    msg.exec_()
+                    condition = True
+                    return condition
+            except Exception as e:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRORE")
+                msg.setText("Riprova")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+                return
