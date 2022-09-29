@@ -13,13 +13,13 @@ import os
 class AppuntamentoRicercatoA(QMainWindow):
     appuntamentiList = []
 
-    #app = Appuntamento()
-
+    app1 = Appuntamento()
 
     def __init__(self, parent=None):
         super(AppuntamentoRicercatoA, self).__init__(parent)
         # super().init()
         self.initUI()
+        self.app1 = self.app
 
     def initUI(self):
         tool = Tools()
@@ -94,13 +94,13 @@ class AppuntamentoRicercatoA(QMainWindow):
         i = 0
         # for appuntamento in self.appuntamentiList:
         label = QLabel()
-        print("miaoooo")
+        print("miaoooooooo")
         label.setText(
-            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app.getDatiAppuntamento()['Data e Ora Fine']}")
+            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app1.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app1.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app1.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app1.getDatiAppuntamento()['Data e Ora Fine']}")
         label.setGeometry(QRect(0, 0, 350, 20))
         label.setFont(QFont('Arial', 10))
         label.setStyleSheet("border: 1px solid black;")
-        print("ciao2")
+        print("ciao22")
         self.grid.addWidget(label, i, 1, 1, 2)
         i += 1
         self.grid.addWidget(tool.createButton("Modifica", self.aggiornaAppuntamento), i, 1)
@@ -109,5 +109,4 @@ class AppuntamentoRicercatoA(QMainWindow):
         i += 1
 
     def setData(self, appuntamento):
-        app = appuntamento
-        print(app.getDatiAppuntamento()['Tipo Procedimento'])
+        self.app = appuntamento
