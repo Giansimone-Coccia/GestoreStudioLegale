@@ -18,19 +18,27 @@ class VistaVisualizzaClienti(QMainWindow):
     def __init__(self, parent=None):
         super(VistaVisualizzaClienti, self).__init__(parent)
         tool = Tools()
+        '''self.scroll = QScrollArea()
+        self.widget = QWidget()
+        self.grifLayout = QGridLayout()
+        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
+
+        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella), 0, 1)
+        self.grifLayout.addWidget(
+            tool.createButton("Cerca", self.cercaParcella), 0, 2)'''
 
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()
+        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
 
         self.grifLayout = QGridLayout()
 
         self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Aggiungi Cliente", self.aggiungiCliente))
+        self.button_layout.addWidget(tool.createButton("Inserisci",self.aggiungiCliente))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiC()
@@ -42,8 +50,8 @@ class VistaVisualizzaClienti(QMainWindow):
         self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
-        self.setCentralWidget(self.scroll)
-        self.setWindowTitle("Clienti")
+        self.setWindowTitle("Parcelle")
+        self.show()
 
     def loadDateC(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
@@ -53,7 +61,7 @@ class VistaVisualizzaClienti(QMainWindow):
     def getDatiC(self):
         self.loadDateC()
         tool=Tools()
-        i=2
+        i=1
         for cliente in self.clientiList:
             textLabel = QLabel()
             textLabel.setText('Cliente: ' + '\n' + 'NOME: ' + f"{cliente.getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{cliente.getDatiCliente()['Cognome']}"+ '\n'+ 'DATA DI NASCITA: ' + f"{cliente.getDatiCliente()['Data nascita']}" + '\n' + 'ID: ' + f"{cliente.getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{cliente.getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{cliente.getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{cliente.getDatiCliente()['Numero telefono']}")
