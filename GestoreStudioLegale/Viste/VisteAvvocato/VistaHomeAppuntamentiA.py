@@ -89,9 +89,10 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.vistaAvvocatoR = RicercaAppuntamentoA()
         self.vistaAvvocatoR.show()
 
-    def aggiornaAppuntamento(self):
+    def aggiornaAppuntamento(self, appuntamento):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaAppuntamentoA import VistaAggiornaAppuntamentoA
         self.vistaAggiorna = VistaAggiornaAppuntamentoA()
+        self.vistaAggiorna.appuntamento = appuntamento
         self.vistaAggiorna.show()
         self.close()
 
@@ -135,10 +136,10 @@ class VistaHomeAppuntamentiA(QMainWindow):
             print("ciao2")
             self.grid.addWidget(label,i,1,1,2)
             i += 1
-            self.grid.addWidget(tool.createButton("Modifica", self.aggiornaAppuntamento), i, 1)
+            self.grid.addWidget(tool.createButton("Modifica", lambda checked,  a = appuntamento: self.aggiornaAppuntamento(a)), i, 1)
             print("yugdbskjavsu")
             self.grid.addWidget(
-                tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
+                tool.createButton("Elimina", lambda checked, a = appuntamento: self.rimuoviAppuntamento(appuntamento.getDatiAppuntamento()['ID'])), i, 2)
                 #tool.createButton("Elimina", self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
             i += 1
 

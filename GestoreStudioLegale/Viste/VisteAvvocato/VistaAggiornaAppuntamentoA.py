@@ -62,7 +62,7 @@ class VistaAggiornaAppuntamentoA(QWidget):
         self.day = self.dataSelezionata.day()
         self.month = self.dataSelezionata.month()
 
-    def confermaAppuntamento(self, appuntamento):
+    def confermaAppuntamento(self):
         for appuntamento in self.appuntamentiList:
-            if appuntamento.ID == True: #appuntamento acquisito
-                pass
+            if appuntamento.ID == self.appuntamento.ID:
+                pass #finisci
