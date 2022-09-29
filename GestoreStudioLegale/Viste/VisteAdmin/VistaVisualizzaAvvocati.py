@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox, QHBoxLayout
 import pickle
 import os
 
@@ -18,12 +18,19 @@ class VistaVisualizzaAvvocati(QMainWindow):
         super(VistaVisualizzaAvvocati, self).__init__(parent)
         tool = Tools()
 
-        self.scroll = QScrollArea()
-        self.widget = QWidget()
+        self.cWidget = QWidget()  # contiene tutto
+        self.outerLayout = QVBoxLayout()
+        self.button_layout = QHBoxLayout()
+        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+
         self.grifLayout = QGridLayout()
 
-        self.grifLayout.addWidget(tool.createButton("Aggiungi", self.aggiungiAvvocato,baseS=160*3,maxBase=160*4), 0, 1,1,2)
-        self.grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addLayout(self.button_layout, 1)
+        self.outerLayout.addWidget(self.scroll, 8)
+        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiAvvocato))
+        self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiA()
         self.widget.setLayout(self.grifLayout)
@@ -31,10 +38,11 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
+        self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
-        self.resize(700, 600)
-        self.setCentralWidget(self.scroll)
+        self.resize(800, 600)
         self.setWindowTitle("Avvocati")
+        self.show()
 
     def loadDateA(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):

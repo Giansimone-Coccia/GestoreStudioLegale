@@ -50,7 +50,7 @@ class VistaVisualizzaClienti(QMainWindow):
         self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
-        self.setWindowTitle("Parcelle")
+        self.setWindowTitle("Clienti")
         self.show()
 
     def loadDateC(self):
