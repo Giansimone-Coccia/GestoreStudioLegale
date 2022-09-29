@@ -48,26 +48,37 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.show()
 
     def getDatiA(self):
-        print("ciao6")
-        tool = Tools()
+        #self.appuntamentiList = self.tool.loadAppuntamenti()
+        #self.clientiList = self.tool.loadClienti()
         i = 1
-
-        print("ciao7")
         for appuntamento in self.appuntamentiList:
-            label = QLabel()
-            print("ciao8")
-            label.setText(
-                'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}")
-            label.setGeometry(QRect(0, 0, 350, 20))
-            label.setFont(QFont('Arial', 10))
-            print("ciao9")
-            label.setStyleSheet("border: 1px solid black;")
-            print("ciao10")
-            self.grifLayout.addWidget(label, i, 1, 1, 2)
-            i += 1
+            #print(appuntamento.Cliente.codiceFiscale) #STAMPA TUTTI GLI APPUNTAMENTI
+            #print(self.getDatiC()['Codice fiscale'])
+            #if appuntamento.Cliente.codiceFiscale == self.getDatiC()['Codice fiscale']:
+            for cliente in self.clientiList:
+                if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
+                    #print(cliente.codiceFiscale)
+                    #print(appuntamento.Cliente.codiceFiscale)
+                    #print(type(cliente.codiceFiscale))
+                    #print(type(appuntamento.Cliente.codiceFiscale))
+                    #print("ciaoo3")
+                    label = QLabel()
+                    #print("ciaoo4")
+                    #label.setText(
+                        #'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}")
+                    label.setGeometry(QRect(0, 0, 350, 20))
+                    label.setText(
+                        'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
+                    label.setFont(QFont('Arial', 10))
+                    label.setStyleSheet("border: 1px solid black;")
+                    #print("ciaoo5")
+                    self.grifLayout.addWidget(label, i, 1, 1, 2)
+                    #print("ciao78")
+                    i += 1
+                    print("ciao89")
 
     def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
+        #self.clientiList = self.tool.loadClienti()
         for cliente in self.clientiList:
             if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
                 return cliente.getDatiCliente()
