@@ -87,7 +87,11 @@ cliente3.getDatiCliente()
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
 #cliente1.aggiornaCliente('almail@gmil.com')
 
+<<<<<<< HEAD
+avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+=======
 #avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', udienza1, listaClienti, licenze, appuntamentiAvvocato) #FUNZONA
+>>>>>>> cbc928a73b06f59c6d3215fd9dcb533a9caabbc2
 avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '23/12/1995', 'albe4382@outlook.com', 'B4783', 1233754, 'passAvv2', udienza2, listaClienti, licenze, appuntamentiAvvocato)
 #avvocato1.getDatiAvvocato() #FUNZIONA INISIME A CREAAVVOCATO
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
