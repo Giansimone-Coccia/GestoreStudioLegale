@@ -12,7 +12,7 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class GestoreEmail:
 
-    def __init__(self):
+    def init(self):
         self.Appuntamento = None
         self.appuntamentiList = []
         self.tool = Tools()
@@ -21,7 +21,7 @@ class GestoreEmail:
     def invioEmail(self):
       try:
         oggetto = "Si ricorda l'appuntamento presso lo studio legale \n"
-        contenuto = 'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiApp()['Tipo Procedimento']}"+'\n'+'ID: '+f"{self.getDatiApp()['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiApp()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiApp()['Data e Ora Fine']}"
+        contenuto = 'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiApp()['Tipo Procedimento']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiApp()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiApp()['Data e Ora Fine']}"
         messaggio = oggetto + contenuto
 
         email = smtplib.SMTP("smtp.gmail.com", 587)
@@ -30,9 +30,8 @@ class GestoreEmail:
         email.starttls()
         email.login("ProgettoStudioLegale0@gmail.com", "bzpklkbsziismfdv")
 
-
-        #emailDestinatari =
-        email.sendmail("ProgettoStudioLegale0@gmail.com", "destinatario" , messaggio.encode('utf-8'))
+        print(self.getDatiApp()['Cliente'].email)
+        email.sendmail("ProgettoStudioLegale0@gmail.com", self.getDatiApp()['Cliente'].email , messaggio.encode('utf-8'))
         email.quit()
       except Exception:
         print("eccezione")
@@ -42,6 +41,3 @@ class GestoreEmail:
         for appuntamento in self.appuntamentiList:
             if appuntamento.getDatiAppuntamento()['Data e Ora Inizio'] == datetime.now().replace(second=0, microsecond=0) + timedelta(days=1):
                 return appuntamento.getDatiAppuntamento()
-
-
-

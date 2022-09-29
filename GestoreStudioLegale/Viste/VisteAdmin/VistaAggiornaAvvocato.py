@@ -9,8 +9,8 @@ class VistaAggiornaAvvocato(QWidget):
 
     avvocato = Avvocato()
 
-    def __init__(self,parent = None):
-        super(VistaAggiornaAvvocato, self).__init__(parent)
+    def _init_(self,parent = None):
+        super(VistaAggiornaAvvocato, self)._init_(parent)
 
         tool = Tools()
         self.gestore = GestoreSistema()
@@ -45,7 +45,7 @@ class VistaAggiornaAvvocato(QWidget):
         self.string = ""
         print(self.avvocato.getDatiAvvocato()["Data nascita"])
 
-        appuntamenti = self.avvocato.appuntamentoCliente
+        appuntamenti = self.avvocato.appuntamentiAvvocato
         clienti = self.avvocato.clienti
         licenza =self.avvocato.licenza
         corsiAgg = self.avvocato.corsoAggiornamento
@@ -119,9 +119,9 @@ class VistaAggiornaAvvocato(QWidget):
 
         print("yolo")
 
-        Avvocato.rimuoviAvvocato(self.avvocato.getDatiAvvocato()["Id"])
 
-        if nome is not False:self.avvocato.nome = nome
+
+        '''if nome is not False:self.avvocato.nome = nome
         else:return
         if cognome is not False:self.avvocato.cognome = cognome
         else:return
@@ -136,7 +136,26 @@ class VistaAggiornaAvvocato(QWidget):
         if number != "": self.avvocato.numeroTelefono = number
 
         if password is not False:self.avvocato.password = password
-        else:return
+        else:return'''
+
+        complete = nome and cognome and cd and email and password
+
+        if complete is not False:
+            Avvocato.rimuoviAvvocato(self.avvocato.getDatiAvvocato()["Id"])
+            self.avvocato.nome = nome
+            self.avvocato.cognome = cognome
+            self.avvocato.codiceFiscale = cd
+            self.avvocato.email = email
+            self.avvocato.password = password
+
+            if date is not None:
+                self.avvocato.dataNascita = date.strftime("%d/%m/%Y")
+            if id != "":
+                self.avvocato.id = id
+            if number != "":
+                self.avvocato.numeroTelefono = number
+        else:
+            return
 
         print(self.avvocato)
 
@@ -147,9 +166,10 @@ class VistaAggiornaAvvocato(QWidget):
 
         item = self.layout.itemAtPosition(1, 1).widget()
         print(item.text())
-        avvocato =Avvocato()
+        avvocato = Avvocato()
 
-        avvocato.creaAvvocato(self.avvocato.getDatiAvvocato()["Codice fiscale"],self.avvocato.getDatiAvvocato()["Cognome"],self.avvocato.getDatiAvvocato()["Nome"],corsiAgg,
+        avvocato.creaAvvocato(self.avvocato.getDatiAvvocato()["Codice fiscale"],self.avvocato.getDatiAvvocato()["Cognome"],
+                              self.avvocato.getDatiAvvocato()["Nome"],corsiAgg,
                             self.avvocato.getDatiAvvocato()["Data nascita"],self.avvocato.getDatiAvvocato()["Email"],
                             self.avvocato.getDatiAvvocato()["Id"],self.avvocato.getDatiAvvocato()["Numero telefono"],
                             self.avvocato.getDatiAvvocato()["Password"],udienza,clienti,licenza,appuntamenti)

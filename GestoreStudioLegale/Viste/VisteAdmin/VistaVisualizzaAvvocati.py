@@ -14,18 +14,17 @@ class VistaVisualizzaAvvocati(QMainWindow):
 
     avvocatiList = []
 
-    def __init__(self, parent=None):
-        super(VistaVisualizzaAvvocati, self).__init__(parent)
+    def _init_(self, parent=None):
+        super(VistaVisualizzaAvvocati, self)._init_(parent)
         tool = Tools()
+
         self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
+
         self.grifLayout.addWidget(tool.createButton("Aggiungi", self.aggiungiAvvocato,baseS=160*3,maxBase=160*4), 0, 1,1,2)
         self.grifLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        textLabel = QLabel()
-        textLabel.setText("Di seguito la lista degli avvocati")
-        textLabel.setGeometry(QRect(0, 0, 200, 150))
-        textLabel.setFont(QFont('Arial', 10))
+
         self.getDatiA()
         self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)

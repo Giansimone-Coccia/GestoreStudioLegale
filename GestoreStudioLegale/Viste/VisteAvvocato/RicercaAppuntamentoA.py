@@ -12,8 +12,8 @@ class RicercaAppuntamentoA(QDialog):
     NumGridRows = 3
     NumButtons = 4
 
-    def __init__(self):
-        super(RicercaAppuntamentoA, self).__init__()
+    def _init_(self):
+        super(RicercaAppuntamentoA, self)._init_()
         self.textIn = QLineEdit()
         self.calendar = QCalendarWidget()
         self.combo = QComboBox()
@@ -21,6 +21,8 @@ class RicercaAppuntamentoA(QDialog):
         self.layout = QFormLayout()
 
         self.createFormGroupBox()
+
+        self.app1 = Appuntamento()
 
         buttonBox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         buttonBox.accepted.connect(self.indexScelta)
@@ -56,15 +58,17 @@ class RicercaAppuntamentoA(QDialog):
         from GestoreStudioLegale.Viste.VisteAvvocato.AppuntamentoRicercatoA import AppuntamentoRicercatoA
         self.cindex = self.combo.currentIndex()
         self.code = self.textIn.text()
+        #appuntamento = Appuntamento()
         print(self.cindex)
 
         if self.cindex == 0:
             #code = self.textIn.text()
             print(self.code)
+            print("sas")
             self.subWindow = AppuntamentoRicercatoA()
             print("1")
-            print(Appuntamento.ricercaAppuntamentoID(self.code)) #VUOTO
-            #self.subWindow.setData(Appuntamento.ricercaAppuntamentoID(self.code))
+            app = self.app1.ricercaAppuntamentoID(self.code)
+            #self.subWindow.setData(app)
             print("2")
             #self.subWindow.show()
             #self.close()

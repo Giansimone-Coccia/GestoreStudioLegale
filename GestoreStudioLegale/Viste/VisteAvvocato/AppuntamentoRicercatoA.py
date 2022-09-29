@@ -12,18 +12,20 @@ import os
 
 class AppuntamentoRicercatoA(QMainWindow):
     appuntamentiList = []
-    app = Appuntamento()
 
-    def __init__(self, parent=None):
-        super(AppuntamentoRicercatoA, self).__init__(parent)
-        # super()._init_()
+    #app = Appuntamento()
+
+
+    def _init_(self, parent=None):
+        super(AppuntamentoRicercatoA, self)._init_(parent)
+        # super().init()
         self.initUI()
 
     def initUI(self):
         tool = Tools()
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
-        #self.button_layout = QHBoxLayout()
+        # self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()  # Widget that contains the collection of Vertical Box
 
@@ -34,11 +36,11 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.cWidget.setLayout(self.outerLayout)
         self.getDatiAp()
 
-        #self.supWidget = QWidget()
+        # self.supWidget = QWidget()
 
         # button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento))
         # button_layout2.addWidget(self.createButton("Rimuovi", self.rimuoviAppuntamento))
-        #self.supWidget.setLayout(self.button_layout2)
+        # self.supWidget.setLayout(self.button_layout2)
 
         # self.vbox.addWidget(tool.rewindButton(self.rewind))
         self.widget.setLayout(self.grid)
@@ -90,21 +92,22 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.loadDateAp()
         tool = Tools()
         i = 0
-        #for appuntamento in self.appuntamentiList:
+        # for appuntamento in self.appuntamentiList:
         label = QLabel()
-        print("ciao")
+        print("miaoooo")
         label.setText(
             'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app.getDatiAppuntamento()['Data e Ora Fine']}")
         label.setGeometry(QRect(0, 0, 350, 20))
         label.setFont(QFont('Arial', 10))
         label.setStyleSheet("border: 1px solid black;")
         print("ciao2")
-        self.grid.addWidget(label,i,1,1,2)
+        self.grid.addWidget(label, i, 1, 1, 2)
         i += 1
         self.grid.addWidget(tool.createButton("Modifica", self.aggiornaAppuntamento), i, 1)
         self.grid.addWidget(
             tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
         i += 1
 
-    def setData(self,appuntamento):
-        self.app = appuntamento
+    def setData(self, appuntamento):
+        app = appuntamento
+        print(app.getDatiAppuntamento()['Tipo Procedimento'])
