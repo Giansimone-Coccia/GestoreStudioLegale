@@ -14,8 +14,8 @@ class VistaVisualizzaAvvocati(QMainWindow):
 
     avvocatiList = []
 
-    def _init_(self, parent=None):
-        super(VistaVisualizzaAvvocati, self)._init_(parent)
+    def __init__(self, parent=None):
+        super(VistaVisualizzaAvvocati, self).__init__(parent)
         tool = Tools()
 
         self.scroll = QScrollArea()

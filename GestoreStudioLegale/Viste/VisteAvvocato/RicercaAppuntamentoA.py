@@ -13,7 +13,7 @@ class RicercaAppuntamentoA(QDialog):
     NumButtons = 4
 
     def _init_(self):
-        super(RicercaAppuntamentoA, self)._init_()
+        super(RicercaAppuntamentoA, self).__init__()
         self.textIn = QLineEdit()
         self.calendar = QCalendarWidget()
         self.combo = QComboBox()

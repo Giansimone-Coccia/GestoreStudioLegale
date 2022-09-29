@@ -10,7 +10,7 @@ class VistaAggiornaCliente(QWidget):
     cliente = Cliente()
 
     def _init_(self,parent = None):
-        super(VistaAggiornaCliente, self)._init_(parent)
+        super(VistaAggiornaCliente, self).__init__(parent)
 
         tool = Tools()
         self.gestore = GestoreSistema()

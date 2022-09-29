@@ -10,7 +10,7 @@ class VistaAggiornaAvvocato(QWidget):
     avvocato = Avvocato()
 
     def _init_(self,parent = None):
-        super(VistaAggiornaAvvocato, self)._init_(parent)
+        super(VistaAggiornaAvvocato, self).__init__(parent)
 
         tool = Tools()
         self.gestore = GestoreSistema()
