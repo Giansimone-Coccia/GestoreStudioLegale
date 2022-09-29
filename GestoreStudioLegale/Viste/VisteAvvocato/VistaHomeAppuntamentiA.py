@@ -119,7 +119,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
         i = 0
         for appuntamento in self.appuntamentiList:
             label = QLabel()
-            print("ciao")
+            #print("ciao")
             '''textLabel2 = QLabel() #NON VISUALIZZA LE INFORMAZIONI DEL CLIENTE
             textLabel2.setText(
                 'Cliente: ' + '\n' + 'NOME: ' + f"{appuntamento.getDatiAppuntamento()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{appuntamento.getDatiAppuntamento()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{appuntamento.getDatiAppuntamento()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{appuntamento.getDatiAppuntamento()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{appuntamento.getDatiAppuntamento()['Cliente'].getDatiCliente()['Numero telefono']}")
