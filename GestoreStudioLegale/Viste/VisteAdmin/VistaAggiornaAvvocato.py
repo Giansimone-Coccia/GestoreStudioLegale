@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-
+from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -30,7 +30,6 @@ class VistaAggiornaAvvocato(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
-        #self.layout.setRowMinimumHeight(3, 75)
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
@@ -47,73 +46,99 @@ class VistaAggiornaAvvocato(QWidget):
         print(self.avvocato.getDatiAvvocato()["Data nascita"])
 
         appuntamenti = self.avvocato.appuntamentoCliente
-        parcelle = self.avvocato.parcelle
-        udienze =self.avvocato.udienza
+        clienti = self.avvocato.clienti
+        licenza =self.avvocato.licenza
         corsiAgg = self.avvocato.corsoAggiornamento
+        udienza= self.avvocato.udienza
 
-        Avvocato.rimuoviAvvocato(self.avvocato.getDatiAvvocato()["Id"])
+        nome = self.breve('nome', self.avvocato.getDatiAvvocato()["Nome"], 1, 'o')
 
-        x = self.breve('nome',self.avvocato.getDatiAvvocato()["Nome"],1,'o')
-        if x is not False: self.avvocato.nome = x
-        else: return
+        cognome = self.breve('cognome', self.avvocato.getDatiAvvocato()["Cognome"], 2, 'o')
 
-        x = self.breve('cognome',self.avvocato.getDatiAvvocato()["Cognome"],2,'o')
-        if x is not False: self.avvocato.cognome = x
-        else: return
+        cd = self.breve('codice fiscale', self.avvocato.getDatiAvvocato()["Codice fiscale"], 3, 'o')
 
-        x = self.breve('codice fiscale',self.avvocato.getDatiAvvocato()["Codice fiscale"],3,'o')
-        if x is not False:self.avvocato.codiceFiscale = x
-        else: return
-
-        '''x = self.breve('data di nascita',self.cliente.getDatiCliente()["Data nascita"],4,'o')
-        if x is not False: self.cliente.dataNascita = x
-        else: return'''
         item = self.layout.itemAtPosition(4, 1).widget()
+        date = None
         if self.avvocato.getDatiAvvocato()["Data nascita"] == item.text():
             self.error(f"Hai inseirto la stessa data di nascita")
             return
-        elif str(self.avvocato.getDatiAvvocato()["Data nascita"])!= item.text() and item.text() != "":
-            x = str(item.text())
-            y = x[2] != "/" and x[5] != '/'
-            z = x.split("/")
+        elif str(self.avvocato.getDatiAvvocato()["Data nascita"]) != item.text() and item.text() != "":
+            data = str(item.text())
+            z = data.split("/")
             y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
-            print("22222")
-            if y:
+            if (len(data) > 6):
+                y = data[2] != "/" and data[5] != '/'
+                if y:
+                    self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
+                    return
+                elif y1:
+                    try:
+                        date = datetime.strptime(data, "%d/%m/%Y")
+                        if date > datetime.now():
+                            self.error("Data non valida inserita, la data che hai inserito è futura")
+                            return
+                        self.string += f"data di nascita, "
+                    except ValueError:
+                        self.error("Data non valida inserita")
+                        return
+
+                else:
+                    self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+                    return
+            else:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
-            elif y1:
-                self.string += f"data di nascita, "
-                self.avvocato.dataNascita= x
+
+        email = self.breve('email', self.avvocato.getDatiAvvocato()["Email"], 5, 'a')
+
+        item = self.layout.itemAtPosition(6, 1).widget()
+        id = str(item.text())
+        if str(self.avvocato.getDatiAvvocato()["Id"]) == item.text():
+            self.error("Hai inseirto lo stesso Id")
+            return
+        elif str(self.avvocato.getDatiAvvocato()["Id"]) != item.text() and item.text() != "":
+            if self.avvocato.ricercaUtilizzatoreId(item.text()) is None:
+                self.string += f"id, "
             else:
-                self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+                self.error("Hai inserito l'id di un cliente già esistente")
                 return
 
-
-        x = self.breve('email',self.avvocato.getDatiAvvocato()["Email"],5,'a')
-        if x is not False: self.avvocato.email = x
-        else: return
-
-        x = self.breve('id',self.avvocato.getDatiAvvocato()["Id"],6,'o')
-        if x is not False: self.avvocato.Id = x
-        else: return
-
         item = self.layout.itemAtPosition(7, 1).widget()
-        x = str(item.text())
+        number = str(item.text())
         if str(self.avvocato.getDatiAvvocato()["Numero telefono"]) == item.text():
             self.error("Hai inseirto lo stesso numero di telefono")
             return
-        elif str(self.avvocato.getDatiAvvocato()["Numero telefono"])!= item.text() and item.text() != "":
-            if len(str(item.text())) == 10 and str(item.text()).isdigit() :
+        elif str(self.avvocato.getDatiAvvocato()["Numero telefono"]) != item.text() and item.text() != "":
+            if len(str(item.text())) == 10 and str(item.text()).isdigit():
                 self.string += f"numero di telefono, "
-                self.avvocato.numeroTelefono = x
             else:
                 self.error("Hai sbagliato il formato del numero di telefono, devi inserire 10 numeri")
                 return
 
+        password = self.breve('password', self.avvocato.getDatiAvvocato()["Password"], 8, 'a')
 
-        x = self.breve('password',self.avvocato.getDatiAvvocato()["Password"],8,'a')
-        if x is not False: self.avvocato.password = x
-        else: return
+        print("yolo")
+
+        Avvocato.rimuoviAvvocato(self.avvocato.getDatiAvvocato()["Id"])
+
+        if nome is not False:self.avvocato.nome = nome
+        else:return
+        if cognome is not False:self.avvocato.cognome = cognome
+        else:return
+        if cd is not False:self.avvocato.codiceFiscale = cd
+        else:return
+        if date is not None: self.avvocato.dataNascita = date
+
+        if email is not False:self.avvocato.email = email
+        else:return
+        if id != "": self.avvocato.id = id
+
+        if number != "": self.avvocato.numeroTelefono = number
+
+        if password is not False:self.avvocato.password = password
+        else:return
+
+        print(self.avvocato)
 
         self.string = self.string[:-2]
         print(self.avvocato.nome)
@@ -124,11 +149,10 @@ class VistaAggiornaAvvocato(QWidget):
         print(item.text())
         avvocato =Avvocato()
 
-        avvocato.creaAvvocato(self.avvocato.getDatiAvvocato()["Codice fiscale"],self.avvocato.getDatiAvvocato()["Cognome"],corsiAgg,
+        avvocato.creaAvvocato(self.avvocato.getDatiAvvocato()["Codice fiscale"],self.avvocato.getDatiAvvocato()["Cognome"],self.avvocato.getDatiAvvocato()["Nome"],corsiAgg,
                             self.avvocato.getDatiAvvocato()["Data nascita"],self.avvocato.getDatiAvvocato()["Email"],
                             self.avvocato.getDatiAvvocato()["Id"],self.avvocato.getDatiAvvocato()["Numero telefono"],
-                            self.avvocato.getDatiAvvocato()["Password"],appuntamenti,parcelle,
-                            self.avvocato.getDatiAvvocato()["Nome"],udienze)
+                            self.avvocato.getDatiAvvocato()["Password"],udienza,clienti,licenza,appuntamenti)
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Modifica avvenuta con successo')

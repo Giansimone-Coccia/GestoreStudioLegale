@@ -30,7 +30,6 @@ class VistaAggiornaCliente(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
-        #self.layout.setRowMinimumHeight(3, 75)
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
@@ -58,9 +57,6 @@ class VistaAggiornaCliente(QWidget):
 
         cd = self.breve('codice fiscale',self.cliente.getDatiCliente()["Codice fiscale"],3,'o')
 
-        '''x = self.breve('data di nascita',self.cliente.getDatiCliente()["Data nascita"],4,'o')
-        if x is not False: self.cliente.dataNascita = x
-        else: return'''
         item = self.layout.itemAtPosition(4, 1).widget()
         date = None
         if self.cliente.getDatiCliente()["Data nascita"] == item.text():
@@ -82,7 +78,6 @@ class VistaAggiornaCliente(QWidget):
                             self.error("Data non valida inserita, la data che hai inserito è futura")
                             return
                         self.string += f"data di nascita, "
-                        dataT = True
                     except ValueError:
                         self.error("Data non valida inserita")
                         return
