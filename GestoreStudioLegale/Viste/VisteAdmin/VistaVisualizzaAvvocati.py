@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox, QHBoxLayout
 import pickle
 import os
 
@@ -17,14 +17,6 @@ class VistaVisualizzaAvvocati(QMainWindow):
     def __init__(self, parent=None):
         super(VistaVisualizzaAvvocati, self).__init__(parent)
         tool = Tools()
-        '''self.scroll = QScrollArea()
-        self.widget = QWidget()
-        self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
-
-        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella), 0, 1)
-        self.grifLayout.addWidget(
-            tool.createButton("Cerca", self.cercaParcella), 0, 2)'''
 
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
@@ -34,14 +26,13 @@ class VistaVisualizzaAvvocati(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
+        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiAvvocato))
         self.cWidget.setLayout(self.outerLayout)
 
-        self.getDatiP()
+        self.getDatiA()
         self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -50,7 +41,7 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
-        self.setWindowTitle("Parcelle")
+        self.setWindowTitle("Avvocati")
         self.show()
 
     def loadDateA(self):
