@@ -17,8 +17,8 @@ class VistaHomeUdienze(QMainWindow):
         super(VistaHomeUdienze, self).__init__(parent)
         self.scroll = QScrollArea()
         self.widget = QWidget()
-        grifLayout = QGridLayout()
-        grifLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
+        self.gridLayout = QGridLayout()
+        self.gridLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista delle udienze con le informazioni relative al cliente")
@@ -29,18 +29,19 @@ class VistaHomeUdienze(QMainWindow):
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Arial', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
-        textLabel3 = QLabel()
+        '''textLabel3 = QLabel()
         print("ciao879")
         textLabel3.setText('Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{self.getDatiU()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{self.getDatiU()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{self.getDatiU()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{self.getDatiU()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{self.getDatiU()['Data e Ora Fine']}")
         textLabel3.setGeometry(QRect(0, 0, 350, 20))
         textLabel3.setFont(QFont('Arial', 10))
-        textLabel3.setStyleSheet("border: 1px solid black;")
-        grifLayout.addWidget(textLabel2, 1, 1)
-        grifLayout.addWidget(textLabel1, 2, 1)
+        textLabel3.setStyleSheet("border: 1px solid black;")'''
+        self.gridLayout.addWidget(textLabel2, 1, 1)
+        self.gridLayout.addWidget(textLabel1, 2, 1)
         print("ciao3")
-        grifLayout.addWidget(textLabel3, 3, 1)
+        #grifLayout.addWidget(textLabel3, 3, 1)
+        self.getDatiU()
         #self.setLayout(grifLayout)
-        self.widget.setLayout(grifLayout)
+        self.widget.setLayout(self.gridLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
@@ -54,10 +55,31 @@ class VistaHomeUdienze(QMainWindow):
     def getDatiU(self):
         tool = Tools()
         self.udienzeList = self.tool.loadUdienze()
+        udienzeL = []
+        i=3
         for udienza in self.udienzeList:
            if udienza.Cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
-              return udienza.getDatiUdienza()
+              udienzeL.append(udienza)
 
+        for u in udienzeL:
+            label = QLabel()
+            print(u)
+            label.setText(
+                'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
+            label.setGeometry(QRect(0, 0, 350, 20))
+            label.setFont(QFont('Arial', 10))
+            label.setStyleSheet("border: 1px solid black;")
+            print("ciao2")
+            self.gridLayout.addWidget(label, i, 1, 1, 2)
+            i += 1
+
+
+
+    def aggiornaUdienza(self):
+        pass
+
+    def rimuoviUdienza(self):
+        pass
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

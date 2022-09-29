@@ -10,20 +10,20 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 
 #modificare dimensioni tasti in utilities
-class VistaHomeParcelle(QMainWindow):
+class VistaHomeUdienze(QMainWindow):
 
-    parcelleList = []
+    udienzeList = []
     avvocatiList = []
     clientiList = []
     tool = Tools()
 
     def __init__(self, parent=None):
-        super(VistaHomeParcelle, self).__init__(parent)
+        super(VistaHomeUdienze, self).__init__(parent)
         self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
         self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
-        self.getDatiP()
+        self.getDatiU()
         self.widget.setLayout(self.grifLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -35,15 +35,16 @@ class VistaHomeParcelle(QMainWindow):
         self.setWindowTitle("Parcelle")
         self.show()
 
-    def getDatiP(self):
-        self.parcelleList = self.tool.loadParcelle()
+    def getDatiU(self):
+        self.udienzeList = self.tool.loadUdienze()
         self.avvocatiList = self.tool.loadAvvocati()
         tool = Tools()
-        parc = []
+        ud = []
+        clientiL = []
         i=0
 
         print("ca")
-        print(self.parcelleList)
+        print(self.udienzeList)
         print(self.avvocatiList)
         #print(avvocato.getDatiAvvocato()['clienti'])
 
@@ -60,44 +61,45 @@ class VistaHomeParcelle(QMainWindow):
                print(clienti)
                print("cag")
                for cliente in clienti:
-                    print("cioooo")
-                    for parcella in self.parcelleList:
-                        if parcella.Cliente.codiceFiscale == cliente.codiceFiscale:
-                            print("cad")
-                            parc.append(parcella)
-                            print (parc)
+                   for udienza in self.udienzeList:
+                      if udienza.Cliente.codiceFiscale == cliente.codiceFiscale:
+                        print("cad")
+                        ud.append(udienza)
+                        print (ud)
 
-        for p in parc:
+        for u in ud:
             label = QLabel()
-            print(p)
+            print(u)
             textLabel2 = QLabel()
             textLabel2.setText(
-                'Cliente: ' + '\n' + 'NOME: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Numero telefono']}")
+                'Cliente: ' + '\n' + 'NOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
             textLabel2.setFont(QFont('Arial', 10))
             textLabel2.setStyleSheet("border: 1px solid black;")
-            self.grifLayout.addWidget(textLabel2, i, 1, 1, 2)
+            self.grifLayout.addWidget(textLabel2, i, 1, 1,2)
             i += 1
             label.setText(
-                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{p.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{p.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{p.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{p.getDatiParcellaCliente()['identificativo']}")
+               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
             print("ciao2")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
-            self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaParcella), i, 1)
+            self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaUdienza), i, 1)
             self.grifLayout.addWidget(
-                tool.createButton("Elimina", self.rimuoviParcella),i,2)
+                tool.createButton("Elimina", self.rimuoviUdienza),i,2)
             i += 1
 
-    def aggiungiParcella(self):
+            print("cos")
+
+    def aggiungiUdienza(self):
         pass
 
-    def aggiornaParcella(self):
+    def aggiornaUdienza(self):
         pass
 
-    def rimuoviParcella(self):
+    def rimuoviUdienza(self):
         pass
 
     def getDatiC(self):
