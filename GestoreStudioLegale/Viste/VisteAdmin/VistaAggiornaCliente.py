@@ -101,7 +101,7 @@ class VistaAggiornaCliente(QWidget):
         item = self.layout.itemAtPosition(6, 1).widget()
         id = str(item.text())
         if str(self.cliente.getDatiCliente()["Id"]) == item.text():
-            self.error("Hai inseirto lo stesso Id")
+            self.error("Hai inserito lo stesso Id")
             return
         elif str(self.cliente.getDatiCliente()["Id"]) != item.text() and item.text() != "":
             if cliente.ricercaUtilizzatoreId(item.text()) is None:
@@ -113,7 +113,7 @@ class VistaAggiornaCliente(QWidget):
         item = self.layout.itemAtPosition(7, 1).widget()
         number = str(item.text())
         if str(self.cliente.getDatiCliente()["Numero telefono"]) == item.text():
-            self.error("Hai inseirto lo stesso numero di telefono")
+            self.error("Hai inserito lo stesso numero di telefono")
             return
         elif str(self.cliente.getDatiCliente()["Numero telefono"])!= item.text() and item.text() != "":
             if len(str(item.text())) == 10 and str(item.text()).isdigit() :
@@ -173,7 +173,7 @@ class VistaAggiornaCliente(QWidget):
     def breve(self, nome, obj, n, l):
         item = self.layout.itemAtPosition(n, 1).widget()
         if obj == item.text():
-            self.error(f"Hai inseirto l{l} stess{l} {nome}")
+            self.error(f"Hai inserito l{l} stess{l} {nome}")
             return False
         elif obj != item.text() and item.text()!="":
             self.string += f"{nome}, "
