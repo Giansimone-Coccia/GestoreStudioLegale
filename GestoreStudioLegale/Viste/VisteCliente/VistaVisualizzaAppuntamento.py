@@ -12,8 +12,9 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaVisualizzaAppuntamento(QMainWindow):
 
     tool = Tools()
+    clientiList = []
     appuntamentiList = tool.loadAppuntamenti()
-    clientiList = tool.loadClienti()
+    #clientiList = tool.loadClienti()
 
     def __init__(self, parent = None):
         super(VistaVisualizzaAppuntamento, self).__init__(parent)
@@ -48,15 +49,25 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.show()
 
     def getDatiA(self):
-        #self.appuntamentiList = self.tool.loadAppuntamenti()
+        self.clientiList = self.tool.loadClienti()
+
+        self.appuntamentiList = self.tool.loadAppuntamenti()
         #self.clientiList = self.tool.loadClienti()
         i = 1
-        for appuntamento in self.appuntamentiList:
+        #for appuntamento in self.appuntamentiList:
             #print(appuntamento.Cliente.codiceFiscale) #STAMPA TUTTI GLI APPUNTAMENTI
             #print(self.getDatiC()['Codice fiscale'])
             #if appuntamento.Cliente.codiceFiscale == self.getDatiC()['Codice fiscale']:
-            for cliente in self.clientiList:
-                if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
+        for cliente in self.clientiList:
+            #print(cliente.codiceFiscale)
+            #print(str(self.tool.leggi(n=0)).rsplit()[0])
+            if cliente.codiceFiscale == self.tool.leggi(n=0).rsplit()[0]:
+               print(cliente.appuntamentoCliente)
+               print("b")
+               for appuntamento in self.appuntamentiList:
+                 if appuntamento.Cliente.Id == cliente.Id:
+                    print("s")
+                    print(appuntamento.getDatiAppuntamento())
                     #print(cliente.codiceFiscale)
                     #print(appuntamento.Cliente.codiceFiscale)
                     #print(type(cliente.codiceFiscale))
@@ -64,11 +75,11 @@ class VistaVisualizzaAppuntamento(QMainWindow):
                     #print("ciaoo3")
                     label = QLabel()
                     #print("ciaoo4")
-                    #label.setText(
-                        #'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}")
-                    label.setGeometry(QRect(0, 0, 350, 20))
                     label.setText(
-                        'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
+                        'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}")
+                    label.setGeometry(QRect(0, 0, 350, 20))
+                    #label.setText(
+                    #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
                     label.setFont(QFont('Arial', 10))
                     label.setStyleSheet("border: 1px solid black;")
                     #print("ciaoo5")
@@ -78,8 +89,8 @@ class VistaVisualizzaAppuntamento(QMainWindow):
                     print("ciao89")
 
     def getDatiC(self):
-        #self.clientiList = self.tool.loadClienti()
-        for cliente in self.clientiList:
+        clientiList = self.tool.loadClienti()
+        for cliente in clientiList:
             if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
                 return cliente.getDatiCliente()
 
