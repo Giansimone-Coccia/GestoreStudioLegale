@@ -13,13 +13,12 @@ import os
 class AppuntamentoRicercatoA(QMainWindow):
     appuntamentiList = []
 
-    app1 = Appuntamento()
+    #app1 = Appuntamento()
 
     def __init__(self, parent=None):
         super(AppuntamentoRicercatoA, self).__init__(parent)
         # super().init()
         self.initUI()
-        self.app1 = self.app
 
     def initUI(self):
         tool = Tools()
@@ -96,7 +95,7 @@ class AppuntamentoRicercatoA(QMainWindow):
         label = QLabel()
         print("miaoooooooo")
         label.setText(
-            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app1.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app1.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app1.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app1.getDatiAppuntamento()['Data e Ora Fine']}")
+            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app.getDatiAppuntamento()['Data e Ora Fine']}")
         label.setGeometry(QRect(0, 0, 350, 20))
         label.setFont(QFont('Arial', 10))
         label.setStyleSheet("border: 1px solid black;")

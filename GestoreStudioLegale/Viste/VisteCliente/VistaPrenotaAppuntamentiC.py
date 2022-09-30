@@ -87,26 +87,27 @@ class VistaPrenotaAppuntamentiC(QWidget):
         self.appuntamentiList = self.tool.loadAppuntamenti()
         print("ecco 5")
         if not self.convalida():
-            print("ecco 6")
-            print("ecco 9")
+            #print("ecco 6")
+            #print("ecco 9")
             hourDT = datetime.datetime.strptime(hour, "%H:%M")
-            oraFine = hourDT+datetime.timedelta(hours = 1)
-            print("ecco 10")
+            #oraFine = hourDT+datetime.timedelta(hours = 1) #MODIFICATO, MEZZO OGNI 30 MINS
+            oraFine = hourDT + datetime.timedelta(minutes=30)
+            #print("ecco 10")
             self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
             dateS = self.pyDate.strftime("%d/%m/%Y")
             dataOraInizio = dateS+','+hour
             dataOraFine = dateS+','+oraFine.strftime("%H:%M")
             #id = 1234 #provvisorio
             for appuntamento in self.appuntamentiList:
-                print(appuntamento.getDatiAppuntamento())
-                print("ecco uno")
+                #print(appuntamento.getDatiAppuntamento())
+                #print("ecco uno")
                 if appuntamento.dataOraInizio == self.pyDate:
                     self.problema()
                     return
                 else:
-                    print("ecco 2")
+                    #print("ecco 2")
                     appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), avvocato, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
-                    print("ecco 3")
+                    #print("ecco 3")
                     self.conferma()
                     return
 

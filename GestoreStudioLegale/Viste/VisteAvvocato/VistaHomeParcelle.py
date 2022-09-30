@@ -63,28 +63,28 @@ class VistaHomeParcelle(QMainWindow):
         parc = []
         i=1
 
-        print("ca")
-        print(self.parcelleList)
-        print(self.avvocatiList)
+        #print("ca")
+        #print(self.parcelleList)
+        #print(self.avvocatiList)
         #print(avvocato.getDatiAvvocato()['clienti'])
 
         for avvocato in self.avvocatiList:
-            print("noia")
+            #print("noia")
             print (self.tool.leggi().rsplit()[0])
             print (avvocato.codiceFiscale)
             print(avvocato.getDatiAvvocato()['clienti'])
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-               print("coglione")
+               #print("coglione")
                print(avvocato.getDatiAvvocato()['clienti'])
                clienti = avvocato.getDatiAvvocato()['clienti']
-               print("ciao")
+               #print("ciao")
                print(clienti)
-               print("cag")
+               #print("cag")
                for cliente in clienti:
-                    print("cioooo")
+                    #print("cioooo")
                     for parcella in self.parcelleList:
                         if parcella.Cliente.codiceFiscale == cliente.codiceFiscale:
-                            print("cad")
+                            #print("cad")
                             parc.append(parcella)
                             print (parc)
 

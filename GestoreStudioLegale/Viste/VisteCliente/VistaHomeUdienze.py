@@ -73,8 +73,6 @@ class VistaHomeUdienze(QMainWindow):
             self.gridLayout.addWidget(label, i, 1, 1, 2)
             i += 1
 
-
-
     def aggiornaUdienza(self):
         pass
 

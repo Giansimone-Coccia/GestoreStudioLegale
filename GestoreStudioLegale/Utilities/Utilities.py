@@ -47,11 +47,11 @@ class Tools():
         button1.setSizePolicy(150, 50)
         return button1
 
-    def createButton(self, nome, on_click,baseS=int(160),heightS=int(90),maxBase=int(160*1.5),maxHeight=int(90*2)):
+    def createButton(self, nome, on_click):#,baseS=int(160),heightS=int(90),maxBase=int(160*1.5),maxHeight=int(90*2)):
         button = QPushButton(nome)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.setBaseSize(baseS,heightS)
-        button.setMaximumSize(maxBase,maxHeight)
+        #button.setBaseSize(baseS,heightS)
+        #button.setMaximumSize(maxBase,maxHeight)
         button.setFont(QFont('Arial', 10))
         button.clicked.connect(on_click)
         return button
