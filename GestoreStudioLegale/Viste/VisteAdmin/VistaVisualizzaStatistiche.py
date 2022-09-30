@@ -3,10 +3,10 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QMainWindow, QWidget, QGridLayout
 import pyqtgraph as pg'''
 #from _curses import window
-#from _curses import window
-#from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries, QStackedBarSeries
+'''from _curses import window
+from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries, QStackedBarSeries
 from PyQt5.Qt import Qt
-#from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView
+from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QMainWindow, QWidget, QGridLayout
 from numpy.distutils.fcompiler import pg
@@ -16,7 +16,7 @@ from GestoreStudioLegale.Gestione.Statistiche import Statistiche
 
 class VistaVisualizzaStatistiche(QMainWindow):
 
-    '''def __init__(self, parent=None):
+    def __init__(self, parent=None):
         super(VistaVisualizzaStatistiche, self).__init__(parent)
         self.setWindowTitle("Statistiche")
         stats = Statistiche()
