@@ -2,13 +2,14 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaCredenziali import VistaModificaCredenziali
 from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaPassword import VistaModificaPassword
 from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
 from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 from GestoreStudioLegale.Utilities.Utilities import Tools
-from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
+#from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 
 
 class VistaHomeAdmin(QWidget):
@@ -19,7 +20,7 @@ class VistaHomeAdmin(QWidget):
         tool=Tools()
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(tool.createButton("Modifica Password", self.reachModificaPassword), 1, 0)
+        gLayout.addWidget(tool.createButton("Modifica Credenziali", self.reachCredenziali), 1, 0)
         gLayout.addWidget(tool.createButton("Mostra Avvocati", self.reachAvvocati), 2, 1)
         gLayout.addWidget(tool.createButton("Mostra Clienti", self.reachClienti), 2, 0)
         gLayout.addWidget(tool.createButton("Mostra Statistiche", self.reachStatistiche), 1, 1)
@@ -29,10 +30,16 @@ class VistaHomeAdmin(QWidget):
         self.show()
 
 
-    def reachModificaPassword(self):
+    '''def reachModificaPassword(self):
         self.vistaModPassword = VistaModificaPassword()
         self.vistaModPassword.show()
+        self.close()'''
+
+    def reachCredenziali(self):
+        self.vistaModC = VistaModificaCredenziali()
+        self.vistaModC.show()
         self.close()
+
 
     def reachAvvocati(self):
         self.vistaVisualizzaA = VistaVisualizzaAvvocati()
