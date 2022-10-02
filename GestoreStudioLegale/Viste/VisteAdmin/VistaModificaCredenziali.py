@@ -26,7 +26,7 @@ class VistaModificaCredenziali(QWidget):
         button2 = tool.createButton("Modifica Username", self.reachModificaUsername)
         button1.setBaseSize(int(160),int(90))
         button2.setBaseSize(int(160),int(90))
-        button1.setMaximumSize(160*2,90*2)
+        button1.setMaximumSize(160*2, 90*2)
         button2.setMaximumSize(160*2, 90*2)
         gLayout.addWidget(button1, 2, 1)
         gLayout.addWidget(button2, 2, 0)

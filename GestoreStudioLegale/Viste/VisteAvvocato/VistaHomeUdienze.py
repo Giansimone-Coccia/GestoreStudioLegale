@@ -119,7 +119,10 @@ class VistaHomeUdienze(QMainWindow):
             print("cos")
 
     def aggiungiUdienza(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaIserisciUdienza import VistaInserisciUdienza
+        self.vistaInserimento = VistaInserisciUdienza()
+        self.vistaInserimento.show()
+        self.close()
 
     def aggiornaUdienza(self):
         pass

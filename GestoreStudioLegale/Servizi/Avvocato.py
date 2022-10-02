@@ -113,6 +113,16 @@ class Avvocato(Utilizzatore):
         else:
             return None
 
+    def ricercaUtilizzatoreCC(self, codiceFiscale):
+        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
+                avvocati = pickle.load(f)
+                for avvocato in avvocati:
+                    if avvocato.codiceFiscale == codiceFiscale:
+                        return avvocato
+                return None
+        else:
+            return None
 
     @staticmethod
     def rimuoviAvvocato(Id):      #Effettuo una ricerca tramite Id

@@ -59,6 +59,6 @@ class VistaModificaUsername(QWidget):
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaCredenziali import VistaModificaCredenziali
-        self.vistaHome = VistaModificaCredenziali()
-        self.vistaHome.show()
+        self.vistaHome1 = VistaModificaCredenziali()
+        self.vistaHome1.show()
         self.close()
