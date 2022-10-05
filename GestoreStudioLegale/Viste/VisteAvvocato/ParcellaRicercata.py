@@ -17,10 +17,14 @@ class ParcellaRicercata(QMainWindow):
     clientiList = []
     tool = Tools()
 
-    def __init__(self, parcella,parent=None):
+    def __init__(self, parcelle,parent=None):
         super(ParcellaRicercata, self).__init__(parent)
         tool = Tools()
-        self.parcellaTrovata = parcella
+        print(parcelle[0].getDatiParcellaCliente()['intestatario']) #vuoto ma non crasha
+        self.parcelleTrovate = []
+        for i in parcelle:
+            self.parcelleTrovate[i] == parcelle[i]
+
         '''self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
@@ -94,14 +98,14 @@ class ParcellaRicercata(QMainWindow):
             print(p)
             textLabel2 = QLabel()
             textLabel2.setText(
-                'Cliente: ' + '\n' + 'NOME: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Numero telefono']}")
+                'Cliente: ' + '\n' + 'NOME: ' + f"{self.parcelleTrovate[p].getDatiParcellaCliente()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.parcelleTrovate[p].getDatiParcellaCliente()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{self.parcelleTrovate[p].getDatiParcellaCliente()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.parcelleTrovate[p].getDatiParcellaCliente()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.parcelleTrovate[p].getDatiParcellaCliente()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.parcelleTrovate[p].getDatiParcellaCliente()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
             textLabel2.setFont(QFont('Arial', 10))
             textLabel2.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(textLabel2, i, 1, 1, 2)
             i += 1
             label.setText(
-                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['identificativo']}")
+                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.parcelleTrovate[p].getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.parcelleTrovate[p].getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{self.parcelleTrovate[p].getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.parcelleTrovate[p].getDatiParcellaCliente()['identificativo']}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
