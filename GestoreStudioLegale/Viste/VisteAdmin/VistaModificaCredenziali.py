@@ -24,6 +24,8 @@ class VistaModificaCredenziali(QWidget):
         gLayout.addWidget(textLabel, 1,0)
         button1 = tool.createButton("Modifica Password", self.reachModificaPassword)
         button2 = tool.createButton("Modifica Username", self.reachModificaUsername)
+        button1.setFont(QFont('Arial', 15))
+        button2.setFont(QFont('Arial', 15))
         button1.setBaseSize(int(160),int(90))
         button2.setBaseSize(int(160),int(90))
         button1.setMaximumSize(160*2,90*2)
@@ -31,7 +33,7 @@ class VistaModificaCredenziali(QWidget):
         gLayout.addWidget(button1, 2, 1)
         gLayout.addWidget(button2, 2, 0)
         self.setLayout(gLayout)
-        self.resize(500, 300)
+        self.resize(160*4, 300)
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
