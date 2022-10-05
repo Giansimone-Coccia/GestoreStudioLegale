@@ -25,12 +25,8 @@ class VistaInserisciUdienza(QWidget):
         orari = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00',
                  '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
         self.ora.addItems(orari)
-        #self.confirmButton = QPushButton()
-        #self.confirmButton.setText('Conferma udienza')
-        #self.confirmButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.confirmButton.clicked.connect(self.udienzaOK()) #CRUSHA
         print("ciao34")
-        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK()) #CRUSHA
+        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK)
         print("ciao35")
         self.menuClienti = QComboBox()
         self.menuClienti.addItems(self.sceltaClienti())
@@ -97,6 +93,7 @@ class VistaInserisciUdienza(QWidget):
                     return
                 else:
                     udienza.creaUdienza(avvocato.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), self.labelCittaText.text(), self.menuClienti.currentText(), dataOraInizio, dataOraFine, ID, self.procedimento.currentText())
+                    #print(udienza.getDatiUdienza())
                     self.conferma()
                     return
 
@@ -106,8 +103,7 @@ class VistaInserisciUdienza(QWidget):
         msg.setText("L'udienza è stata presa in carico")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-        self.vistaH = VistaHomeAppuntamentiA()
+        self.vistaH = VistaHomeUdienze()
         self.vistaH.show()
         self.close()
 
