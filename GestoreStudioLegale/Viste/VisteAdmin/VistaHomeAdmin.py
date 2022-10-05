@@ -1,5 +1,4 @@
-from PyQt5.QtGui import QFont
-from PyQt5.QtGui import QFont
+
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
 from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaCredenziali import VistaModificaCredenziali
@@ -29,17 +28,10 @@ class VistaHomeAdmin(QWidget):
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
-
-    '''def reachModificaPassword(self):
-        self.vistaModPassword = VistaModificaPassword()
-        self.vistaModPassword.show()
-        self.close()'''
-
     def reachCredenziali(self):
         self.vistaModC = VistaModificaCredenziali()
         self.vistaModC.show()
         self.close()
-
 
     def reachAvvocati(self):
         self.vistaVisualizzaA = VistaVisualizzaAvvocati()

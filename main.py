@@ -41,6 +41,8 @@ appuntamento1 = Appuntamento()
 appuntamento2 = Appuntamento()
 appuntamento3 = Appuntamento()
 appuntamento4 = Appuntamento()
+appuntamentiL = [appuntamento1, appuntamento2]
+appuntamentiL2 = [appuntamento4, appuntamento3]
 parcella1 = Parcella()
 parcella2 = Parcella()
 parcella3 = Parcella()
@@ -55,10 +57,11 @@ b = ['non so']
 listaClienti = [cliente1, cliente2, cliente3]
 nuovaListaClienti = []
 corsoAggiornamentiLista = ['matematica', 'analisi 2']
-parcelleL = [parcella1, parcella2, parcella3]
+parcelleL = [parcella1, parcella2]
+parcelleL1 = [parcella3]
 
-#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcelleL, 'alesseio', udienza1)
-#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella2, 'alessio', udienza1)
+#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamentiL, parcelleL, 'alesseio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamentiL2, parcelleL1, 'alessio', udienza2)
 #cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella3, 'angelo', udienza2)
 #cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
@@ -104,7 +107,7 @@ parcelleL = [parcella1, parcella2, parcella3]
 
 #parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'alessio') #FUNZIONA
 #parcella2.creaParcella(cliente1, 'PP123', 583928493, 2000, 'francesca')
-#parcella3.creaParcella(cliente1, 'PP678', 432455653, 3444, 'marco')
+#parcella3.creaParcella(cliente2, 'PP678', 432455653, 3444, 'marco')
 #print(cliente1.getDatiCliente()['parcelle'])
 #print('si')
 #parcella1.getDatiParcellaCliente() #FUNZIONA UTILIZZANDOLO INSIEME A creaParcella
@@ -120,7 +123,7 @@ parcelleL = [parcella1, parcella2, parcella3]
 #parcella3.getDatiParcellaCliente()
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-#udienza2.creaUdienza(avvocato2, 'Roma', cliente1, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
+#udienza2.creaUdienza(avvocato2, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
 #udienza1.getDatiUdienza() #FUNZIONA
 #udienza2.getDatiUdienza() #FUNZIONA
 #listaUdienze = udienza1.ricercaUdienzaCliente(cliente1) #DA RICONTROLLARE DOPO AVER SISTEMATO LA CLASSE CLIENTE
@@ -187,9 +190,11 @@ parcelleL = [parcella1, parcella2, parcella3]
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
 #appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
-#appuntamento2.creaAppuntamento(cliente2, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
+#appuntamento2.creaAppuntamento(cliente1, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
 #appuntamento3.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:26','30/09/2022,16:00', 'A76fry5', 'civile')
 #appuntamento4.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:21','30/09/2022,16:00', 'A5825667', 'civile')
+#print(appuntamentiL)
+#print(appuntamento1.getDatiAppuntamento())
 #email.invioEmail()
 
 

@@ -81,9 +81,7 @@ class Cliente(Utilizzatore):
                 clienti = pickle.load(f)
                 for cliente in clienti:
                     if cliente.codiceFiscale == codiceFiscale:
-                        #print("Ok cliente")
                         return cliente
-                #print("Nessun cliente trovato")
                 return None
         else:
             return None
