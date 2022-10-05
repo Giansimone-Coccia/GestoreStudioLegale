@@ -54,6 +54,7 @@ class Cliente(Utilizzatore):
                         pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
 
 
+
     def getDatiCliente(self):
         d = self.getInfoUtilizzatore()
         d['appuntamentoCliente'] = self.appuntamentoCliente

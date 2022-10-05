@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QPushButton
     QSizePolicy, QMessageBox
 
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Udienza import Udienza
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
@@ -30,7 +31,7 @@ class VistaInserisciUdienza(QWidget):
         #self.confirmButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         #self.confirmButton.clicked.connect(self.udienzaOK()) #CRUSHA
         print("ciao34")
-        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK()) #CRUSHA
+        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK) #CRUSHA
         print("ciao35")
         self.menuClienti = QComboBox()
         self.menuClienti.addItems(self.sceltaClienti())
@@ -96,7 +97,9 @@ class VistaInserisciUdienza(QWidget):
                     self.problema()
                     return
                 else:
-                    udienza.creaUdienza(avvocato.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), self.labelCittaText.text(), self.menuClienti.currentText(), dataOraInizio, dataOraFine, ID, self.procedimento.currentText())
+                    cliente1 = Cliente()
+                    stringa = self.menuClienti.currentText().rsplit()
+                    udienza.creaUdienza(avvocato.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), self.labelCittaText.text(), cliente1.ricercaUtilizzatoreNomeCognome(stringa[0],stringa[1]), dataOraInizio, dataOraFine, ID, self.procedimento.currentText())
                     self.conferma()
                     return
 

@@ -10,16 +10,17 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 
 #modificare dimensioni tasti in utilities
-class VistaHomeParcelle(QMainWindow):
+class ParcellaRicercata(QMainWindow):
 
     parcelleList = []
     avvocatiList = []
     clientiList = []
     tool = Tools()
 
-    def __init__(self, parent=None):
-        super(VistaHomeParcelle, self).__init__(parent)
+    def __init__(self, parcella,parent=None):
+        super(ParcellaRicercata, self).__init__(parent)
         tool = Tools()
+        self.parcellaTrovata = parcella
         '''self.scroll = QScrollArea()
         self.widget = QWidget()
         self.grifLayout = QGridLayout()
@@ -93,14 +94,14 @@ class VistaHomeParcelle(QMainWindow):
             print(p)
             textLabel2 = QLabel()
             textLabel2.setText(
-                'Cliente: ' + '\n' + 'NOME: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{p.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Numero telefono']}")
+                'Cliente: ' + '\n' + 'NOME: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.parcellaTrovata.getDatiParcellaCliente()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
             textLabel2.setFont(QFont('Arial', 10))
             textLabel2.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(textLabel2, i, 1, 1, 2)
             i += 1
             label.setText(
-                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{p.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{p.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{p.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{p.getDatiParcellaCliente()['identificativo']}")
+                'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.parcellaTrovata.getDatiParcellaCliente()['identificativo']}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
@@ -116,9 +117,7 @@ class VistaHomeParcelle(QMainWindow):
         pass
 
     def cercaParcella(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaParcelle import RicercaParcelle
-        self.vistaAvvocatoR = RicercaParcelle()
-        self.vistaAvvocatoR.show()
+        pass
 
     def aggiornaParcella(self):
         pass
