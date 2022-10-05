@@ -113,7 +113,10 @@ class VistaHomeParcelle(QMainWindow):
             i += 1
 
     def aggiungiParcella(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaInserisciParcellaA import VistaInserisciParcellaA
+        self.aggiunta = VistaInserisciParcellaA()
+        self.aggiunta.show()
+        self.close()
 
     def cercaParcella(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.RicercaParcelle import RicercaParcelle
