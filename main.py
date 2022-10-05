@@ -197,8 +197,9 @@ parcelleL1 = [parcella3]
 #print(appuntamento1.getDatiAppuntamento())
 #email.invioEmail()
 
+
 if __name__ == '__main__':
-    app = QApplication (sys.argv)
+    app = QApplication(sys.argv)
     app.setStyle('Fusion')
     vista_home = VistaHome()
     vista_home.show()

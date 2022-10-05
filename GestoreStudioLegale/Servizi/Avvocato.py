@@ -68,7 +68,6 @@ class Avvocato(Utilizzatore):
         d['udienza'] = self.udienza
         d['clienti'] = self.clienti
         d['licenza'] = self.licenza
-        print(d)
         return d
 
 
