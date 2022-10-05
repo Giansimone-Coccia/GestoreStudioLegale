@@ -1,53 +1,51 @@
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QPushButton, QCalendarWidget, QLineEdit, \
+    QSizePolicy, QMessageBox
+
+from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Servizi.Udienza import Udienza
+from GestoreStudioLegale.Utilities.Utilities import Tools
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
 import datetime
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QGroupBox, QFormLayout, \
-    QComboBox, QMainWindow, QCalendarWidget
 
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
-from GestoreStudioLegale.Servizi.Cliente import Cliente
-from GestoreStudioLegale.Utilities.Utilities import Tools
-#from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
+class VistaInserisciUdienza(QWidget):
 
-from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
-
-
-class VisteInserisciAppuntamentoA(QWidget):
-
-    appuntamentiList = []
+    tool = Tools()
     clientiList = []
     nomi = []
-    tool = Tools()
-    year = None
-    month = None
-    day = None
+    udienzeList = []
 
     def __init__(self, parent=None):
-        super(VisteInserisciAppuntamentoA, self).__init__(parent)
+        super(VistaInserisciUdienza, self).__init__(parent)
         gLayout = QGridLayout()
         gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
-        self.labelName3 = QLabel('<font size="4"> Il sistema controllerà la disponibilità della data inserita </font>')
-        self.labelName3.setStyleSheet("border: 1px solid black;")
-        self.labelName = QLabel('<font size="4"> Data appuntamento </font>')
-        self.labelName2 = QLabel('<font size="4"> Orario appuntamento </font>')
+        self.labelName = QLabel('<font size="4"> Data udienza </font>')
+        self.labelName2 = QLabel('<font size="4"> Orario udienza </font>')
         self.ora = QComboBox()
         orari = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00',
                  '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
         self.ora.addItems(orari)
-        confirmButton = QPushButton()
-        confirmButton = self.tool.createButton('Conferma appuntamento', self.confermaAppuntamento)
+        #self.confirmButton = QPushButton()
+        #self.confirmButton.setText('Conferma udienza')
+        #self.confirmButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        #self.confirmButton.clicked.connect(self.udienzaOK()) #CRUSHA
+        print("ciao34")
+        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK()) #CRUSHA
+        print("ciao35")
         self.menuClienti = QComboBox()
         self.menuClienti.addItems(self.sceltaClienti())
-        self.labelName4 = QLabel('<font size="4"> Cliente appuntamento </font>')
+        self.labelName4 = QLabel('<font size="4"> Cliente udienza </font>')
         self.procedimento = QComboBox()
         procedimenti = ['Penale', 'Civile', 'Amministrativo', 'Giudiziario', 'Minorile']
         self.procedimento.addItems(procedimenti)
         self.labelName5 = QLabel('<font size="4"> Tipo procedimento </font>')
+        self.labelCitta = QLabel('<font size="4"> Città tribunale </font>')
+        self.labelCittaText = QLineEdit()
+        self.labelCittaText.setPlaceholderText("Inserisci città tribunale")
         self.calendar = QCalendarWidget()
         self.calendar.clicked.connect(self.selezionaData)
         self.dataSelezionata = None
-        gLayout.addWidget(confirmButton, 5, 1)
-        gLayout.addWidget(self.labelName3, 0, 1)
+        gLayout.addWidget(self.confirmButton, 6, 1)
         gLayout.addWidget(self.labelName, 1, 0)
         gLayout.addWidget(self.labelName2, 2, 0)
         gLayout.addWidget(self.ora, 2, 1)
@@ -56,16 +54,17 @@ class VisteInserisciAppuntamentoA(QWidget):
         gLayout.addWidget(self.procedimento, 3, 1)
         gLayout.addWidget(self.calendar, 1, 1)
         gLayout.addWidget(self.labelName5, 3, 0)
+        gLayout.addWidget(self.labelCitta, 5, 0)
+        gLayout.addWidget(self.labelCittaText, 5, 1)
         self.setLayout(gLayout)
         self.resize(800, 500)
-        self.setWindowTitle("Prenotazione appuntamenti")
+        self.setWindowTitle("Udienza")
         self.show()
 
-    def sceltaClienti(self):
-        self.clientiList = self.tool.loadClienti()
-        for cliente in self.clientiList:
-            self.nomi.append(cliente.nome+' '+cliente.cognome)
-        return self.nomi
+    def rewind(self):
+        self.vistaUdienzeHome = VistaHomeUdienze()
+        self.vistaUdienzeHome.show()
+        self.close()
 
     def selezionaData(self):
         self.dataSelezionata = self.calendar.selectedDate()
@@ -73,38 +72,38 @@ class VisteInserisciAppuntamentoA(QWidget):
         self.day = self.dataSelezionata.day()
         self.month = self.dataSelezionata.month()
 
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-        self.vistaAppuntameti = VistaHomeAppuntamentiA()
-        self.vistaAppuntameti.show()
-        self.close()
+    def sceltaClienti(self):
+        self.clientiList = self.tool.loadClienti()
+        for cliente in self.clientiList:
+            self.nomi.append(cliente.nome+' '+cliente.cognome)
+        return self.nomi
 
-    def confermaAppuntamento(self):
-        client = Cliente()
-        clienti = self.menuClienti.currentText()
+    def udienzaOK(self):
+        avvocato = Avvocato()
         hour = self.ora.currentText()
-        self.appuntamentiList = self.tool.loadAppuntamenti()
+        self.udienzeList = self.tool.loadUdienze()
         if not self.convalida():
             hourDT = datetime.datetime.strptime(hour, "%H:%M")
-            oraFine = hourDT+datetime.timedelta(minutes = 30)
+            oraFine = hourDT + datetime.timedelta(minutes=30)
             self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
             dateS = self.pyDate.strftime("%d/%m/%Y")
-            dataOraInizio = dateS+','+hour
-            dataOraFine = dateS+','+oraFine.strftime("%H:%M")
-            for appuntamento in self.appuntamentiList:
-                print(appuntamento.getDatiAppuntamento())
-                if appuntamento.dataOraInizio == self.pyDate:
+            dataOraInizio = dateS + ',' + hour
+            dataOraFine = dateS + ',' + oraFine.strftime("%H:%M")
+            ID = self.tool.IdGenerator('UD')
+            for udienza in self.udienzeList:
+                print(udienza.getDatiUdienza())
+                if udienza.dataOraInizio == self.pyDate:
                     self.problema()
                     return
                 else:
-                    appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), clienti, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
+                    udienza.creaUdienza(avvocato.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), self.labelCittaText.text(), self.menuClienti.currentText(), dataOraInizio, dataOraFine, ID, self.procedimento.currentText())
                     self.conferma()
                     return
 
     def conferma(self):
         msg = QMessageBox()
-        msg.setWindowTitle("Appuntamento confermato")
-        msg.setText("Il suo appuntamento è stato confermato")
+        msg.setWindowTitle("Udienza confermata")
+        msg.setText("L'udienza è stata presa in carico")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
@@ -115,7 +114,7 @@ class VisteInserisciAppuntamentoA(QWidget):
     def problema(self):
         msg = QMessageBox()
         msg.setWindowTitle("Problema")
-        msg.setText("Range occupato, provare un orario o data differente")
+        msg.setText("Problema con l'inserimento, riprovare")
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
 
@@ -133,11 +132,8 @@ class VisteInserisciAppuntamentoA(QWidget):
                 print(self.year)
                 print(self.day)
                 print(self.month)
-                print("poco dopo il try")
                 date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-                print("nel try")
                 hour = self.ora.currentText()
-                print("ecco 8")
                 hourT = datetime.datetime.strptime(hour, "%H:%M")
                 timeMin = datetime.datetime.strptime('09:00', '%H:%M')
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
@@ -152,22 +148,6 @@ class VisteInserisciAppuntamentoA(QWidget):
                     msg.exec_()
                     condition = True
                     return condition
-                #elif not date.__format__("%d/%m/%Y"):
-                    #msg = QMessageBox()
-                    #msg.setWindowTitle("ERRORE")
-                    #msg.setText("Formato data errato, riprova (%d/%m/%Y)")
-                    #msg.setIcon(QMessageBox.Critical)
-                    #msg.exec_()
-                    #condition = True
-                    #return condition
-                #elif not hourT.__format__('%H:%M'):
-                    #msg = QMessageBox()
-                    #msg.setWindowTitle("ERRORE")
-                    #msg.setText("Formato orario errato, riprova (%H:%M)")
-                    #msg.setIcon(QMessageBox.Critical)
-                    #msg.exec_()
-                    #condition = True
-                    #return condition
                 elif hourT < timeMin or hourT > timeMax:
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
