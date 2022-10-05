@@ -70,7 +70,6 @@ class Udienza:
         d['Data e Ora Fine'] = self.dataOraFine
         d['ID'] = self.ID
         d['Tipo Tribunale'] = self.tipoTribunale
-        print(d)
         return d
 
     def ricercaUdienzaCliente (self, cliente):

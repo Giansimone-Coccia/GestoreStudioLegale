@@ -59,7 +59,6 @@ class Parcella():
         d['identificativo'] = self.identificativo
         d['importo'] = self.importo
         d['ID'] = self.ID
-        print(d)
         return d
 
 

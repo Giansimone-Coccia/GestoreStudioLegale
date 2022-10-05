@@ -11,17 +11,14 @@ import os
 
 
 class AppuntamentoRicercatoA(QMainWindow):
-    appuntamentiList = []
 
-    #app1 = Appuntamento()
-
-    def __init__(self, parent=None):
+    def __init__(self, appuntamento, parent = None):
         super(AppuntamentoRicercatoA, self).__init__(parent)
-        # super().init()
-        self.initUI()
+        self.initUI(appuntamento)
 
-    def initUI(self):
+    def initUI(self, appuntamento):
         tool = Tools()
+        self.appuntamentoTrovato = appuntamento
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
         # self.button_layout = QHBoxLayout()
@@ -30,10 +27,12 @@ class AppuntamentoRicercatoA(QMainWindow):
 
         self.grid = QGridLayout()
 
+
         self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
         self.outerLayout.addWidget(self.scroll, 9)
         self.cWidget.setLayout(self.outerLayout)
-        self.getDatiAp()
+
+#        self.getDatiAp()
 
         # self.supWidget = QWidget()
 
@@ -42,6 +41,7 @@ class AppuntamentoRicercatoA(QMainWindow):
         # self.supWidget.setLayout(self.button_layout2)
 
         # self.vbox.addWidget(tool.rewindButton(self.rewind))
+
         self.widget.setLayout(self.grid)
 
         # Scroll Area Properties
@@ -50,11 +50,11 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
 
-        self.setCentralWidget(self.cWidget)
 
+        self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.setWindowTitle('Appuntamenti')
-        self.show()
+        self.getDatiAp()
 
     '''def createButton(self, nome, on_click):
         button = QPushButton(nome)
@@ -95,7 +95,7 @@ class AppuntamentoRicercatoA(QMainWindow):
         label = QLabel()
         print("miaoooooooo")
         label.setText(
-            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.app.getDatiAppuntamento()['Data e Ora Fine']}")
+            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Fine']}")
         label.setGeometry(QRect(0, 0, 350, 20))
         label.setFont(QFont('Arial', 10))
         label.setStyleSheet("border: 1px solid black;")
@@ -106,6 +106,3 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.grid.addWidget(
             tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
         i += 1
-
-    def setData(self, appuntamento):
-        self.app = appuntamento

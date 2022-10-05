@@ -192,8 +192,9 @@ parcelleL = [parcella1, parcella2, parcella3]
 #appuntamento4.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:21','30/09/2022,16:00', 'A5825667', 'civile')
 #email.invioEmail()
 
+
 if __name__ == '__main__':
-    app = QApplication (sys.argv)
+    app = QApplication(sys.argv)
     app.setStyle('Fusion')
     vista_home = VistaHome()
     vista_home.show()

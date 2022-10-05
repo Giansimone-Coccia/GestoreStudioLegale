@@ -3,37 +3,41 @@ import datetime
 import pickle
 import os.path
 
-class Appuntamento():
+
+class Appuntamento:
 
     def __init__(self):
-       self.Cliente = None
-       self.Avvocato = None
-       self.ID = ''
-       self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       self.tipoProcedimento = ''
+        self.Cliente = None
+        self.Avvocato = None
+        self.ID = ''
+        self.dataOraFine = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
+        self.dataOraInizio = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
+        self.tipoProcedimento = ''
 
-    def aggiornaAppuntamento(self, Cliente = None, Avvocato = None,
-                            dataOraInizio=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
-                            dataOraFine=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
-                            tipoProcedimento = ''):
-            if Cliente != None:
-                self.Cliente = Cliente
-            elif Avvocato != None:
-                self.Avvocato = Avvocato
-            elif dataOraInizio != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
-                self.dataOraInizio = dataOraInizio
-            elif dataOraFine != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
-                self.dataOraFine = dataOraFine
-            elif tipoProcedimento != '':
-                self.tipoProcedimento = tipoProcedimento
+    #def getAppuntamento(self):
+        #return self
 
-            self.rimuoviAppuntamento(self.ID)
-            self.creaAppuntamento( self.Cliente, self.Avvocato, self.dataOraInizio, self.dataOraFine,
-                             self.ID, self.tipoProcedimento)
-            print("Aggiornato")
+    def aggiornaAppuntamento(self, Cliente=None, Avvocato=None,
+                             dataOraInizio=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
+                             dataOraFine=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
+                             tipoProcedimento=''):
+        if Cliente != None:
+            self.Cliente = Cliente
+        elif Avvocato != None:
+            self.Avvocato = Avvocato
+        elif dataOraInizio != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
+            self.dataOraInizio = dataOraInizio
+        elif dataOraFine != datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00):
+            self.dataOraFine = dataOraFine
+        elif tipoProcedimento != '':
+            self.tipoProcedimento = tipoProcedimento
 
-    def creaAppuntamento(self, Cliente, Avvocato, dataOraInizio, dataOraFine, ID, tipoProcedimento ):
+        self.rimuoviAppuntamento(self.ID)
+        self.creaAppuntamento(self.Cliente, self.Avvocato, self.dataOraInizio, self.dataOraFine,
+                              self.ID, self.tipoProcedimento)
+        print("Aggiornato")
+
+    def creaAppuntamento(self, Cliente, Avvocato, dataOraInizio, dataOraFine, ID, tipoProcedimento):
         self.Cliente = Cliente
         self.Avvocato = Avvocato
         self.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
@@ -65,12 +69,10 @@ class Appuntamento():
         d['Data e Ora Fine'] = self.dataOraFine
         d['ID'] = self.ID
         d['Tipo Procedimento'] = self.tipoProcedimento
-        print(d)
         return d
 
-
-    def ricercaAppuntamentoCliente (self, Cliente):
-        listaAppuntamenti=[]
+    def ricercaAppuntamentoCliente(self, Cliente):
+        listaAppuntamenti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Appuntamento.pickle'):
             with open('GestoreStudioLegale/Dati/Appuntamento.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
@@ -81,7 +83,7 @@ class Appuntamento():
         else:
             return None
 
-    def ricercaAppuntamentoDataInizio (self, DataInizio):
+    def ricercaAppuntamentoDataInizio(self, DataInizio):
         if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
             with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'rb') as f:
                 appuntamenti = pickle.load(f)
@@ -104,7 +106,7 @@ class Appuntamento():
             return None
 
     @staticmethod
-    def rimuoviAppuntamento (ID):
+    def rimuoviAppuntamento(ID):
         try:
             appuntamenti = []
             if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
@@ -119,7 +121,3 @@ class Appuntamento():
                 pickle.dump(appuntamenti, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
             print("Finito")
-
-
-
-
