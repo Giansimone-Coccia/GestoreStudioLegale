@@ -10,6 +10,8 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiornaCliente import VistaAggio
 from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiungiCliente import VistaAggiungiCliente
 from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaCliente import VistaEliminaCliente
 from GestoreStudioLegale.Servizi.Cliente import *
+from GestoreStudioLegale.Viste.VisteAdmin.VistaRicercaCliente import VistaRicercaCliente
+
 
 class VistaVisualizzaClienti(QMainWindow):
 
@@ -39,6 +41,7 @@ class VistaVisualizzaClienti(QMainWindow):
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
         self.button_layout.addWidget(tool.createButton("Inserisci",self.aggiungiCliente))
+        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaCliente))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiC()
@@ -51,7 +54,6 @@ class VistaVisualizzaClienti(QMainWindow):
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
         self.setWindowTitle("Clienti")
-        self.show()
 
     def loadDateC(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
@@ -92,6 +94,10 @@ class VistaVisualizzaClienti(QMainWindow):
         self.subWindow.show()
         self.close()
 
+    def cercaCliente(self):
+        self.subWindow = VistaRicercaCliente()
+        self.subWindow.show()
+        self.close()
 
     def aggiornaCliente(self,cliente):
         self.subWindow = VistaAggiornaCliente()

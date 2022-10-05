@@ -8,6 +8,7 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiornaAvvocato import VistaAggiornaAvvocato
 from GestoreStudioLegale.Viste.VisteAdmin.VistaAggiungiAvvocato import VistaAggiungiAvvocato
 from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaAvvocato import VistaEliminaAvvocato
+from GestoreStudioLegale.Viste.VisteAdmin.VistaRicercaAvvocato import VistaRicercaAvvocato
 
 
 class VistaVisualizzaAvvocati(QMainWindow):
@@ -30,6 +31,7 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
         self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiAvvocato))
+        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaAvvocato))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiA()
@@ -42,7 +44,6 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
         self.setWindowTitle("Avvocati")
-        self.show()
 
     def loadDateA(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
@@ -74,6 +75,11 @@ class VistaVisualizzaAvvocati(QMainWindow):
 
     def aggiungiAvvocato(self):
         self.subWindow = VistaAggiungiAvvocato()
+        self.subWindow.show()
+        self.close()
+
+    def cercaAvvocato(self):
+        self.subWindow = VistaRicercaAvvocato()
         self.subWindow.show()
         self.close()
 

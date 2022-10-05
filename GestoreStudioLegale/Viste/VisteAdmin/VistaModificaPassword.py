@@ -59,7 +59,7 @@ class VistaModificaPassword(QWidget):
             return
 
     def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
-        self.vistaHome = VistaHomeAdmin()
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaCredenziali import VistaModificaCredenziali
+        self.vistaHome = VistaModificaCredenziali()
         self.vistaHome.show()
         self.close()
