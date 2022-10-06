@@ -108,8 +108,8 @@ cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.c
 #avvocato1.aggiornaAvvocato(nuovaListaClienti, 3620988123)
 #print(avvocato2.getDatiAvvocato()['clienti'])
 
-#parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'alessio') #FUNZIONA
-#parcella2.creaParcella(cliente1, 'PP123', 583928493, 2000, 'francesca')
+parcella1.creaParcella(cliente1, 'PP456', 123456789, 1235, 'alessio') #FUNZIONA
+parcella2.creaParcella(cliente1, 'PP123', 583928493, 2000, 'francesca')
 #parcella3.creaParcella(cliente2, 'PP678', 432455653, 3444, 'marco')
 #print(cliente1.getDatiCliente()['parcelle'])
 #print('si')
