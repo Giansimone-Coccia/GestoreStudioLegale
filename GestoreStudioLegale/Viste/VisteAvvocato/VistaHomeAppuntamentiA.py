@@ -18,7 +18,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
 
     def __init__(self, parent=None):
         super(VistaHomeAppuntamentiA, self).__init__(parent)
-        # super()._init_()
         self.initUI()
 
     def initUI(self):
@@ -39,28 +38,8 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.cWidget.setLayout(self.outerLayout)
         self.getDatiAp()
 
-        #self.supWidget = QWidget()
-
-        # button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento))
-        # button_layout2.addWidget(self.createButton("Rimuovi", self.rimuoviAppuntamento))
-        #self.supWidget.setLayout(self.button_layout2)
-
-        """for i in range(1, self.getNum()):
-            label = QLabel()
-            print("ciao")
-            label.setText(
-                'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.getDatiAp()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.getDatiAp()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.getDatiAp()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.getDatiAp()['Data e Ora Fine']}")
-            label.setFont(QFont('Arial', 10))
-            print("ciao2")
-            self.vbox.addWidget(label, 9)
-            self.vbox.addWidget(supWidget, 1)
-            button_layout2.addWidget(self.createButton("Modifica", self.aggiornaAppuntamento),i,1)
-            button_layout2.addWidget(self.createButton("Elimina",lambda: self.rimuoviAppuntamento(self.getDatiAp()['ID'])),i,2)
-"""
-        # self.vbox.addWidget(tool.rewindButton(self.rewind))
         self.widget.setLayout(self.grid)
 
-        # Scroll Area Properties
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)
@@ -72,14 +51,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.setWindowTitle('Appuntamenti')
         self.show()
 
-    '''def createButton(self, nome, on_click):
-        button = QPushButton(nome)
-        button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.setFont(QFont('Arial', 10))
-        button.clicked.connect(on_click)
-        #button.setSizePolicy(150, 50)
-        return button'''
-
     def aggiungiAppuntamento(self):
         self.vistaAggiuntaA = VisteInserisciAppuntamentoA()
         self.vistaAggiuntaA.show()
@@ -88,6 +59,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
     def cercaAppuntamento(self):
         self.vistaAvvocatoR = RicercaAppuntamentoA()
         self.vistaAvvocatoR.show()
+        self.close()
 
     def aggiornaAppuntamento(self, appuntamento):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaAppuntamentoA import VistaAggiornaAppuntamentoA
@@ -130,8 +102,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
             self.grid.addWidget(tool.createButton("Modifica", lambda checked,  a = appuntamento: self.aggiornaAppuntamento(a)), i, 1)
             print("yugdbskjavsu")
             self.grid.addWidget(
-                tool.createButton("Elimina", lambda checked, a = appuntamento: self.rimuoviAppuntamento(appuntamento.getDatiAppuntamento()['ID'])), i, 2)
-                #tool.createButton("Elimina", self.rimuoviAppuntamento(self.getDatiAp()['ID'])), i, 2)
+                tool.createButton("Elimina", lambda checked, a = appuntamento.getDatiAppuntamento()['ID']: self.rimuoviAppuntamento(a)), i, 2)
             i += 1
 
     def getNum(self):

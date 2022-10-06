@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
                              QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
                              QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
-                             QVBoxLayout, QCalendarWidget)
+                             QVBoxLayout, QCalendarWidget, QMessageBox)
 
 from GestoreStudioLegale.Servizi.Appuntamento import *
 
@@ -52,7 +52,15 @@ class RicercaAppuntamentoA(QDialog):
         appuntamento = Appuntamento()
         risultatoRicerca = appuntamento.ricercaAppuntamentoID(self.code)
 
+        if risultatoRicerca is None:
+            msg = QMessageBox()
+            msg.setWindowTitle('Appuntamento non trovato')
+            msg.setText('Non esiste alcun appuntamento con questo id')
+            msg.exec()
+            return
 
-        self.subWindow = AppuntamentoRicercatoA(risultatoRicerca)
+
+        self.subWindow = AppuntamentoRicercatoA()
+        self.subWindow.initUI(risultatoRicerca)
         self.subWindow.show()
         self.close()

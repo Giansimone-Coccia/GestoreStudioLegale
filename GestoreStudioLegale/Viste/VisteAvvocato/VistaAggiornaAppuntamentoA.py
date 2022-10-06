@@ -48,7 +48,6 @@ class VistaAggiornaAppuntamentoA(QWidget):
         self.setLayout(gLayout)
         self.resize(800, 400)
         self.setWindowTitle("Modifica appuntamenti")
-        self.show()
 
     def rewind(self):
         self.vistaHome = VistaHomeAppuntamentiA()

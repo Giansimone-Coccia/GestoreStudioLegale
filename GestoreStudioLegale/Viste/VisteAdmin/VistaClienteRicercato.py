@@ -19,7 +19,7 @@ class VistaClienteRicercato(QWidget):
         self.setWindowTitle('Ricerca cliente')
         self.resize(500, 120)
         self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
+        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 1)
 
 
     def rewind(self):
@@ -32,7 +32,7 @@ class VistaClienteRicercato(QWidget):
         self.cliente = cliente
         textLabel = QLabel()
         textLabel.setText(
-            'Cliente: ' + '\n' + 'NOME: ' + f"{self.cliente.getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.cliente.getDatiCliente()['Cognome']}" + '\n' + 'DATA DI NASCITA: ' + f"{self.cliente.getDatiCliente()['Data nascita']}" + '\n' + 'ID: ' + f"{self.cliente.getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.cliente.getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.cliente.getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.cliente.getDatiCliente()['Numero telefono']}")
+            'Cliente: ' + '\n' + 'NOME: ' + f"{self.cliente.getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.cliente.getDatiCliente()['Cognome']}" + '\n' + 'DATA DI NASCITA: ' + f"{self.cliente.getDatiCliente()['Data nascita']}" + '\n' + 'ID: ' + f"{self.cliente.getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.cliente.getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.cliente.getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.cliente.getDatiCliente()['Numero telefono']}" + '\n' + 'PASSWORD: ' + f"{self.cliente.getDatiCliente()['Password']}")
         textLabel.setGeometry(QRect(0, 0, 350, 20))
         textLabel.setFont(QFont('Arial', 10))
         textLabel.setStyleSheet("border: 1px solid black;")

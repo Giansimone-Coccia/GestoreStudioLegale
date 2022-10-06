@@ -29,7 +29,6 @@ class VistaEliminaAppuntamentoA(QWidget):
         self.setLayout(gLayout)
         self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")
-        self.show()
 
     def eliminaAppuntamento(self,id):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA

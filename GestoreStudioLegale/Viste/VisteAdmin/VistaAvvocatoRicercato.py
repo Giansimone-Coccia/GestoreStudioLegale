@@ -23,7 +23,7 @@ class VistaAvvocatoRicercato(QWidget):
         self.setWindowTitle('Ricerca avvocato')
         self.resize(500, 120)
         self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
+        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 1)
 
 
     def rewind(self):
@@ -36,7 +36,7 @@ class VistaAvvocatoRicercato(QWidget):
         self.avvocato = avvocato
         textLabel = QLabel()
         textLabel.setText(
-            'Avvocato: ' + '\n' + 'NOME: ' + f"{self.avvocato.getDatiAvvocato()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.avvocato.getDatiAvvocato()['Cognome']}" + '\n' + 'DATA DI NASCITA: ' + f"{self.avvocato.getDatiAvvocato()['Data nascita']}" + '\n' + 'ID: ' + f"{self.avvocato.getDatiAvvocato()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.avvocato.getDatiAvvocato()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.avvocato.getDatiAvvocato()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.avvocato.getDatiAvvocato()['Numero telefono']}")
+            'Avvocato: ' + '\n' + 'NOME: ' + f"{self.avvocato.getDatiAvvocato()['Nome']}" + '\n' + 'COGNOME: ' + f"{self.avvocato.getDatiAvvocato()['Cognome']}" + '\n' + 'DATA DI NASCITA: ' + f"{self.avvocato.getDatiAvvocato()['Data nascita']}" + '\n' + 'ID: ' + f"{self.avvocato.getDatiAvvocato()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{self.avvocato.getDatiAvvocato()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{self.avvocato.getDatiAvvocato()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{self.avvocato.getDatiAvvocato()['Numero telefono']}" + '\n' + 'PASSWORD: ' + f"{self.avvocato.getDatiAvvocato()['Password']}")
         textLabel.setGeometry(QRect(0, 0, 350, 20))
         textLabel.setFont(QFont('Arial', 10))
         textLabel.setStyleSheet("border: 1px solid black;")
