@@ -8,7 +8,7 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVis
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 from GestoreStudioLegale.Utilities.Utilities import Tools
-#from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
+from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 
 
 class VistaHomeAdmin(QWidget):

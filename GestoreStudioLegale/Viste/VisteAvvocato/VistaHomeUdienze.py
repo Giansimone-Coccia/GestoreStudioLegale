@@ -12,24 +12,13 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 #modificare dimensioni tasti in utilities
 class VistaHomeUdienze(QMainWindow):
 
-    udienzeList = []
-    avvocatiList = []
-    clientiList = []
+    #udienzeList = []
+    #avvocatiList = []
+    #clientiList = []
     tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaHomeUdienze, self).__init__(parent)
-        tool = Tools()
-
-
-        '''self.scroll = QScrollArea()
-        self.widget = QWidget()
-        self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
-
-        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiUdienza), 0, 1)
-        self.grifLayout.addWidget(
-            tool.createButton("Cerca", self.cercaUdienza), 0, 2)'''
 
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
@@ -39,11 +28,11 @@ class VistaHomeUdienze(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind1), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiUdienza))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaUdienza))
+        self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiUdienza))
+        self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaUdienza))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiU()
@@ -57,45 +46,41 @@ class VistaHomeUdienze(QMainWindow):
         self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
-        self.setWindowTitle("Parcelle")
+        self.setWindowTitle("Udienze")
         self.show()
 
     def getDatiU(self):
         self.udienzeList = self.tool.loadUdienze()
         self.avvocatiList = self.tool.loadAvvocati()
+        self.clientiList = self.tool.loadClienti()
         tool = Tools()
         ud = []
-        clientiL = []
+        #clientiL = []
         i=1
 
-        print("ca")
-        print(self.udienzeList)
-        print(self.avvocatiList)
-        #print(avvocato.getDatiAvvocato()['clienti'])
-
         for avvocato in self.avvocatiList:
-            print("noia")
-            print (self.tool.leggi().rsplit()[0])
-            print (avvocato.codiceFiscale)
-            print(avvocato.getDatiAvvocato()['clienti'])
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-               print("coglione")
-               print(avvocato.getDatiAvvocato()['clienti'])
                clienti = avvocato.getDatiAvvocato()['clienti']
-               print("ciao")
-               print(clienti)
-               print("cag")
+               #for cliente in self.clientiList:
                for cliente in clienti:
                    for udienza in self.udienzeList:
                       if udienza.Cliente.codiceFiscale == cliente.codiceFiscale:
-                        print("cad")
-                        ud.append(udienza)
-                        print (ud)
-
+                         #ud.append(udienza)
+                         print("ciao24")
+                         ud.append(udienza)
+                         print("ciao25")
+                         #break
+                         #print(self.udienzeList)                     #CRUSHA NON FUNZIONA
+                         #print(self.udienzeList.__getitem__(3))
+                         #print(ud)
+        print("ciao26")
         for u in ud:
+            print("hei bro")
             label = QLabel()
-            print(u)
+            #print(u)
             textLabel2 = QLabel()
+            print(u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome'])
+            print(u.getDatiUdienza()['Cliente'])
             textLabel2.setText(
                 'Cliente: ' + '\n' + 'NOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
@@ -115,8 +100,6 @@ class VistaHomeUdienze(QMainWindow):
             self.grifLayout.addWidget(
                 tool.createButton("Elimina", self.rimuoviUdienza),i,2)
             i += 1
-
-            print("cos")
 
     def aggiungiUdienza(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaIserisciUdienza import VistaInserisciUdienza
