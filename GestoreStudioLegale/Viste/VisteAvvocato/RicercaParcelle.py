@@ -50,10 +50,14 @@ class RicercaParcelle(QDialog):
         self.code = self.textIn.text()
 
         cliente = Cliente()
-        parcella = Parcella()
-        risultatoRicerca = parcella.ricercaParcellaIdentificativo(self.code)
+        risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code) #FUNZIONA
+        parcelle = []
+        parcelle = risultatoRicerca.getDatiCliente()["parcelle"] #CREDO VUOTO
+        print("1")
+        print(parcelle[0].getDatiParcellaCliente()['intestatario'])
+        print("2")
+        #COME PRENDERE LE PARCELLE DA UN CLIENTE
 
-
-        self.subWindow = ParcellaRicercata(risultatoRicerca)
+        self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
         self.subWindow.show()
         self.close()
