@@ -20,10 +20,13 @@ class ParcellaRicercata(QMainWindow):
     def __init__(self, parcelle,parent=None):
         super(ParcellaRicercata, self).__init__(parent)
         tool = Tools()
-        print(parcelle[0].getDatiParcellaCliente()['intestatario']) #vuoto ma non crasha
+        #print(parcelle[0].getDatiParcellaCliente()['intestatario']) #vuoto ma non crasha
         self.parcelleTrovate = []
-        for i in parcelle:
-            self.parcelleTrovate[i] == parcelle[i]
+        print("ciaoo45")
+        for parcella in parcelle:
+            self.parcelleTrovate.append(parcella)
+            print("ciaoo89")
+        print(self.parcelleTrovate)
 
         '''self.scroll = QScrollArea()
         self.widget = QWidget()
