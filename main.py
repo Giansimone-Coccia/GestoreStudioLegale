@@ -63,9 +63,9 @@ udienzeC = [udienza1, udienza2]
 udienzeA = [udienza3,udienza4]
 udienzeGen = [udienza1, udienza2, udienza3, udienza4]
 
-cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamentiL, parcelleL, 'alesseio', udienza1)
-cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamentiL2, parcelleL1, 'alessio', udienza3)
-cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella3, 'angelo', udienza2)
+#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamentiL, parcelleL, 'alesseio', udienza1)
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamentiL2, parcelleL1, 'alessio', udienza3)
+#cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella3, 'angelo', udienza2)
 #cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/9/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamento1, parcella1, 'alesseio', udienza1)
@@ -124,15 +124,15 @@ parcella2.creaParcella(cliente1, 'PP123', 583928493, 2000, 'francesca')
 #parcella1.getDatiParcellaCliente() #FUNZIONA
 #parcella2.getDatiParcellaCliente()
 #parcella3.getDatiParcellaCliente()
-udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
 #udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
-udienza2.creaUdienza(avvocato2, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
+#udienza1.creaUdienza(avvocato1, 'Ascoli Piceno', cliente1, '10/08/2022,12:00','10/08/2022,13:00','U2345','civile') #FUNZIONA
+#udienza2.creaUdienza(avvocato2, 'Roma', cliente2, '21/2/2022,15:00','21/12/2021,19:00','U7765','penale') #FUNZIONA
 #udienza1.getDatiUdienza() #FUNZIONA
 
 #cliente1 = udienza1.getDatiUdienza()['Cliente']
-print(udienza1.getDatiUdienza()['Cliente'].getDatiCliente())
-print(cliente1.getDatiCliente())
-print('ciao')
+#print(udienza1.getDatiUdienza()['Cliente'].getDatiCliente())
+#print(cliente1.getDatiCliente())
+#print('ciao')
 #udienza2.getDatiUdienza() #FUNZIONA
 #listaUdienze = udienza1.ricercaUdienzaCliente(cliente1) #DA RICONTROLLARE DOPO AVER SISTEMATO LA CLASSE CLIENTE
 #print(listaUdienze)
@@ -148,8 +148,8 @@ print('ciao')
 #udienza1.rimuoviUdienza('U2345') #FUNZIONA
 #udienza1.rimuoviUdienza('U2765') #FUNZIONA
 
-udienza3.creaUdienza(avvocato2, 'Bari', cliente2, '9/08/2022,12:00','10/08/2022,13:00','U299345','amministrativa')
-udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
+#udienza3.creaUdienza(avvocato2, 'Bari', cliente2, '9/08/2022,12:00','10/08/2022,13:00','U299345','amministrativa')
+#udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,19:00','U276865','penale')
 #udienza5.creaUdienza(avvocato1, 'Ascoli Piceno', cliente5, '11/08/2022,12:00','12/08/2022,13:00','U26345','civile')
 #udienza6.creaUdienza(avvocato1, 'Roma', cliente6, '20/2/2022,15:00','21/12/2022,19:00','U27965','penale')
 #udienza7.creaUdienza(avvocato1, 'Roma', cliente7, '20/2/2022,15:00','21/12/2022,19:00','U25965','amministrativa')
@@ -197,10 +197,10 @@ udienza4.creaUdienza(avvocato1, 'Roma', cliente4, '22/2/2022,15:00','23/12/2022,
 #backup.eseguiBackup()
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
-appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
-appuntamento2.creaAppuntamento(cliente1, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
-appuntamento3.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:26','30/09/2022,16:00', 'A76fry5', 'civile')
-appuntamento4.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:21','30/09/2022,16:00', 'A5825667', 'civile')
+#appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
+#appuntamento2.creaAppuntamento(cliente1, avvocato2,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
+#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:26','30/09/2022,16:00', 'A76fry5', 'civile')
+#appuntamento4.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:21','30/09/2022,16:00', 'A5825667', 'civile')
 #print(appuntamentiL)
 #print(appuntamento1.getDatiAppuntamento())
 #email.invioEmail()
