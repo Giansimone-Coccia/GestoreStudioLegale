@@ -15,8 +15,8 @@ class VistaAggiungiCliente(QWidget):
         tool = Tools()
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(tool.createButton("Aggiungi cliente esistente", self.reachAggiungiClienteEsistente()), 1, 0)
-        gLayout.addWidget(tool.createButton("Crea nuovo cliente", self.reachCreaCliente()), 2, 0)
+        gLayout.addWidget(tool.createButton("Aggiungi cliente esistente", self.reachAggiungiClienteEsistente), 1, 0)
+        gLayout.addWidget(tool.createButton("Crea nuovo cliente", self.reachCreaCliente), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
@@ -30,7 +30,13 @@ class VistaAggiungiCliente(QWidget):
         self.close()
 
     def reachCreaCliente(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaCreaCliente import VistaCreaCliente
+        self.vistaH = VistaCreaCliente()
+        self.vistaH.show()
+        self.close()
 
     def reachAggiungiClienteEsistente(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiungiClienteEsistente import VistaAggiungiClienteEsistente
+        self.vistaH = VistaAggiungiClienteEsistente()
+        self.vistaH.show()
+        self.close()
