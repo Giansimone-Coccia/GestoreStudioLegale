@@ -10,6 +10,9 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 
 #modificare dimensioni tasti in utilities
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaUdienze import VistaEliminaUdienze
+
+
 class VistaHomeUdienze(QMainWindow):
 
     #udienzeList = []
@@ -111,7 +114,10 @@ class VistaHomeUdienze(QMainWindow):
         pass
 
     def rimuoviUdienza(self):
-        pass
+        self.subWindow = VistaEliminaUdienze()
+        self.subWindow.setData(id)
+        self.subWindow.show()
+        self.close()
 
     def cercaUdienza(self):
         pass
