@@ -7,13 +7,14 @@ import pickle
 import os
 
 from GestoreStudioLegale.Servizi.Cliente import Cliente
+from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaVisualizzaAppuntamento(QMainWindow):
 
     tool = Tools()
     clientiList = []
-    appuntamentiList = tool.loadAppuntamenti()
+    appuntamentiList = []
     #clientiList = tool.loadClienti()
 
     def __init__(self, parent = None):
@@ -49,44 +50,52 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.show()
 
     def getDatiA(self):
-        self.clientiList = self.tool.loadClienti()
-
+        #self.clientiList = self.tool.loadClienti()
         self.appuntamentiList = self.tool.loadAppuntamenti()
+
         #self.clientiList = self.tool.loadClienti()
         i = 1
+        appuntamentiL = []
+
         #for appuntamento in self.appuntamentiList:
             #print(appuntamento.Cliente.codiceFiscale) #STAMPA TUTTI GLI APPUNTAMENTI
             #print(self.getDatiC()['Codice fiscale'])
             #if appuntamento.Cliente.codiceFiscale == self.getDatiC()['Codice fiscale']:
-        for cliente in self.clientiList:
+        #for cliente in self.clientiList:
             #print(cliente.codiceFiscale)
             #print(str(self.tool.leggi(n=0)).rsplit()[0])
-            if cliente.codiceFiscale == self.tool.leggi(n=0).rsplit()[0]:
-               print(cliente.appuntamentoCliente)
+
+
+        for appuntamento in self.appuntamentiList:
+            print(self.appuntamentiList)
+            #if appuntamento.Cliente.Id == cliente.Id:
+            #if appuntamento.Cliente.codiceFiscale == self.tool.leggi(n=0).rsplit()[0]:
+            if appuntamento.Cliente.codiceFiscale == self.tool.leggi(n=0).rsplit()[0]:
+            #if 'cc' == self.tool.leggi(n=0).rsplit()[0]:
+               appuntamentiL.append(appuntamento)
                print("b")
-               for appuntamento in self.appuntamentiList:
-                 if appuntamento.Cliente.Id == cliente.Id:
-                    print("s")
-                    print(appuntamento.getDatiAppuntamento())
-                    #print(cliente.codiceFiscale)
-                    #print(appuntamento.Cliente.codiceFiscale)
-                    #print(type(cliente.codiceFiscale))
-                    #print(type(appuntamento.Cliente.codiceFiscale))
-                    #print("ciaoo3")
-                    label = QLabel()
-                    #print("ciaoo4")
-                    label.setText(
-                        'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}")
-                    label.setGeometry(QRect(0, 0, 350, 20))
-                    #label.setText(
-                    #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
-                    label.setFont(QFont('Arial', 10))
-                    label.setStyleSheet("border: 1px solid black;")
-                    #print("ciaoo5")
-                    self.grifLayout.addWidget(label, i, 1, 1, 2)
-                    #print("ciao78")
-                    i += 1
-                    print("ciao89")
+               print("s")
+            print(appuntamento.getDatiAppuntamento()['Cliente'])
+        for app in appuntamentiL:
+            #print(cliente.codiceFiscale)
+            #print(appuntamento.Cliente.codiceFiscale)
+            #print(type(cliente.codiceFiscale))
+            #print(type(appuntamento.Cliente.codiceFiscale))
+            #print("ciaoo3")
+            label = QLabel()
+            #print("ciaoo4")
+            label.setText(
+                'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{app.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{app.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{app.getDatiAppuntamento()['Tipo Procedimento']}")
+            label.setGeometry(QRect(0, 0, 350, 20))
+            #label.setText(
+            #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
+            label.setFont(QFont('Arial', 10))
+            label.setStyleSheet("border: 1px solid black;")
+            #print("ciaoo5")
+            self.grifLayout.addWidget(label, i, 1, 1, 2)
+            #print("ciao78")
+            i += 1
+            print("ciao89")
 
     def getDatiC(self):
         clientiList = self.tool.loadClienti()

@@ -54,7 +54,7 @@ class VistaHomeUdienze(QMainWindow):
         self.avvocatiList = self.tool.loadAvvocati()
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
-        #ud = []
+        ud = []
         #clientiL = []
         i=1
 
@@ -67,17 +67,20 @@ class VistaHomeUdienze(QMainWindow):
                       if udienza.Cliente.codiceFiscale == cliente.codiceFiscale:
                          #ud.append(udienza)
                          print("ciao24")
-                         self.udienzeList.append(udienza)
+                         ud.append(udienza)
                          print("ciao25")
+                         #break
                          #print(self.udienzeList)                     #CRUSHA NON FUNZIONA
                          #print(self.udienzeList.__getitem__(3))
                          #print(ud)
         print("ciao26")
-        for u in self.udienzeList:
+        for u in ud:
             print("hei bro")
             label = QLabel()
             #print(u)
             textLabel2 = QLabel()
+            print(u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome'])
+            print(u.getDatiUdienza()['Cliente'])
             textLabel2.setText(
                 'Cliente: ' + '\n' + 'NOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
