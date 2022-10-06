@@ -99,9 +99,9 @@ class VistaHomeUdienze(QMainWindow):
             print("ciao2")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
-            self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaUdienza), i, 1)
+            self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = u: self.aggiornaUdienza(a)), i, 1)
             self.grifLayout.addWidget(
-                tool.createButton("Elimina", self.rimuoviUdienza),i,2)
+                tool.createButton("Elimina", lambda checked, a = u.getDatiUdienza()['ID']: self.rimuoviUdienza(a)),i,2)
             i += 1
 
     def aggiungiUdienza(self):
@@ -110,10 +110,14 @@ class VistaHomeUdienze(QMainWindow):
         self.vistaInserimento.show()
         self.close()
 
-    def aggiornaUdienza(self):
-        pass
+    def aggiornaUdienza(self, udienza):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaUdienza import VistaAggiornaUdienza
+        self.vistaAggiorna = VistaAggiornaUdienza()
+        self.vistaAggiorna.udienza = udienza
+        self.vistaAggiorna.show()
+        self.close()
 
-    def rimuoviUdienza(self):
+    def rimuoviUdienza(self, id):
         self.subWindow = VistaEliminaUdienze()
         self.subWindow.setData(id)
         self.subWindow.show()
