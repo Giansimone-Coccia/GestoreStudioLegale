@@ -10,6 +10,9 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 
 #modificare dimensioni tasti in utilities
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaParcelle import VistaEliminaParcelle
+
+
 class VistaHomeParcelle(QMainWindow):
 
     parcelleList = []
@@ -109,7 +112,7 @@ class VistaHomeParcelle(QMainWindow):
             i += 1
             self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaParcella), i, 1)
             self.grifLayout.addWidget(
-                tool.createButton("Elimina", self.rimuoviParcella),i,2)
+                tool.createButton("Elimina", lambda checked, a = p.getDatiParcellaCliente()['ID']: self.rimuoviParcella(a)),i,2)
             i += 1
 
     def aggiungiParcella(self):
@@ -126,8 +129,11 @@ class VistaHomeParcelle(QMainWindow):
     def aggiornaParcella(self):
         pass
 
-    def rimuoviParcella(self):
-        pass
+    def rimuoviParcella(self, id):
+        self.subWindow = VistaEliminaParcelle()
+        self.subWindow.setData(id)
+        self.subWindow.show()
+        self.close()
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

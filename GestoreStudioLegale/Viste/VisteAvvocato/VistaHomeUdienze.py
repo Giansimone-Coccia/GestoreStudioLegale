@@ -101,7 +101,7 @@ class VistaHomeUdienze(QMainWindow):
             i += 1
             self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaUdienza), i, 1)
             self.grifLayout.addWidget(
-                tool.createButton("Elimina", self.rimuoviUdienza),i,2)
+                tool.createButton("Elimina", lambda checked, a = u.getDatiUdienza()['ID']: self.rimuoviUdienza(a)),i,2)
             i += 1
 
     def aggiungiUdienza(self):
@@ -113,7 +113,7 @@ class VistaHomeUdienze(QMainWindow):
     def aggiornaUdienza(self):
         pass
 
-    def rimuoviUdienza(self):
+    def rimuoviUdienza(self, id):
         self.subWindow = VistaEliminaUdienze()
         self.subWindow.setData(id)
         self.subWindow.show()

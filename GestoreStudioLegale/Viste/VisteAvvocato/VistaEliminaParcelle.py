@@ -3,16 +3,16 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
 from PyQt5 import QtCore as qtc
 
-from GestoreStudioLegale.Servizi.Udienza import Udienza
+from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
-class VistaEliminaUdienze(QWidget):
+class VistaEliminaParcelle(QWidget):
 
     id = ''
 
     def __init__(self,parent = None):
-        super(VistaEliminaUdienze, self).__init__(parent)
+        super(VistaEliminaParcelle, self).__init__(parent)
 
         tool = Tools()
         gLayout = QGridLayout()
@@ -25,25 +25,25 @@ class VistaEliminaUdienze(QWidget):
         button1 = tool.createButton("No", self.rewind)
         button1.setMaximumSize(500,200)
         gLayout.addWidget(button1, 2, 1)
-        gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaUdienza(self.id)), 2, 0)
+        gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaParcella(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")
 
-    def eliminaUdienza(self, id):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
-        Udienza.rimuoviUdienza(id)
-        self.vistaHomeUdienze = VistaHomeUdienze()
+    def eliminaParcella(self, id):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
+        Parcella.rimuoviParcella(id)
+        self.vistaHomeParcelle = VistaHomeParcelle()
         msg = QMessageBox()
         msg.setWindowTitle('Appuntamento eliminato')
         msg.setText('Appuntamento eliminato con successo')
         msg.exec()
-        self.vistaHomeUdienze.show()
+        self.vistaHomeParcelle.show()
         self.close()
 
     def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
-        self.vistaHome = VistaHomeUdienze()
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
+        self.vistaHome = VistaHomeParcelle()
         self.vistaHome.show()
         self.close()
 
