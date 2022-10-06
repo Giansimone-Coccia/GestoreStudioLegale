@@ -48,16 +48,20 @@ class RicercaParcelle(QDialog):
         from GestoreStudioLegale.Viste.VisteAvvocato.ParcellaRicercata import ParcellaRicercata
 
         self.code = self.textIn.text()
+        print(self.code)
 
         cliente = Cliente()
         risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code) #FUNZIONA
-        parcelle = []
-        parcelle = risultatoRicerca.getDatiCliente()["parcelle"] #CREDO VUOTO
+        print(risultatoRicerca.getDatiCliente())
+        #parcelle = []
+        parcelle = risultatoRicerca.parcelle #CREDO VUOTO
         print("1")
-        print(parcelle[0].getDatiParcellaCliente()['intestatario'])
+        #print(parcelle.getDatiParcellaCliente())
+        #print(risultatoRicerca.parcelle)
         print("2")
         #COME PRENDERE LE PARCELLE DA UN CLIENTE
 
-        self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
+        #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
+        self.subWindow = ParcellaRicercata(risultatoRicerca.parcelle)
         self.subWindow.show()
         self.close()
