@@ -3,17 +3,25 @@ from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
                              QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
                              QVBoxLayout, QCalendarWidget)
 
-from GestoreStudioLegale.Servizi.Parcella import *
+from GestoreStudioLegale.Servizi.Parcella import Parcella
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 import sys
+
+from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class RicercaParcelle(QDialog):
     NumGridRows = 3
     NumButtons = 4
 
+
     def __init__(self):
         super(RicercaParcelle, self).__init__()
+
+        self.tool = Tools()
+        self.parcelleList = self.tool.loadParcelle()
+
 
         self.textIn = QLineEdit()
 
@@ -51,17 +59,19 @@ class RicercaParcelle(QDialog):
         print(self.code)
 
         cliente = Cliente()
-        risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code) #FUNZIONA
-        print(risultatoRicerca.getDatiCliente())
-        #parcelle = []
-        parcelle = risultatoRicerca.parcelle #CREDO VUOTO
-        print("1")
-        #print(parcelle.getDatiParcellaCliente())
-        #print(risultatoRicerca.parcelle)
-        print("2")
-        #COME PRENDERE LE PARCELLE DA UN CLIENTE
+
+        self.risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code) #FUNZIONA
+
+        parcelle = []
+
+        #parcelle = self.risultatoRicerca.getDatiCliente()['parcelle'] #HO IL NUMERO DI PARCELLE MA SONO VUOTE
+
+        for parcella in self.parcelleList:
+            if parcella.Cliente.codiceFiscale == self.risultatoRicerca.codiceFiscale:
+                parcelle.append(parcella)
+
 
         #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
-        self.subWindow = ParcellaRicercata(risultatoRicerca.parcelle)
+        self.subWindow = ParcellaRicercata(parcelle)
         self.subWindow.show()
         self.close()
