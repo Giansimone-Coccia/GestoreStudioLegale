@@ -110,7 +110,7 @@ class VistaHomeParcelle(QMainWindow):
             print("ciao2")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
-            self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaParcella), i, 1)
+            self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = p: self.aggiornaParcella(a)), i, 1)
             self.grifLayout.addWidget(
                 tool.createButton("Elimina", lambda checked, a = p.getDatiParcellaCliente()['ID']: self.rimuoviParcella(a)),i,2)
             i += 1
@@ -126,8 +126,12 @@ class VistaHomeParcelle(QMainWindow):
         self.vistaAvvocatoR = RicercaParcelle()
         self.vistaAvvocatoR.show()
 
-    def aggiornaParcella(self):
-        pass
+    def aggiornaParcella(self, parcella):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaParcella import VistaAggiornaParcella
+        self.vistaAggiorna = VistaAggiornaParcella()
+        self.vistaAggiorna.parcella = parcella
+        self.vistaAggiorna.show()
+        self.close()
 
     def rimuoviParcella(self, id):
         self.subWindow = VistaEliminaParcelle()

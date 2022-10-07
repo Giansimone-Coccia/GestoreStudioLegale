@@ -11,8 +11,8 @@ class VistaEliminaParcelle(QWidget):
 
     id = ''
 
-    def __init__(self,parent = None):
-        super(VistaEliminaParcelle, self).__init__(parent)
+    def init(self,parent = None):
+        super(VistaEliminaParcelle, self).init(parent)
 
         tool = Tools()
         gLayout = QGridLayout()

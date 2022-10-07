@@ -20,7 +20,7 @@ class RicercaUdienze(QDialog):
         super(RicercaUdienze, self).__init__()
 
         self.tool = Tools()
-        self.parcelleList = self.tool.loadParcelle()
+        self.udienzeList = self.tool.loadUdienze()
 
 
         self.textIn = QLineEdit()
@@ -56,7 +56,7 @@ class RicercaUdienze(QDialog):
         from GestoreStudioLegale.Viste.VisteAvvocato.UdienzaRicercata import UdienzaRicercata
 
         self.code = self.textIn.text()
-        print(self.code)
+        #print(self.code)
 
         cliente = Cliente()
 
@@ -71,9 +71,11 @@ class RicercaUdienze(QDialog):
 
         udienze = []
 
-        for udienza in self.parcelleList:
+        for udienza in self.udienzeList:
             if udienza.Cliente.codiceFiscale == self.risultatoRicerca.codiceFiscale:
                 udienze.append(udienza)
+                #print("stampa le udienze")
+                #print(udienza.getDatiUdienza())
 
 
         #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])

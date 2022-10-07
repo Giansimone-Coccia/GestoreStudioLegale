@@ -15,9 +15,6 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaUdienze import VistaEli
 
 class VistaHomeUdienze(QMainWindow):
 
-    #udienzeList = []
-    #avvocatiList = []
-    #clientiList = []
     tool = Tools()
 
     def __init__(self, parent=None):

@@ -15,9 +15,9 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaUdienze import VistaEli
 
 class UdienzaRicercata(QMainWindow):
 
-    #udienzeList = []
-    #avvocatiList = []
-    #clientiList = []
+    udienzeList = []
+    avvocatiList = []
+    clientiList = []
     tool = Tools()
 
     def __init__(self, udienze,parent=None):
@@ -27,6 +27,7 @@ class UdienzaRicercata(QMainWindow):
         print("ciaoo45")
         for u in udienze:
             self.udienzeTrovate.append(u)
+            #self.udienzeList.append(u)
 
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
@@ -85,13 +86,14 @@ class UdienzaRicercata(QMainWindow):
         print("ciao26")
         '''
 
+        #for u in self.udienzeTrovate:
         for u in self.udienzeTrovate:
             print("hei bro")
             label = QLabel()
             #print(u)
             textLabel2 = QLabel()
             print(u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome'])
-            print(u.getDatiUdienza()['Cliente'])
+            print("tra i due clienti")
             textLabel2.setText(
                 'Cliente: ' + '\n' + 'NOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
@@ -100,17 +102,18 @@ class UdienzaRicercata(QMainWindow):
             self.grifLayout.addWidget(textLabel2, i, 1, 1,2)
             i += 1
             label.setText(
-               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['CittÃ  Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
+               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
-            print("ciao2")
+            print("ciao2054")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
             self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = u: self.aggiornaUdienza(a)), i, 1)
             self.grifLayout.addWidget(
                 tool.createButton("Elimina", lambda checked, a = u.getDatiUdienza()['ID']: self.rimuoviUdienza(a)),i,2)
             i += 1
+            print("ecco ciao9")
 
     def aggiungiUdienza(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaIserisciUdienza import VistaInserisciUdienza
@@ -137,6 +140,7 @@ class UdienzaRicercata(QMainWindow):
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
+        print("ngul a mammt")
         print(tool.leggi())
         for cliente in self.clientiList:
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
