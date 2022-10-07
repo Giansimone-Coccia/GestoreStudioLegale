@@ -13,29 +13,34 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaUdienze import VistaEliminaUdienze
 
 
-class VistaHomeUdienze(QMainWindow):
+class UdienzaRicercata(QMainWindow):
 
     #udienzeList = []
     #avvocatiList = []
     #clientiList = []
     tool = Tools()
 
-    def __init__(self, parent=None):
-        super(VistaHomeUdienze, self).__init__(parent)
+    def __init__(self, udienze,parent=None):
+        super(UdienzaRicercata, self).__init__(parent)
+
+        self.udienzeTrovate = []
+        print("ciaoo45")
+        for u in udienze:
+            self.udienzeTrovate.append(u)
 
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
-        self.button_layout = QHBoxLayout()
+        #self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()  # Widget that contains the collection of Vertical Box
 
         self.grifLayout = QGridLayout()
 
         self.outerLayout.addWidget(self.tool.rewindButton(self.rewind1), 1)
-        self.outerLayout.addLayout(self.button_layout, 1)
-        self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiUdienza))
-        self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaUdienza))
+        #self.outerLayout.addLayout(self.button_layout, 1)
+        self.outerLayout.addWidget(self.scroll, 9)
+        #self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiUdienza))
+        #self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaUdienza))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiU()
@@ -61,6 +66,7 @@ class VistaHomeUdienze(QMainWindow):
         #clientiL = []
         i=1
 
+        '''
         for avvocato in self.avvocatiList:
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                clienti = avvocato.getDatiAvvocato()['clienti']
@@ -77,7 +83,9 @@ class VistaHomeUdienze(QMainWindow):
                          #print(self.udienzeList.__getitem__(3))
                          #print(ud)
         print("ciao26")
-        for u in ud:
+        '''
+
+        for u in self.udienzeTrovate:
             print("hei bro")
             label = QLabel()
             #print(u)
@@ -92,7 +100,7 @@ class VistaHomeUdienze(QMainWindow):
             self.grifLayout.addWidget(textLabel2, i, 1, 1,2)
             i += 1
             label.setText(
-               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
+               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['CittÃ  Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
@@ -124,10 +132,7 @@ class VistaHomeUdienze(QMainWindow):
         self.close()
 
     def cercaUdienza(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaUdienze import RicercaUdienze
-        self.ricerca = RicercaUdienze()
-        self.ricerca.show()
-        #self.close()
+        pass
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
@@ -138,7 +143,7 @@ class VistaHomeUdienze(QMainWindow):
                     return cliente.getDatiCliente()
 
     def rewind1(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaHome = VistaHomeAvvocato()
+        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaUdienze import RicercaUdienze
+        self.vistaHome = RicercaUdienze()
         self.vistaHome.show()
         self.close()

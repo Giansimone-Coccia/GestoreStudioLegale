@@ -11,13 +11,13 @@ import sys
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
-class RicercaParcelle(QDialog):
+class RicercaUdienze(QDialog):
     NumGridRows = 3
     NumButtons = 4
 
 
     def __init__(self):
-        super(RicercaParcelle, self).__init__()
+        super(RicercaUdienze, self).__init__()
 
         self.tool = Tools()
         self.parcelleList = self.tool.loadParcelle()
@@ -44,7 +44,7 @@ class RicercaParcelle(QDialog):
         self.resize(400, 120)
 
     def createFormGroupBox(self):
-        self.formGroupBox = QGroupBox("Cerca una parcella")
+        self.formGroupBox = QGroupBox("Cerca un udienza")
 
         self.layout.insertRow(1, "Codice fiscale (cliente):", self.textIn)
 
@@ -53,7 +53,7 @@ class RicercaParcelle(QDialog):
         self.formGroupBox.setLayout(self.layout)
 
     def indexScelta(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.ParcellaRicercata import ParcellaRicercata
+        from GestoreStudioLegale.Viste.VisteAvvocato.UdienzaRicercata import UdienzaRicercata
 
         self.code = self.textIn.text()
         print(self.code)
@@ -69,14 +69,14 @@ class RicercaParcelle(QDialog):
             msg.exec()
             return
 
-        parcelle = []
+        udienze = []
 
-        for parcella in self.parcelleList:
-            if parcella.Cliente.codiceFiscale == self.risultatoRicerca.codiceFiscale:
-                parcelle.append(parcella)
+        for udienza in self.parcelleList:
+            if udienza.Cliente.codiceFiscale == self.risultatoRicerca.codiceFiscale:
+                udienze.append(udienza)
 
 
         #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
-        self.subWindow = ParcellaRicercata(parcelle)
+        self.subWindow = UdienzaRicercata(udienze)
         self.subWindow.show()
         self.close()

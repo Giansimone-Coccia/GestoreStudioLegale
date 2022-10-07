@@ -20,36 +20,24 @@ class ParcellaRicercata(QMainWindow):
     def __init__(self, parcelle,parent=None):
         super(ParcellaRicercata, self).__init__(parent)
         tool = Tools()
-        #print(parcelle[0].getDatiParcellaCliente()['intestatario']) #vuoto ma non crasha
         self.parcelleTrovate = []
         print("ciaoo45")
         for parcella in parcelle:
             self.parcelleTrovate.append(parcella)
 
-        #LE PARCELLE SONO VUOTE
-
-        '''self.scroll = QScrollArea()
-        self.widget = QWidget()
-        self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
-
-        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella), 0, 1)
-        self.grifLayout.addWidget(
-            tool.createButton("Cerca", self.cercaParcella), 0, 2)'''
-
         self.cWidget = QWidget()  # contiene tutto
         self.outerLayout = QVBoxLayout()
-        self.button_layout = QHBoxLayout()
+        #self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         self.widget = QWidget()  # Widget that contains the collection of Vertical Box
 
         self.grifLayout = QGridLayout()
 
         self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
-        self.outerLayout.addLayout(self.button_layout, 1)
-        self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
+        #self.outerLayout.addLayout(self.button_layout, 1)
+        self.outerLayout.addWidget(self.scroll, 9)
+        #self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
+        #self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiP()
@@ -68,15 +56,10 @@ class ParcellaRicercata(QMainWindow):
         self.parcelleList = self.tool.loadParcelle()
         self.avvocatiList = self.tool.loadAvvocati()
         tool = Tools()
-        parc = []
+        #parc = []
         i=1
 
-        #print("ca")
-        #print(self.parcelleList)
-        #print(self.avvocatiList)
-        #print(avvocato.getDatiAvvocato()['clienti'])
-
-        for avvocato in self.avvocatiList:
+        '''for avvocato in self.avvocatiList:
             #print("noia")
             print (self.tool.leggi().rsplit()[0])
             print (avvocato.codiceFiscale)
@@ -95,7 +78,7 @@ class ParcellaRicercata(QMainWindow):
                             #print("cad")
                             parc.append(parcella)
                             print (parc)
-
+            '''
         for par in self.parcelleTrovate:
             label = QLabel()
             textLabel2 = QLabel()
@@ -140,7 +123,7 @@ class ParcellaRicercata(QMainWindow):
                     return cliente.getDatiCliente()
 
     def rewind1(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaHome = VistaHomeAvvocato()
+        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaParcelle import RicercaParcelle
+        self.vistaHome = RicercaParcelle()
         self.vistaHome.show()
         self.close()

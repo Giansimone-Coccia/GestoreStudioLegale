@@ -110,7 +110,7 @@ class VistaInserisciUdienza(QWidget):
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-        self.vistaH = VistaHomeAppuntamentiA()
+        self.vistaH = VistaHomeUdienze()
         self.vistaH.show()
         self.close()
 
