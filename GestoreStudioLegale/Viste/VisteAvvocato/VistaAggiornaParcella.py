@@ -49,7 +49,28 @@ class VistaAggiornaParcella(QWidget):
         self.close()
 
     def confermaParcella(self):
-        pass
+
+        for parcella in self.parcelleList:
+            if parcella.ID == self.parcella.ID:
+                nuovoIntestatario = self.labelIntestTex.text()
+                nuovoImporto = int(self.labelImportoTex.text())
+                parcella1 = Parcella()
+                parcella1 = parcella
+                print(self.labelIntestTex.text())
+                print(self.parcella.intestatario)
+                print(self.labelImportoTex.text())
+                print(self.parcella.importo)
+                #non funziona questo or
+                if ((self.labelIntestTex.text() != self.parcella.intestatario) or (self.labelImportoTex.text()!= self.parcella.importo)):
+                    parcella1.importo = nuovoImporto
+                    parcella1.intestatario = nuovoIntestatario
+                    parcella.rimuoviParcella(self.parcella.ID)
+                    print("ciao")
+                    parcella1.creaParcella(self.parcella.Cliente, self.parcella.ID,self.parcella.identificativo, nuovoImporto, nuovoIntestatario)
+                    self.conferma()
+                else:
+                    self.problema()
+
         '''for parcella in self.parcelleList:
             if parcella.ID == self.parcella.ID:
                 parcella1 = Parcella()
@@ -73,6 +94,7 @@ class VistaAggiornaParcella(QWidget):
         msg.setText("La sua parcella è stata modificata con successo")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
+        print("Why?")
         self.vistaPrima = VistaHomeParcelle()
         self.vistaPrima.show()
         self.close()
@@ -80,7 +102,7 @@ class VistaAggiornaParcella(QWidget):
     def problema(self):
         msg = QMessageBox()
         msg.setWindowTitle("ERRORE")
-        msg.setText("Non è possibile modificarla con questi dati, riprovi")
+        msg.setText("Immessi gli stessi dati!")
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
         self.vistaPrec = VistaHomeParcelle()
