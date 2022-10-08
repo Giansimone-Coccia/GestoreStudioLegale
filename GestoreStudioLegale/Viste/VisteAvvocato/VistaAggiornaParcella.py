@@ -61,7 +61,9 @@ class VistaAggiornaParcella(QWidget):
                 print(self.labelImportoTex.text())
                 print(self.parcella.importo)
                 #non funziona questo or
-                if ((self.labelIntestTex.text() != self.parcella.intestatario) or (self.labelImportoTex.text()!= self.parcella.importo)):
+                condizione1 = self.labelIntestTex.text() != str(self.parcella.intestatario)
+                condizione2 = self.labelImportoTex.text()!= str(self.parcella.importo)
+                if (condizione1 or condizione2):
                     parcella1.importo = nuovoImporto
                     parcella1.intestatario = nuovoIntestatario
                     parcella.rimuoviParcella(self.parcella.ID)
