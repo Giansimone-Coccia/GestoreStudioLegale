@@ -59,26 +59,6 @@ class ParcellaRicercata(QMainWindow):
         #parc = []
         i=1
 
-        '''for avvocato in self.avvocatiList:
-            #print("noia")
-            print (self.tool.leggi().rsplit()[0])
-            print (avvocato.codiceFiscale)
-            print(avvocato.getDatiAvvocato()['clienti'])
-            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-               #print("coglione")
-               print(avvocato.getDatiAvvocato()['clienti'])
-               clienti = avvocato.getDatiAvvocato()['clienti']
-               #print("ciao")
-               print(clienti)
-               #print("cag")
-               for cliente in clienti:
-                    #print("cioooo")
-                    for parcella in self.parcelleList:
-                        if parcella.Cliente.codiceFiscale == cliente.codiceFiscale:
-                            #print("cad")
-                            parc.append(parcella)
-                            print (parc)
-            '''
         for par in self.parcelleTrovate:
             label = QLabel()
             textLabel2 = QLabel()
@@ -97,22 +77,24 @@ class ParcellaRicercata(QMainWindow):
             print("ciao2")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
-            self.grifLayout.addWidget(tool.createButton("Modifica", self.aggiornaParcella), i, 1)
+            self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = par: self.aggiornaParcella(a)), i, 1)
+            print("mammt")
             self.grifLayout.addWidget(
                 tool.createButton("Elimina", self.rimuoviParcella),i,2)
             i += 1
 
-    def aggiungiParcella(self):
-        pass
-
-    def cercaParcella(self):
-        pass
-
-    def aggiornaParcella(self):
-        pass
+    def aggiornaParcella(self, parcella):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaParcella import VistaAggiornaParcella
+        self.vistaAggiorna = VistaAggiornaParcella()
+        self.vistaAggiorna.parcella = parcella
+        self.vistaAggiorna.show()
+        self.close()
 
     def rimuoviParcella(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaParcelle import VistaEliminaParcelle
+        self.elimina = VistaEliminaParcelle()
+        self.elimina.show()
+        self.close()
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

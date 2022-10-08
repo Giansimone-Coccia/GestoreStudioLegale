@@ -54,9 +54,7 @@ class VistaAggiungiClienteEsistente(QWidget):
             msg.exec()
             return
         else:
-            if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-                with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                    self.avvocatiList = list(pickle.load(f))
+            self.avvocatiList = self.tool.loadAvvocati()
             for avvocato in self.avvocatiList:
                 if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                     '''for cliente in avvocato.clienti:

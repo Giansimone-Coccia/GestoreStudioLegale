@@ -11,8 +11,8 @@ class VistaEliminaParcelle(QWidget):
 
     id = ''
 
-    def init(self,parent = None):
-        super(VistaEliminaParcelle, self).init(parent)
+    def __init__(self, parent = None):
+        super(VistaEliminaParcelle, self).__init__(parent)
 
         tool = Tools()
         gLayout = QGridLayout()
@@ -28,7 +28,7 @@ class VistaEliminaParcelle(QWidget):
         gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaParcella(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
-        self.setWindowTitle("Gestore Studio Legale")
+        self.setWindowTitle("Eliminazione parcella")
 
     def eliminaParcella(self, id):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle

@@ -5,7 +5,6 @@ import pickle
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox, QComboBox, \
     QCalendarWidget
 #from datetime import datetime, timedelta, time
-from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -19,30 +18,30 @@ class VistaAggiornaParcella(QWidget):
     parcella = Parcella()
     parcelleList = tool.loadParcelle()
 
-    def __init__(self,parent = None):
+    def __init__(self, parent = None):
         super(VistaAggiornaParcella, self).__init__(parent)
-        tool = Tools()
-        self.gestore = GestoreSistema()
+        #self.gestore = GestoreSistema()
         self.setWindowTitle('Modifica Parcella')
         self.resize(500, 120)
         self.layout = QGridLayout()
-        self.layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        self.layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
 
-        self.createLine('intestatario', 1, 'o')
-        self.createLine('importo', 2, 'o')
+        self.labelIntestatario = QLabel('<font size="4"> Nuovo intestatario </font>')
+        self.labelImporto = QLabel('<font size="4"> Nuovo importo </font>')
+        self.labelIntestTex = QLineEdit()
+        self.labelIntestTex.setPlaceholderText("Inserisci nuovo intestatario")
+        self.labelImportoTex = QLineEdit()
+        self.labelImportoTex.setPlaceholderText("Inserisci nuovo importo")
 
         self.confirmButton = QPushButton()
         self.confirmButton = self.tool.createButton('Conferma Parcella', self.confermaParcella)
 
-        self.layout.addWidget(self.confirmButton, 3, 0, 1, 2)
+        self.layout.addWidget(self.confirmButton, 3, 1, 1, 2)
+        self.layout.addWidget(self.labelIntestatario, 1, 0)
+        self.layout.addWidget(self.labelImporto, 2, 0)
+        self.layout.addWidget(self.labelIntestTex, 1, 2,)
+        self.layout.addWidget(self.labelImportoTex, 2, 2)
         self.setLayout(self.layout)
-
-    def createLine(self, name, n, l):
-        self.labelName = QLabel(f'<font size="4"> {name} </font>')
-        self.lineEdit = QLineEdit()
-        self.lineEdit.setPlaceholderText(f'Inserisci nuov{l} {name.lower()}')
-        self.layout.addWidget(self.labelName, n, 0)
-        self.layout.addWidget(self.lineEdit, n, 1)
 
     def rewind(self):
         self.vistaHome = VistaHomeParcelle()
@@ -50,23 +49,23 @@ class VistaAggiornaParcella(QWidget):
         self.close()
 
     def confermaParcella(self):
-        i=0
-        item = self.layout.itemAtPosition(i + 1, 1).widget()
-        for parcella in self.parcelleList:
+        pass
+        '''for parcella in self.parcelleList:
             if parcella.ID == self.parcella.ID:
-               importoAggiornato = self.layout.itemAtPosition(2, 1).widget().text()
-               intestatarioAggiornato = self.layout.itemAtPosition(1, 1).widget().text()
-               #print(item.text())
-               print(importoAggiornato)
-               print(intestatarioAggiornato)
-               #parcella.aggiornaParcella(parcella.Cliente, parcella.identificativo, importoAggiornato, intestatarioAggiornato )
-               parcella.intestatario = intestatarioAggiornato
-               parcella.importo = importoAggiornato
-               #print(self.layout.itemAtPosition(2, 1).widget().text())
-            if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
-                    with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f1:
-                        pickle.dump(self.parcelleList, f1, pickle.HIGHEST_PROTOCOL)
-                    self.conferma()
+                parcella1 = Parcella()
+                parcella1 = parcella
+                nuovoIntestatario = self.labelIntestTex.text()
+                nuovoImporto = int(self.labelImportoTex.text())
+                print("ci siamo")
+                #self.parcella.creaParcella(CLIENTE, self.parcella.ID, self.parcella.identificativo, nuovoImporto, nuovoIntestatario)
+                #self.parcella.rimuoviParcella(self.parcella.ID)
+                self.parcella.intestatario = nuovoIntestatario
+                self.parcella.importo = nuovoImporto
+                if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+                    with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb+') as f:
+                        self.parcelleList.remove(self.parcella)
+                        self.parcelleList.append(parcella1)
+                        self.conferma()'''
 
     def conferma(self):
         msg = QMessageBox()

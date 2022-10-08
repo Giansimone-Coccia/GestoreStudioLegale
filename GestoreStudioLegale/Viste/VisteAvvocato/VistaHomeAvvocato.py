@@ -1,3 +1,6 @@
+import os
+import pickle
+
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
@@ -15,6 +18,30 @@ class VistaHomeAvvocato(QWidget):
         tool = Tools()
         gLayout = QGridLayout()
         gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+
+        tool = Tools()
+        self.clientiList = tool.loadClienti()
+        self.avvocatiList = tool.loadAvvocati()
+
+        for avvocato in self.avvocatiList:
+            print("888")
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                print("777")
+                self.avvClientiList = avvocato.clienti
+                for clienteAvv in self.avvClientiList:
+                    print("3333")
+                    i=0
+                    for cliente in self.clientiList:
+                        print("989")
+                        print(clienteAvv.getDatiCliente())
+                        if clienteAvv.getDatiCliente()["Id"] == cliente.getDatiCliente()["Id"]:
+                            i=1
+                    if i == 0:
+                        self.avvClientiList.remove(clienteAvv)
+                        avvocato.aggiornaAvvocato(clienti=self.avvClientiList)
+                        for cliennte in self.avvClientiList:
+                            print(cliennte.getDatiCliente())
+
         gLayout.addWidget(self.createButton("Gestisci Appuntamenti", self.reachAppuntamenti), 1, 0)
         gLayout.addWidget(self.createButton("Parcelle", self.reachParcelle), 2, 0)
         gLayout.addWidget(self.createButton("Udienze", self.reachUdienze), 3, 0, 1, 2)

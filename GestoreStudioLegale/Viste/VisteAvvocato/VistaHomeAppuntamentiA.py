@@ -95,21 +95,50 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 print(avvocato.appuntamentiAvvocato)
                 i = 0
                 for appuntamento in avvocato.appuntamentiAvvocato:
-                    print(appuntamento.getDatiAppuntamento())
+                    for cliente in avvocato.clienti:
+                        print("777")
+                        print(appuntamento.Cliente.getDatiCliente()['Id'])
+                        if cliente.getDatiCliente()['Id'] == appuntamento.Cliente.getDatiCliente()['Id']:
+                            #print(appuntamento.getDatiAppuntamento())
+                            label = QLabel()
+                            clientep=appuntamento.getDatiAppuntamento()['Cliente']
+                            nome=clientep.getDatiCliente()["Nome"]
+                            cognome = clientep.getDatiCliente()["Cognome"]
+                            label.setText(
+                                    'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
+                            label.setGeometry(QRect(0, 0, 350, 20))
+                            label.setFont(QFont('Arial', 10))
+                            label.setStyleSheet("border: 1px solid black;")
+                            print("ciao2")
+                            self.grid.addWidget(label,i,1,1,2)
+                            i += 1
+                            self.grid.addWidget(tool.createButton("Modifica", lambda checked,  a = appuntamento: self.aggiornaAppuntamento(a)), i, 1)
+                            print("yugdbskjavsu")
+                            self.grid.addWidget(
+                                    tool.createButton("Elimina", lambda checked, a = appuntamento.getDatiAppuntamento()['ID']: self.rimuoviAppuntamento(a)), i, 2)
+                            i += 1
+                            '''
                     label = QLabel()
+
+                    clientep=appuntamento.getDatiAppuntamento()['Cliente']
+                    nome=clientep.getDatiCliente()["Nome"]
+                    cognome = clientep.getDatiCliente()["Cognome"]
                     label.setText(
-                        'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}")
+                        'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
                     label.setGeometry(QRect(0, 0, 350, 20))
                     label.setFont(QFont('Arial', 10))
                     label.setStyleSheet("border: 1px solid black;")
                     print("ciao2")
-                    self.grid.addWidget(label,i,1,1,2)
+                    self.grid.addWidget(label, i, 1, 1, 2)
                     i += 1
-                    self.grid.addWidget(tool.createButton("Modifica", lambda checked,  a = appuntamento: self.aggiornaAppuntamento(a)), i, 1)
+                    self.grid.addWidget(
+                        tool.createButton("Modifica", lambda checked, a=appuntamento: self.aggiornaAppuntamento(a)), i,
+                        1)
                     print("yugdbskjavsu")
                     self.grid.addWidget(
-                        tool.createButton("Elimina", lambda checked, a = appuntamento.getDatiAppuntamento()['ID']: self.rimuoviAppuntamento(a)), i, 2)
-                    i += 1
+                        tool.createButton("Elimina", lambda checked, a=appuntamento.getDatiAppuntamento()[
+                            'ID']: self.rimuoviAppuntamento(a)), i, 2)
+                    i += 1'''
 
     def getNum(self):
         n = 0

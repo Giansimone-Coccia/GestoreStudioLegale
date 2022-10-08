@@ -11,7 +11,7 @@ class VistaEliminaUdienze(QWidget):
 
     id = ''
 
-    def __init__(self,parent = None):
+    def __init__(self, parent = None):
         super(VistaEliminaUdienze, self).__init__(parent)
 
         tool = Tools()
@@ -28,7 +28,7 @@ class VistaEliminaUdienze(QWidget):
         gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaUdienza(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
-        self.setWindowTitle("Gestore Studio Legale")
+        self.setWindowTitle("Eliminazione udienza")
 
     def eliminaUdienza(self, id):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
