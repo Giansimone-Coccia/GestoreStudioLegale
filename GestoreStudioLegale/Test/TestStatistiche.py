@@ -6,7 +6,7 @@ from GestoreStudioLegale.Servizi.Udienza import Udienza
 
 class TestStatistiche(TestCase):
     def setUp(self):
-        '''self.udienza3 = Udienza()
+        self.udienza3 = Udienza()
         self.udienza4 = Udienza()
         self.udienza5 = Udienza()
         self.udienza6 = Udienza()
@@ -19,23 +19,23 @@ class TestStatistiche(TestCase):
         self.stats = Statistiche()
         self.stats.calcolaStatistiche()
         self.stats.salvaSuFile()
-        self.d = self.stats.leggiFile()'''
+        self.d = self.stats.leggiFile()
         #Statistiche.calcolaStatistiche()
         #print(Statistiche.leggiFile())
         #print(self.stats.mediaUdienzeAmministrative)
         #self.stats.salvaSuFile()
         #self.stats.leggiFile()
-        self.stats = Statistiche()
-        print(self.stats.mediaUdienzeAmministrative)
-        self.stats.calcolaStatistiche()
-        print(self.stats.mediaUdienzeAmministrative)
+        #self.stats = Statistiche()
+        #print(self.stats.mediaUdienzeAmministrative)
+        #self.stats.calcolaStatistiche()
+        #print(self.stats.mediaUdienzeAmministrative)
 
 
     def testCalcoloStatistiche(self):
         #print(self.d)
-        pass
+        #pass
         #print(self.stats.mediaUdienzeAmministrative)
-        ''''#self.assertEqual(self.stats.mediaUdienzeMensili, 2)
+        #self.assertEqual(self.stats.mediaUdienzeMensili, 2)
         self.assertEqual(self.stats.mediaUdienzeMensili, 0)
         #self.assertEqual(self.stats.mediaUdienzeAmministrative, 1)
         self.assertEqual(self.stats.mediaUdienzeAmministrative, 0)
@@ -43,17 +43,14 @@ class TestStatistiche(TestCase):
         self.assertEqual(self.stats.mediaUdienzeCivili, 0)
         #self.assertEqual(self.stats.numeroAppuntamenti, 12)
         self.assertEqual(self.stats.numeroAppuntamenti, 0)
-<<<<<<< HEAD
-=======
 
->>>>>>> a74cd63d2c4265182da20a66538ffcc3d2d9e8e5
         d = self.stats.leggiFile()
         print(d)
-        print(self.stats.mediaUdienzeCivili)
+        print(self.stats.mediaUdienzeCivili)    #Non va bene, riportano tutti zero
         print(self.stats.numeroAppuntamenti)
         print(self.stats.mediaUdienzeAmministrative)
         print(self.stats.mediaUdienzeMensili)
         print(self.stats.mediaUdienzeMinorili)
         print(self.stats.mediaUdienzePenali)
         print(self.stats.leggiFile())
-        #print(self.stats.leggiFile()['Amministrative'])'''
+        #print(self.stats.leggiFile()['Amministrative'])

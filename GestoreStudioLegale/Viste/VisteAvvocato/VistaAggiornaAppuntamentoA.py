@@ -61,22 +61,39 @@ class VistaAggiornaAppuntamentoA(QWidget):
         self.month = self.dataSelezionata.month()
 
     def confermaAppuntamento(self):
+        tool = Tools()
+        print("sus")
         for appuntamento in self.appuntamentiList:
             if appuntamento.ID == self.appuntamento.ID:
+                print("sheesh")
                 hour = self.ora.currentText()
+                print("333")
                 if not self.convalida():
+                    print("sheesh1")
                     hourDT = datetime.datetime.strptime(hour, "%H:%M")
                     #oraFine = hourDT+datetime.timedelta(hours = 1) #FAI MINUTI SE OGNI MEZZ'ORA
                     oraFine = hourDT + datetime.timedelta(minutes=30)
                     self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
                     dateS = self.pyDate.strftime("%d/%m/%Y")
+                    print("sheesh2")
                     dataOraInizio = dateS + ',' + hour
                     dataOraFine = dateS + ',' + oraFine.strftime("%H:%M")
                     appuntamento.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
                     appuntamento.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
+                    print("sheesh3")
                     if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
                         with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'wb') as f1:
                             pickle.dump(self.appuntamentiList, f1, pickle.HIGHEST_PROTOCOL)
+                    print("sheesh3.5")
+                    self.avocatiList = tool.loadAvvocati()
+                    for avvocato in self.avocatiList:
+                        if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                            for app in avvocato.appuntamentiAvvocato:
+                                if app.ID == self.appuntamento.ID:
+                                    avvocato.appuntamentiAvvocato.remove(app)
+                                    avvocato.appuntamentiAvvocato.append(appuntamento)
+                            avvocato.aggiornaAvvocato()
+                    print("sheesh4")
                     self.conferma()
 
     def conferma(self):
@@ -132,7 +149,7 @@ class VistaAggiornaAppuntamentoA(QWidget):
                     msg.exec_()
                     condition = True
                     return condition
-                elif date.weekday() == 5 or date == 6:
+                elif date.weekday() == 5 or date.weekday() == 6:
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
                     msg.setText("Lo studio è chiuso durante il week-end")

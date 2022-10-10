@@ -25,14 +25,24 @@ class VistaEliminaAppuntamentoA(QWidget):
         button1 = tool.createButton("No", self.rewind)
         button1.setMaximumSize(500,200)
         gLayout.addWidget(button1, 2, 1)
-        gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaAppuntamento(self.id)), 2, 0)
+        gLayout.addWidget(tool.createButton("SÃ¬",lambda checked: self.eliminaAppuntamento(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")
 
     def eliminaAppuntamento(self,id):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-        Appuntamento.rimuoviAppuntamento(id)
+        app = Appuntamento()
+        app.rimuoviAppuntamento(id)
+        tool = Tools()
+        self.avocatiList = tool.loadAvvocati()
+        for avvocato in self.avocatiList:
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                print("shit")
+                for app in avvocato.appuntamentiAvvocato:
+                    if app.ID == id:
+                        avvocato.appuntamentiAvvocato.remove(app)
+                avvocato.aggiornaAvvocato()
         self.vistaVisualizzaAppuntamento = VistaHomeAppuntamentiA()
         msg = QMessageBox()
         msg.setWindowTitle('Appuntamento eliminato')

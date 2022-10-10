@@ -7,6 +7,8 @@ from GestoreStudioLegale.Servizi.Appuntamento import *
 
 import sys
 
+from GestoreStudioLegale.Utilities.Utilities import Tools
+
 
 class RicercaAppuntamentoA(QDialog):
     NumGridRows = 3
@@ -48,11 +50,19 @@ class RicercaAppuntamentoA(QDialog):
         from GestoreStudioLegale.Viste.VisteAvvocato.AppuntamentoRicercatoA import AppuntamentoRicercatoA
 
         self.code = self.textIn.text()
+        tool = Tools()
+        avvocatiList = tool.loadAvvocati()
+
+        self.risultatoRicerca = None
 
         appuntamento = Appuntamento()
-        risultatoRicerca = appuntamento.ricercaAppuntamentoID(self.code)
+        for avvocato in avvocatiList:
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                for app in avvocato.appuntamentiAvvocato:
+                    if app.ID == self.code:
+                        self.risultatoRicerca = appuntamento.ricercaAppuntamentoID(self.code)
 
-        if risultatoRicerca is None:
+        if self.risultatoRicerca is None:
             msg = QMessageBox()
             msg.setWindowTitle('Appuntamento non trovato')
             msg.setText('Non esiste alcun appuntamento con questo id')
@@ -61,6 +71,6 @@ class RicercaAppuntamentoA(QDialog):
 
 
         self.subWindow = AppuntamentoRicercatoA()
-        self.subWindow.initUI(risultatoRicerca)
+        self.subWindow.initUI(self.risultatoRicerca)
         self.subWindow.show()
         self.close()

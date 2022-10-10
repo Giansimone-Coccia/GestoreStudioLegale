@@ -65,7 +65,7 @@ class VistaInserisciParcellaA(QWidget):
         parcella = Parcella()
         ID = self.tool.IdGenerator('PA')
         cliente = self.ottieniCliente()
-        if not self.convalida():
+        if not self.convalida():    #Una volta creata una dalla vista, crasha e non parte neanche più il visualizza
             parcella.creaParcella(cliente, ID, int(self.labelIdentText.text()), int(self.labelImportoText.text()), self.labelIntestText.text())
             self.conferma()
             return

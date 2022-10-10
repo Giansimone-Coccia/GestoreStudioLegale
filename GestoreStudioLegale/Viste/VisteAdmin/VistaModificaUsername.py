@@ -27,10 +27,10 @@ class VistaModificaUsername(QWidget):
         self.buttonLogin = QPushButton('Conferma')
         layout.addWidget(self.buttonLogin, 3, 0, 1, 3)
         layout.setRowMinimumHeight(2, 75)
-        self.buttonLogin.clicked.connect(lambda: self.modificaPassw())
+        self.buttonLogin.clicked.connect(lambda: self.modificaUser())
         self.setLayout(layout)
 
-    def modificaPassw(self):
+    def modificaUser(self):
         tool =Tools()
         passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
         print(passEuser)

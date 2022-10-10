@@ -66,9 +66,11 @@ class AppuntamentoRicercatoA(QMainWindow):
         print("miaoooooooo")
         self.vistaAggiorna = VistaAggiornaAppuntamentoA()
         self.vistaAggiorna.appuntamento =self.appuntamentoTrovato
+        datIn = self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
+        datFin = self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
 
         label.setText(
-            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Fine']}")
+            'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{self.appuntamentoTrovato.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE' + f"{datFin}")
         label.setGeometry(QRect(0, 0, 350, 20))
         label.setFont(QFont('Arial', 10))
         label.setStyleSheet("border: 1px solid black;")

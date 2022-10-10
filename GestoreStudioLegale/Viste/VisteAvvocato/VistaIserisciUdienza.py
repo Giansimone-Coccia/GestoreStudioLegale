@@ -74,9 +74,14 @@ class VistaInserisciUdienza(QWidget):
         self.month = self.dataSelezionata.month()
 
     def sceltaClienti(self):
-        self.clientiList = self.tool.loadClienti()
+        tool = Tools()
+        self.avvocatiList = tool.loadAvvocati()
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                self.clientiList = avvocato.clienti
+
         for cliente in self.clientiList:
-            self.nomi.append(cliente.nome+' '+cliente.cognome)
+            self.nomi.append(cliente.nome + ' ' + cliente.cognome)
         return self.nomi
 
     def udienzaOK(self):
@@ -99,7 +104,7 @@ class VistaInserisciUdienza(QWidget):
                 else:
                     cliente1 = Cliente()
                     stringa = self.menuClienti.currentText().rsplit()
-                    udienza.creaUdienza(avvocato.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), self.labelCittaText.text(), cliente1.ricercaUtilizzatoreNomeCognome(stringa[0],stringa[1]), dataOraInizio, dataOraFine, ID, self.procedimento.currentText())
+                    udienza.creaUdienza(avvocato.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), self.labelCittaText.text(), cliente1.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0],cognome = self.menuClienti.currentText().rsplit()[1]), dataOraInizio, dataOraFine, ID, self.procedimento.currentText())
                     self.conferma()
                     return
 
@@ -122,6 +127,15 @@ class VistaInserisciUdienza(QWidget):
         msg.exec_()
 
     def convalida(self):
+
+            if self.labelCittaText.text() == "":
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRORE")
+                msg.setText("Città non selezionata, riprova")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+                return True
+
             if self.year is None and self.month is None and self.day is None:
                 msg = QMessageBox()
                 print("ecco 7")
@@ -159,7 +173,7 @@ class VistaInserisciUdienza(QWidget):
                     msg.exec_()
                     condition = True
                     return condition
-                elif date.weekday() == 5 or date == 6:
+                elif date.weekday() == 5 or date.weekday() == 6:
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
                     msg.setText("Lo studio è chiuso durante il week-end")

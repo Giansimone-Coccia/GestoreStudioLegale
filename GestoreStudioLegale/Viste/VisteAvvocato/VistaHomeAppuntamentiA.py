@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QScrollArea, \
-    QListWidget, QScrollBar, QListWidgetItem, QLabel, QMainWindow, QLineEdit
+    QListWidget, QScrollBar, QListWidgetItem, QLabel, QMainWindow, QLineEdit, QMessageBox
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
@@ -53,6 +53,16 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.show()
 
     def aggiungiAppuntamento(self):
+        tool = Tools()
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                self.avvClientiList = avvocato.clienti
+                if len(self.avvClientiList) == 0:
+                    msg = QMessageBox()
+                    msg.setWindowTitle('Nessun cliente associato')
+                    msg.setText('Nessun cliente Ã¨ associato a questo avvocato')
+                    msg.exec()
+                    return
         self.vistaAggiuntaA = VisteInserisciAppuntamentoA()
         self.vistaAggiuntaA.show()
         self.close()
@@ -104,6 +114,10 @@ class VistaHomeAppuntamentiA(QMainWindow):
                             clientep=appuntamento.getDatiAppuntamento()['Cliente']
                             nome=clientep.getDatiCliente()["Nome"]
                             cognome = clientep.getDatiCliente()["Cognome"]
+                            datIn = appuntamento.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
+                            datFin = appuntamento.getDatiAppuntamento()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
+                            #label.setText(
+                                    #'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE: ' + f"{datFin}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
                             label.setText(
                                     'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
                             label.setGeometry(QRect(0, 0, 350, 20))
