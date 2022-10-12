@@ -107,7 +107,7 @@ class VistaCreaCliente(QWidget):
         corsiAgg = []
         appuntamenti = []
         parcelle = []
-        udienze = []
+        #udienze = []
         tool = Tools()
 
         cliente.creaCliente(self.layout.itemAtPosition(3, 1).widget().text(),
@@ -116,7 +116,7 @@ class VistaCreaCliente(QWidget):
                             self.layout.itemAtPosition(6, 1).widget().text(),
                             self.layout.itemAtPosition(7, 1).widget().text(),
                             self.layout.itemAtPosition(8, 1).widget().text(), appuntamenti, parcelle,
-                            self.layout.itemAtPosition(1, 1).widget().text(), udienze)
+                            self.layout.itemAtPosition(1, 1).widget().text())
 
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:

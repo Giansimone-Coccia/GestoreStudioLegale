@@ -48,7 +48,7 @@ class VistaAggiornaCliente(QWidget):
 
         appuntamenti = self.cliente.appuntamentoCliente
         parcelle = self.cliente.parcelle
-        udienze =self.cliente.udienza
+        #udienze =self.cliente.udienza
         corsiAgg = self.cliente.corsoAggiornamento
 
         nome = self.breve('nome',self.cliente.getDatiCliente()["Nome"],1,'o')
@@ -175,7 +175,7 @@ class VistaAggiornaCliente(QWidget):
                             self.cliente.getDatiCliente()["Data nascita"],self.cliente.getDatiCliente()["Email"],
                             self.cliente.getDatiCliente()["Id"],self.cliente.getDatiCliente()["Numero telefono"],
                             self.cliente.getDatiCliente()["Password"],appuntamenti,parcelle,
-                            self.cliente.getDatiCliente()["Nome"],udienze)
+                            self.cliente.getDatiCliente()["Nome"])
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Modifica avvenuta con successo')

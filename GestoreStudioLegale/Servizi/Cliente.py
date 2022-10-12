@@ -24,11 +24,11 @@ class Cliente(Utilizzatore):
         self.rimuoviCliente(self.Id)
         self.creaCliente(self.codiceFiscale, self.cognome, self.corsoAggiornamento, self.dataNascita, self.email,
                              self.Id, self.numeroTelefono, self.password, self.appuntamentoCliente, self.parcelle,
-                             self.nome, self.udienza)
+                             self.nome)
         print("Aggiornato")
 
     def creaCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
-                        appuntamentoCliente, parcelle, nome, udienza):
+                        appuntamentoCliente, parcelle, nome):
 
         self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
                                   password, nome)
