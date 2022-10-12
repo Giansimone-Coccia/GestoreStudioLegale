@@ -72,7 +72,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
     def cercaAppuntamento(self):
         self.vistaAvvocatoR = RicercaAppuntamentoA()
         self.vistaAvvocatoR.show()
-        #self.close()
+        self.close()
 
     def aggiornaAppuntamento(self, appuntamento):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaAppuntamentoA import VistaAggiornaAppuntamentoA

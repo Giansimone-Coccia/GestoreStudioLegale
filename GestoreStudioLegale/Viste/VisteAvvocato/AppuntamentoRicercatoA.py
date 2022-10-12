@@ -6,8 +6,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBo
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaAppuntamentoA import VistaAggiornaAppuntamentoA
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaAppuntamentoA import VistaEliminaAppuntamentoA
-from GestoreStudioLegale.Viste.VisteAvvocato import VistaHomeAppuntamentiA
-from GestoreStudioLegale.Servizi.Appuntamento import *
+
 import pickle
 import os
 
@@ -54,8 +53,8 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.close()
 
     def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
-        self.vistaAvvocatoR = RicercaAppuntamentoA()
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
+        self.vistaAvvocatoR = VistaHomeAppuntamentiA()
         self.vistaAvvocatoR.show()
         self.close()
 

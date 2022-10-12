@@ -32,7 +32,7 @@ class RicercaParcelle(QDialog):
 
         buttonBox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         buttonBox.accepted.connect(self.indexScelta)
-        buttonBox.rejected.connect(self.reject)
+        buttonBox.rejected.connect(self.rewind)
 
         mainLayout = QVBoxLayout()
         mainLayout.addWidget(self.formGroupBox)
@@ -79,4 +79,10 @@ class RicercaParcelle(QDialog):
         #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
         self.subWindow = ParcellaRicercata(parcelle)
         self.subWindow.show()
+        self.close()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
+        self.vistaHome = VistaHomeParcelle()
+        self.vistaHome.show()
         self.close()

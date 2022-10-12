@@ -26,7 +26,7 @@ class RicercaAppuntamentoA(QDialog):
 
         buttonBox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         buttonBox.accepted.connect(self.indexScelta)
-        buttonBox.rejected.connect(self.reject)
+        buttonBox.rejected.connect(self.rewind)
 
         mainLayout = QVBoxLayout()
         mainLayout.addWidget(self.formGroupBox)
@@ -74,4 +74,10 @@ class RicercaAppuntamentoA(QDialog):
         self.subWindow = AppuntamentoRicercatoA()
         self.subWindow.initUI(self.risultatoRicerca)
         self.subWindow.show()
+        self.close()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
+        self.vistaHome = VistaHomeAppuntamentiA()
+        self.vistaHome.show()
         self.close()

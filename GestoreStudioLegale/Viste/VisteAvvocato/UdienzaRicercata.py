@@ -11,6 +11,7 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 #modificare dimensioni tasti in utilities
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaUdienze import VistaEliminaUdienze
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
 
 
 class UdienzaRicercata(QMainWindow):
@@ -151,7 +152,6 @@ class UdienzaRicercata(QMainWindow):
                     return cliente.getDatiCliente()
 
     def rewind1(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaUdienze import RicercaUdienze
-        self.vistaHome = RicercaUdienze()
+        self.vistaHome = VistaHomeUdienze()
         self.vistaHome.show()
         self.close()

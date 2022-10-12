@@ -97,6 +97,7 @@ class VistaHomeParcelle(QMainWindow):
         from GestoreStudioLegale.Viste.VisteAvvocato.RicercaParcelle import RicercaParcelle
         self.vistaAvvocatoR = RicercaParcelle()
         self.vistaAvvocatoR.show()
+        self.close()
 
     def aggiornaParcella(self, parcella):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaParcella import VistaAggiornaParcella

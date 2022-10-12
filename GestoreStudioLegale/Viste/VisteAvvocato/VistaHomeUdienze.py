@@ -126,7 +126,7 @@ class VistaHomeUdienze(QMainWindow):
         from GestoreStudioLegale.Viste.VisteAvvocato.RicercaUdienze import RicercaUdienze
         self.ricerca = RicercaUdienze()
         self.ricerca.show()
-        #self.close()
+        self.close()
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

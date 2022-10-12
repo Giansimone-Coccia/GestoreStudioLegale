@@ -10,6 +10,9 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 
 
 #modificare dimensioni tasti in utilities
+from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
+
+
 class ParcellaRicercata(QMainWindow):
 
     parcelleList = []
@@ -105,7 +108,6 @@ class ParcellaRicercata(QMainWindow):
                     return cliente.getDatiCliente()
 
     def rewind1(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.RicercaParcelle import RicercaParcelle
-        self.vistaHome = RicercaParcelle()
+        self.vistaHome = VistaHomeParcelle()
         self.vistaHome.show()
         self.close()
