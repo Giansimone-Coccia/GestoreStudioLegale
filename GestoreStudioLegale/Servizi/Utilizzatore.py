@@ -14,12 +14,12 @@ class Utilizzatore:
         self.nome = ''
         self.numeroTelefono = 0
         self.password = ''
-        self.udienza = None
+        #self.udienza = None
         #self.udienza = Udienza #non dovrebbe essere lista?
 
 
     def creaUtilizzatore(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
-                         udienza, nome):
+                          nome):
         self.codiceFiscale = codiceFiscale
         self.cognome = cognome
         self.corsoAggiornamento = corsoAggiornamento
@@ -29,7 +29,7 @@ class Utilizzatore:
         self.nome = nome
         self.numeroTelefono = numeroTelefono
         self.password = password
-        self.udienza = udienza
+        #self.udienza = udienza
 
     def getInfoUtilizzatore(self):
         return {
@@ -41,7 +41,7 @@ class Utilizzatore:
             'Id': self.Id,
             'Numero telefono': self.numeroTelefono,
             'Password': self.password,
-            'Udienza': self.udienza,
+            #'Udienza': self.udienza,
             'Corso aggiornamento': self.corsoAggiornamento
         }
 
@@ -66,6 +66,6 @@ class Utilizzatore:
         self.id = ''
         self.numeroTelefono = ''
         self.password = ''
-        self.udienza = None
+        #self.udienza = None
         self.corsoAggiornamento = None
 

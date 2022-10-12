@@ -109,17 +109,16 @@ class VistaAggiungiAvvocato(QWidget):
             return
 
         corsiAgg = []
-        udienza = []
+        #udienza = []
         clienti = []
-        licenza = []
+        #licenza = []
         appuntamento = []
         print("merda")
 
         avvocato.creaAvvocato(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
                               self.layout.itemAtPosition(1, 1).widget().text(),corsiAgg,date.strftime("%d/%m/%Y"), self.layout.itemAtPosition(5, 1).widget().text(),
                             self.layout.itemAtPosition(6, 1).widget().text(), self.layout.itemAtPosition(7, 1).widget().text(),
-                            self.layout.itemAtPosition(8, 1).widget().text(), udienza, clienti,
-                             licenza,appuntamento)
+                            self.layout.itemAtPosition(8, 1).widget().text(), clienti, appuntamento)
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Creazione avvenuta con successo')

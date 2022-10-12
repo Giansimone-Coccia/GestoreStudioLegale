@@ -47,9 +47,9 @@ class VistaAggiornaAvvocato(QWidget):
 
         appuntamenti = self.avvocato.appuntamentiAvvocato
         clienti = self.avvocato.clienti
-        licenza =self.avvocato.licenza
+        #licenza =self.avvocato.licenza
         corsiAgg = self.avvocato.corsoAggiornamento
-        udienza= self.avvocato.udienza
+        #udienza= self.avvocato.udienza
 
         nome = self.breve('nome', self.avvocato.getDatiAvvocato()["Nome"], 1, 'o')
 
@@ -172,7 +172,7 @@ class VistaAggiornaAvvocato(QWidget):
                               self.avvocato.getDatiAvvocato()["Nome"],corsiAgg,
                             self.avvocato.getDatiAvvocato()["Data nascita"],self.avvocato.getDatiAvvocato()["Email"],
                             self.avvocato.getDatiAvvocato()["Id"],self.avvocato.getDatiAvvocato()["Numero telefono"],
-                            self.avvocato.getDatiAvvocato()["Password"],udienza,clienti,licenza,appuntamenti)
+                            self.avvocato.getDatiAvvocato()["Password"],clienti,appuntamenti)
 
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Modifica avvenuta con successo')

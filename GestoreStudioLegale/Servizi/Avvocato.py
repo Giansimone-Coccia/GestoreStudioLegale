@@ -9,11 +9,11 @@ class Avvocato(Utilizzatore):
         super(Avvocato, self).__init__()
         self.appuntamentiAvvocato = []
         self.clienti = []
-        self.licenza = []
+        #self.licenza = []
 
 
     def aggiornaAvvocato(self, clienti = None, email='', numTelefono=0, password='', appuntamentoAvvocato=None,
-                            udienza = None, corsoAggiornamento = None):  # Modifica in EA
+                             corsoAggiornamento = None):  # Modifica in EA
         if corsoAggiornamento != None:
             self.corsoAggiornamento = corsoAggiornamento
         elif email != '':
@@ -22,26 +22,25 @@ class Avvocato(Utilizzatore):
             self.numeroTelefono = numTelefono
         elif password != '':
             self.password = password
-        elif udienza is not None:
-            self.udienza = udienza
+        #elif udienza is not None:
+            #self.udienza = udienza
         elif appuntamentoAvvocato is not None:
             self.appuntamentoAvvocato = appuntamentoAvvocato
         elif clienti is not None:
             self.clienti = clienti
         self.rimuoviAvvocato(self.Id)
         self.creaAvvocato(self.codiceFiscale, self.cognome, self.nome, self.corsoAggiornamento, self.dataNascita, self.email,
-                             self.Id, self.numeroTelefono, self.password, self.udienza, self.clienti, self.licenza,
-                              self.appuntamentiAvvocato)
+                             self.Id, self.numeroTelefono, self.password, self.clienti, self.appuntamentiAvvocato)
         print("Aggiornato")
 
 
     def creaAvvocato(self, codiceFiscale, cognome, nome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password, #modifica ea
-                         udienza, clienti, licenza, appuntamentoAvvocato):
+                          clienti,  appuntamentoAvvocato):
         self.creaUtilizzatore(codiceFiscale = codiceFiscale, cognome = cognome, nome = nome, corsoAggiornamento = corsoAggiornamento,
                               dataNascita = dataNascita, email = email, Id = Id, numeroTelefono = numeroTelefono,
-                              password = password, udienza = udienza)
+                              password = password)
         self.clienti = clienti
-        self.licenza = licenza
+        #self.licenza = licenza
         self.appuntamentiAvvocato = appuntamentoAvvocato
         avvocati = []
         if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
@@ -65,9 +64,9 @@ class Avvocato(Utilizzatore):
 
     def getDatiAvvocato(self):
         d = self.getInfoUtilizzatore()
-        d['udienza'] = self.udienza
+        #d['udienza'] = self.udienza
         d['clienti'] = self.clienti
-        d['licenza'] = self.licenza
+        #d['licenza'] = self.licenza
         return d
 
 

@@ -31,7 +31,7 @@ class Cliente(Utilizzatore):
                         appuntamentoCliente, parcelle, nome, udienza):
 
         self.creaUtilizzatore(codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono,
-                                  password, udienza, nome)
+                                  password, nome)
         self.appuntamentoCliente = appuntamentoCliente
         self.parcelle = parcelle
         clienti = []
