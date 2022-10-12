@@ -8,7 +8,7 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVis
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 from GestoreStudioLegale.Utilities.Utilities import Tools
-#from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
+from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 
 
 class VistaHomeAdmin(QWidget):
@@ -46,7 +46,7 @@ class VistaHomeAdmin(QWidget):
     def reachStatistiche(self):
         self.vistaVisualizzaS = VistaVisualizzaStatistiche()
         self.vistaVisualizzaS.show()
-        self.close()
+        #self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin

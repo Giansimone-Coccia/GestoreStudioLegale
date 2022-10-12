@@ -53,7 +53,7 @@ class VistaAggiornaParcella(QWidget):
         for parcella in self.parcelleList:
             if parcella.ID == self.parcella.ID:
                 nuovoIntestatario = self.labelIntestTex.text()
-                nuovoImporto = int(self.labelImportoTex.text())
+                nuovoImporto = self.labelImportoTex.text()
                 parcella1 = Parcella()
                 parcella1 = parcella
                 print(self.labelIntestTex.text())
@@ -62,16 +62,21 @@ class VistaAggiornaParcella(QWidget):
                 print(self.parcella.importo)
                 #non funziona questo or
                 condizione1 = self.labelIntestTex.text() != str(self.parcella.intestatario)
-                condizione2 = self.labelImportoTex.text()!= str(self.parcella.importo)
+                condizione2 = self.labelImportoTex.text() != str(self.parcella.importo)
+                condizione3 = self.labelImportoTex.text().isdigit()
                 if (condizione1 or condizione2):
-                    parcella1.importo = nuovoImporto
-                    parcella1.intestatario = nuovoIntestatario
-                    parcella.rimuoviParcella(self.parcella.ID)
-                    print("ciao")
-                    parcella1.creaParcella(self.parcella.Cliente, self.parcella.ID,self.parcella.identificativo, nuovoImporto, nuovoIntestatario)
-                    self.conferma()
+                    if (condizione3):
+                        parcella1.importo = nuovoImporto
+                        parcella1.intestatario = nuovoIntestatario
+                        parcella.rimuoviParcella(self.parcella.ID)
+                        print("ciao")
+                        parcella1.creaParcella(self.parcella.Cliente, self.parcella.ID, self.parcella.identificativo,
+                                               nuovoImporto, nuovoIntestatario)
+                        self.conferma()
+                    else:
+                        self.problema("Importo non intero")
                 else:
-                    self.problema()
+                    self.problema("Immessi gli stessi dati")
 
         '''for parcella in self.parcelleList:
             if parcella.ID == self.parcella.ID:
@@ -101,12 +106,12 @@ class VistaAggiornaParcella(QWidget):
         self.vistaPrima.show()
         self.close()
 
-    def problema(self):
+    def problema(self, messaggio):
         msg = QMessageBox()
         msg.setWindowTitle("ERRORE")
-        msg.setText("Immessi gli stessi dati!")
+        msg.setText(messaggio)
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
-        self.vistaPrec = VistaHomeParcelle()
-        self.vistaPrima.show()
-        self.close()
+        #self.vistaPrec = VistaHomeParcelle()
+        #self.vistaPrec.show()
+        #self.close()

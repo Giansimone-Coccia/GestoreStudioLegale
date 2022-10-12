@@ -3,7 +3,7 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QMainWindow, QWidget, QGridLayout
 import pyqtgraph as pg'''
 #from _curses import window
-'''from _curses import window
+# from _curses import window
 from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView, QBarSeries, QStackedBarSeries
 from PyQt5.Qt import Qt
 from PyQt5.QtChart import QBarSet, QHorizontalBarSeries, QChart, QBarCategoryAxis, QValueAxis, QChartView
@@ -36,7 +36,7 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
         chart.setAnimationOptions(QChart.SeriesAnimations)
 
-        types = ('udienze amministrative', 'udienze civili', 'udienze minorili', 'udienze penali', 'udienze mensili', 'numero appuntamenti')
+        types = ('udienze amministrative', 'udienze civili', 'udienze minorili', 'udienze penali', 'udienze mensili', 'numero appuntamenti mensili')
 
         axisX = QBarCategoryAxis()
         axisX.append(types)
@@ -54,4 +54,4 @@ class VistaVisualizzaStatistiche(QMainWindow):
 
         chartView = QChartView(chart)
         chartView.setRenderHint(QPainter.Antialiasing)
-        self.setCentralWidget(chartView)'''
+        self.setCentralWidget(chartView)

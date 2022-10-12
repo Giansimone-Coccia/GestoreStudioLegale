@@ -31,7 +31,7 @@ class VistaEliminaCliente(QWidget):
         gLayout.addWidget(button1, 2, 1)
         gLayout.addWidget(button2, 2, 0)
         self.setLayout(gLayout)
-        self.resize(160 * 4, 300)
+        self.resize(300, 100)
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 

@@ -105,6 +105,12 @@ class VistaInserisciParcellaA(QWidget):
             elif self.labelImportoText.text() == '':
                 self.problema("Importo non inserito, riprova")
                 return True
+            elif not self.labelImportoText.text().isdigit():
+                self.problema("L'importo non è intero, rirprova")
+                return True
+            elif not self.labelIdentText.text().isdigit():
+                self.problema("Identificativo non intero, riprova")
+                return True
         except Exception as e:
             msg = QMessageBox()
             msg.setWindowTitle("ERRORE")

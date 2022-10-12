@@ -92,7 +92,7 @@ class Statistiche:
                 if appuntamento.dataOraInizio > date:
                     nAppuntamenti += 1
 
-            self.numeroAppuntamenti = nAppuntamenti
+            self.numeroAppuntamenti = nAppuntamenti/12
 
     def mostraGrafico(self,a='a'):
         my_dict = self.mostraStatistiche()
