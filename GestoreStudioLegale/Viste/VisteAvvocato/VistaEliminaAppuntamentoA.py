@@ -25,7 +25,7 @@ class VistaEliminaAppuntamentoA(QWidget):
         button1 = tool.createButton("No", self.rewind)
         button1.setMaximumSize(500,200)
         gLayout.addWidget(button1, 2, 1)
-        gLayout.addWidget(tool.createButton("SÃ¬",lambda checked: self.eliminaAppuntamento(self.id)), 2, 0)
+        gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaAppuntamento(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 300)
         self.setWindowTitle("Gestore Studio Legale")

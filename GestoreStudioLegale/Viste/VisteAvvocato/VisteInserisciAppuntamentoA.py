@@ -70,6 +70,8 @@ class VisteInserisciAppuntamentoA(QWidget):
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
                 self.clientiList = avvocato.clienti
 
+        self.nomi.clear()
+
         for cliente in self.clientiList:
             self.nomi.append(cliente.nome+' '+cliente.cognome)
         return self.nomi

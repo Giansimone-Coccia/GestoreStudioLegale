@@ -52,13 +52,14 @@ class RicercaAppuntamentoA(QDialog):
         self.code = self.textIn.text()
         tool = Tools()
         avvocatiList = tool.loadAvvocati()
+        appuntamentiList = tool.loadAppuntamenti()
 
         self.risultatoRicerca = None
 
         appuntamento = Appuntamento()
         for avvocato in avvocatiList:
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
-                for app in avvocato.appuntamentiAvvocato:
+                for app in appuntamentiList:
                     if app.ID == self.code:
                         self.risultatoRicerca = appuntamento.ricercaAppuntamentoID(self.code)
 

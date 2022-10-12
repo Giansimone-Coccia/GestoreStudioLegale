@@ -7,6 +7,7 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaAppuntamentoA import VistaEliminaAppuntamentoA
 from GestoreStudioLegale.Servizi.Appuntamento import *
+from GestoreStudioLegale.Servizi.Cliente import Cliente
 import pickle
 import os
 
@@ -14,11 +15,12 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VisteInserisciAppuntamentoA import 
 
 
 class VistaHomeAppuntamentiA(QMainWindow):
-    appuntamentiList = []
 
     def __init__(self, parent=None):
         super(VistaHomeAppuntamentiA, self).__init__(parent)
-        self.avvocatiList = []
+        self.tool = Tools()
+        self.appuntamentiList = self.tool.loadAppuntamenti()
+        self.avvocatiList = self.tool.loadAvvocati()
         self.initUI()
 
     def initUI(self):
@@ -104,10 +106,12 @@ class VistaHomeAppuntamentiA(QMainWindow):
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 print(avvocato.appuntamentiAvvocato)
                 i = 0
-                for appuntamento in avvocato.appuntamentiAvvocato:
+                for appuntamento in self.appuntamentiList:
                     for cliente in avvocato.clienti:
                         print("777")
-                        print(appuntamento.Cliente.getDatiCliente()['Id'])
+                        print(appuntamento.getDatiAppuntamento())
+                        print("ciao")
+                        #print(appuntamento.Cliente.getDatiCliente()['Id'])
                         if cliente.getDatiCliente()['Id'] == appuntamento.Cliente.getDatiCliente()['Id']:
                             #print(appuntamento.getDatiAppuntamento())
                             label = QLabel()
