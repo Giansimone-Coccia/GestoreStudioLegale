@@ -62,6 +62,7 @@ class VistaPrenotaAppuntamentiC(QWidget):
 
     def sceltaAvv(self):
         self.avvocatiList = self.tool.loadAvvocati()
+        self.nomi = []
         for avvocato in self.avvocatiList:
             self.nomi.append(avvocato.nome+' '+avvocato.cognome)
         return self.nomi

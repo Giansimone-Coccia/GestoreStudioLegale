@@ -15,6 +15,9 @@ class VistaInserisciUdienza(QWidget):
     clientiList = []
     nomi = []
     udienzeList = []
+    year = 0
+    month = 0
+    day = 0
 
     def __init__(self, parent=None):
         super(VistaInserisciUdienza, self).__init__(parent)
@@ -75,6 +78,7 @@ class VistaInserisciUdienza(QWidget):
 
     def sceltaClienti(self):
         tool = Tools()
+        self.nomi = []
         self.avvocatiList = tool.loadAvvocati()
         for avvocato in self.avvocatiList:
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:

@@ -57,6 +57,7 @@ class VistaInserisciParcellaA(QWidget):
 
     def sceltaClienti(self):
         self.clientiList = self.tool.loadClienti()
+        self.nomi = []
         for cliente in self.clientiList:
             self.nomi.append(cliente.nome + ' ' + cliente.cognome)
         return self.nomi
