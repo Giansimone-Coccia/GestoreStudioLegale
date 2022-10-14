@@ -63,9 +63,13 @@ class VistaPrenotaAppuntamentiC(QWidget):
     def sceltaAvv(self):
         self.avvocatiList = self.tool.loadAvvocati()
         self.nomi = []
+        tool = Tools()
         for avvocato in self.avvocatiList:
-            self.nomi.append(avvocato.nome+' '+avvocato.cognome)
+            for cliente in avvocato.clienti:
+                if cliente.codiceFiscale == tool.leggi().rsplit()[0]:
+                    self.nomi.append(avvocato.nome+' '+avvocato.cognome)
         return self.nomi
+
 
     def selezionaData(self):
         self.dataSelezionata = self.calendar.selectedDate()

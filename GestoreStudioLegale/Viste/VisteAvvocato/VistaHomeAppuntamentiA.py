@@ -7,7 +7,6 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaAppuntamentoA import VistaEliminaAppuntamentoA
 from GestoreStudioLegale.Servizi.Appuntamento import *
-from GestoreStudioLegale.Servizi.Cliente import Cliente
 import pickle
 import os
 
@@ -15,12 +14,11 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VisteInserisciAppuntamentoA import 
 
 
 class VistaHomeAppuntamentiA(QMainWindow):
+    appuntamentiList = []
 
     def __init__(self, parent=None):
         super(VistaHomeAppuntamentiA, self).__init__(parent)
-        self.tool = Tools()
-        self.appuntamentiList = self.tool.loadAppuntamenti()
-        self.avvocatiList = self.tool.loadAvvocati()
+        self.avvocatiList = []
         self.initUI()
 
     def initUI(self):
@@ -72,7 +70,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
     def cercaAppuntamento(self):
         self.vistaAvvocatoR = RicercaAppuntamentoA()
         self.vistaAvvocatoR.show()
-        self.close()
+        #self.close()
 
     def aggiornaAppuntamento(self, appuntamento):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaAppuntamentoA import VistaAggiornaAppuntamentoA
@@ -106,24 +104,22 @@ class VistaHomeAppuntamentiA(QMainWindow):
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 print(avvocato.appuntamentiAvvocato)
                 i = 0
-                for appuntamento in self.appuntamentiList:
+                for appuntamento in avvocato.appuntamentiAvvocato:
                     for cliente in avvocato.clienti:
                         print("777")
-                        print(appuntamento.getDatiAppuntamento())
-                        print("ciao")
-                        #print(appuntamento.Cliente.getDatiCliente()['Id'])
+                        print(appuntamento.Cliente.getDatiCliente()['Id'])
                         if cliente.getDatiCliente()['Id'] == appuntamento.Cliente.getDatiCliente()['Id']:
                             #print(appuntamento.getDatiAppuntamento())
                             label = QLabel()
                             clientep=appuntamento.getDatiAppuntamento()['Cliente']
                             nome=clientep.getDatiCliente()["Nome"]
                             cognome = clientep.getDatiCliente()["Cognome"]
+
                             datIn = appuntamento.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
                             datFin = appuntamento.getDatiAppuntamento()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
-                            #label.setText(
-                                    #'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE: ' + f"{datFin}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
                             label.setText(
-                                    'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
+                                    'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE: ' + f"{datFin}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
+
                             label.setGeometry(QRect(0, 0, 350, 20))
                             label.setFont(QFont('Arial', 10))
                             label.setStyleSheet("border: 1px solid black;")
@@ -135,28 +131,6 @@ class VistaHomeAppuntamentiA(QMainWindow):
                             self.grid.addWidget(
                                     tool.createButton("Elimina", lambda checked, a = appuntamento.getDatiAppuntamento()['ID']: self.rimuoviAppuntamento(a)), i, 2)
                             i += 1
-                            '''
-                    label = QLabel()
-
-                    clientep=appuntamento.getDatiAppuntamento()['Cliente']
-                    nome=clientep.getDatiCliente()["Nome"]
-                    cognome = clientep.getDatiCliente()["Cognome"]
-                    label.setText(
-                        'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{appuntamento.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{appuntamento.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'DATA E ORA FINE: ' + f"{appuntamento.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'CLIENTE: ' + f"{nome} {cognome}")
-                    label.setGeometry(QRect(0, 0, 350, 20))
-                    label.setFont(QFont('Arial', 10))
-                    label.setStyleSheet("border: 1px solid black;")
-                    print("ciao2")
-                    self.grid.addWidget(label, i, 1, 1, 2)
-                    i += 1
-                    self.grid.addWidget(
-                        tool.createButton("Modifica", lambda checked, a=appuntamento: self.aggiornaAppuntamento(a)), i,
-                        1)
-                    print("yugdbskjavsu")
-                    self.grid.addWidget(
-                        tool.createButton("Elimina", lambda checked, a=appuntamento.getDatiAppuntamento()[
-                            'ID']: self.rimuoviAppuntamento(a)), i, 2)
-                    i += 1'''
 
     def getNum(self):
         n = 0

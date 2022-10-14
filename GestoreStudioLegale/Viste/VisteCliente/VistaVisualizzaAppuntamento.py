@@ -84,8 +84,21 @@ class VistaVisualizzaAppuntamento(QMainWindow):
             #print("ciaoo3")
             label = QLabel()
             #print("ciaoo4")
+            tool = Tools()
+            nome = ""
+            cognome = ""
+            avvocatiList = tool.loadAvvocati()
+            for avvocato in avvocatiList:
+                for appuntamento in avvocato.appuntamentiAvvocato:
+                    if appuntamento.ID == app.ID:
+                        nome = avvocato.nome
+                        cognome = avvocato.cognome
+
+
+            datIn = app.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
+            datFin = app.getDatiAppuntamento()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
             label.setText(
-                'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{app.getDatiAppuntamento()['Data e Ora Inizio']}" + '\n' + 'Data e ora fine: ' + f"{app.getDatiAppuntamento()['Data e Ora Fine']}" + '\n' + 'ID: ' + f"{app.getDatiAppuntamento()['ID']}" + '\n' + 'Tipo procedimento: ' + f"{app.getDatiAppuntamento()['Tipo Procedimento']}")
+                'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE: ' + f"{datFin}" + '\n' + 'AVVOCATO: ' + f"{nome} {cognome}")
             label.setGeometry(QRect(0, 0, 350, 20))
             #label.setText(
             #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")

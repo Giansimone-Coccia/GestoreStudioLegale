@@ -70,6 +70,7 @@ class VisteInserisciAppuntamentoA(QWidget):
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
                 self.clientiList = avvocato.clienti
 
+        self.nomi = []
         for cliente in self.clientiList:
             self.nomi.append(cliente.nome+' '+cliente.cognome)
         return self.nomi
@@ -111,13 +112,8 @@ class VisteInserisciAppuntamentoA(QWidget):
                         if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
                             self.avv = avvocato
                     appuntamento.creaAppuntamento(cliente.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0], cognome = self.menuClienti.currentText().rsplit()[1]), self.avv, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
-                    cliente1 = cliente.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0], cognome = self.menuClienti.currentText().rsplit()[1])
-                    print(cliente1.getDatiCliente())
-                    appuntamento.creaAppuntamento(cliente.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0], cognome = self.menuClienti.currentText().rsplit()[1]), cliente1, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
 
-                    if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                            self.avvocatiList = list(pickle.load(f))
+                    self.avvocatiList = tool.loadAvvocati()
 
                     for avvocato in self.avvocatiList:
                         if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:

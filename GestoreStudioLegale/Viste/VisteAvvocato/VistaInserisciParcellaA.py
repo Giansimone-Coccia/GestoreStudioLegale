@@ -56,10 +56,15 @@ class VistaInserisciParcellaA(QWidget):
         self.close()
 
     def sceltaClienti(self):
-        self.clientiList = self.tool.loadClienti()
+        tool=Tools()
+        self.avvocatiList = tool.loadAvvocati()
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                self.clientiList = avvocato.clienti
+
         self.nomi = []
         for cliente in self.clientiList:
-            self.nomi.append(cliente.nome + ' ' + cliente.cognome)
+            self.nomi.append(cliente.nome+' '+cliente.cognome)
         return self.nomi
 
     def parcellaOK(self):
