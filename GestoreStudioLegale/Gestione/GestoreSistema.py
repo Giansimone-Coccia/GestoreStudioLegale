@@ -7,7 +7,7 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class GestoreSistema:
 
-    def _init_(self):
+    def __init__(self):
 
         self.listaAvvocati = []
         self.listaClienti = []

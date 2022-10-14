@@ -10,7 +10,7 @@ class Backup():
 
     backup = {}
 
-    def _init_(self):
+    def __init__(self):
         self.data = datetime.datetime(year=1970, month=1, day=1)
         self.frequenza = 24
 

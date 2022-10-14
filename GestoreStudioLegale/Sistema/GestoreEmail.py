@@ -12,7 +12,7 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class GestoreEmail:
 
-    def init(self):
+    def __init__(self):
         self.Appuntamento = None
         self.appuntamentiList = []
         self.tool = Tools()
