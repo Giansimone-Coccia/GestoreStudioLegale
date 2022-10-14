@@ -1,4 +1,3 @@
-
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
 from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
@@ -63,6 +62,20 @@ class VistaAggiungiAvvocato(QWidget):
             item = self.layout.itemAtPosition(i+1, 1).widget()
         print("ciao")
 
+        nome = self.layout.itemAtPosition(1,1).widget().text()
+        cognome = self.layout.itemAtPosition(2,1).widget().text()
+        codiceFiscale = self.layout.itemAtPosition(3,1).widget().text()
+        tool = Tools()
+        avv = tool.loadAvvocati()
+
+        for avvocato in avv:
+            if nome == avvocato.nome and cognome == avvocato.cognome:
+                self.error("Esiste già un avvocato con questo nome e cognome")
+                return
+            if codiceFiscale == avvocato.codiceFiscale:
+                self.error("Esiste già un avvocato con questo codice fiscale")
+                return
+
         item = self.layout.itemAtPosition(4, 1).widget()
         x = item.text()
         print(x)
@@ -94,6 +107,14 @@ class VistaAggiungiAvvocato(QWidget):
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+            return
+
+        item = self.layout.itemAtPosition(5, 1).widget()
+        lenght = len(item.text())
+        email = str(item.text())
+
+        if not (tool.check(email)):
+            self.error("Erore formato email, questa non può contenere caratteri speciali e deve  concludere con \"@gmail.com\"")
             return
 
         item = self.layout.itemAtPosition(6, 1).widget()

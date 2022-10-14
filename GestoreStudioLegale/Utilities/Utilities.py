@@ -1,4 +1,5 @@
 import os
+import re
 
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QPushButton, QSizePolicy
@@ -13,6 +14,7 @@ class Tools():
     appuntamenti = []
     parcelle = []
     udienze = []
+    corsiAggiornamento = []
 
     def __init__(self):
         pass
@@ -88,6 +90,12 @@ class Tools():
                 self.appuntamenti = list(pickle.load(f))
                 return self.appuntamenti
 
+    def loadCorsiAggiornamento(self):
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
+            with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
+                self.corsiAggiornamento = list(pickle.load(f))
+                return self.corsiAggiornamento
+
     def IdGenerator(self, stringa): #ID posto a 0000 nel file
         if stringa == 'A':
             stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
@@ -114,3 +122,12 @@ class Tools():
             stringa = stringa + str(stringa1)
             self.salva(str(stringa1), 'lastID')
             return stringa
+
+    def check(self,email):
+        regex = '^[a-z0-9]+[._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        if (re.search(regex, email) and email.endswith("@gmail.com")):
+            print("Valid Email")
+            return True
+        else:
+            print("Invalid Email")
+            return False

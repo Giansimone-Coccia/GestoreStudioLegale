@@ -44,21 +44,48 @@ class VistaAggiornaAvvocato(QWidget):
 
         self.string = ""
         print(self.avvocato.getDatiAvvocato()["Data nascita"])
+        tool = Tools()
 
+        nome = self.layout.itemAtPosition(1, 1).widget().text()
+        cognome = self.layout.itemAtPosition(2, 1).widget().text()
         appuntamenti = self.avvocato.appuntamentiAvvocato
         clienti = self.avvocato.clienti
         #licenza =self.avvocato.licenza
         corsiAgg = self.avvocato.corsoAggiornamento
         #udienza= self.avvocato.udienza
 
-        nome = self.breve('nome', self.avvocato.getDatiAvvocato()["Nome"], 1, 'o')
+        if str(self.avvocato.getDatiAvvocato()["Nome"]) == nome:
+            self.error("Hai inseirto lo stesso Nome")
+            return
+        if str(self.avvocato.getDatiAvvocato()["Cognome"]) == cognome:
+            self.error("Hai inseirto lo stesso Cognome")
+            return
 
-        cognome = self.breve('cognome', self.avvocato.getDatiAvvocato()["Cognome"], 2, 'o')
+        if nome != "" or cognome != "":
+            if self.avvocato.ricercaUtilizzatoreNomeCognome(nome, cognome):
+                self.error("Esiste già un cliente con questo nome e cognome")
+                return
+            else:
+                if nome != "":
+                    self.string += f"nome, "
+                if cognome != "":
+                    self.string += f"cognome, "
 
-        cd = self.breve('codice fiscale', self.avvocato.getDatiAvvocato()["Codice fiscale"], 3, 'o')
+        cd = self.layout.itemAtPosition(3, 1).widget().text()
+
+        if str(self.avvocato.getDatiAvvocato()["Codice fiscale"]) == cd:
+            self.error("Hai inseirto lo stesso Codice fiscale")
+            return
+        elif str(self.avvocato.getDatiAvvocato()["Codice fiscale"]) != cd and cd != "":
+            if self.avvocato.ricercaUtilizzatoreCC(cd) is None:
+                self.string += f"codice fiscale, "
+            else:
+                self.error("Hai inserito l'id di un cliente già esistente")
+                return
 
         item = self.layout.itemAtPosition(4, 1).widget()
         date = None
+
         if self.avvocato.getDatiAvvocato()["Data nascita"] == item.text():
             self.error(f"Hai inseirto la stessa data di nascita")
             return
@@ -89,10 +116,22 @@ class VistaAggiornaAvvocato(QWidget):
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
 
-        email = self.breve('email', self.avvocato.getDatiAvvocato()["Email"], 5, 'a')
+        email = self.layout.itemAtPosition(5, 1).widget().text()
+
+        if str(self.avvocato.getDatiAvvocato()["Email"]) == email:
+            self.error("Hai inseirto la stessa email")
+            return
+        elif str(self.avvocato.getDatiAvvocato()["Email"]) != email and email != "":
+            if tool.check(email):
+                self.string += f"email, "
+            else:
+                self.error(
+                    "Erore formato email, questa non può contenere caratteri speciali e deve  concludere con \"@gmail.com\"")
+                return
 
         item = self.layout.itemAtPosition(6, 1).widget()
         id = str(item.text())
+
         if str(self.avvocato.getDatiAvvocato()["Id"]) == item.text():
             self.error("Hai inseirto lo stesso Id")
             return
@@ -105,6 +144,7 @@ class VistaAggiornaAvvocato(QWidget):
 
         item = self.layout.itemAtPosition(7, 1).widget()
         number = str(item.text())
+
         if str(self.avvocato.getDatiAvvocato()["Numero telefono"]) == item.text():
             self.error("Hai inseirto lo stesso numero di telefono")
             return
@@ -117,49 +157,50 @@ class VistaAggiornaAvvocato(QWidget):
 
         password = self.breve('password', self.avvocato.getDatiAvvocato()["Password"], 8, 'a')
 
-        print("yolo")
-
-
-
-        '''if nome is not False:self.avvocato.nome = nome
-        else:return
-        if cognome is not False:self.avvocato.cognome = cognome
-        else:return
-        if cd is not False:self.avvocato.codiceFiscale = cd
-        else:return
-        if date is not None: self.avvocato.dataNascita = date
-
-        if email is not False:self.avvocato.email = email
-        else:return
-        if id != "": self.avvocato.id = id
-
-        if number != "": self.avvocato.numeroTelefono = number
-
-        if password is not False:self.avvocato.password = password
-        else:return'''
-
-        complete = nome and cognome and cd and email and password
+        complete = password
 
         if complete is not False:
-            Avvocato.rimuoviAvvocato(self.avvocato.getDatiAvvocato()["Id"])
-            self.avvocato.nome = nome
-            self.avvocato.cognome = cognome
-            self.avvocato.codiceFiscale = cd
-            self.avvocato.email = email
+            if nome != "":
+                self.avvocato.nome = nome
+
+            if cognome != "":
+                self.avvocato.cognome = cognome
+
+            if cd != "":
+                self.avvocato.codiceFiscale = cd
+
+            if email != "":
+                self.avvocato.email = email
+
             self.avvocato.password = password
 
             if date is not None:
                 self.avvocato.dataNascita = date.strftime("%d/%m/%Y")
+
             if id != "":
                 self.avvocato.id = id
+
             if number != "":
                 self.avvocato.numeroTelefono = number
         else:
             return
 
-        print(self.avvocato)
-
         self.string = self.string[:-2]
+
+        i=0
+        vString = self.string.rsplit(",")
+        print(vString)
+        if len(vString)>1:
+            self.string = ""
+            while i < len(vString):
+                if i!=(len(vString)-1):
+                    self.string += f"{vString[i]},"
+                if i==(len(vString)-1):
+                    self.string = self.string[:-1]
+                    self.string += f" e{vString[i]}"
+                i+=1
+
+        self.avvocato.aggiornaAvvocato()
         print(self.avvocato.nome)
         print(self.string)
         print(self.avvocato.getDatiAvvocato())

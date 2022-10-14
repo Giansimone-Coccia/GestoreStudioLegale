@@ -43,22 +43,49 @@ class VistaAggiornaCliente(QWidget):
     def invio(self):
 
         self.string = ""
+        tool = Tools()
         print(self.cliente.getDatiCliente()["Data nascita"])
         cliente = Cliente()
 
+        nome = self.layout.itemAtPosition(1, 1).widget().text()
+        cognome = self.layout.itemAtPosition(2, 1).widget().text()
         appuntamenti = self.cliente.appuntamentoCliente
         parcelle = self.cliente.parcelle
         #udienze =self.cliente.udienza
         corsiAgg = self.cliente.corsoAggiornamento
 
-        nome = self.breve('nome',self.cliente.getDatiCliente()["Nome"],1,'o')
+        if str(self.cliente.getDatiCliente()["Nome"]) == nome:
+            self.error("Hai inseirto lo stesso Nome")
+            return
+        if str(self.cliente.getDatiCliente()["Cognome"]) == cognome:
+            self.error("Hai inseirto lo stesso Cognome")
+            return
 
-        cognome = self.breve('cognome',self.cliente.getDatiCliente()["Cognome"],2,'o')
+        if nome !="" or cognome != "":
+            if self.cliente.ricercaUtilizzatoreNomeCognome(nome,cognome):
+                self.error("Esiste già un cliente con questo nome e cognome")
+                return
+            else:
+                if nome !="":
+                    self.string += f"nome, "
+                if cognome !="":
+                    self.string += f"cognome, "
 
-        cd = self.breve('codice fiscale',self.cliente.getDatiCliente()["Codice fiscale"],3,'o')
+        cd = self.layout.itemAtPosition(3, 1).widget().text()
+
+        if str(self.cliente.getDatiCliente()["Codice fiscale"]) == cd:
+            self.error("Hai inseirto lo stesso Codice fiscale")
+            return
+        elif str(self.cliente.getDatiCliente()["Codice fiscale"]) != cd and cd != "":
+            if cliente.ricercaUtilizzatoreCC(cd) is None:
+                self.string += f"codice fiscale, "
+            else:
+                self.error("Hai inserito l'id di un cliente già esistente")
+                return
 
         item = self.layout.itemAtPosition(4, 1).widget()
         date = None
+
         if self.cliente.getDatiCliente()["Data nascita"] == item.text():
             self.error(f"Hai inseirto la stessa data di nascita")
             return
@@ -89,12 +116,23 @@ class VistaAggiornaCliente(QWidget):
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
 
+        email = self.layout.itemAtPosition(5, 1).widget().text()
 
+        if str(self.cliente.getDatiCliente()["Email"]) == email:
+            self.error("Hai inseirto la stessa email")
+            return
+        elif str(self.cliente.getDatiCliente()["Email"]) != email and email != "":
+            if tool.check(email):
+                self.string += f"email, "
+            else:
+                self.error(
+                    "Erore formato email, questa non può contenere caratteri speciali e deve  concludere con \"@gmail.com\"")
+                return
 
-        email = self.breve('email',self.cliente.getDatiCliente()["Email"],5,'a')
 
         item = self.layout.itemAtPosition(6, 1).widget()
         id = str(item.text())
+
         if str(self.cliente.getDatiCliente()["Id"]) == item.text():
             self.error("Hai inseirto lo stesso Id")
             return
@@ -122,33 +160,22 @@ class VistaAggiornaCliente(QWidget):
 
         print("yolo")
 
-        #Cliente.rimuoviCliente(self.cliente.getDatiCliente()["Id"])
-
-        '''if nome is not False: self.cliente.nome = nome
-        else: return
-        if cognome is not False:self.cliente.cognome = cognome
-        else: return
-        if cd is not False:self.cliente.codiceFiscale = cd
-        else: return
-        if date is not None: self.cliente.dataNascita = date
-
-        if email is not False:self.cliente.email = email
-        else: return
-        if id != "":self.cliente.id = id
-
-        if number != "": self.cliente.numeroTelefono=number
-
-        if password is not False:self.cliente.password = password
-        else:return'''
-
-        complete = nome and cognome and cd and email and password
+        complete = password
 
         if complete is not False:
-            Cliente.rimuoviCliente(self.cliente.getDatiCliente()["Id"])
-            self.cliente.nome = nome
-            self.cliente.cognome = cognome
-            self.cliente.codiceFiscale = cd
-            self.cliente.email = email
+
+            if nome != "":
+                self.cliente.nome = nome
+
+            if cognome != "":
+                self.cliente.cognome = cognome
+
+            if cd != "":
+                self.cliente.codiceFiscale = cd
+
+            if email != "":
+                self.cliente.email = email
+
             self.cliente.password = password
 
             if date is not None:
@@ -160,10 +187,22 @@ class VistaAggiornaCliente(QWidget):
         else:
             return
 
-        print(self.cliente)
-
-
         self.string = self.string[:-2]
+
+        i=0
+        vString = self.string.rsplit(",")
+        print(vString)
+        if len(vString)>1:
+            self.string = ""
+            while i < len(vString):
+                if i!=(len(vString)-1):
+                    self.string += f"{vString[i]},"
+                if i==(len(vString)-1):
+                    self.string = self.string[:-1]
+                    self.string += f" e{vString[i]}"
+                i+=1
+
+        self.cliente.aggiornaCliente()
         print(self.cliente.nome)
         print(self.string)
         print(self.cliente.getDatiCliente())

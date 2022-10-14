@@ -1,4 +1,3 @@
-
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
 from datetime import datetime, timedelta, time
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
@@ -59,6 +58,20 @@ class VistaAggiungiCliente(QWidget):
             i+=1
             item = self.layout.itemAtPosition(i+1, 1).widget()
 
+        nome = self.layout.itemAtPosition(1,1).widget().text()
+        cognome = self.layout.itemAtPosition(2,1).widget().text()
+        codiceFiscale = self.layout.itemAtPosition(3,1).widget().text()
+        tool = Tools()
+        clienti = tool.loadClienti()
+
+        for cliente in clienti:
+            if nome == cliente.nome and cognome == cliente.cognome:
+                self.error("Esiste già un cliente con questo nome e cognome")
+                return
+            if codiceFiscale == cliente.codiceFiscale:
+                self.error("Esiste già un cliente con questo codice fiscale")
+                return
+
         item = self.layout.itemAtPosition(4, 1).widget()
         x = item.text()
         date = None
@@ -83,11 +96,21 @@ class VistaAggiungiCliente(QWidget):
             self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
             return
 
+
+
         z = x.split("/")
         y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
+            return
+
+        item = self.layout.itemAtPosition(5, 1).widget()
+        lenght = len(item.text())
+        email = str(item.text())
+
+        if not ( tool.check(email)):
+            self.error("Erore formato email, questa non può contenere caratteri speciali e deve  concludere con \"@gmail.com\"")
             return
 
         item = self.layout.itemAtPosition(6, 1).widget()
