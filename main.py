@@ -205,9 +205,12 @@ cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.c
 #print(appuntamento1.getDatiAppuntamento())
 #email.invioEmail()
 
+backup = Backup()
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
     vista_home = VistaHome()
     vista_home.show()
+    backup.eseguiBackup()
     sys.exit(app.exec())
