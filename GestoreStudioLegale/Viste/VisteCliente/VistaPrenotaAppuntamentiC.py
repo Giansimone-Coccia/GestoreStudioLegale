@@ -112,7 +112,10 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 else:
                     #print("ecco 2")
                     appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), avvocato, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
-                    #print("ecco 3")
+                    lawyer = Avvocato()
+                    avv = lawyer.ricercaUtilizzatoreNomeCognome(self.menuAvvocati.currentText().rsplit()[0],self.menuAvvocati.currentText().rsplit()[1])
+                    avv.appuntamentiAvvocato.append(appuntamento)
+                    avv.aggiornaAvvocato()
                     self.conferma()
                     return
 
