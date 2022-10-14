@@ -94,20 +94,20 @@ class VistaVisualizzaAppuntamento(QMainWindow):
                         nome = avvocato.nome
                         cognome = avvocato.cognome
 
-
-            datIn = app.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
-            datFin = app.getDatiAppuntamento()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
-            label.setText(
-                'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE: ' + f"{datFin}" + '\n' + 'AVVOCATO: ' + f"{nome} {cognome}")
-            label.setGeometry(QRect(0, 0, 350, 20))
-            #label.setText(
-            #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
-            label.setFont(QFont('Arial', 10))
-            label.setStyleSheet("border: 1px solid black;")
-            #print("ciaoo5")
-            self.grifLayout.addWidget(label, i, 1, 1, 2)
-            #print("ciao78")
-            i += 1
+            if(nome !="" and cognome != ""):
+                datIn = app.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
+                datFin = app.getDatiAppuntamento()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
+                label.setText(
+                    'Appuntamento: ' + '\n' + 'TIPO PROCEDIMENTO: ' + f"{app.getDatiAppuntamento()['Tipo Procedimento']}" + '\n' + 'ID: ' + f"{app.getDatiAppuntamento()['ID']}" + '\n' + 'DATA E ORA INIZIO: ' + f"{datIn}" + '\n' + 'DATA E ORA FINE: ' + f"{datFin}" + '\n' + 'AVVOCATO: ' + f"{nome} {cognome}")
+                label.setGeometry(QRect(0, 0, 350, 20))
+                #label.setText(
+                #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
+                label.setFont(QFont('Arial', 10))
+                label.setStyleSheet("border: 1px solid black;")
+                #print("ciaoo5")
+                self.grifLayout.addWidget(label, i, 1, 1, 2)
+                #print("ciao78")
+                i += 1
             print("ciao89")
 
     def getDatiC(self):

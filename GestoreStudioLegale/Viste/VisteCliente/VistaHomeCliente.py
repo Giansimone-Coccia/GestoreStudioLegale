@@ -17,6 +17,11 @@ class VistaHomeCliente(QWidget):
         gLayout.addWidget(tool.createButton("Appuntamenti", self.reachAppuntamenti), 1, 0)
         gLayout.addWidget(tool.createButton("Parcelle", self.reachParcelle), 2, 0)
         gLayout.addWidget(tool.createButton("Udienze", self.reachUdienze), 3, 0, 1, 3)
+
+        self.clientiList = tool.loadClienti()
+        self.avvocatiList = tool.loadAvvocati()
+        self.appC = []
+
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
