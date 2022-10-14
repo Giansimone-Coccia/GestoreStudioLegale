@@ -3,6 +3,9 @@ import os.path
 import datetime
 import os
 
+from PyQt5.QtWidgets import QMessageBox
+
+
 class Backup():
 
     def _init_(self):
@@ -125,3 +128,10 @@ class Backup():
                 except EOFError as er:
                     print("Errore5")
         return backup
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Problema")
+        msg.setText("Problema con il backup")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()

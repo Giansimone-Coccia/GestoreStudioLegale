@@ -70,8 +70,6 @@ class VisteInserisciAppuntamentoA(QWidget):
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
                 self.clientiList = avvocato.clienti
 
-        self.nomi.clear()
-
         for cliente in self.clientiList:
             self.nomi.append(cliente.nome+' '+cliente.cognome)
         return self.nomi
@@ -108,11 +106,6 @@ class VisteInserisciAppuntamentoA(QWidget):
                 else:
                     cliente = Cliente()
                     cliente1 = Cliente()
-                    tool = Tools()
-                    for avvocato in self.avvocatiList:
-                        if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
-                            self.avv = avvocato
-                    appuntamento.creaAppuntamento(cliente.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0], cognome = self.menuClienti.currentText().rsplit()[1]), self.avv, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
                     cliente1 = cliente.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0], cognome = self.menuClienti.currentText().rsplit()[1])
                     print(cliente1.getDatiCliente())
                     appuntamento.creaAppuntamento(cliente.ricercaUtilizzatoreNomeCognome(nome =self.menuClienti.currentText().rsplit()[0], cognome = self.menuClienti.currentText().rsplit()[1]), cliente1, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
@@ -211,7 +204,7 @@ class VisteInserisciAppuntamentoA(QWidget):
                     msg.exec_()
                     condition = True
                     return condition
-                elif date.weekday() == 5 or date.weekday() == 6:
+                elif date.weekday() == 5 or date == 6:
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
                     msg.setText("Lo studio è chiuso durante il week-end")
