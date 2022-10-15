@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QMessageBox
+
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 import pickle
 import os.path
@@ -25,7 +27,6 @@ class Parcella():
             self.rimuoviParcella(self.ID)
             self.creaParcella( self.Cliente, self.ID, self.importo,
                              self.intestatario, self.identificativo)
-            print("Aggiornato")
 
 
     def creaParcella(self, Cliente, ID, identificativo, importo, intestatario):
@@ -62,7 +63,7 @@ class Parcella():
         return d
 
 
-    def ricercaParcellaCliente (self, Cliente): #Prende una stringa come parametro, cambiare in EA
+    def ricercaParcellaCliente (self, Cliente):
         listaParcelle = []
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
@@ -70,7 +71,6 @@ class Parcella():
                 for parcella in parcelle:
                     if parcella.Cliente.Id == Cliente.Id:
                         listaParcelle.append(parcella)
-                print(listaParcelle)
                 return listaParcelle
         else:
             return None
@@ -84,7 +84,6 @@ class Parcella():
                 for parcella in parcelle:
                     if parcella.intestatario == intestatario:
                         listaParcelle.append(parcella)
-                print(listaParcelle)
                 return listaParcelle
         else:
             return None
@@ -96,9 +95,8 @@ class Parcella():
                 parcelle = pickle.load(f)
                 for parcella in parcelle:
                     if parcella.identificativo == identificativo:
-                        print("Trovata")
                         return parcella
-            print("Niente")
+            self.notFound()
             return None
         else:
             return None
@@ -120,5 +118,12 @@ class Parcella():
                 pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
             print("Finito")
+
+    def notFound(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Attenzione")
+        msg.setText("Parcella non trovata")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
 
 

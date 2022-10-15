@@ -14,7 +14,7 @@ class Backup():
         self.data = datetime.datetime(year=1970, month=1, day=1)
         self.frequenza = 24
 
-    def eseguiBackup(self): # da vedere
+    def eseguiBackup(self):
         file_path = 'GestoreStudioLegale/Dati/Backup.pickle'
         with open(file_path, 'w+') as f:
             f.write('')
@@ -24,10 +24,10 @@ class Backup():
         self.salvaDatiUtilizzatore()
         #self.getDatiBakcup()
 
-    def modificaData(self, nuovaData): #ricorda su enterprise
+    def modificaData(self, nuovaData):
         self.data=nuovaData
 
-    def modificaFrequenza(self, nuovaFrequenza):  #ricorda su enterprise
+    def modificaFrequenza(self, nuovaFrequenza):
         self.frequenza=nuovaFrequenza
 
     def salvaDatiAppuntamento(self):

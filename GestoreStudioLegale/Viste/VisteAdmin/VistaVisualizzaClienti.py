@@ -1,8 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox, QPushButton, \
-    QSizePolicy, QHBoxLayout
-import pickle
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QHBoxLayout
 import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -20,20 +18,12 @@ class VistaVisualizzaClienti(QMainWindow):
     def __init__(self, parent=None):
         super(VistaVisualizzaClienti, self).__init__(parent)
         tool = Tools()
-        '''self.scroll = QScrollArea()
-        self.widget = QWidget()
-        self.grifLayout = QGridLayout()
-        self.grifLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
 
-        self.grifLayout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella), 0, 1)
-        self.grifLayout.addWidget(
-            tool.createButton("Cerca", self.cercaParcella), 0, 2)'''
-
-        self.cWidget = QWidget()  # contiene tutto
+        self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
 
         self.grifLayout = QGridLayout()
 

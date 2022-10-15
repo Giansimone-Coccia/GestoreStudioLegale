@@ -1,12 +1,9 @@
 import pickle
 import os.path
 from datetime import datetime, timedelta, time
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_template import FigureCanvas
-from matplotlib.figure import Figure
 
-from GestoreStudioLegale.Servizi.Udienza import Udienza
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
+from PyQt5.QtWidgets import QMessageBox
+
 
 class Statistiche:
 
@@ -27,40 +24,29 @@ class Statistiche:
         nUdienze=0
         nAppuntamenti=0
 
-        '''def breve(lista,tribunale,nUdienze,nGiorni):
-            for i in lista:
-                if i.getDatiUdienza().get('Tipo Tribunale', None) == tribunale:
-                    date = datetime.now()-timedelta(days = nGiorni)
-                    if i.getDatiUdienza.get('Data e Ora Inizio') > date:
-                        nUdienze += 1'''
-
         udienze = []
         if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
             with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
                 try:
                     udienze = pickle.load(f)
                 except EOFError as er:
-                    print("") #scrivere errore
+                    self.problema()
 
-            #breve(udienze,'amministrativo',nUdienzeAmminsitrative,365)
             for udienza in udienze:
                 if udienza.tipoTribunale == 'amministrativa':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzeAmminsitrative += 1
-            #breve(udienze, 'civile', nUdienzeCivili, 365)
             for udienza in udienze:
                 if udienza.tipoTribunale == 'civile':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzeCivili += 1
-            #breve(udienze, 'penale', nUdienzePenali, 365)
             for udienza in udienze:
                 if udienza.tipoTribunale == 'penale':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzePenali += 1
-            #breve(udienze, 'minorile', nUdienzeMinorili, 365)
             for udienza in udienze:
                 if udienza.tipoTribunale == 'minorile':
                     date = datetime.now() - timedelta(days=365)
@@ -85,7 +71,7 @@ class Statistiche:
                 try:
                     appuntamenti = pickle.load(f)
                 except EOFError as er:
-                    print("") #scrivere errore
+                    self.problema()
 
             for appuntamento in appuntamenti:
                 date = datetime.now() - timedelta(days = 365)
@@ -98,24 +84,12 @@ class Statistiche:
         my_dict = self.mostraStatistiche()
 
         myList = my_dict.items()
-        #myList = sorted(myList)
         x = my_dict.keys()
         y = my_dict.values()
         if a == 'a':
             return x
         else:
             return y
-
-        '''plt.bar(x, y)
-        return plt
-        
-        canvas = FigureCanvas(Figure(figsize=(5, 3)))
-        myList = my_dict.items()
-        # myList = sorted(myList)
-        x, y = zip(*myList)
-
-        ax = canvas.figure.subplots(plt.bar(x,y))
-        return ax'''
 
     def salvaSuFile(self):
         stats = {
@@ -138,10 +112,9 @@ class Statistiche:
                 #pickle.load(f)
                 return d
 
-    def mostraStatistiche(self): #modificare, c'è scritto void
+    def mostraStatistiche(self):
         self.calcolaStatistiche()
         self.salvaSuFile()
-        #statistica = statistica.lower()
 
         stats={}
         if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
@@ -149,6 +122,13 @@ class Statistiche:
                 try:
                     stats = dict(pickle.load(f))
                 except EOFError as er:
-                    print("errore!") #scrivere errore
+                    self.problema()
         return stats
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Problema")
+        msg.setText("Problema con lettura/scrittua file")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
 

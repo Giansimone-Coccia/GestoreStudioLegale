@@ -1,7 +1,6 @@
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from PyQt5 import QtCore as qtc
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QMessageBox
 
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools

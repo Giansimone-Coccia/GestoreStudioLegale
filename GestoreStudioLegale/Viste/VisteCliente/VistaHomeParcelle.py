@@ -1,8 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea
-import pickle
-import os
+from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout, QMainWindow, QScrollArea
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -28,15 +26,8 @@ class VistaHomeParcelle(QMainWindow):
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Times', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
-        '''textLabel3 = QLabel()
-        textLabel3.setText('Parcella: '+'\n'+ 'INTESTATARIO: '+f"{self.getDatiP()['intestatario']}"+ '\n'+'IMPORTO: '+f"{self.getDatiP()['importo']}"+'€'+'\n'+'ID: '+f"{self.getDatiP()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{self.getDatiP()['identificativo']}")
-        textLabel3.setGeometry(QRect(0, 0, 350, 20))
-        textLabel3.setFont(QFont('Arial', 10))
-        textLabel3.setStyleSheet("border: 1px solid black;")'''
         self.gridLayout.addWidget(textLabel2, 1, 1)
         self.gridLayout.addWidget(textLabel1, 2, 1)
-        #grifLayout.addWidget(textLabel3, 3, 1)
-        #self.setLayout(grifLayout)
         self.getDatiP()
         self.widget.setLayout(self.gridLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
@@ -57,18 +48,13 @@ class VistaHomeParcelle(QMainWindow):
         for parcella in self.parcelleList:
             if parcella.Cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                 parc.append(parcella)
-                print("prova")
-                print(parc)
         for p in parc:
             label = QLabel()
-            print("prova")
-            print(p)
             label.setText(
                 'Parcella: '+'\n'+ 'INTESTATARIO: '+f"{p.getDatiParcellaCliente()['intestatario']}"+ '\n'+'IMPORTO: '+f"{p.getDatiParcellaCliente()['importo']}"+'€'+'\n'+'ID: '+f"{p.getDatiParcellaCliente()['ID']}"+'\n'+'IDENTIFICATIVO: '+f"{p.getDatiParcellaCliente()['identificativo']}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
-            print("ciao2")
             self.gridLayout.addWidget(label, i, 1, 1, 2)
             i += 1
 

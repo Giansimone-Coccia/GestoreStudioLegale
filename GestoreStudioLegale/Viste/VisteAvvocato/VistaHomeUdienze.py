@@ -1,15 +1,9 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
-import pickle
-import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
-from GestoreStudioLegale.Servizi.Cliente import Cliente
 
-
-#modificare dimensioni tasti in utilities
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaUdienze import VistaEliminaUdienze
 
 
@@ -20,11 +14,11 @@ class VistaHomeUdienze(QMainWindow):
     def __init__(self, parent=None):
         super(VistaHomeUdienze, self).__init__(parent)
 
-        self.cWidget = QWidget()  # contiene tutto
+        self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
 
         self.grifLayout = QGridLayout()
 
@@ -42,7 +36,6 @@ class VistaHomeUdienze(QMainWindow):
         self.scroll.setWidgetResizable(True)
         self.scroll.setWidget(self.widget)
 
-        #self.setCentralWidget(self.scroll)
         self.setCentralWidget(self.cWidget)
         self.setGeometry(600, 100, 1000, 900)
         self.resize(800, 600)
@@ -55,29 +48,17 @@ class VistaHomeUdienze(QMainWindow):
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
         ud = []
-        #clientiL = []
         i=1
 
         for avvocato in self.avvocatiList:
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                clienti = avvocato.getDatiAvvocato()['clienti']
-               #for cliente in self.clientiList:
                for cliente in clienti:
                    for udienza in self.udienzeList:
                       if udienza.Cliente.codiceFiscale == cliente.codiceFiscale:
-                         #ud.append(udienza)
-                         print("ciao24")
                          ud.append(udienza)
-                         print("ciao25")
-                         #break
-                         #print(self.udienzeList)                     #CRUSHA NON FUNZIONA
-                         #print(self.udienzeList.__getitem__(3))
-                         #print(ud)
-        print("ciao26")
         for u in ud:
-            print("hei bro")
             label = QLabel()
-            #print(u)
             textLabel2 = QLabel()
             print(u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome'])
             print(u.getDatiUdienza()['Cliente'])
@@ -95,7 +76,6 @@ class VistaHomeUdienze(QMainWindow):
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
-            print("ciao2")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
             self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = u: self.aggiornaUdienza(a)), i, 1)

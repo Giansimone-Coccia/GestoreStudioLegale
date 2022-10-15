@@ -2,7 +2,6 @@ from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLabel
 
-#from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin
 from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin
 from GestoreStudioLegale.Viste.VisteAvvocato.LoginAvvocato import LoginAvvocato
 from GestoreStudioLegale.Viste.VisteCliente.LoginCliente import LoginCliente
@@ -10,7 +9,6 @@ from GestoreStudioLegale.Viste.VisteCliente.LoginCliente import LoginCliente
 
 class VistaHome(QWidget):
 
-    #Scegli stile PyQt così non varia tra ambienti diversi
     def __init__(self, parent=None):
         super(VistaHome, self).__init__(parent)
         gLayout = QGridLayout()

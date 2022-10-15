@@ -1,5 +1,4 @@
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -33,7 +32,7 @@ class VistaModificaUsername(QWidget):
     def modificaUser(self):
         tool =Tools()
         passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
-        print(passEuser)
+        #print(passEuser)
 
         if self.lineEditNewUser.text() == self.lineEditOldUser.text():
             msg = QMessageBox()

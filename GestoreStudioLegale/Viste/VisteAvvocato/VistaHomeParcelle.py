@@ -1,14 +1,9 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
-import pickle
-import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
-from GestoreStudioLegale.Servizi.Cliente import Cliente
 
-#modificare dimensioni tasti in utilities
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaParcelle import VistaEliminaParcelle
 
 
@@ -23,11 +18,11 @@ class VistaHomeParcelle(QMainWindow):
         super(VistaHomeParcelle, self).__init__(parent)
         tool = Tools()
 
-        self.cWidget = QWidget()  # contiene tutto
+        self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
 
         self.grifLayout = QGridLayout()
 
@@ -63,7 +58,6 @@ class VistaHomeParcelle(QMainWindow):
                     for parcella in self.parcelleList:
                         if parcella.Cliente.codiceFiscale == cliente.codiceFiscale:
                             parc.append(parcella)
-                            print(parc)
         for p in parc:
             label = QLabel()
             textLabel2 = QLabel()

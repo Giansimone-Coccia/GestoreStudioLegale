@@ -1,11 +1,7 @@
 from datetime import datetime, timedelta
-from GestoreStudioLegale.Servizi.Cliente import Cliente
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import smtplib
-import time
-import os
+
+from PyQt5.QtWidgets import QMessageBox
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -34,10 +30,17 @@ class GestoreEmail:
         email.sendmail("ProgettoStudioLegale0@gmail.com", self.getDatiApp()['Cliente'].email , messaggio.encode('utf-8'))
         email.quit()
       except Exception:
-        print("eccezione")
+        self.problema()
 
     def getDatiApp(self):
         self.appuntamentiList = self.tool.loadAppuntamenti()
         for appuntamento in self.appuntamentiList:
             if appuntamento.getDatiAppuntamento()['Data e Ora Inizio'] == datetime.now().replace(second=0, microsecond=0) + timedelta(days=1):
                 return appuntamento.getDatiAppuntamento()
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Attenzione")
+        msg.setText("Problema durante l'invio della e-mail")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()

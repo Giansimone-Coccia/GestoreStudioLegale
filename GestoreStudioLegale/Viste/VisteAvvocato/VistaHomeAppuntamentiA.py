@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QScrollArea, \
-    QListWidget, QScrollBar, QListWidgetItem, QLabel, QMainWindow, QLineEdit, QMessageBox
+from PyQt5.QtWidgets import QWidget, QGridLayout, QVBoxLayout, QHBoxLayout, QScrollArea, \
+     QLabel, QMainWindow, QMessageBox
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.RicercaAppuntamentoA import RicercaAppuntamentoA
@@ -23,11 +23,11 @@ class VistaHomeAppuntamentiA(QMainWindow):
 
     def initUI(self):
         tool = Tools()
-        self.cWidget = QWidget()  # contiene tutto
+        self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
 
         self.grid = QGridLayout()
 
@@ -106,10 +106,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 i = 0
                 for appuntamento in avvocato.appuntamentiAvvocato:
                     for cliente in avvocato.clienti:
-                        print("777")
-                        print(appuntamento.Cliente.getDatiCliente()['Id'])
                         if cliente.getDatiCliente()['Id'] == appuntamento.Cliente.getDatiCliente()['Id']:
-                            #print(appuntamento.getDatiAppuntamento())
                             label = QLabel()
                             clientep=appuntamento.getDatiAppuntamento()['Cliente']
                             nome=clientep.getDatiCliente()["Nome"]

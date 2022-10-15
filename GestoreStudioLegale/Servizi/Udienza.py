@@ -34,7 +34,6 @@ class Udienza:
 
         self.rimuoviUdienza(self.ID)
         self.creaUdienza(self.Avvocato, self.cittaTribunale, self.Cliente, self.dataOraInizio, self.dataOraFine, self.ID, self.tipoTribunale)
-        print("Aggiornato")
 
     def creaUdienza(self, Avvocato, cittaTribunale, Cliente, dataOraInizio, dataOraFine, ID, tipoTribunale ):
         self.Avvocato = Avvocato

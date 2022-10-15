@@ -1,12 +1,9 @@
-from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
-                             QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
-                             QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
-                             QVBoxLayout, QCalendarWidget, QMessageBox)
+from PyQt5.QtWidgets import (QDialog,
+                             QDialogButtonBox, QFormLayout, QGroupBox,
+                             QLineEdit,
+                             QVBoxLayout, QMessageBox)
 
-from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Cliente import Cliente
-
-import sys
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -20,7 +17,6 @@ class RicercaUdienze(QDialog):
         super(RicercaUdienze, self).__init__()
 
         self.tool = Tools()
-        #self.parcelleList = self.tool.loadParcelle()
         self.udienzeList = self.tool.loadUdienze()
 
 
@@ -57,11 +53,10 @@ class RicercaUdienze(QDialog):
         from GestoreStudioLegale.Viste.VisteAvvocato.UdienzaRicercata import UdienzaRicercata
 
         self.code = self.textIn.text()
-        #print(self.code)
 
         cliente = Cliente()
 
-        self.risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code) #FUNZIONA
+        self.risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code)
 
         if self.risultatoRicerca is None:
             msg = QMessageBox()
@@ -71,18 +66,11 @@ class RicercaUdienze(QDialog):
             return
 
         udienze = []
-        print("3333")
 
         for udienza in self.udienzeList:
             if udienza.Cliente.codiceFiscale == self.risultatoRicerca.codiceFiscale:
                 udienze.append(udienza)
-                #print("stampa le udienze")
-                #print(udienza.getDatiUdienza())
 
-        print(self.risultatoRicerca.getDatiCliente())
-        print(udienze)
-
-        #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
         self.subWindow = UdienzaRicercata(udienze)
         self.subWindow.show()
         self.close()

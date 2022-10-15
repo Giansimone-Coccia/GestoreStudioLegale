@@ -1,8 +1,6 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout, QScrollArea, QMainWindow
-import pickle
-import os
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -29,18 +27,9 @@ class VistaHomeUdienze(QMainWindow):
         textLabel2.setGeometry(QRect(0, 0, 350, 10))
         textLabel2.setFont(QFont('Arial', 10))
         textLabel2.setStyleSheet("border: 1px solid black;")
-        '''textLabel3 = QLabel()
-        print("ciao879")
-        textLabel3.setText('Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{self.getDatiU()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{self.getDatiU()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{self.getDatiU()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{self.getDatiU()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{self.getDatiU()['Data e Ora Fine']}")
-        textLabel3.setGeometry(QRect(0, 0, 350, 20))
-        textLabel3.setFont(QFont('Arial', 10))
-        textLabel3.setStyleSheet("border: 1px solid black;")'''
         self.gridLayout.addWidget(textLabel2, 1, 1)
         self.gridLayout.addWidget(textLabel1, 2, 1)
-        print("ciao3")
-        #grifLayout.addWidget(textLabel3, 3, 1)
         self.getDatiU()
-        #self.setLayout(grifLayout)
         self.widget.setLayout(self.gridLayout)
         self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -63,7 +52,6 @@ class VistaHomeUdienze(QMainWindow):
 
         for u in udienzeL:
             label = QLabel()
-            print(u)
             dataIn = u.getDatiUdienza()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
             dataFin = u.getDatiUdienza()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
             label.setText(
@@ -71,7 +59,6 @@ class VistaHomeUdienze(QMainWindow):
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
-            print("ciao2")
             self.gridLayout.addWidget(label, i, 1, 1, 2)
             i += 1
 

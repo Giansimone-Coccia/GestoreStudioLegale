@@ -77,15 +77,13 @@ class VistaAggiungiCliente(QWidget):
         date = None
         if (len(x) > 6):
             y = x[2] != "/" and x[5] != '/'
-            print("yup")
             if y:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
             else:
                 try:
-                    print("shit")
                     date = datetime.strptime(item.text(), "%d/%m/%Y")
-                    print(date)
+                    #print(date)
                     if date > datetime.now():
                         self.error("Data non valida inserita, la data che hai inserito è futura")
                         return

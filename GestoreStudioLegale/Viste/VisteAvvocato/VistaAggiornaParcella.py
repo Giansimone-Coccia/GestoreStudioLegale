@@ -1,10 +1,4 @@
-import datetime
-import os
-import pickle
-
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox, QComboBox, \
-    QCalendarWidget
-#from datetime import datetime, timedelta, time
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -20,7 +14,6 @@ class VistaAggiornaParcella(QWidget):
 
     def __init__(self, parent = None):
         super(VistaAggiornaParcella, self).__init__(parent)
-        #self.gestore = GestoreSistema()
         self.setWindowTitle('Modifica Parcella')
         self.resize(500, 120)
         self.layout = QGridLayout()
@@ -60,7 +53,6 @@ class VistaAggiornaParcella(QWidget):
                 print(self.parcella.intestatario)
                 print(self.labelImportoTex.text())
                 print(self.parcella.importo)
-                #non funziona questo or
                 condizione1 = self.labelIntestTex.text() != str(self.parcella.intestatario)
                 condizione2 = self.labelImportoTex.text() != str(self.parcella.importo)
                 condizione3 = self.labelImportoTex.text().isdigit()
@@ -69,7 +61,6 @@ class VistaAggiornaParcella(QWidget):
                         parcella1.importo = nuovoImporto
                         parcella1.intestatario = nuovoIntestatario
                         parcella.rimuoviParcella(self.parcella.ID)
-                        print("ciao")
                         parcella1.creaParcella(self.parcella.Cliente, self.parcella.ID, self.parcella.identificativo,
                                                nuovoImporto, nuovoIntestatario)
                         self.conferma()
@@ -78,22 +69,6 @@ class VistaAggiornaParcella(QWidget):
                 else:
                     self.problema("Immessi gli stessi dati")
 
-        '''for parcella in self.parcelleList:
-            if parcella.ID == self.parcella.ID:
-                parcella1 = Parcella()
-                parcella1 = parcella
-                nuovoIntestatario = self.labelIntestTex.text()
-                nuovoImporto = int(self.labelImportoTex.text())
-                print("ci siamo")
-                #self.parcella.creaParcella(CLIENTE, self.parcella.ID, self.parcella.identificativo, nuovoImporto, nuovoIntestatario)
-                #self.parcella.rimuoviParcella(self.parcella.ID)
-                self.parcella.intestatario = nuovoIntestatario
-                self.parcella.importo = nuovoImporto
-                if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
-                    with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb+') as f:
-                        self.parcelleList.remove(self.parcella)
-                        self.parcelleList.append(parcella1)
-                        self.conferma()'''
 
     def conferma(self):
         msg = QMessageBox()
@@ -101,7 +76,6 @@ class VistaAggiornaParcella(QWidget):
         msg.setText("La sua parcella è stata modificata con successo")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
-        print("Why?")
         self.vistaPrima = VistaHomeParcelle()
         self.vistaPrima.show()
         self.close()
@@ -112,6 +86,3 @@ class VistaAggiornaParcella(QWidget):
         msg.setText(messaggio)
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
-        #self.vistaPrec = VistaHomeParcelle()
-        #self.vistaPrec.show()
-        #self.close()

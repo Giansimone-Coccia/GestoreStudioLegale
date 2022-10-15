@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from datetime import datetime, timedelta, time
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
+from datetime import datetime
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -55,10 +55,10 @@ class VistaAggiornaAvvocato(QWidget):
         #udienza= self.avvocato.udienza
 
         if str(self.avvocato.getDatiAvvocato()["Nome"]) == nome:
-            self.error("Hai inseirto lo stesso Nome")
+            self.error("Hai inserito lo stesso Nome")
             return
         if str(self.avvocato.getDatiAvvocato()["Cognome"]) == cognome:
-            self.error("Hai inseirto lo stesso Cognome")
+            self.error("Hai inserito lo stesso Cognome")
             return
 
         if nome != "" or cognome != "":
@@ -87,7 +87,7 @@ class VistaAggiornaAvvocato(QWidget):
         date = None
 
         if self.avvocato.getDatiAvvocato()["Data nascita"] == item.text():
-            self.error(f"Hai inseirto la stessa data di nascita")
+            self.error(f"Hai inserito la stessa data di nascita")
             return
         elif str(self.avvocato.getDatiAvvocato()["Data nascita"]) != item.text() and item.text() != "":
             data = str(item.text())
@@ -232,7 +232,6 @@ class VistaAggiornaAvvocato(QWidget):
             return item.text()
         if item.text() == "":
             return obj
-
 
 
     def rewind(self):

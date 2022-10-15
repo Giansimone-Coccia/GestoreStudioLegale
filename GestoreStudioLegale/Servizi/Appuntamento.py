@@ -14,9 +14,6 @@ class Appuntamento:
         self.dataOraInizio = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
         self.tipoProcedimento = ''
 
-    #def getAppuntamento(self):
-        #return self
-
     def aggiornaAppuntamento(self, Cliente=None, Avvocato=None,
                              dataOraInizio=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
                              dataOraFine=datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00),
@@ -35,7 +32,6 @@ class Appuntamento:
         self.rimuoviAppuntamento(self.ID)
         self.creaAppuntamento(self.Cliente, self.Avvocato, self.dataOraInizio, self.dataOraFine,
                               self.ID, self.tipoProcedimento)
-        print("Aggiornato")
 
     def creaAppuntamento(self, Cliente, Avvocato, dataOraInizio, dataOraFine, ID, tipoProcedimento):
         self.Cliente = Cliente

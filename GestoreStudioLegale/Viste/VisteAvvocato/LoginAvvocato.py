@@ -1,6 +1,3 @@
-import os.path
-import pickle
-
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
@@ -41,12 +38,10 @@ class LoginAvvocato(QWidget):
         tool = Tools()
         cc = self.lineEditUsername.text()
         pswrd = self.lineEditPassword.text()
-        print("22222")
         gestore = GestoreSistema()
         tool.salva(str(self.lineEditUsername.text()))
 
         if gestore.loginAvvocato(pswrd, cc):
-            print("Accesso eseguito")
             self.show_new()
             self.close()
         else:
@@ -56,24 +51,6 @@ class LoginAvvocato(QWidget):
             msg.exec()
             return
 
-        '''
-            cliente.codiceFiscale = cc
-            print("Dopo")
-            if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-                print("presto")
-                with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                    clienti = list(pickle.load(f))
-                    print("eccoci di nuovo")
-                    for cliente in clienti:
-                        if cliente.codiceFiscale == cc:
-                            print("Accesso eseguito")
-                        else:
-                            msg = QMessageBox()
-                            msg.setWindowTitle('ERRORE')
-                            msg.setText('Attenzione, Errore nella lettura del file, riprovare')
-                            msg.exec()
-                            return
-                            '''
 
     def show_new(self):
         self.vistaAvvocatoH = VistaHomeAvvocato()

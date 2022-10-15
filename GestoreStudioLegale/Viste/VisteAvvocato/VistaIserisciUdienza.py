@@ -1,9 +1,8 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QPushButton, QCalendarWidget, QLineEdit, \
-    QSizePolicy, QMessageBox
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QCalendarWidget, QLineEdit, \
+    QMessageBox
 
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
-from GestoreStudioLegale.Servizi.Udienza import Udienza
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
 import datetime
@@ -29,13 +28,7 @@ class VistaInserisciUdienza(QWidget):
         orari = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00',
                  '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']
         self.ora.addItems(orari)
-        #self.confirmButton = QPushButton()
-        #self.confirmButton.setText('Conferma udienza')
-        #self.confirmButton.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.confirmButton.clicked.connect(self.udienzaOK()) #CRUSHA
-        print("ciao34")
-        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK) #CRUSHA
-        print("ciao35")
+        self.confirmButton = self.tool.createButton('Conferma udienza', self.udienzaOK)
         self.menuClienti = QComboBox()
         self.menuClienti.addItems(self.sceltaClienti())
         self.labelName4 = QLabel('<font size="4"> Cliente udienza </font>')
@@ -147,7 +140,6 @@ class VistaInserisciUdienza(QWidget):
                 msg.setText("Data non selezionata, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                #self.rewind()
                 return True
             try:
                 print(self.year)
@@ -159,7 +151,6 @@ class VistaInserisciUdienza(QWidget):
                 timeMin = datetime.datetime.strptime('09:00', '%H:%M')
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
                 condition = False
-                #while condition:
                 if date < datetime.datetime.now():
                     print("nel primo if")
                     msg = QMessageBox()

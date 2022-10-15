@@ -1,12 +1,9 @@
-from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
-                             QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
-                             QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
-                             QVBoxLayout, QCalendarWidget, QMessageBox)
+from PyQt5.QtWidgets import (QDialog,
+                             QDialogButtonBox, QFormLayout, QGroupBox,
+                             QLabel, QLineEdit,
+                             QVBoxLayout, QMessageBox)
 
-from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Cliente import Cliente
-
-import sys
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -56,11 +53,10 @@ class RicercaParcelle(QDialog):
         from GestoreStudioLegale.Viste.VisteAvvocato.ParcellaRicercata import ParcellaRicercata
 
         self.code = self.textIn.text()
-        print(self.code)
 
         cliente = Cliente()
 
-        self.risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code) #FUNZIONA
+        self.risultatoRicerca = cliente.ricercaUtilizzatoreCC(self.code)
 
         if self.risultatoRicerca is None:
             msg = QMessageBox()
@@ -76,7 +72,6 @@ class RicercaParcelle(QDialog):
                 parcelle.append(parcella)
 
 
-        #self.subWindow = ParcellaRicercata(risultatoRicerca.getDatiCliente()["parcelle"])
         self.subWindow = ParcellaRicercata(parcelle)
         self.subWindow.show()
         self.close()

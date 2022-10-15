@@ -1,7 +1,8 @@
+from PyQt5.QtWidgets import QMessageBox
+
 from GestoreStudioLegale.Servizi.Utilizzatore import Utilizzatore
 import pickle
 import os.path
-import datetime
 
 class Cliente(Utilizzatore):
 
@@ -11,8 +12,7 @@ class Cliente(Utilizzatore):
         self.parcelle = []
 
 
-    #Da vedere in seguito
-    def aggiornaCliente(self, email = '', numTelefono = 0, password = '',appuntamentoCliente = None): #Modifica in EA
+    def aggiornaCliente(self, email = '', numTelefono = 0, password = '',appuntamentoCliente = None):
         if email != '':
             self.email = email
         elif numTelefono != 0:
@@ -25,7 +25,6 @@ class Cliente(Utilizzatore):
         self.creaCliente(self.codiceFiscale, self.cognome, self.corsoAggiornamento, self.dataNascita, self.email,
                              self.Id, self.numeroTelefono, self.password, self.appuntamentoCliente, self.parcelle,
                              self.nome)
-        print("Aggiornato")
 
     def creaCliente(self, codiceFiscale, cognome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                         appuntamentoCliente, parcelle, nome):
@@ -36,23 +35,17 @@ class Cliente(Utilizzatore):
         self.parcelle = parcelle
         clienti = []
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0: #UNA VOLTA MODIFICATO NON FUNZIONA PIU'
+            if os.path.getsize('GestoreStudioLegale/Dati/Clienti.pickle') == 0:
                 clienti.append(self)
-                #with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f1:
-                    #clienti=pickle.load(f1)
                 with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f:
                     pickle.dump(clienti, f, pickle.HIGHEST_PROTOCOL)
             else:
                 if self.ricercaUtilizzatoreId(self.Id) is None:
                     with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                    #try:
                         clienti = pickle.load(f)
                         clienti.append(self)
-                    #except EOFError as er:
-                    #   print("Errore")
                     with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f1:
                         pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
-
 
 
     def getDatiCliente(self):
@@ -68,14 +61,11 @@ class Cliente(Utilizzatore):
                 clienti = pickle.load(f)
                 for cliente in clienti:
                     if cliente.email == email:
-                        print("Ok cliente")
                         return cliente
-                print("Nessun cliente trovato")
                 return None
         else:
             return None
 
-    #Da aggiungere in EA
     def ricercaUtilizzatoreCC(self, codiceFiscale):
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
@@ -94,9 +84,7 @@ class Cliente(Utilizzatore):
                 clienti = pickle.load(f)
                 for cliente in clienti:
                     if cliente.Id == Id:
-                        #print("Trovato")
                         return cliente
-                #print("Cliente non trovato")
                 return None
         else:
             return None
@@ -108,16 +96,14 @@ class Cliente(Utilizzatore):
                 clienti = pickle.load(f)
                 for cliente in clienti:
                     if cliente.nome == nome and cliente.cognome == cognome:
-                        print("Trovato")
                         return cliente
-                print("Cliente non trovato")
                 return None
         else:
             return None
 
 
     @staticmethod
-    def rimuoviCliente(Id):   #Anche quì suppongo una ricerca per Id oppure passo direttamente l'oggetto, da vedere
+    def rimuoviCliente(Id):
         try:
             clienti = []
             if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):

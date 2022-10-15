@@ -1,9 +1,7 @@
-from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QScrollArea, QMainWindow, QGroupBox, QHBoxLayout, \
-    QLineEdit, QPushButton, QMessageBox
-import pickle
-import os
+from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout
+
 
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -19,7 +17,7 @@ class VistaAvvocatoRicercato(QWidget):
 
         self.vistaVis = VistaVisualizzaAvvocati()
         self.tool = Tools()
-        print(f"ddddd {self.avvocato.getDatiAvvocato} dio can")
+        #print(f"{self.avvocato.getDatiAvvocato}")
         self.setWindowTitle('Ricerca avvocato')
         self.resize(500, 120)
         self.grifLayout = QGridLayout()

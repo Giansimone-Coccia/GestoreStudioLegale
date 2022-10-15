@@ -39,9 +39,9 @@ class VistaRicercaAvvocato(QWidget):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaAvvocatoRicercato import VistaAvvocatoRicercato
         avvocato = Avvocato()
 
-        print(self.lineEditIdAvv)
+        #print(self.lineEditIdAvv)
 
-        print(avvocato.ricercaUtilizzatoreId(self.lineEditIdAvv.text()))
+        #print(avvocato.ricercaUtilizzatoreId(self.lineEditIdAvv.text()))
 
         if avvocato.ricercaUtilizzatoreId(self.lineEditIdAvv.text()) is None:
             msg = QMessageBox()
@@ -52,12 +52,10 @@ class VistaRicercaAvvocato(QWidget):
         else:
             self.subWindow = VistaAvvocatoRicercato()
             avv= avvocato.ricercaUtilizzatoreId(self.lineEditIdAvv.text())
-            print(avv.getDatiAvvocato())
+            #print(avv.getDatiAvvocato())
             self.subWindow.setData(avv)
             self.subWindow.show()
             self.close()
-
-
 
 
     def rewind(self):

@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from datetime import datetime, timedelta, time
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
+from datetime import datetime
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -119,7 +119,7 @@ class VistaAggiornaCliente(QWidget):
         email = self.layout.itemAtPosition(5, 1).widget().text()
 
         if str(self.cliente.getDatiCliente()["Email"]) == email:
-            self.error("Hai inseirto la stessa email")
+            self.error("Hai inserito la stessa email")
             return
         elif str(self.cliente.getDatiCliente()["Email"]) != email and email != "":
             if tool.check(email):
@@ -134,7 +134,7 @@ class VistaAggiornaCliente(QWidget):
         id = str(item.text())
 
         if str(self.cliente.getDatiCliente()["Id"]) == item.text():
-            self.error("Hai inseirto lo stesso Id")
+            self.error("Hai inserito lo stesso Id")
             return
         elif str(self.cliente.getDatiCliente()["Id"]) != item.text() and item.text() != "":
             if cliente.ricercaUtilizzatoreId(item.text()) is None:
@@ -146,7 +146,7 @@ class VistaAggiornaCliente(QWidget):
         item = self.layout.itemAtPosition(7, 1).widget()
         number = str(item.text())
         if str(self.cliente.getDatiCliente()["Numero telefono"]) == item.text():
-            self.error("Hai inseirto lo stesso numero di telefono")
+            self.error("Hai inserito lo stesso numero di telefono")
             return
         elif str(self.cliente.getDatiCliente()["Numero telefono"])!= item.text() and item.text() != "":
             if len(str(item.text())) == 10 and str(item.text()).isdigit() :
@@ -233,7 +233,6 @@ class VistaAggiornaCliente(QWidget):
             return item.text()
         if item.text() == "":
             return obj
-
 
 
     def rewind(self):

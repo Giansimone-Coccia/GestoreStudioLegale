@@ -1,8 +1,5 @@
-import datetime
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QLineEdit, QMessageBox
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QLineEdit, QCalendarWidget, QMessageBox
-
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -71,7 +68,7 @@ class VistaInserisciParcellaA(QWidget):
         parcella = Parcella()
         ID = self.tool.IdGenerator('PA')
         cliente = self.ottieniCliente()
-        if not self.convalida():    #Una volta creata una dalla vista, crasha e non parte neanche più il visualizza
+        if not self.convalida():
             parcella.creaParcella(cliente, ID, int(self.labelIdentText.text()), int(self.labelImportoText.text()), self.labelIntestText.text())
             self.conferma()
             return

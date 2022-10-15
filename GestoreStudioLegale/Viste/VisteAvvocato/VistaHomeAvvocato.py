@@ -1,10 +1,5 @@
-import os
-import pickle
-
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
-
-# from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaAppuntamentiA
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiungiCliente import VistaAggiungiCliente
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
@@ -24,16 +19,11 @@ class VistaHomeAvvocato(QWidget):
         self.avvocatiList = tool.loadAvvocati()
 
         for avvocato in self.avvocatiList:
-            print("888")
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
-                print("777")
                 self.avvClientiList = avvocato.clienti
                 for clienteAvv in self.avvClientiList:
-                    print("3333")
                     i=0
                     for cliente in self.clientiList:
-                        print("989")
-                        print(clienteAvv.getDatiCliente())
                         if clienteAvv.getDatiCliente()["Id"] == cliente.getDatiCliente()["Id"]:
                             i=1
                     if i == 0:

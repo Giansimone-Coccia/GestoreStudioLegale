@@ -1,5 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from datetime import datetime, timedelta, time
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
+from datetime import datetime
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
@@ -31,7 +31,6 @@ class VistaAggiungiAvvocato(QWidget):
 
         self.buttonLogin = QPushButton('conferma')
         self.layout.addWidget(self.buttonLogin, 9, 0, 1, 2)
-        print("999")
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
@@ -52,7 +51,6 @@ class VistaAggiungiAvvocato(QWidget):
         i = 0
         item = self.layout.itemAtPosition(i+1, 1).widget()
         avvocato = Avvocato()
-        print("ioo")
 
         while i < 8:
             if item.text() == "":
@@ -60,7 +58,6 @@ class VistaAggiungiAvvocato(QWidget):
                 return
             i+=1
             item = self.layout.itemAtPosition(i+1, 1).widget()
-        print("ciao")
 
         nome = self.layout.itemAtPosition(1,1).widget().text()
         cognome = self.layout.itemAtPosition(2,1).widget().text()
@@ -88,9 +85,8 @@ class VistaAggiungiAvvocato(QWidget):
                 return
             else:
                 try:
-                    print("shit")
                     date = datetime.strptime(item.text(), "%d/%m/%Y")
-                    print(date)
+                    #print(date)
                     if date > datetime.now():
                         self.error("Data non valida inserita, la data che hai inserito è futura")
                         return
@@ -103,7 +99,6 @@ class VistaAggiungiAvvocato(QWidget):
 
         z = x.split("/")
         y1 = z[0].isdigit() and z[1].isdigit() and z[2].isdigit()
-        print("888")
 
         if not y1:
             self.error("Erore formato data di nascita devi inserire dei numeri e non delle lettere")
@@ -134,7 +129,6 @@ class VistaAggiungiAvvocato(QWidget):
         clienti = []
         #licenza = []
         appuntamento = []
-        print("merda")
 
         avvocato.creaAvvocato(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
                               self.layout.itemAtPosition(1, 1).widget().text(),corsiAgg,date.strftime("%d/%m/%Y"), self.layout.itemAtPosition(5, 1).widget().text(),

@@ -1,15 +1,9 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
-import pickle
-import os
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
-from GestoreStudioLegale.Servizi.Cliente import Cliente
 
-
-#modificare dimensioni tasti in utilities
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
 
 
@@ -24,15 +18,14 @@ class ParcellaRicercata(QMainWindow):
         super(ParcellaRicercata, self).__init__(parent)
         tool = Tools()
         self.parcelleTrovate = []
-        print("ciaoo45")
         for parcella in parcelle:
             self.parcelleTrovate.append(parcella)
 
-        self.cWidget = QWidget()  # contiene tutto
+        self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         #self.button_layout = QHBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
 
         self.grifLayout = QGridLayout()
 
@@ -59,7 +52,6 @@ class ParcellaRicercata(QMainWindow):
         self.parcelleList = self.tool.loadParcelle()
         self.avvocatiList = self.tool.loadAvvocati()
         tool = Tools()
-        #parc = []
         i=1
 
         for par in self.parcelleTrovate:
@@ -77,11 +69,9 @@ class ParcellaRicercata(QMainWindow):
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
-            print("ciao2")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
             self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = par: self.aggiornaParcella(a)), i, 1)
-            print("mammt")
             self.grifLayout.addWidget(
                 tool.createButton("Elimina", self.rimuoviParcella),i,2)
             i += 1

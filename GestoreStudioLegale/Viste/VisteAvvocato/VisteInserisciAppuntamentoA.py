@@ -1,17 +1,10 @@
 import datetime
-import os
-import pickle
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QGroupBox, QFormLayout, \
-    QComboBox, QMainWindow, QCalendarWidget
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QMessageBox, \
+    QComboBox, QCalendarWidget
 
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
-#from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-
-from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
 
 
 class VisteInserisciAppuntamentoA(QWidget):
@@ -100,7 +93,6 @@ class VisteInserisciAppuntamentoA(QWidget):
             dataOraInizio = dateS+','+hour
             dataOraFine = dateS+','+oraFine.strftime("%H:%M")
             for appuntamento in self.appuntamentiList:
-                print(appuntamento.getDatiAppuntamento())
                 if appuntamento.dataOraInizio == self.pyDate:
                     self.problema()
                     return
@@ -151,29 +143,19 @@ class VisteInserisciAppuntamentoA(QWidget):
     def convalida(self):
             if self.year is None and self.month is None and self.day is None:
                 msg = QMessageBox()
-                print("ecco 7")
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Data non selezionata, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                #self.rewind()
                 return True
             try:
-                print(self.year)
-                print(self.day)
-                print(self.month)
-                print("poco dopo il try")
                 date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-                print("nel try")
                 hour = self.ora.currentText()
-                print("ecco 8")
                 hourT = datetime.datetime.strptime(hour, "%H:%M")
                 timeMin = datetime.datetime.strptime('09:00', '%H:%M')
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
                 condition = False
-                #while condition:
                 if date < datetime.datetime.now():
-                    print("nel primo if")
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
                     msg.setText("Data precedente all'attuale, riprova")
@@ -181,22 +163,6 @@ class VisteInserisciAppuntamentoA(QWidget):
                     msg.exec_()
                     condition = True
                     return condition
-                #elif not date.__format__("%d/%m/%Y"):
-                    #msg = QMessageBox()
-                    #msg.setWindowTitle("ERRORE")
-                    #msg.setText("Formato data errato, riprova (%d/%m/%Y)")
-                    #msg.setIcon(QMessageBox.Critical)
-                    #msg.exec_()
-                    #condition = True
-                    #return condition
-                #elif not hourT.__format__('%H:%M'):
-                    #msg = QMessageBox()
-                    #msg.setWindowTitle("ERRORE")
-                    #msg.setText("Formato orario errato, riprova (%H:%M)")
-                    #msg.setIcon(QMessageBox.Critical)
-                    #msg.exec_()
-                    #condition = True
-                    #return condition
                 elif hourT < timeMin or hourT > timeMax:
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")

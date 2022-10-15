@@ -1,5 +1,3 @@
-import os.path
-import pickle
 
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
@@ -37,20 +35,17 @@ class LoginAdmin(QWidget):
         self.setLayout(layout)
 
     def convalidaPassw(self):
-            user = self.lineEditUsername.text()
-            pswrd = self.lineEditPassword.text()
-            print("22222")
-            if self.gestore.loginAdmin(pswrd,user):
-                print("Accesso eseguito")
-                self.show_new()
-                self.close()
-            else:
-                msg = QMessageBox()
-                msg.setWindowTitle('ERRORE')
-                msg.setText('Credenziali errate')
-                msg.exec()
-                return
-
+        user = self.lineEditUsername.text()
+        pswrd = self.lineEditPassword.text()
+        if self.gestore.loginAdmin(pswrd,user):
+            self.show_new()
+            self.close()
+        else:
+            msg = QMessageBox()
+            msg.setWindowTitle('ERRORE')
+            msg.setText('Credenziali errate')
+            msg.exec()
+            return
 
     def show_new(self):
         self.vistaAdminH = VistaHomeAdmin()

@@ -1,15 +1,10 @@
 from PyQt5.QtCore import Qt, QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBoxLayout, QHBoxLayout, QScrollArea, \
-    QListWidget, QScrollBar, QListWidgetItem, QLabel, QMainWindow, QLineEdit
+from PyQt5.QtWidgets import QWidget, QGridLayout, QVBoxLayout, QScrollArea, QLabel, QMainWindow
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaAppuntamentoA import VistaAggiornaAppuntamentoA
 from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaAppuntamentoA import VistaEliminaAppuntamentoA
-
-import pickle
-import os
-
 
 class AppuntamentoRicercatoA(QMainWindow):
 
@@ -19,11 +14,11 @@ class AppuntamentoRicercatoA(QMainWindow):
     def initUI(self, appuntamento):
         tool = Tools()
         self.appuntamentoTrovato = appuntamento
-        print(self.appuntamentoTrovato)
-        self.cWidget = QWidget()  # contiene tutto
+        #print(self.appuntamentoTrovato)
+        self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
 
         self.grid = QGridLayout()
 
@@ -62,7 +57,6 @@ class AppuntamentoRicercatoA(QMainWindow):
         tool = Tools()
         i = 0
         label = QLabel()
-        print("miaoooooooo")
         self.vistaAggiorna = VistaAggiornaAppuntamentoA()
         self.vistaAggiorna.appuntamento =self.appuntamentoTrovato
         datIn = self.appuntamentoTrovato.getDatiAppuntamento()['Data e Ora Inizio'].strftime("%m/%d/%Y, %H:%M:%S")
@@ -73,7 +67,6 @@ class AppuntamentoRicercatoA(QMainWindow):
         label.setGeometry(QRect(0, 0, 350, 20))
         label.setFont(QFont('Arial', 10))
         label.setStyleSheet("border: 1px solid black;")
-        print("ciao22")
         self.grid.addWidget(label, i, 1, 1, 2)
         i += 1
         self.grid.addWidget(tool.createButton("Modifica",lambda: self.vistaAggiorna.show(),method2=self.close), i, 1)

@@ -1,11 +1,9 @@
-from PyQt5.QtWidgets import (QApplication, QComboBox, QDialog,
-                             QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox, QHBoxLayout,
-                             QLabel, QLineEdit, QMenu, QMenuBar, QPushButton, QSpinBox, QTextEdit,
-                             QVBoxLayout, QCalendarWidget, QMessageBox)
+from PyQt5.QtWidgets import (QDialog,
+                             QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox,
+                             QLineEdit,
+                             QVBoxLayout, QMessageBox)
 
 from GestoreStudioLegale.Servizi.Appuntamento import *
-
-import sys
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 

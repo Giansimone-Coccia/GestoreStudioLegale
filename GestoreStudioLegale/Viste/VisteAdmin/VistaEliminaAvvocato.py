@@ -1,6 +1,6 @@
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QMessageBox
 
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 

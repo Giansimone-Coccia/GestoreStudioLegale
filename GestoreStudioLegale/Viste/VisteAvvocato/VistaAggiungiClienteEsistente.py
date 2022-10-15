@@ -1,12 +1,6 @@
-import os
-import pickle
-
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from PyQt5 import QtCore as qtc
-
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -57,17 +51,8 @@ class VistaAggiungiClienteEsistente(QWidget):
             self.avvocatiList = self.tool.loadAvvocati()
             for avvocato in self.avvocatiList:
                 if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-                    '''for cliente in avvocato.clienti:
-                        if cliente.ricercaUtilizzatoreId(self.lineEditIdC.text())).getDatiCli cliente:
-                            msg = QMessageBox()
-                            msg.setWindowTitle('Cliente agià presente')
-                            msg.setText('ha già questo cliente')
-                            msg.exec()
-                            return'''
                     avvocato.clienti.append(cliente.ricercaUtilizzatoreId(self.lineEditIdC.text()))
                     avvocato.aggiornaAvvocato()
-                    print(avvocato.clienti)
-                    print("2222")
                     msg = QMessageBox()
                     msg.setWindowTitle('Cliente aggiunto')
                     msg.setText('Cliente aggiunto con successo')

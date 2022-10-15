@@ -1,7 +1,7 @@
 import datetime
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QGroupBox, QFormLayout, \
-    QComboBox, QMainWindow, QCalendarWidget
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QPushButton, QMessageBox,  \
+    QComboBox, QCalendarWidget
 
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
@@ -90,27 +90,19 @@ class VistaPrenotaAppuntamentiC(QWidget):
         avvocato = self.menuAvvocati.currentText()
         hour = self.ora.currentText()
         self.appuntamentiList = self.tool.loadAppuntamenti()
-        print("ecco 5")
         if not self.convalida():
-            #print("ecco 6")
-            #print("ecco 9")
             hourDT = datetime.datetime.strptime(hour, "%H:%M")
             #oraFine = hourDT+datetime.timedelta(hours = 1) #MODIFICATO, MEZZO OGNI 30 MINS
             oraFine = hourDT + datetime.timedelta(minutes=30)
-            #print("ecco 10")
             self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
             dateS = self.pyDate.strftime("%d/%m/%Y")
             dataOraInizio = dateS+','+hour
             dataOraFine = dateS+','+oraFine.strftime("%H:%M")
-            #id = 1234 #provvisorio
             for appuntamento in self.appuntamentiList:
-                #print(appuntamento.getDatiAppuntamento())
-                #print("ecco uno")
                 if appuntamento.dataOraInizio == self.pyDate:
                     self.problema()
                     return
                 else:
-                    #print("ecco 2")
                     appuntamento.creaAppuntamento(client.ricercaUtilizzatoreCC(str(self.tool.leggi()).rsplit()[0]), avvocato, dataOraInizio, dataOraFine, self.tool.IdGenerator('A'), self.procedimento.currentText())
                     lawyer = Avvocato()
 
@@ -140,27 +132,18 @@ class VistaPrenotaAppuntamentiC(QWidget):
     def convalida(self):
             if self.year is None and self.month is None and self.day is None:
                 msg = QMessageBox()
-                print("ecco 7")
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Data non selezionata, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                #self.rewind()
                 return True
             try:
-                print(self.year)
-                print(self.day)
-                print(self.month)
-                print("poco dopo il try")
                 date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-                print("nel try")
                 hour = self.ora.currentText()
-                print("ecco 8")
                 hourT = datetime.datetime.strptime(hour, "%H:%M")
                 timeMin = datetime.datetime.strptime('09:00', '%H:%M')
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
                 condition = False
-                #while condition:
                 if date < datetime.datetime.now():
                     print("nel primo if")
                     msg = QMessageBox()
@@ -170,22 +153,6 @@ class VistaPrenotaAppuntamentiC(QWidget):
                     msg.exec_()
                     condition = True
                     return condition
-                #elif not date.__format__("%d/%m/%Y"):
-                    #msg = QMessageBox()
-                    #msg.setWindowTitle("ERRORE")
-                    #msg.setText("Formato data errato, riprova (%d/%m/%Y)")
-                    #msg.setIcon(QMessageBox.Critical)
-                    #msg.exec_()
-                    #condition = True
-                    #return condition
-                #elif not hourT.__format__('%H:%M'):
-                    #msg = QMessageBox()
-                    #msg.setWindowTitle("ERRORE")
-                    #msg.setText("Formato orario errato, riprova (%H:%M)")
-                    #msg.setIcon(QMessageBox.Critical)
-                    #msg.exec_()
-                    #condition = True
-                    #return condition
                 elif hourT < timeMin or hourT > timeMax:
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")

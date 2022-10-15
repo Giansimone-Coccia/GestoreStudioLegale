@@ -8,12 +8,12 @@ class CorsoAggiornamento:
     def __init__(self):
        self.nome = ''
        self.crediti = 0
-       self.ID = '' #mettilo stringa in ea
+       self.ID = ''
        self.dataOraInizio = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
        self.dataOraFine = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
        self.tipo = ''
 
-    def creaCorso(self, nome, crediti, ID, dataOraInizio, dataOraFine, tipo ): #modifica in ea
+    def creaCorso(self, nome, crediti, ID, dataOraInizio, dataOraFine, tipo ):
         self.nome = nome
         self.crediti = crediti
         self.ID = ID
@@ -45,7 +45,6 @@ class CorsoAggiornamento:
         d['Data e Ora Inizio'] = self.dataOraInizio
         d['Data e Ora Fine'] = self.dataOraFine
         d['Tipo Corso'] = self.tipo
-        print(d)
         return d
 
 
@@ -55,19 +54,17 @@ class CorsoAggiornamento:
                 corsiAggiornamento = pickle.load(f)
                 for corsoAggiornamento in corsiAggiornamento:
                     if corsoAggiornamento.ID == ID:
-                        print("Ok")
                         return corsoAggiornamento
                 return None
         else:
             return None
 
-    def ricercaCorsoNome(self, nome): #aggiungi la variabile nome in ea
+    def ricercaCorsoNome(self, nome):
         if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 corsiAggiornamento = pickle.load(f)
                 for corsoAggiornamento in corsiAggiornamento:
                     if corsoAggiornamento.nome == nome:
-                        print("Va bene")
                         return corsoAggiornamento
                 return None
         else:
@@ -81,7 +78,6 @@ class CorsoAggiornamento:
                 for corsoAggiornamento in corsiAggiornamento:
                     if corsoAggiornamento.tipo == tipo:
                         listaCorsi.append(corsoAggiornamento)
-                        print("Finito")
                 return listaCorsi
             return None
         else:

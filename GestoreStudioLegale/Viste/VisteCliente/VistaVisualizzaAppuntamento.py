@@ -3,11 +3,7 @@ from __future__ import print_function
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
-import pickle
-import os
 
-from GestoreStudioLegale.Servizi.Cliente import Cliente
-from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaVisualizzaAppuntamento(QMainWindow):
@@ -15,7 +11,6 @@ class VistaVisualizzaAppuntamento(QMainWindow):
     tool = Tools()
     clientiList = []
     appuntamentiList = []
-    #clientiList = tool.loadClienti()
 
     def __init__(self, parent = None):
         super(VistaVisualizzaAppuntamento, self).__init__(parent)
@@ -23,8 +18,8 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
-        self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-        self.widget = QWidget()  # Widget that contains the collection of Vertical Box
+        self.scroll = QScrollArea()
+        self.widget = QWidget()
         self.grifLayout = QGridLayout()
         self.outerLayout.addWidget(self.tool.rewindButton(self.rewindHomeCliente), 1)
         labelC = QLabel()
@@ -50,40 +45,17 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.show()
 
     def getDatiA(self):
-        #self.clientiList = self.tool.loadClienti()
         self.appuntamentiList = self.tool.loadAppuntamenti()
 
-        #self.clientiList = self.tool.loadClienti()
         i = 1
         appuntamentiL = []
 
-        #for appuntamento in self.appuntamentiList:
-            #print(appuntamento.Cliente.codiceFiscale) #STAMPA TUTTI GLI APPUNTAMENTI
-            #print(self.getDatiC()['Codice fiscale'])
-            #if appuntamento.Cliente.codiceFiscale == self.getDatiC()['Codice fiscale']:
-        #for cliente in self.clientiList:
-            #print(cliente.codiceFiscale)
-            #print(str(self.tool.leggi(n=0)).rsplit()[0])
-
 
         for appuntamento in self.appuntamentiList:
-            print(self.appuntamentiList)
-            #if appuntamento.Cliente.Id == cliente.Id:
-            #if appuntamento.Cliente.codiceFiscale == self.tool.leggi(n=0).rsplit()[0]:
             if appuntamento.Cliente.codiceFiscale == self.tool.leggi(n=0).rsplit()[0]:
-            #if 'cc' == self.tool.leggi(n=0).rsplit()[0]:
                appuntamentiL.append(appuntamento)
-               print("b")
-               print("s")
-            print(appuntamento.getDatiAppuntamento()['Cliente'])
         for app in appuntamentiL:
-            #print(cliente.codiceFiscale)
-            #print(appuntamento.Cliente.codiceFiscale)
-            #print(type(cliente.codiceFiscale))
-            #print(type(appuntamento.Cliente.codiceFiscale))
-            #print("ciaoo3")
             label = QLabel()
-            #print("ciaoo4")
             tool = Tools()
             nome = ""
             cognome = ""
@@ -104,11 +76,8 @@ class VistaVisualizzaAppuntamento(QMainWindow):
                 #   'Appuntamento: ' + '\n' + 'Data e ora inizio: ' + f"{appuntamento.dataOraInizio}" + '\n' + 'Data e ora fine: ' + f"{appuntamento.dataOraFine}" + '\n' + 'ID: ' + f"{appuntamento.ID}" + '\n' + 'Tipo procedimento: ' + f"{appuntamento.tipoProcedimento}")
                 label.setFont(QFont('Arial', 10))
                 label.setStyleSheet("border: 1px solid black;")
-                #print("ciaoo5")
                 self.grifLayout.addWidget(label, i, 1, 1, 2)
-                #print("ciao78")
                 i += 1
-            print("ciao89")
 
     def getDatiC(self):
         clientiList = self.tool.loadClienti()

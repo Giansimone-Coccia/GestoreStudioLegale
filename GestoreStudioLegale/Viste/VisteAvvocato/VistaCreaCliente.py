@@ -1,8 +1,8 @@
 import os
 import pickle
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox
-from datetime import datetime, timedelta, time
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLineEdit, QLabel, QMessageBox
+from datetime import datetime
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -80,15 +80,12 @@ class VistaCreaCliente(QWidget):
         date = None
         if (len(x) > 6):
             y = x[2] != "/" and x[5] != '/'
-            print("yup")
             if y:
                 self.error("Erore formato data di nascita, il formato è DD/MM/YYYY")
                 return
             else:
                 try:
-                    print("shit")
                     date = datetime.strptime(item.text(), "%d/%m/%Y")
-                    print(date)
                     if date > datetime.now():
                         self.error("Data non valida inserita, la data che hai inserito è futura")
                         return
@@ -129,7 +126,6 @@ class VistaCreaCliente(QWidget):
         corsiAgg = []
         appuntamenti = []
         parcelle = []
-        #udienze = []
         tool = Tools()
 
         cliente.creaCliente(self.layout.itemAtPosition(3, 1).widget().text(),

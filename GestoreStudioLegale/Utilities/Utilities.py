@@ -25,9 +25,6 @@ class Tools():
                 if n == 0 :
                     return f.read()
                 stringa1 = f.read(n)
-                #stringa1 = f.readline()
-                #stringa2 = f.readline()
-                #self.salvaAppend(stringa2)
                 return str(stringa1)
 
     def salva(self, stringa,file='Credenziali'):
@@ -36,7 +33,7 @@ class Tools():
                 f.write(stringa)
                 f.write('\n')
 
-    def salvaAppend(self, stringa,file='Credenziali'): #per richiamarlo anche poi con la password
+    def salvaAppend(self, stringa,file='Credenziali'):
         if os.path.isfile(f'GestoreStudioLegale/Dati/{file}.pickle'):
             with open(f'GestoreStudioLegale/Dati/{file}.pickle', 'a') as f:
                 f.write(stringa)
@@ -49,7 +46,7 @@ class Tools():
         button1.setSizePolicy(150, 50)
         return button1
 
-    def createButton(self, nome, on_click,dim=10,method2 = 0):#,baseS=int(160),heightS=int(90),maxBase=int(160*1.5),maxHeight=int(90*2)):
+    def createButton(self, nome, on_click,dim=10,method2 = 0):
         button = QPushButton(nome)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         button.setFont(QFont('Arial', dim))

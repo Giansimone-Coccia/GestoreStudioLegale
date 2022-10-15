@@ -2,10 +2,8 @@ import datetime
 import os
 import pickle
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox, QComboBox, \
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QMessageBox, QComboBox, \
     QCalendarWidget
-#from datetime import datetime, timedelta, time
-from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -62,29 +60,22 @@ class VistaAggiornaAppuntamentoA(QWidget):
 
     def confermaAppuntamento(self):
         tool = Tools()
-        print("sus")
         for appuntamento in self.appuntamentiList:
             if appuntamento.ID == self.appuntamento.ID:
-                print("sheesh")
                 hour = self.ora.currentText()
-                print("333")
                 if not self.convalida():
-                    print("sheesh1")
                     hourDT = datetime.datetime.strptime(hour, "%H:%M")
                     #oraFine = hourDT+datetime.timedelta(hours = 1) #FAI MINUTI SE OGNI MEZZ'ORA
                     oraFine = hourDT + datetime.timedelta(minutes=30)
                     self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
                     dateS = self.pyDate.strftime("%d/%m/%Y")
-                    print("sheesh2")
                     dataOraInizio = dateS + ',' + hour
                     dataOraFine = dateS + ',' + oraFine.strftime("%H:%M")
                     appuntamento.dataOraInizio = datetime.datetime.strptime(dataOraInizio, "%d/%m/%Y,%H:%M")
                     appuntamento.dataOraFine = datetime.datetime.strptime(dataOraFine, "%d/%m/%Y,%H:%M")
-                    print("sheesh3")
                     if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
                         with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'wb') as f1:
                             pickle.dump(self.appuntamentiList, f1, pickle.HIGHEST_PROTOCOL)
-                    print("sheesh3.5")
                     self.avocatiList = tool.loadAvvocati()
                     for avvocato in self.avocatiList:
                         if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
@@ -93,7 +84,6 @@ class VistaAggiornaAppuntamentoA(QWidget):
                                     avvocato.appuntamentiAvvocato.remove(app)
                                     avvocato.appuntamentiAvvocato.append(appuntamento)
                             avvocato.aggiornaAvvocato()
-                    print("sheesh4")
                     self.conferma()
 
     def conferma(self):
@@ -123,7 +113,6 @@ class VistaAggiornaAppuntamentoA(QWidget):
                 msg.setText("Data non selezionata, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                #self.rewind()
                 return True
             try:
                 date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
@@ -132,7 +121,6 @@ class VistaAggiornaAppuntamentoA(QWidget):
                 timeMin = datetime.datetime.strptime('09:00', '%H:%M')
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
                 condition = False
-                #while condition:
                 if date < datetime.datetime.now():
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")

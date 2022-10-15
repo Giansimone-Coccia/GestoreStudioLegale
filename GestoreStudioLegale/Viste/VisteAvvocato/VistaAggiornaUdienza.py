@@ -2,10 +2,8 @@ import datetime
 import os
 import pickle
 
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QLineEdit, QLabel, QMessageBox, QComboBox, \
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QMessageBox, QComboBox, \
     QCalendarWidget
-#from datetime import datetime, timedelta, time
-from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Servizi.Udienza import Udienza
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Utilities.Utilities import Tools
@@ -106,7 +104,6 @@ class VistaAggiornaUdienza(QWidget):
             msg.setText("Data non selezionata, riprova")
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
-            # self.rewind()
             return True
         try:
             date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
@@ -115,7 +112,6 @@ class VistaAggiornaUdienza(QWidget):
             timeMin = datetime.datetime.strptime('09:00', '%H:%M')
             timeMax = datetime.datetime.strptime('17:00', '%H:%M')
             condition = False
-            # while condition:
             if date < datetime.datetime.now():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")

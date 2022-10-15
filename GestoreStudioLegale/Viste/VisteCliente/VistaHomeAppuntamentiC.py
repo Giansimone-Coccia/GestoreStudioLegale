@@ -1,8 +1,6 @@
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QGridLayout
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
-#from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
 from GestoreStudioLegale.Viste.VisteCliente.VistaPrenotaAppuntamentiC import VistaPrenotaAppuntamentiC
 from GestoreStudioLegale.Viste.VisteCliente.VistaVisualizzaAppuntamento import VistaVisualizzaAppuntamento
 

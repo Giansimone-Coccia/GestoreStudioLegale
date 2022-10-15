@@ -1,9 +1,5 @@
-#from PyQt5.uic.properties import QtWidgets
-#from GestoreStudioLegale.Viste.LoginCliente import Ui_Form
 import sys
-from os import name
 
-from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from PyQt5.QtWidgets import QApplication
 
 from GestoreStudioLegale.Servizi.Appuntamento import Appuntamento
@@ -12,12 +8,9 @@ from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Udienza import Udienza
 #from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
-from GestoreStudioLegale.Gestione.Statistiche import Statistiche
-from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
 from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
-from GestoreStudioLegale.Utilities.Utilities import Tools
 from GestoreStudioLegale.Viste.VistaHome import VistaHome
 
 
