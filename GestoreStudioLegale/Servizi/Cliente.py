@@ -1,5 +1,3 @@
-from PyQt5.QtWidgets import QMessageBox
-
 from GestoreStudioLegale.Servizi.Utilizzatore import Utilizzatore
 import pickle
 import os.path

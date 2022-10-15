@@ -1,6 +1,5 @@
 import datetime
 
-from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 import pickle
 import os.path
@@ -18,7 +17,7 @@ class Udienza:
 
     def aggiornaUdienza(self, cittaTribunale = '', tipoTribunale = '', dataOraInizio = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
                         dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
-                        Cliente = None, Avvoccato = None): #modifica date con datetime
+                        Cliente = None, Avvoccato = None):
         if cittaTribunale != '':
             self.cittaTribunale = cittaTribunale
         elif tipoTribunale != '':

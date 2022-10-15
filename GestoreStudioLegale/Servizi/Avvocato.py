@@ -1,5 +1,3 @@
-from PyQt5.QtWidgets import QMessageBox
-
 from GestoreStudioLegale.Servizi.Utilizzatore import Utilizzatore
 import pickle
 import os.path
@@ -31,7 +29,7 @@ class Avvocato(Utilizzatore):
                              self.Id, self.numeroTelefono, self.password, self.clienti, self.appuntamentiAvvocato)
 
 
-    def creaAvvocato(self, codiceFiscale, cognome, nome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password, #modifica ea
+    def creaAvvocato(self, codiceFiscale, cognome, nome, corsoAggiornamento, dataNascita, email, Id, numeroTelefono, password,
                           clienti,  appuntamentoAvvocato):
         self.creaUtilizzatore(codiceFiscale = codiceFiscale, cognome = cognome, nome = nome, corsoAggiornamento = corsoAggiornamento,
                               dataNascita = dataNascita, email = email, Id = Id, numeroTelefono = numeroTelefono,

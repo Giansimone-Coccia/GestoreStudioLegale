@@ -96,7 +96,6 @@ class Parcella():
                 for parcella in parcelle:
                     if parcella.identificativo == identificativo:
                         return parcella
-            self.notFound()
             return None
         else:
             return None
@@ -118,12 +117,3 @@ class Parcella():
                 pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:
             print("Finito")
-
-    def notFound(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Attenzione")
-        msg.setText("Parcella non trovata")
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
-
-
