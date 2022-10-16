@@ -17,7 +17,6 @@ class VistaAvvocatoRicercato(QWidget):
 
         self.vistaVis = VistaVisualizzaAvvocati()
         self.tool = Tools()
-        #print(f"{self.avvocato.getDatiAvvocato}")
         self.setWindowTitle('Ricerca avvocato')
         self.resize(500, 120)
         self.grifLayout = QGridLayout()

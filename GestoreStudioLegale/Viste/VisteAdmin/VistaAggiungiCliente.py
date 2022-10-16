@@ -83,7 +83,6 @@ class VistaAggiungiCliente(QWidget):
             else:
                 try:
                     date = datetime.strptime(item.text(), "%d/%m/%Y")
-                    #print(date)
                     if date > datetime.now():
                         self.error("Data non valida inserita, la data che hai inserito è futura")
                         return
@@ -118,7 +117,6 @@ class VistaAggiungiCliente(QWidget):
 
         item = self.layout.itemAtPosition(7, 1).widget()
         x = item.text()
-        print(str(x).isdigit())
         if not (len(str(x)) == 10 and str(x).isdigit()):
             self.error("Il numero di telefono deve essere di 10 numeri")
             return

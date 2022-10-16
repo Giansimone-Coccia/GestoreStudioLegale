@@ -14,7 +14,6 @@ class AppuntamentoRicercatoA(QMainWindow):
     def initUI(self, appuntamento):
         tool = Tools()
         self.appuntamentoTrovato = appuntamento
-        #print(self.appuntamentoTrovato)
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.scroll = QScrollArea()

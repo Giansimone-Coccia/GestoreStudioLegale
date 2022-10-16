@@ -32,7 +32,6 @@ class VistaModificaUsername(QWidget):
     def modificaUser(self):
         tool =Tools()
         passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
-        #print(passEuser)
 
         if self.lineEditNewUser.text() == self.lineEditOldUser.text():
             msg = QMessageBox()

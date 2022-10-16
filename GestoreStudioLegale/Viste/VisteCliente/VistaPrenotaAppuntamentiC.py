@@ -145,7 +145,6 @@ class VistaPrenotaAppuntamentiC(QWidget):
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
                 condition = False
                 if date < datetime.datetime.now():
-                    print("nel primo if")
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
                     msg.setText("Data precedente all'attuale, riprova")

@@ -38,7 +38,6 @@ class VistaEliminaAppuntamentoA(QWidget):
         self.avocatiList = tool.loadAvvocati()
         for avvocato in self.avocatiList:
             if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
-                print("shit")
                 for app in avvocato.appuntamentiAvvocato:
                     if app.ID == id:
                         avvocato.appuntamentiAvvocato.remove(app)

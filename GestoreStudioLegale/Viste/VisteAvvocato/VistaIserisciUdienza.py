@@ -94,7 +94,6 @@ class VistaInserisciUdienza(QWidget):
             dataOraFine = dateS + ',' + oraFine.strftime("%H:%M")
             ID = self.tool.IdGenerator('UD')
             for udienza in self.udienzeList:
-                print(udienza.getDatiUdienza())
                 if udienza.dataOraInizio == self.pyDate:
                     self.problema()
                     return
@@ -135,16 +134,12 @@ class VistaInserisciUdienza(QWidget):
 
             if self.year is None and self.month is None and self.day is None:
                 msg = QMessageBox()
-                print("ecco 7")
                 msg.setWindowTitle("ERRORE")
                 msg.setText("Data non selezionata, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
                 return True
             try:
-                print(self.year)
-                print(self.day)
-                print(self.month)
                 date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
                 hour = self.ora.currentText()
                 hourT = datetime.datetime.strptime(hour, "%H:%M")
@@ -152,7 +147,6 @@ class VistaInserisciUdienza(QWidget):
                 timeMax = datetime.datetime.strptime('17:00', '%H:%M')
                 condition = False
                 if date < datetime.datetime.now():
-                    print("nel primo if")
                     msg = QMessageBox()
                     msg.setWindowTitle("ERRORE")
                     msg.setText("Data precedente all'attuale, riprova")

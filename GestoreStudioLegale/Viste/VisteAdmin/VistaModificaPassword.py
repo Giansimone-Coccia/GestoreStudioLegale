@@ -33,7 +33,6 @@ class VistaModificaPassword(QWidget):
     def modificaPassw(self):
         tool =Tools()
         passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
-        #print(passEuser)
 
         if self.lineEditNewPassword.text() == self.lineEditOldPassword.text():
             msg = QMessageBox()

@@ -60,8 +60,6 @@ class VistaHomeUdienze(QMainWindow):
         for u in ud:
             label = QLabel()
             textLabel2 = QLabel()
-            print(u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome'])
-            print(u.getDatiUdienza()['Cliente'])
             textLabel2.setText(
                 'Cliente: ' + '\n' + 'NOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Nome']}" + '\n' + 'COGNOME: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Cognome']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Id']}" + '\n' + 'CODICE FISCALE: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Codice fiscale']}" + '\n' + 'EMAIL: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Email']}" + '\n' + 'NUMERO TELEFONO: ' + f"{u.getDatiUdienza()['Cliente'].getDatiCliente()['Numero telefono']}")
             textLabel2.setGeometry(QRect(0, 0, 350, 20))
@@ -111,7 +109,6 @@ class VistaHomeUdienze(QMainWindow):
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
-        print(tool.leggi())
         for cliente in self.clientiList:
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                     return cliente.getDatiCliente()

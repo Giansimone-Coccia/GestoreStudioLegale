@@ -38,10 +38,6 @@ class VistaRicercaCliente(QWidget):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaClienteRicercato import VistaClienteRicercato
         cliente = Cliente()
 
-        #print(self.lineEditIdC)
-
-        #print(cliente.ricercaUtilizzatoreId(self.lineEditIdC.text()))
-
         if cliente.ricercaUtilizzatoreId(self.lineEditIdC.text()) is None:
             msg = QMessageBox()
             msg.setWindowTitle('Cliente non trovato')

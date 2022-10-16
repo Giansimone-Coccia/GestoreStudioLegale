@@ -49,10 +49,6 @@ class VistaAggiornaParcella(QWidget):
                 nuovoImporto = self.labelImportoTex.text()
                 parcella1 = Parcella()
                 parcella1 = parcella
-                print(self.labelIntestTex.text())
-                print(self.parcella.intestatario)
-                print(self.labelImportoTex.text())
-                print(self.parcella.importo)
                 condizione1 = self.labelIntestTex.text() != str(self.parcella.intestatario)
                 condizione2 = self.labelImportoTex.text() != str(self.parcella.importo)
                 condizione3 = self.labelImportoTex.text().isdigit()

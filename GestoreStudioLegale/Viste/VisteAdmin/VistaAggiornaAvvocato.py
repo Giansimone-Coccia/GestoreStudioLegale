@@ -43,7 +43,7 @@ class VistaAggiornaAvvocato(QWidget):
     def invio(self):
 
         self.string = ""
-        print(self.avvocato.getDatiAvvocato()["Data nascita"])
+        #print(self.avvocato.getDatiAvvocato()["Data nascita"])
         tool = Tools()
 
         nome = self.layout.itemAtPosition(1, 1).widget().text()
@@ -189,7 +189,7 @@ class VistaAggiornaAvvocato(QWidget):
 
         i=0
         vString = self.string.rsplit(",")
-        print(vString)
+        #print(vString)
         if len(vString)>1:
             self.string = ""
             while i < len(vString):
@@ -201,12 +201,8 @@ class VistaAggiornaAvvocato(QWidget):
                 i+=1
 
         self.avvocato.aggiornaAvvocato()
-        print(self.avvocato.nome)
-        print(self.string)
-        print(self.avvocato.getDatiAvvocato())
 
         item = self.layout.itemAtPosition(1, 1).widget()
-        print(item.text())
         avvocato = Avvocato()
 
         avvocato.creaAvvocato(self.avvocato.getDatiAvvocato()["Codice fiscale"],self.avvocato.getDatiAvvocato()["Cognome"],

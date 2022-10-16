@@ -44,14 +44,12 @@ class VistaAggiornaCliente(QWidget):
 
         self.string = ""
         tool = Tools()
-        print(self.cliente.getDatiCliente()["Data nascita"])
         cliente = Cliente()
 
         nome = self.layout.itemAtPosition(1, 1).widget().text()
         cognome = self.layout.itemAtPosition(2, 1).widget().text()
         appuntamenti = self.cliente.appuntamentoCliente
         parcelle = self.cliente.parcelle
-        #udienze =self.cliente.udienza
         corsiAgg = self.cliente.corsoAggiornamento
 
         if str(self.cliente.getDatiCliente()["Nome"]) == nome:
@@ -158,7 +156,6 @@ class VistaAggiornaCliente(QWidget):
 
         password = self.breve('password',self.cliente.getDatiCliente()["Password"],8,'a')
 
-        print("yolo")
 
         complete = password
 
@@ -191,7 +188,6 @@ class VistaAggiornaCliente(QWidget):
 
         i=0
         vString = self.string.rsplit(",")
-        print(vString)
         if len(vString)>1:
             self.string = ""
             while i < len(vString):
@@ -203,12 +199,8 @@ class VistaAggiornaCliente(QWidget):
                 i+=1
 
         self.cliente.aggiornaCliente()
-        print(self.cliente.nome)
-        print(self.string)
-        print(self.cliente.getDatiCliente())
 
         item = self.layout.itemAtPosition(1, 1).widget()
-        print(item.text())
 
         cliente.creaCliente(self.cliente.getDatiCliente()["Codice fiscale"],self.cliente.getDatiCliente()["Cognome"],corsiAgg,
                             self.cliente.getDatiCliente()["Data nascita"],self.cliente.getDatiCliente()["Email"],

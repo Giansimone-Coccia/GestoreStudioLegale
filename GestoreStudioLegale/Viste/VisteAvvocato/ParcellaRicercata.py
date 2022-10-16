@@ -92,7 +92,6 @@ class ParcellaRicercata(QMainWindow):
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
-        print(tool.leggi())
         for cliente in self.clientiList:
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                     return cliente.getDatiCliente()
