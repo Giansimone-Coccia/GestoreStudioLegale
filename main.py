@@ -40,6 +40,7 @@ parcella1 = Parcella()
 parcella2 = Parcella()
 parcella3 = Parcella()
 corso1 = CorsoAggiornamento()
+corso2 = CorsoAggiornamento()
 email = GestoreEmail()
 
 corsi = ['economia politica']
@@ -179,7 +180,8 @@ udienzeGen = [udienza1, udienza2, udienza3, udienza4]
 #gestore.rimuoviCliente(cliente1) #FUNZIONA
 #gestore1.invioEmail() #NON ACORA TESTATO
 
-#corso1.creaCorso('matematica',3,'CR123','21/08/2022,15:00','21/08/2022,21:00','formazione') #FUNZIONA
+#corso1.creaCorso('matematica',3,'CR123','21/08/2022,15:00','21/08/2022,21:00','formazione')
+#corso2.creaCorso('algebra',6,'CR122','21/09/2022,11:00','21/10/2022,16:00','formazione')#FUNZIONA
 #corso1.getDatiCorso()
 #corso1.ricercaCorsoCodice('CR123') #FUNZIONA
 #corso1.ricercaCorsoNome('matematica') #FUNZIONA

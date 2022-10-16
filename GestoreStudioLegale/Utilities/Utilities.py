@@ -119,6 +119,11 @@ class Tools():
             stringa = stringa + str(stringa1)
             self.salva(str(stringa1), 'lastID')
             return stringa
+        elif stringa == 'CO':
+            stringa1 = int(self.leggi('lastID').rsplit()[0]) + 1
+            stringa = stringa + str(stringa1)
+            self.salva(str(stringa1), 'lastID')
+            return stringa
 
     def check(self,email):
         regex = '^[a-z0-9]+[._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'

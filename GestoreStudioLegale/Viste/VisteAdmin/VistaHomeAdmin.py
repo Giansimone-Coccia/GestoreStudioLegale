@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout
 
+from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeCorsoAgg import VistaHomeCorsoAgg
 from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaCredenziali import VistaModificaCredenziali
 from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
 from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
@@ -19,6 +20,7 @@ class VistaHomeAdmin(QWidget):
         gLayout.addWidget(tool.createButton("Mostra Avvocati", self.reachAvvocati), 2, 1)
         gLayout.addWidget(tool.createButton("Mostra Clienti", self.reachClienti), 2, 0)
         gLayout.addWidget(tool.createButton("Mostra Statistiche", self.reachStatistiche), 1, 1)
+        gLayout.addWidget(tool.createButton("Corsi aggiornamento", self.reachCorsiAgg), 3, 0)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")
@@ -43,6 +45,11 @@ class VistaHomeAdmin(QWidget):
         self.vistaVisualizzaS = VistaVisualizzaStatistiche()
         self.vistaVisualizzaS.show()
         #self.close()
+
+    def reachCorsiAgg(self):
+        self.vistaCorsi = VistaHomeCorsoAgg()
+        self.vistaCorsi.show()
+        self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin
