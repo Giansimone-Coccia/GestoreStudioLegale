@@ -70,7 +70,10 @@ class VistaHomeAvvocato(QWidget):
         self.close()
 
     def reachSceltaCorso(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaSceltaCorso import VistaSceltaCorso
+        self.vistaScelta = VistaSceltaCorso()
+        self.vistaScelta.show()
+        self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VistaHome import VistaHome
