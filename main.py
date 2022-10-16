@@ -207,5 +207,5 @@ if __name__ == '__main__':
     app.setStyle('Fusion')
     vista_home = VistaHome()
     vista_home.show()
-    backup.eseguiBackup()
+    #backup.eseguiBackup()
     sys.exit(app.exec())

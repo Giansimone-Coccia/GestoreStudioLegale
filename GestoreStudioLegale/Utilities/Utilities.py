@@ -15,6 +15,7 @@ class Tools():
     parcelle = []
     udienze = []
     corsiAggiornamento = []
+    corsiDict = []
 
     def __init__(self):
         pass
@@ -92,6 +93,12 @@ class Tools():
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 self.corsiAggiornamento = list(pickle.load(f))
                 return self.corsiAggiornamento
+
+    def loadCorsiDict(self):
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsoAvv.pickle'):
+            with open('GestoreStudioLegale/Dati/CorsoAvv.pickle', 'rb') as f:
+                self.corsiDict = list(pickle.load(f))
+                return self.corsiDict
 
     def IdGenerator(self, stringa): #ID posto a 0000 nel file
         if stringa == 'A':

@@ -69,3 +69,13 @@ class VistaHomeCorsoAgg(QMainWindow):
             textLabel2.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(textLabel2, i, 1, 1, 2)
             i += 1
+            self.grifLayout.addWidget(self.tool.createButton("Elimina", lambda checked, a=corso.getDatiCorso()['ID']: self.rimuoviCorso(a)), i, 2)
+            i += 1
+
+
+    def rimuoviCorso(self, id):
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaCorsoAgg import VistaEliminaCorsoAgg
+        self.vistaE = VistaEliminaCorsoAgg()
+        self.vistaE.setData(id)
+        self.vistaE.show()
+        self.close()

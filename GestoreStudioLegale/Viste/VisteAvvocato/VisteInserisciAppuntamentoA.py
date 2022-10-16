@@ -141,48 +141,48 @@ class VisteInserisciAppuntamentoA(QWidget):
         msg.exec_()
 
     def convalida(self):
-            if self.year is None and self.month is None and self.day is None:
+        if self.year is None and self.month is None and self.day is None:
+            msg = QMessageBox()
+            msg.setWindowTitle("ERRORE")
+            msg.setText("Data non selezionata, riprova")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+            return True
+        try:
+            date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+            hour = self.ora.currentText()
+            hourT = datetime.datetime.strptime(hour, "%H:%M")
+            timeMin = datetime.datetime.strptime('09:00', '%H:%M')
+            timeMax = datetime.datetime.strptime('17:00', '%H:%M')
+            condition = False
+            if date < datetime.datetime.now():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
-                msg.setText("Data non selezionata, riprova")
+                msg.setText("Data precedente all'attuale, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                return True
-            try:
-                date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-                hour = self.ora.currentText()
-                hourT = datetime.datetime.strptime(hour, "%H:%M")
-                timeMin = datetime.datetime.strptime('09:00', '%H:%M')
-                timeMax = datetime.datetime.strptime('17:00', '%H:%M')
-                condition = False
-                if date < datetime.datetime.now():
-                    msg = QMessageBox()
-                    msg.setWindowTitle("ERRORE")
-                    msg.setText("Data precedente all'attuale, riprova")
-                    msg.setIcon(QMessageBox.Critical)
-                    msg.exec_()
-                    condition = True
-                    return condition
-                elif hourT < timeMin or hourT > timeMax:
-                    msg = QMessageBox()
-                    msg.setWindowTitle("ERRORE")
-                    msg.setText("Lo studio rimarrà aperto dalle 09:00 alle 17:00")
-                    msg.setIcon(QMessageBox.Critical)
-                    msg.exec_()
-                    condition = True
-                    return condition
-                elif date.weekday() == 5 or date.weekday() == 6:
-                    msg = QMessageBox()
-                    msg.setWindowTitle("ERRORE")
-                    msg.setText("Lo studio è chiuso durante il week-end")
-                    msg.setIcon(QMessageBox.Critical)
-                    msg.exec_()
-                    condition = True
-                    return condition
-            except Exception as e:
+                condition = True
+                return condition
+            elif hourT < timeMin or hourT > timeMax:
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
-                msg.setText("Riprova")
+                msg.setText("Lo studio rimarrà aperto dalle 09:00 alle 17:00")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                return
+                condition = True
+                return condition
+            elif date.weekday() == 5 or date.weekday() == 6:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRORE")
+                msg.setText("Lo studio è chiuso durante il week-end")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+                condition = True
+                return condition
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setWindowTitle("ERRORE")
+            msg.setText("Riprova")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+            return

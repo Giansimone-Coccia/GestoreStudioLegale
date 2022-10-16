@@ -13,7 +13,7 @@ class CorsoAggiornamento:
        self.dataOraFine = datetime.datetime(year=1970, month=1, day=1, hour=00, minute=00)
        self.tipo = ''
 
-    def creaCorso(self, nome, crediti, ID, dataOraInizio, dataOraFine, tipo ):
+    def creaCorso(self, nome, crediti, ID, dataOraInizio, dataOraFine, tipo):
         self.nome = nome
         self.crediti = crediti
         self.ID = ID

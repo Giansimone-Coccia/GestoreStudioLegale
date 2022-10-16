@@ -13,6 +13,11 @@ class VistaInserisciCorso(QWidget):
 
     tool = Tools()
     avvocatiList = []
+    corsiL = tool.loadCorsiDict()
+    corsoAvv = {}
+    year = None
+    month = None
+    day = None
 
     def __init__(self, parent=None):
         super(VistaInserisciCorso, self).__init__(parent)
@@ -21,8 +26,8 @@ class VistaInserisciCorso(QWidget):
         self.labelName = QLabel('<font size="4"> ID Corso aggiornamento </font>')
         self.labelName2 = QLabel('<font size="4"> Nome corso </font>')
         self.confirmButton = self.tool.createButton('Conferma corso', self.corsoOK)
-        self.menuAvv = QComboBox()
-        self.menuAvv.addItems(self.sceltaAvvocati())
+        #self.menuAvv = QComboBox()
+        #self.menuAvv.addItems(self.sceltaAvvocati())
         self.labelName4 = QLabel('<font size="4"> Avvocato corso </font>')
         self.labelCR = QLabel('<font size="4"> Crediti </font>')
         self.labelType = QLabel('<font size="4"> Tipo corso aggiornamento </font>')
@@ -47,8 +52,8 @@ class VistaInserisciCorso(QWidget):
         gLayout.addWidget(self.labelID, 2, 1)
         gLayout.addWidget(self.labelName2, 3, 0)
         gLayout.addWidget(self.labelNomeText, 3, 1)
-        gLayout.addWidget(self.menuAvv, 5, 1)
-        gLayout.addWidget(self.labelName4, 5, 0)
+        #gLayout.addWidget(self.menuAvv, 5, 1)
+        #gLayout.addWidget(self.labelName4, 5, 0)
         gLayout.addWidget(self.labelCR, 4, 0)
         gLayout.addWidget(self.labelCRText, 4, 1)
         gLayout.addWidget(self.labelType, 6, 0)
@@ -58,7 +63,7 @@ class VistaInserisciCorso(QWidget):
         gLayout.addWidget(self.labelOra, 7, 0)
         gLayout.addWidget(self.ora, 7, 1)
         self.setLayout(gLayout)
-        self.resize(800, 600)
+        self.resize(800, 500)
         self.setWindowTitle("Inserimento corso")
         self.show()
 
@@ -80,16 +85,17 @@ class VistaInserisciCorso(QWidget):
             dataOraInizio = dateIS + ',' + hour
             dataOraFine = dateF.strftime("%d/%m/%Y") + ',' + oraFine.strftime("%H:%M")
             corsoA.creaCorso(self.labelNomeText.text(), self.labelCRText.text(), self.tool.IdGenerator('CO'), dataOraInizio, dataOraFine, self.labelTypeText.text())
+            self.caricaCorsoAvv()
             self.conferma()
         else:
             self.problema()
 
-    def sceltaAvvocati(self):
+    '''def sceltaAvvocati(self):
         self.nomi = []
         self.avvocatiList = self.tool.loadAvvocati()
         for avvocato in self.avvocatiList:
             self.nomi.append(avvocato.nome+' '+avvocato.cognome)
-        return self.nomi
+        return self.nomi'''
 
     def conferma(self):
         msg = QMessageBox()
@@ -110,17 +116,12 @@ class VistaInserisciCorso(QWidget):
         msg.exec_()
 
     def caricaCorsoAvv(self):
-        corsi = self.tool.loadCorsiAggiornamento()
-        avv = Avvocato()
-        for corso in corsi:
-            if corso.nome == self.labelNomeText.text() and corso.crediti == self.labelCRText.text():
-                avvocatoSelezionato = avv.ricercaUtilizzatoreNomeCognome(self.menuAvv.currentText().rsplit()[0], self.menuAvv.currentText().rsplit()[1])
-                corsoAvv = {}
-                corsoAvv['Avvocato'] = avvocatoSelezionato
-                corsoAvv['Corso'] = corso
-                if os.path.isfile('GestoreStudioLegale/Dati/CorsoAvv.pickle'):
-                    with open('GestoreStudioLegale/Dati/CorsoAvv.pickle', 'wb') as f1:
-                        pickle.dump(corsoAvv, f1, pickle.HIGHEST_PROTOCOL)
+        corso = CorsoAggiornamento()
+        self.corsoAvv['Corso'] = corso.ricercaCorsoNome(self.labelNomeText.text())
+        self.corsiL.append(self.corsoAvv)
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsoAvv.pickle'):
+            with open('GestoreStudioLegale/Dati/CorsoAvv.pickle', 'wb') as f1:
+                pickle.dump(self.corsiL, f1, pickle.HIGHEST_PROTOCOL)
 
     def selezionaData(self):
         self.dataSelezionata = self.calendar.selectedDate()
@@ -129,48 +130,48 @@ class VistaInserisciCorso(QWidget):
         self.month = self.dataSelezionata.month()
 
     def convalida(self):
-            if self.year is None and self.month is None and self.day is None:
+        if self.year is None and self.month is None and self.day is None:
+            msg = QMessageBox()
+            msg.setWindowTitle("ERRORE")
+            msg.setText("Data non selezionata, riprova")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+            return True
+        try:
+            date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+            hour = self.ora.currentText()
+            hourT = datetime.datetime.strptime(hour, "%H:%M")
+            timeMin = datetime.datetime.strptime('09:00', '%H:%M')
+            timeMax = datetime.datetime.strptime('17:00', '%H:%M')
+            condition = False
+            if date < datetime.datetime.now():
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
-                msg.setText("Data non selezionata, riprova")
+                msg.setText("Data precedente all'attuale, riprova")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                return True
-            try:
-                date = self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-                hour = self.ora.currentText()
-                hourT = datetime.datetime.strptime(hour, "%H:%M")
-                timeMin = datetime.datetime.strptime('09:00', '%H:%M')
-                timeMax = datetime.datetime.strptime('17:00', '%H:%M')
-                condition = False
-                if date < datetime.datetime.now():
-                    msg = QMessageBox()
-                    msg.setWindowTitle("ERRORE")
-                    msg.setText("Data precedente all'attuale, riprova")
-                    msg.setIcon(QMessageBox.Critical)
-                    msg.exec_()
-                    condition = True
-                    return condition
-                elif hourT < timeMin or hourT > timeMax:
-                    msg = QMessageBox()
-                    msg.setWindowTitle("ERRORE")
-                    msg.setText("Lo studio rimarrà aperto dalle 09:00 alle 17:00")
-                    msg.setIcon(QMessageBox.Critical)
-                    msg.exec_()
-                    condition = True
-                    return condition
-                elif date.weekday() == 5 or date.weekday() == 6:
-                    msg = QMessageBox()
-                    msg.setWindowTitle("ERRORE")
-                    msg.setText("Lo studio è chiuso durante il week-end")
-                    msg.setIcon(QMessageBox.Critical)
-                    msg.exec_()
-                    condition = True
-                    return condition
-            except Exception as e:
+                condition = True
+                return condition
+            elif hourT < timeMin or hourT > timeMax:
                 msg = QMessageBox()
                 msg.setWindowTitle("ERRORE")
-                msg.setText("Riprova")
+                msg.setText("Lo studio rimarrà aperto dalle 09:00 alle 17:00")
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
-                return
+                condition = True
+                return condition
+            elif date.weekday() == 5 or date.weekday() == 6:
+                msg = QMessageBox()
+                msg.setWindowTitle("ERRORE")
+                msg.setText("Lo studio è chiuso durante il week-end")
+                msg.setIcon(QMessageBox.Critical)
+                msg.exec_()
+                condition = True
+                return condition
+        except Exception as e:
+            msg = QMessageBox()
+            msg.setWindowTitle("ERRORE")
+            msg.setText("Riprova")
+            msg.setIcon(QMessageBox.Critical)
+            msg.exec_()
+            return

@@ -73,7 +73,7 @@ class Backup():
             pickle.dump(self.backup, f, pickle.HIGHEST_PROTOCOL)
 
     def salvaDatiCorsoAggiornamento(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+        if os.path.isfile('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle'):
             with open('GestoreStudioLegale/Dati/CorsiAggiornamento.pickle', 'rb') as f:
                 try:
                     corsiAggiornamento = pickle.load(f)
