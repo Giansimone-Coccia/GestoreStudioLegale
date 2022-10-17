@@ -94,12 +94,6 @@ class Tools():
                 self.corsiAggiornamento = list(pickle.load(f))
                 return self.corsiAggiornamento
 
-    '''def loadCorsiDict(self):
-        corsiDict = []
-        if os.path.isfile('GestoreStudioLegale/Dati/CorsoAvv.pickle'):
-            with open('GestoreStudioLegale/Dati/CorsoAvv.pickle', 'rb') as f:
-                corsiDict = list(pickle.load(f))
-                return corsiDict'''
 
     def IdGenerator(self, stringa): #ID posto a 0000 nel file
         if stringa == 'A':
