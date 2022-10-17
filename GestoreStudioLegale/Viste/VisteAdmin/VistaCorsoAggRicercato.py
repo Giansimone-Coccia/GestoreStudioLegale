@@ -20,7 +20,6 @@ class VistaCorsoAggRicercato(QMainWindow):
         for corso in corsiAgg:
             self.corsiTrovati.append(corso)
 
-        print(self.corsiTrovati.getDatiCorso['Nome'])
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()

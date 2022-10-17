@@ -120,10 +120,8 @@ class VistaAggiungiAvvocato(QWidget):
             self.error("Il numero di telefono deve essere di 10 numeri")
             return
 
-        corsiAgg = []
-        #udienza = []
+        corsiAgg = None
         clienti = []
-        #licenza = []
         appuntamento = []
 
         avvocato.creaAvvocato(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),

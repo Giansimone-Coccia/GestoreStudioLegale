@@ -8,6 +8,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaEliminaCorsoAgg(QWidget):
 
     id = ''
+    tool = Tools()
+    avvocatiList = tool.loadAvvocati()
 
     def __init__(self, parent = None):
         super(VistaEliminaCorsoAgg, self).__init__(parent)
@@ -33,6 +35,10 @@ class VistaEliminaCorsoAgg(QWidget):
         corso1 = CorsoAggiornamento()
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeCorsoAgg import VistaHomeCorsoAgg
         corso1.rimuoviCorso(id)
+        for avvocato in self.avvocatiList:
+            if avvocato.corsoAggiornamento.ID == id:
+                avvocato.corsoAggiornamento = None
+                avvocato.aggiornaAvvocato()
         self.vistaHomeCo = VistaHomeCorsoAgg()
         msg = QMessageBox()
         msg.setWindowTitle('Corso eliminato')
