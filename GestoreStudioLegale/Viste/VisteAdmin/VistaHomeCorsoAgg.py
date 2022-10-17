@@ -53,7 +53,10 @@ class VistaHomeCorsoAgg(QMainWindow):
         self.close()
 
     def cercaCorso(self):
-        pass
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaRicercaCorsoAgg import VistaRicercaCorsoAgg
+        self.vistaCorso = VistaRicercaCorsoAgg()
+        self.vistaCorso.show()
+        self.close()
 
     def getDatiCorso(self):
         self.corsiList = self.tool.loadCorsiAggiornamento()

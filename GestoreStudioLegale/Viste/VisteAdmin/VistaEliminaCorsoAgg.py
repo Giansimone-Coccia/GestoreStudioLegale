@@ -1,6 +1,3 @@
-import os
-import pickle
-
 from PyQt5.QtCore import QRect
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QMessageBox
@@ -41,12 +38,6 @@ class VistaEliminaCorsoAgg(QWidget):
         msg.setWindowTitle('Corso eliminato')
         msg.setText('Corso eliminato con successo')
         msg.exec()
-        if os.path.isfile('GestoreStudioLegale/Dati/CorsoAvv.pickle'):
-            with open('GestoreStudioLegale/Dati/CorsoAvv.pickle', 'rb') as f1:
-                corsi = pickle.load(f1)
-                for c in corsi:
-                    if c['Corso'].ID == id:
-                        corsi.remove(c)
         self.vistaHomeCo.show()
         self.close()
 

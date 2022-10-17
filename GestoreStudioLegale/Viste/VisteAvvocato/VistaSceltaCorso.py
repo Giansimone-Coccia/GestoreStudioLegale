@@ -3,17 +3,16 @@ import pickle
 
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QComboBox, QVBoxLayout, QHBoxLayout, QScrollArea, \
-    QMainWindow, QMessageBox, QPushButton
+from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QVBoxLayout, QHBoxLayout, QScrollArea, \
+    QMainWindow, QMessageBox
 
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
+from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class VistaSceltaCorso(QMainWindow):
 
     tool = Tools()
-    corsiAvv = tool.loadCorsiDict()
     avvoList = tool.loadAvvocati()
 
     def __init__(self, parent=None):
@@ -69,32 +68,35 @@ class VistaSceltaCorso(QMainWindow):
                 self.tool.createButton("Seleziona", lambda checked, a=corso.getDatiCorso()['ID']: self.scegliCorso(a)), i, 2)
             i += 1
 
-    def scegliCorso(self, id):
-        if not self.check():
-            avv = Avvocato()
-            for corso in self.corsiAvv:
-                print(corso['Corso'].ID)
-                if corso['Corso'].ID == id:
-                    corso['Avvocato'] = avv.ricercaUtilizzatoreCC(self.tool.leggi(0))
+    def scegliCorso(self, id):     #CON L'ELIMINAZIONE DEL CORSO IN ADMIN DEVE TOGLIERLO ANCHE DALL'AVVOCATO
+        if self.check():
+            c = CorsoAggiornamento()
+            for avvocato in self.avvoList:
+                if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
+                    #print(avvocato.getDatiAvvocato()['Corso aggiornamento'])
+                    avvocato.corsoAggiornamento = c.ricercaCorsoCodice(id)
+                    if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
+                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f1:
+                            avvocati = pickle.load(f1)
+                            for a in avvocati:
+                                if a.codiceFiscale == avvocato.codiceFiscale:
+                                    avvocati.remove(a)
+                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f:
+                            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
                     self.conferma()
-                    return
-                else:
-                    self.problema()
-                    return
         else:
-            return
+            self.problema("Stai già seguendo un corso, terminalo prima di selezionarne uno nuovo")
 
     def check(self):
         for avvocato in self.avvoList:
-            if self.tool.leggi(0) == avvocato.Id:
-                for corso in self.corsiAvv:
-                    if corso['Avvocato'].Id == self.tool.leggi(0):
-                        msg = QMessageBox()
-                        msg.setWindowTitle("Attenzione")
-                        msg.setText("Puoi seguire un corso per volta, termina quello attuale")
-                        msg.setIcon(QMessageBox.Information)
-                        msg.exec_()
-                        return True
+            empty = []
+            if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
+                #print(avvocato.corsoAggiornamento)
+                #print(avvocato.getDatiAvvocato()['Corso aggiornamento'])
+                if avvocato.corsoAggiornamento == empty:
+                    return True
+                else:
+                    return False
         return False
 
     def conferma(self):
@@ -108,10 +110,10 @@ class VistaSceltaCorso(QMainWindow):
         self.vistaH4.show()
         self.close()
 
-    def problema(self):
+    def problema(self, stringa):
         msg = QMessageBox()
         msg.setWindowTitle("Problema")
-        msg.setText("Corso non trovato")
+        msg.setText(stringa)
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
 

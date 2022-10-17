@@ -1,10 +1,6 @@
 import datetime
-import os
-import pickle
-
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QComboBox, QLineEdit, QCalendarWidget, QMessageBox
 
-from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -13,7 +9,6 @@ class VistaInserisciCorso(QWidget):
 
     tool = Tools()
     avvocatiList = []
-    corsiL = tool.loadCorsiDict()
     corsoAvv = {}
     year = None
     month = None
@@ -26,8 +21,6 @@ class VistaInserisciCorso(QWidget):
         self.labelName = QLabel('<font size="4"> ID Corso aggiornamento </font>')
         self.labelName2 = QLabel('<font size="4"> Nome corso </font>')
         self.confirmButton = self.tool.createButton('Conferma corso', self.corsoOK)
-        #self.menuAvv = QComboBox()
-        #self.menuAvv.addItems(self.sceltaAvvocati())
         self.labelName4 = QLabel('<font size="4"> Avvocato corso </font>')
         self.labelCR = QLabel('<font size="4"> Crediti </font>')
         self.labelType = QLabel('<font size="4"> Tipo corso aggiornamento </font>')
@@ -52,8 +45,6 @@ class VistaInserisciCorso(QWidget):
         gLayout.addWidget(self.labelID, 2, 1)
         gLayout.addWidget(self.labelName2, 3, 0)
         gLayout.addWidget(self.labelNomeText, 3, 1)
-        #gLayout.addWidget(self.menuAvv, 5, 1)
-        #gLayout.addWidget(self.labelName4, 5, 0)
         gLayout.addWidget(self.labelCR, 4, 0)
         gLayout.addWidget(self.labelCRText, 4, 1)
         gLayout.addWidget(self.labelType, 6, 0)
@@ -85,17 +76,10 @@ class VistaInserisciCorso(QWidget):
             dataOraInizio = dateIS + ',' + hour
             dataOraFine = dateF.strftime("%d/%m/%Y") + ',' + oraFine.strftime("%H:%M")
             corsoA.creaCorso(self.labelNomeText.text(), self.labelCRText.text(), self.tool.IdGenerator('CO'), dataOraInizio, dataOraFine, self.labelTypeText.text())
-            self.caricaCorsoAvv()
+            #self.caricaCorsoAvv()
             self.conferma()
         else:
             self.problema()
-
-    '''def sceltaAvvocati(self):
-        self.nomi = []
-        self.avvocatiList = self.tool.loadAvvocati()
-        for avvocato in self.avvocatiList:
-            self.nomi.append(avvocato.nome+' '+avvocato.cognome)
-        return self.nomi'''
 
     def conferma(self):
         msg = QMessageBox()
@@ -115,13 +99,6 @@ class VistaInserisciCorso(QWidget):
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
 
-    def caricaCorsoAvv(self):
-        corso = CorsoAggiornamento()
-        self.corsoAvv['Corso'] = corso.ricercaCorsoNome(self.labelNomeText.text())
-        self.corsiL.append(self.corsoAvv)
-        if os.path.isfile('GestoreStudioLegale/Dati/CorsoAvv.pickle'):
-            with open('GestoreStudioLegale/Dati/CorsoAvv.pickle', 'wb') as f1:
-                pickle.dump(self.corsiL, f1, pickle.HIGHEST_PROTOCOL)
 
     def selezionaData(self):
         self.dataSelezionata = self.calendar.selectedDate()
