@@ -16,11 +16,12 @@ class VistaCorsoAggRicercato(QMainWindow):
     def __init__(self, corsiAgg,parent=None):
         super(VistaCorsoAggRicercato, self).__init__(parent)
         tool = Tools()
+
         self.corsiTrovati = []
+
         for corso in corsiAgg:
             self.corsiTrovati.append(corso)
 
-        print(self.corsiTrovati.getDatiCorso['Nome'])
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
