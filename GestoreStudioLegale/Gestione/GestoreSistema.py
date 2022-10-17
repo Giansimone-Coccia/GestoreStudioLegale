@@ -15,7 +15,6 @@ class GestoreSistema:
         self.listaClienti = []
 
     def loginCliente(self, pssw, codiceFiscale):
-        print("shit")
         if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
                 try:

@@ -56,7 +56,6 @@ class VistaRicercaCorsoAgg(QDialog):
         corsoAgg = CorsoAggiornamento()
 
         risultatoRicerca = corsoAgg.ricercaCorsoCodice(self.code)
-        #print(risultatoRicerca.nome)
 
         if risultatoRicerca is None:
             msg = QMessageBox()

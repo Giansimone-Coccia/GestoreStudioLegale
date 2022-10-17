@@ -9,8 +9,6 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeCorsoAgg import VistaHomeCors
 class VistaCorsoAggRicercato(QMainWindow):
 
     corsiAggList = []
-    #avvocatiList = []
-    #clientiList = []
     tool = Tools()
 
     def __init__(self, corsiAgg,parent=None):
@@ -25,17 +23,13 @@ class VistaCorsoAggRicercato(QMainWindow):
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
-        #self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()
         self.widget = QWidget()
 
         self.grifLayout = QGridLayout()
 
         self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
-        #self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 9)
-        #self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
-        #self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiCo()
@@ -64,18 +58,8 @@ class VistaCorsoAggRicercato(QMainWindow):
             label.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
-            #self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = corso: self.aggiornaCorso(a)), i, 1)
             self.grifLayout.addWidget(tool.createButton("Elimina", lambda checked, a=corso.ID: self.rimuoviCorso(a)), i, 1)
             i += 1
-
-    '''
-    def aggiornaCorso(self, corso):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiornaParcella import VistaAggiornaParcella
-        self.vistaAggiorna = VistaAggiornaParcella()
-        self.vistaAggiorna.parcella = corso
-        self.vistaAggiorna.show()
-        self.close()
-    '''
 
     def rimuoviCorso(self,id):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaCorsoAgg import VistaEliminaCorsoAgg
@@ -84,13 +68,6 @@ class VistaCorsoAggRicercato(QMainWindow):
         self.vistaE.show()
         self.close()
 
-    '''def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        tool = Tools()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                    return cliente.getDatiCliente()
-    '''
     def rewind1(self):
         self.vistaHome = VistaHomeCorsoAgg()
         self.vistaHome.show()
