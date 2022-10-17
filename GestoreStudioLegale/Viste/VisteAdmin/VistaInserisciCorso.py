@@ -64,7 +64,7 @@ class VistaInserisciCorso(QWidget):
         self.vistaHome1.show()
         self.close()
 
-    def corsoOK(self):                  #Il corso dura in automatico 1 mese, cambia in EA e relazione
+    def corsoOK(self):
         corsoA = CorsoAggiornamento()
         hour = self.ora.currentText()
         if not self.convalida():
@@ -76,7 +76,6 @@ class VistaInserisciCorso(QWidget):
             dataOraInizio = dateIS + ',' + hour
             dataOraFine = dateF.strftime("%d/%m/%Y") + ',' + oraFine.strftime("%H:%M")
             corsoA.creaCorso(self.labelNomeText.text(), self.labelCRText.text(), self.tool.IdGenerator('CO'), dataOraInizio, dataOraFine, self.labelTypeText.text())
-            #self.caricaCorsoAvv()
             self.conferma()
         else:
             self.problema()

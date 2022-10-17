@@ -68,32 +68,23 @@ class VistaSceltaCorso(QMainWindow):
                 self.tool.createButton("Seleziona", lambda checked, a=corso.getDatiCorso()['ID']: self.scegliCorso(a)), i, 2)
             i += 1
 
-    def scegliCorso(self, id):     #CON L'ELIMINAZIONE DEL CORSO IN ADMIN DEVE TOGLIERLO ANCHE DALL'AVVOCATO
+    def scegliCorso(self, id):
         if self.check():
             c = CorsoAggiornamento()
             for avvocato in self.avvoList:
                 if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
-                    #print(avvocato.getDatiAvvocato()['Corso aggiornamento'])
                     avvocato.corsoAggiornamento = c.ricercaCorsoCodice(id)
-                    if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f1:
-                            avvocati = pickle.load(f1)
-                            for a in avvocati:
-                                if a.codiceFiscale == avvocato.codiceFiscale:
-                                    avvocati.remove(a)
-                        with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f:
-                            pickle.dump(avvocati, f, pickle.HIGHEST_PROTOCOL)
+                    avvocato.aggiornaAvvocato()
                     self.conferma()
         else:
             self.problema("Stai già seguendo un corso, terminalo prima di selezionarne uno nuovo")
 
     def check(self):
         for avvocato in self.avvoList:
-            empty = []
             if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
-                #print(avvocato.corsoAggiornamento)
-                #print(avvocato.getDatiAvvocato()['Corso aggiornamento'])
-                if avvocato.corsoAggiornamento == empty:
+                print(avvocato.corsoAggiornamento)
+                print(type(avvocato.corsoAggiornamento))
+                if avvocato.corsoAggiornamento == None:
                     return True
                 else:
                     return False
