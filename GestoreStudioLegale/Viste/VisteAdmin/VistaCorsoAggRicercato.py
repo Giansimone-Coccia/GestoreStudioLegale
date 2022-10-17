@@ -52,21 +52,20 @@ class VistaCorsoAggRicercato(QMainWindow):
 
     def getDatiCo(self):
         self.corsiAggList = self.tool.loadCorsiAggiornamento()
-        self.avvocatiList = self.tool.loadAvvocati()
         tool = Tools()
         i=1
 
         for corso in self.corsiTrovati:
             label = QLabel()
             label.setText(
-                'Corso di aggiornamento: '+'\n'+ 'NOME CORSO: '+f"{corso.getDatiCorso['Nome']}"+ '\n'+'CREDITI: '+f"{corso.getDatiCorso['Crediti']}"+ '\n'+'ID: '+f"{corso.getDatiCorso['ID']}"+'\n'+'DATA E ORA INIZIO: '+f"{corso.getDatiCorso['Data e Ora Inizio']}"+ '\n'+'DATA E ORA FINE: '+f"{corso.getDatiCorso['Data e Ora Fine']}"+ '\n'+'TIPOLOGIA: '+f"{corso.getDatiCorso['Tipo Corso']}")
+                'Corso di aggiornamento: '+'\n'+ 'NOME CORSO: '+f"{corso.nome}"+ '\n'+'CREDITI: '+f"{corso.crediti}"+ '\n'+'ID: '+f"{corso.ID}"+'\n'+'DATA E ORA INIZIO: '+f"{corso.dataOraInizio}"+ '\n'+'DATA E ORA FINE: '+f"{corso.dataOraFine}"+ '\n'+'TIPOLOGIA: '+f"{corso.tipo}")
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
             label.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(label,i,1,1,2)
             i += 1
             #self.grifLayout.addWidget(tool.createButton("Modifica", lambda checked,  a = corso: self.aggiornaCorso(a)), i, 1)
-            self.grifLayout.addWidget(tool.createButton("Elimina", self.rimuoviCorso),i,1)
+            self.grifLayout.addWidget(tool.createButton("Elimina", lambda checked, a=corso.ID: self.rimuoviCorso(a)), i, 1)
             i += 1
 
     '''
@@ -78,10 +77,11 @@ class VistaCorsoAggRicercato(QMainWindow):
         self.close()
     '''
 
-    def rimuoviCorso(self):
+    def rimuoviCorso(self,id):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaEliminaCorsoAgg import VistaEliminaCorsoAgg
-        self.elimina = VistaEliminaCorsoAgg()
-        self.elimina.show()
+        self.vistaE = VistaEliminaCorsoAgg()
+        self.vistaE.setData(id)
+        self.vistaE.show()
         self.close()
 
     '''def getDatiC(self):
