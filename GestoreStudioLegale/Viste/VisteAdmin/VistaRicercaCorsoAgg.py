@@ -55,9 +55,9 @@ class VistaRicercaCorsoAgg(QDialog):
 
         corsoAgg = CorsoAggiornamento()
 
-        self.risultatoRicerca = corsoAgg.ricercaCorsoCodice(self.code)
+        risultatoRicerca = corsoAgg.ricercaCorsoCodice(self.code)
 
-        if self.risultatoRicerca is None:
+        if risultatoRicerca is None:
             msg = QMessageBox()
             msg.setWindowTitle('Corso non trovato')
             msg.setText('Non esiste alcun corso di aggiornamento con questo ID. Riprova')
@@ -67,7 +67,7 @@ class VistaRicercaCorsoAgg(QDialog):
         corsiAgg = []
 
         for corso in self.corsiList:
-            if corso.ID == self.risultatoRicerca.ID:
+            if corso.ID == risultatoRicerca.ID:
                 corsiAgg.append(corso)
 
 
