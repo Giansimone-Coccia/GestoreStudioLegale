@@ -60,7 +60,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
                 if len(self.avvClientiList) == 0:
                     msg = QMessageBox()
                     msg.setWindowTitle('Nessun cliente associato')
-                    msg.setText('Nessun cliente Ã¨ associato a questo avvocato')
+                    msg.setText('Nessun cliente è associato a questo avvocato')
                     msg.exec()
                     return
         self.vistaAggiuntaA = VisteInserisciAppuntamentoA()

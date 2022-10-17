@@ -200,20 +200,11 @@ class VistaAggiornaCliente(QWidget):
 
         self.cliente.aggiornaCliente()
 
-        item = self.layout.itemAtPosition(1, 1).widget()
-
-        cliente.creaCliente(self.cliente.getDatiCliente()["Codice fiscale"],self.cliente.getDatiCliente()["Cognome"],corsiAgg,
-                            self.cliente.getDatiCliente()["Data nascita"],self.cliente.getDatiCliente()["Email"],
-                            self.cliente.getDatiCliente()["Id"],self.cliente.getDatiCliente()["Numero telefono"],
-                            self.cliente.getDatiCliente()["Password"],appuntamenti,parcelle,
-                            self.cliente.getDatiCliente()["Nome"])
-
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Modifica avvenuta con successo')
         self.msg.setText(f"Hai modificato: {self.string}")
         self.msg.exec()
         self.rewind()
-
 
     def breve(self, nome, obj, n, l):
         item = self.layout.itemAtPosition(n, 1).widget()

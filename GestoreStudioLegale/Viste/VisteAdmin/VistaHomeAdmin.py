@@ -20,7 +20,7 @@ class VistaHomeAdmin(QWidget):
         gLayout.addWidget(tool.createButton("Mostra Avvocati", self.reachAvvocati), 2, 1)
         gLayout.addWidget(tool.createButton("Mostra Clienti", self.reachClienti), 2, 0)
         gLayout.addWidget(tool.createButton("Mostra Statistiche", self.reachStatistiche), 1, 1)
-        gLayout.addWidget(tool.createButton("Corsi aggiornamento", self.reachCorsiAgg), 3, 0)
+        gLayout.addWidget(tool.createButton("Corsi aggiornamento", self.reachCorsiAgg), 3, 0,1,2)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")

@@ -202,15 +202,6 @@ class VistaAggiornaAvvocato(QWidget):
 
         self.avvocato.aggiornaAvvocato()
 
-        item = self.layout.itemAtPosition(1, 1).widget()
-        avvocato = Avvocato()
-
-        avvocato.creaAvvocato(self.avvocato.getDatiAvvocato()["Codice fiscale"],self.avvocato.getDatiAvvocato()["Cognome"],
-                              self.avvocato.getDatiAvvocato()["Nome"],corsiAgg,
-                            self.avvocato.getDatiAvvocato()["Data nascita"],self.avvocato.getDatiAvvocato()["Email"],
-                            self.avvocato.getDatiAvvocato()["Id"],self.avvocato.getDatiAvvocato()["Numero telefono"],
-                            self.avvocato.getDatiAvvocato()["Password"],clienti,appuntamenti)
-
         self.msg = QMessageBox()
         self.msg.setWindowTitle('Modifica avvenuta con successo')
         self.msg.setText(f"Hai modificato: {self.string}")
