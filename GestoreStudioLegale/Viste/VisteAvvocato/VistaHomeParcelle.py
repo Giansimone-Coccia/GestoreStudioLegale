@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QMainWindow, QScrollArea, QHBoxLayout, \
+    QMessageBox
 
 from GestoreStudioLegale.Utilities.Utilities import Tools
 
@@ -82,6 +83,16 @@ class VistaHomeParcelle(QMainWindow):
             i += 1
 
     def aggiungiParcella(self):
+        tool = Tools()
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                self.avvClientiList = avvocato.clienti
+                if len(self.avvClientiList) == 0:
+                    msg = QMessageBox()
+                    msg.setWindowTitle('Nessun cliente associato')
+                    msg.setText('Nessun cliente è associato a questo avvocato')
+                    msg.exec()
+                    return
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaInserisciParcellaA import VistaInserisciParcellaA
         self.aggiunta = VistaInserisciParcellaA()
         self.aggiunta.show()
