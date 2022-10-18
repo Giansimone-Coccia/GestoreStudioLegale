@@ -69,26 +69,16 @@ class VistaSceltaCorso(QMainWindow):
             i += 1
 
     def scegliCorso(self, id):
-        if self.check():
-            c = CorsoAggiornamento()
-            for avvocato in self.avvoList:
-                if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
+        c = CorsoAggiornamento()
+        avvocatiList = self.tool.loadAvvocati()
+        for avvocato in avvocatiList:
+            if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
+                if avvocato.corsoAggiornamento is None:
                     avvocato.corsoAggiornamento = c.ricercaCorsoCodice(id)
                     avvocato.aggiornaAvvocato()
                     self.conferma()
-        else:
-            self.problema("Stai già seguendo un corso, terminalo prima di selezionarne uno nuovo")
-
-    def check(self):
-        for avvocato in self.avvoList:
-            if self.tool.leggi().rsplit()[0] == avvocato.codiceFiscale:
-                print(avvocato.corsoAggiornamento)
-                print(type(avvocato.corsoAggiornamento))
-                if avvocato.corsoAggiornamento == None:
-                    return True
                 else:
-                    return False
-        return False
+                    self.problema("Stai già seguendo un corso, terminalo prima di selezionarne uno nuovo")
 
     def conferma(self):
         msg = QMessageBox()

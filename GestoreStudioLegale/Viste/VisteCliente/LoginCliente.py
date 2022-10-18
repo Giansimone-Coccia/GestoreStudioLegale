@@ -26,8 +26,8 @@ class LoginCliente(QWidget):
         layout.addWidget(self.labelPassword, 2, 0)
         layout.addWidget(self.lineEditPassword, 2, 1)
         self.buttonLogin = QPushButton('Accedi')
-        layout.addWidget(self.buttonLogin, 3, 0, 1, 3)
-        layout.setRowMinimumHeight(2, 75)
+        layout.addWidget(self.buttonLogin, 3, 0, 1, 2)
+        layout.setRowMinimumHeight(3, 75)
         self.buttonLogin.clicked.connect(lambda: self.convalidaPassw())
         self.setLayout(layout)
 

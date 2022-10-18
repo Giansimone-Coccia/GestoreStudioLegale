@@ -35,10 +35,10 @@ class VistaEliminaCorsoAgg(QWidget):
         corso1 = CorsoAggiornamento()
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeCorsoAgg import VistaHomeCorsoAgg
         for avvocato in self.avvocatiList:
-            print(avvocato.corsoAggiornamento.ID)
-            if avvocato.corsoAggiornamento.ID == id:
-                avvocato.corsoAggiornamento = None
-                avvocato.aggiornaAvvocato()
+            if avvocato.corsoAggiornamento is not None:
+                if avvocato.corsoAggiornamento.ID == id:
+                    avvocato.corsoAggiornamento = None
+                    avvocato.aggiornaAvvocato()
         corso1.rimuoviCorso(id)
         self.vistaHomeCo = VistaHomeCorsoAgg()
         msg = QMessageBox()
