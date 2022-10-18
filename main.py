@@ -7,7 +7,6 @@ from GestoreStudioLegale.Servizi.Avvocato import Avvocato
 from GestoreStudioLegale.Servizi.Cliente import Cliente
 from GestoreStudioLegale.Servizi.Parcella import Parcella
 from GestoreStudioLegale.Servizi.Udienza import Udienza
-#from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
 from GestoreStudioLegale.Gestione.Backup import Backup
 from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 from GestoreStudioLegale.Sistema.GestoreEmail import GestoreEmail
@@ -41,24 +40,22 @@ parcella2 = Parcella()
 parcella3 = Parcella()
 corso1 = CorsoAggiornamento()
 corso2 = CorsoAggiornamento()
-email = GestoreEmail()
-
-corsi = ['economia politica']
+#corsi = ['economia politica']
 appuntamentiAvvocato = [appuntamento1, appuntamento2]
 licenze = []
 a = ['bo']
 b = ['non so']
 listaClienti = [cliente1, cliente2, cliente3]
 nuovaListaClienti = []
-corsoAggiornamentiLista = ['matematica', 'analisi 2']
+#corsoAggiornamentiLista = ['matematica', 'analisi 2']
 parcelleL = [parcella1, parcella2]
 parcelleL1 = [parcella3]
 udienzeC = [udienza1, udienza2]
 udienzeA = [udienza3,udienza4]
 udienzeGen = [udienza1, udienza2, udienza3, udienza4]
 
-#cliente1.creaCliente('cc', 'djfsffjc', corsi, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamentiL, parcelleL, 'alesseio')
-#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/09/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamentiL2, parcelleL1, 'alessio')
+#cliente1.creaCliente('cc', 'djfsffjc', corso2, '25/09/2000', 'mail@gwwwmail.com', 'C123ew4', 45254534, 'p', appuntamentiL, parcelleL, 'alesseio')
+#cliente2.creaCliente('dfskfjfsb', 'djfsjc', corso1, '25/09/2000', 'laura.ferretti242001@gmail.com', 'C1254', 45254534, 'pswrd', appuntamentiL2, parcelleL1, 'alessio')
 #cliente3.creaCliente('abcdefgd', 'ertyuio', corsi, '24/9/2011', 'mail234@gmail.com', 'C9923', 56666536, 'pswrd1', appuntamento2, parcella3, 'angelo')
 #cliente1.creaCliente('cc', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1234', 45254534, 'p', appuntamento1, parcella1, 'alessio', udienza1)
 #cliente2.creaCliente('dfskfjfsb', 'djfsjc', corsi, '25/9/2000', 'mail@gmail.com', 'C1254', 45254534, 'pswrd', appuntamento1, parcella1, 'alessio', udienza1)
@@ -87,7 +84,7 @@ udienzeGen = [udienza1, udienza2, udienza3, udienza4]
 #cliente1.visualizzaCliente("C1234")  #FUNZIONA
 #cliente1.aggiornaCliente('almail@gmil.com')
 
-#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corsoAggiornamentiLista, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', listaClienti, appuntamentiAvvocato) #FUNZONA
+#avvocato1.creaAvvocato('jhsdkcdks', 'dilio', 'alberto', corso1, '2/4/1995', 'albe@outlook.com', 'A4783', 4738203754, 'passAvv', listaClienti, appuntamentiAvvocato) #FUNZONA
 #avvocato2.creaAvvocato('abcdefg', 'marozzi', 'luca', corsoAggiornamentiLista, '23/12/1995', 'albe4382@outlook.com', 'B4783', 1233754, 'passAvv2', listaClienti, appuntamentiAvvocato)
 #avvocato1.getDatiAvvocato() #FUNZIONA INISIME A CREAAVVOCATO
 #avvocato1.ricercaUtilizzatoreId('A4783') #FUNZIONA
@@ -193,19 +190,21 @@ udienzeGen = [udienza1, udienza2, udienza3, udienza4]
 #cliente8=backup.getDatiBakcup()['clienti'][0]
 #print(cliente8)
 #appuntamento1.creaAppuntamento(cliente1, avvocato1, '9/08/2022,12:00','10/08/2022,13:00', 'A3245', 'civile') #FUNZIONA
-#appuntamento2.creaAppuntamento(cliente1, avvocato1,  '23/11/2022,12:00','10/08/2022,15:00', 'B7845', 'civile')
-#appuntamento3.creaAppuntamento(cliente2, avvocato2,  '30/09/2022,14:26','30/09/2022,16:00', 'A76fry5', 'civile')
+#appuntamento2.creaAppuntamento(cliente1, avvocato1,  '19/10/2022,09:42','10/08/2022,15:00', 'B7845', 'civile')
+#appuntamento3.creaAppuntamento(cliente2, avvocato1,  '19/10/2022,09:45','30/09/2022,16:00', 'A76fry5', 'civile')
 #appuntamento4.creaAppuntamento(cliente2, avvocato1,  '30/09/2022,14:21','30/09/2022,16:00', 'A5825667', 'civile')
 #print(appuntamentiL)
 #print(appuntamento1.getDatiAppuntamento())
 #email.invioEmail()
 
 backup = Backup()
+email = GestoreEmail()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
     vista_home = VistaHome()
     vista_home.show()
-    #backup.eseguiBackup()
+    backup.eseguiBackup()
+    email.invioEmail()
     sys.exit(app.exec())
