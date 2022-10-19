@@ -1,7 +1,7 @@
 # GestoreStudioLegale
 Progetto d'esame basato sullo sviluppo di un software gestionale per uno studio legale per l'esame di Ingegneria del software A.A 2021/2022
 
-![](https://github.com/Giansimone-Coccia/GestoreStudioLegale/blob/main/logo.png)  
+![](https://github.com/Giansimone-Coccia/GestoreStudioLegale/blob/main/logo.png)   
 
 ## 1.1 REGOLE PER IL CORRETTO UTILIZZO
 ### Avvio del software
