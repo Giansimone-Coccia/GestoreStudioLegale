@@ -7,13 +7,13 @@ import os.path
 class Udienza:
 
     def __init__(self):
-       self.Cliente = None
-       self.Avvocato = None
-       self.cittaTribunale = ''
-       self.ID = ''
-       self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
-       self.tipoTribunale = ''
+        self.Avvocato = None
+        self.cittaTribunale = ''
+        self.Cliente = None
+        self.dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
+        self.dataOraInizio = datetime.datetime (year=1970 ,month=1 , day=1 , hour=00 , minute=00 )
+        self.ID = ''
+        self.tipoTribunale = ''
 
     def aggiornaUdienza(self, cittaTribunale = '', tipoTribunale = '', dataOraInizio = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),
                         dataOraFine = datetime.datetime(year=1970 ,month=1 , day=1 , hour=00 , minute=00 ),

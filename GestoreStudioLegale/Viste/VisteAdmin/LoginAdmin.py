@@ -1,4 +1,3 @@
-
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton, QMessageBox
 
 from GestoreStudioLegale.Gestione.GestoreSistema import GestoreSistema
