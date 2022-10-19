@@ -4,10 +4,16 @@ Progetto d'esame basato sullo sviluppo di un software gestionale per uno studio 
 ![](https://github.com/Giansimone-Coccia/GestoreStudioLegale/blob/main/logo.png)  
 
 ## 1.1 REGOLE PER IL CORRETTO UTILIZZO
+### Avvio del software
 Scaricare l'intero progetto sul proprio pc ed aprirlo con un IDE (PyCharm).
-Se non lo avete già fatto, mandando in esecuzione il programma, l'IDE vi chiederà di installare alcuni pacchetti/librerie esterne, attraverso il comando **pip install**
+Se non lo avete già fatto, mandando in esecuzione il programma, l'IDE vi chiederà di installare alcuni pacchetti/librerie esterne. E' possibile farlo utilizzando il comando **pip install**
   - pip install PyQt5
 
+### Primo accesso
+Il primo inserimento dei clienti o degli avvocati avviene tramite l'amministratore che, per convenzione ha delle credenziali di default che possono essere successivamente modificate. Queste sono:
+
+  - **username:** user
+  - **password:** password
 
 ## 1.2 STRUTTURA DEL SOFTWARE
 Le informazioni raccolte hanno evidenziato i possibili utenti di un software per uno studio legale: gli avvocati, i clienti e l’amministratore dello studio. Per rispettare questa esigenza il nostro software si suddivide principalmente in tre sezioni una per ogni utente. Altra caratteristica che risultava importante era avere la possibilità di visualizzare e gestire agilmente le informazioni relative alle parcelle, alle udienze, agli appuntamenti e ai corsi di aggiornamento. 
