@@ -22,7 +22,6 @@ class Backup():
         self.salvaDatiParcella()
         self.salvaDatiCorsoAggiornamento()
         self.salvaDatiUtilizzatore()
-        #self.getDatiBakcup()
 
     def modificaData(self, nuovaData):
         self.data=nuovaData
@@ -40,6 +39,18 @@ class Backup():
                     self.problema()
             with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
                 pickle.dump(self.backup, f, pickle.HIGHEST_PROTOCOL)
+
+    def salvaDatiUdienza(self):
+        if os.path.isfile('GestoreStudioLegale/Dati/Udienze.pickle'):
+            with open('GestoreStudioLegale/Dati/Udienze.pickle', 'rb') as f:
+                try:
+                    udienze = pickle.load(f)
+                    self.backup['udienze'] = udienze
+                except EOFError as er:
+                    self.problema()
+            with open('GestoreStudioLegale/Dati/Backup.pickle', 'wb') as f:
+                pickle.dump(self.backup, f, pickle.HIGHEST_PROTOCOL)
+
 
     def salvaDatiParcella(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):

@@ -14,16 +14,13 @@ class GestoreSistema:
         self.listaAvvocati = []
         self.listaClienti = []
 
-    def loginCliente(self, pssw, codiceFiscale):
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                try:
-                    clientiList = list(pickle.load(f))
-                except EOFError as er:
-                    self.problema()
-        for cliente in clientiList:
-            if pssw == cliente.getDatiCliente()['Password'] and codiceFiscale == cliente.getDatiCliente()['Codice fiscale'] :
-                return True
+    def loginAdmin(self, pssw, user):
+        tool =Tools()
+        passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
+        print(passEuser)
+        if pssw == passEuser[0] and user == passEuser[1]:
+            return True
+        self.failed()
         return False
 
 
@@ -39,14 +36,19 @@ class GestoreSistema:
                 return True
         return False
 
-    def loginAdmin(self, pssw, user):
-        tool =Tools()
-        passEuser = tool.leggi('CredenzialiAdmin', 0).splitlines()
-        print(passEuser)
-        if pssw == passEuser[0] and user == passEuser[1]:
-            return True
-        self.failed()
+    def loginCliente(self, pssw, codiceFiscale):
+        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
+            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
+                try:
+                    clientiList = list(pickle.load(f))
+                except EOFError as er:
+                    self.problema()
+        for cliente in clientiList:
+            if pssw == cliente.getDatiCliente()['Password'] and codiceFiscale == cliente.getDatiCliente()['Codice fiscale'] :
+                return True
         return False
+
+
 
 
     def modificaCredenzialiAdmin(self, newPssw = '', newUser = ''):

@@ -10,8 +10,8 @@ class Statistiche:
     def __init__(self):
         self.mediaUdienzeAmministrative = 0
         self.mediaUdienzeCivili = 0
-        self.mediaUdienzeMinorili = 0
         self.mediaUdienzeMensili = 0
+        self.mediaUdienzeMinorili = 0
         self.mediaUdienzePenali = 0
         self.numeroAppuntamenti = 0
 
@@ -80,16 +80,6 @@ class Statistiche:
 
             self.numeroAppuntamenti = nAppuntamenti/12
 
-    def mostraGrafico(self,a='a'):
-        my_dict = self.mostraStatistiche()
-
-        myList = my_dict.items()
-        x = my_dict.keys()
-        y = my_dict.values()
-        if a == 'a':
-            return x
-        else:
-            return y
 
     def salvaSuFile(self):
         stats = {
@@ -107,9 +97,7 @@ class Statistiche:
     def leggiFile(self):
         if os.path.isfile('GestoreStudioLegale/Dati/Statistiche.pickle'):
             with open('GestoreStudioLegale/Dati/Statistiche.pickle', 'rb') as f:
-                #d = {}
                 d = pickle.load(f)
-                #pickle.load(f)
                 return d
 
     def mostraStatistiche(self):
