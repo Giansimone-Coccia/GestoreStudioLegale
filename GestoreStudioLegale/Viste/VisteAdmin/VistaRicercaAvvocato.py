@@ -11,14 +11,15 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaRicercaAvvocato(QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaRicercaAvvocato, self).__init__(parent)
 
-        tool = Tools()
         self.setWindowTitle('Ricerca avvocato')
         self.resize(500, 120)
         layout = QGridLayout()
-        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText(f"Inserisci l'id dell'avvocato da ricercare:")
         textLabel.setGeometry(QRect(100, 120, 350, 40))

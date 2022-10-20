@@ -7,17 +7,16 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaAggiungiCliente(QWidget):
 
-    cliente = Cliente()
+    tool = Tools()
 
     def __init__(self,parent = None):
         super(VistaAggiungiCliente, self).__init__(parent)
 
-        tool = Tools()
         self.gestore = GestoreSistema()
         self.setWindowTitle('Aggiungi cliente')
         self.resize(500, 120)
         self.layout = QGridLayout()
-        self.layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        self.layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
 
         self.createLine('Nome',1)
         self.createLine('Cognome', 2)

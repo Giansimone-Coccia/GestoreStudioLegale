@@ -8,23 +8,22 @@ from GestoreStudioLegale.Sistema.CorsoAggiornamento import CorsoAggiornamento
 
 
 class VistaRicercaCorsoAgg(QDialog):
-    NumGridRows = 3
-    NumButtons = 4
 
+    NumButtons = 4
+    NumGridRows = 3
+
+    tool = Tools()
 
     def __init__(self):
         super(VistaRicercaCorsoAgg, self).__init__()
 
-        self.tool = Tools()
         self.corsiList = self.tool.loadCorsiAggiornamento()
-
 
         self.textIn = QLineEdit()
 
         self.layout = QFormLayout()
 
         self.createFormGroupBox()
-
 
         buttonBox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         buttonBox.accepted.connect(self.indexScelta)
@@ -69,7 +68,6 @@ class VistaRicercaCorsoAgg(QDialog):
         for corso in self.corsiList:
             if corso.ID == risultatoRicerca.ID:
                 corsiAgg.append(corso)
-
 
         self.subWindow = VistaCorsoAggRicercato(corsiAgg)
         self.subWindow.show()

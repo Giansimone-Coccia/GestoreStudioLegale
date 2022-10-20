@@ -20,7 +20,7 @@ class VistaHomeCorsoAgg(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
         self.button_layout.addWidget(self.tool.createButton("Inserisci", self.inserisciCorso))
@@ -40,7 +40,7 @@ class VistaHomeCorsoAgg(QMainWindow):
         self.setWindowTitle("Corsi aggiornamento")
         self.show()
 
-    def rewind1(self):
+    def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
         self.vistaHome = VistaHomeAdmin()
         self.vistaHome.show()

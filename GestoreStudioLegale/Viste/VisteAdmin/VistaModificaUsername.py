@@ -5,13 +5,15 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaModificaUsername(QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaModificaUsername, self).__init__(parent)
-        tool = Tools()
+
         self.setWindowTitle('Modifica Username')
         self.resize(500, 120)
         layout = QGridLayout()
-        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         self.labelOldUser = QLabel('<font size="4"> Vecchio username </font>')
         self.lineEditOldUser = QLineEdit()
         self.lineEditOldUser.setPlaceholderText('Inserisci il vecchio username')

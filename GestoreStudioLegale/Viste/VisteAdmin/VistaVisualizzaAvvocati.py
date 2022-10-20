@@ -14,10 +14,11 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaRicercaAvvocato import VistaRicer
 class VistaVisualizzaAvvocati(QMainWindow):
 
     avvocatiList = []
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaVisualizzaAvvocati, self).__init__(parent)
-        tool = Tools()
+
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
@@ -27,11 +28,11 @@ class VistaVisualizzaAvvocati(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiAvvocato))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaAvvocato))
+        self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiAvvocato))
+        self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaAvvocato))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiA()
@@ -45,14 +46,8 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.resize(800, 600)
         self.setWindowTitle("Avvocati")
 
-    def loadDateA(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                self.avvocatiList = list(pickle.load(f))
-
     def getDatiA(self):
-        self.loadDateA()
-        tool=Tools()
+        self.avvocatiList = self.tool.loadAvvocati()
         i=2
         for avvocato in self.avvocatiList:
             textLabel = QLabel()
@@ -63,8 +58,8 @@ class VistaVisualizzaAvvocati(QMainWindow):
             textLabel.setStyleSheet("border: 1px solid black;")
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
-            self.grifLayout.addWidget(tool.createButton("Aggiorna",lambda checked, a=avvocato: self.aggiornaAvvocato(a)),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina",lambda checked, b=avvocato.getDatiAvvocato()['Id']: self.eliminaAvvocato(b)),i, 2)
+            self.grifLayout.addWidget(self.tool.createButton("Aggiorna",lambda checked, a=avvocato: self.aggiornaAvvocato(a)),i,1)
+            self.grifLayout.addWidget(self.tool.createButton("Elimina",lambda checked, b=avvocato.getDatiAvvocato()['Id']: self.eliminaAvvocato(b)),i, 2)
             i+=1
 
     def rewind(self):

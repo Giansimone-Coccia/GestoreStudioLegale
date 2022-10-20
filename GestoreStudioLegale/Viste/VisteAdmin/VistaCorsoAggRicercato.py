@@ -13,8 +13,6 @@ class VistaCorsoAggRicercato(QMainWindow):
 
     def __init__(self, corsiAgg,parent=None):
         super(VistaCorsoAggRicercato, self).__init__(parent)
-        tool = Tools()
-
         self.corsiTrovati = []
 
         for corso in corsiAgg:
@@ -28,7 +26,7 @@ class VistaCorsoAggRicercato(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addWidget(self.scroll, 9)
         self.cWidget.setLayout(self.outerLayout)
 
@@ -68,7 +66,7 @@ class VistaCorsoAggRicercato(QMainWindow):
         self.vistaE.show()
         self.close()
 
-    def rewind1(self):
+    def rewind(self):
         self.vistaHome = VistaHomeCorsoAgg()
         self.vistaHome.show()
         self.close()

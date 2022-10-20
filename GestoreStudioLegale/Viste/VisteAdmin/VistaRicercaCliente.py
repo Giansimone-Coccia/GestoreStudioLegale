@@ -10,14 +10,15 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaRicercaCliente(QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaRicercaCliente, self).__init__(parent)
 
-        tool = Tools()
         self.setWindowTitle('Ricerca cliente')
         self.resize(500, 120)
         layout = QGridLayout()
-        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText(f"Inserisci l'id del cliente da ricercare:")
         textLabel.setGeometry(QRect(100, 120, 350, 40))

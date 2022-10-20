@@ -5,14 +5,16 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaModificaPassword(QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaModificaPassword, self).__init__(parent)
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
-        tool = Tools()
+
         self.setWindowTitle('Modifica Password')
         self.resize(500, 120)
         layout = QGridLayout()
-        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         self.labelOldPassword = QLabel('<font size="4"> Vecchia password </font>')
         self.lineEditOldPassword = QLineEdit()
         self.lineEditOldPassword.setPlaceholderText('Inserisci la vecchia password')

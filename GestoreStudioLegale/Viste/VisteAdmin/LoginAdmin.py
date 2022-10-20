@@ -7,10 +7,11 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
 
 class LoginAdmin(QWidget):
 
+    tool=Tools()
+
     def __init__(self, parent=None):
         super(LoginAdmin, self).__init__(parent)
 
-        tool=Tools()
         self.gestore = GestoreSistema()
         self.setWindowTitle('Accesso Admin')
         self.resize(500, 120)
@@ -18,7 +19,7 @@ class LoginAdmin(QWidget):
         self.labelName = QLabel('<font size="4"> Username </font>')
         self.lineEditUsername = QLineEdit()
         self.lineEditUsername.setPlaceholderText('Inserisci username')
-        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         layout.addWidget(self.labelName, 1, 0)
         layout.addWidget(self.lineEditUsername, 1, 1)
         self.labelPassword = QLabel('<font size="4"> Password </font>')

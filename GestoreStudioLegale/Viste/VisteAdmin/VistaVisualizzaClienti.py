@@ -14,10 +14,10 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaRicercaCliente import VistaRicerc
 class VistaVisualizzaClienti(QMainWindow):
 
     clientiList = []
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaVisualizzaClienti, self).__init__(parent)
-        tool = Tools()
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
@@ -27,11 +27,11 @@ class VistaVisualizzaClienti(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci",self.aggiungiCliente))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaCliente))
+        self.button_layout.addWidget(self.tool.createButton("Inserisci",self.aggiungiCliente))
+        self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaCliente))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiC()
@@ -45,14 +45,9 @@ class VistaVisualizzaClienti(QMainWindow):
         self.resize(800, 600)
         self.setWindowTitle("Clienti")
 
-    def loadDateC(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Clienti.pickle'):
-            with open('GestoreStudioLegale/Dati/Clienti.pickle', 'rb') as f:
-                self.clientiList = list(pickle.load(f))
 
     def getDatiC(self):
-        self.loadDateC()
-        tool=Tools()
+        self.clientiList=self.tool.loadClienti()
         i=1
         for cliente in self.clientiList:
             textLabel = QLabel()
@@ -63,8 +58,8 @@ class VistaVisualizzaClienti(QMainWindow):
             self.grifLayout.addWidget(textLabel,i,1,1,2)
             i+=1
 
-            self.grifLayout.addWidget(tool.createButton("Aggiorna", lambda checked, a=cliente: self.aggiornaCliente(a)),i,1)
-            self.grifLayout.addWidget(tool.createButton("Elimina", lambda checked, b=cliente.getDatiCliente()['Id']: self.eliminaCliente(b)),i,2)
+            self.grifLayout.addWidget(self.tool.createButton("Aggiorna", lambda checked, a=cliente: self.aggiornaCliente(a)),i,1)
+            self.grifLayout.addWidget(self.tool.createButton("Elimina", lambda checked, b=cliente.getDatiCliente()['Id']: self.eliminaCliente(b)),i,2)
             i+=1
 
     def rewind(self):

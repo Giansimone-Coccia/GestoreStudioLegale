@@ -10,12 +10,13 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVis
 class VistaClienteRicercato(QWidget):
 
     cliente = Cliente()
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaClienteRicercato, self).__init__(parent)
 
         self.vistaVis = VistaVisualizzaClienti()
-        self.tool = Tools()
+
         self.setWindowTitle('Ricerca cliente')
         self.resize(500, 120)
         self.grifLayout = QGridLayout()

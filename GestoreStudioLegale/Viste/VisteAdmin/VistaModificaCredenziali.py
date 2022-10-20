@@ -10,19 +10,20 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaUsername import VistaModi
 
 class VistaModificaCredenziali(QWidget):
 
+    tool = Tools()
+
     def __init__(self,parent = None):
         super(VistaModificaCredenziali, self).__init__(parent)
 
-        tool = Tools()
         gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText(f"Scegli quale credenziale modificare:")
         textLabel.setGeometry(QRect(100, 120, 350, 40))
         textLabel.setFont(QFont('Arial', 12))
         gLayout.addWidget(textLabel, 1,0)
-        button1 = tool.createButton("Modifica Password", self.reachModificaPassword)
-        button2 = tool.createButton("Modifica Username", self.reachModificaUsername)
+        button1 = self.tool.createButton("Modifica Password", self.reachModificaPassword)
+        button2 = self.tool.createButton("Modifica Username", self.reachModificaUsername)
         button1.setFont(QFont('Arial', 15))
         button2.setFont(QFont('Arial', 15))
         button1.setBaseSize(int(160),int(90))

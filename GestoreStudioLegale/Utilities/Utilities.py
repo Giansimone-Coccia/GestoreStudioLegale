@@ -9,13 +9,13 @@ from GestoreStudioLegale.Servizi import Cliente
 
 class Tools():
 
-    clienti = []
-    avvocati = []
     appuntamenti = []
-    parcelle = []
-    udienze = []
+    avvocati = []
+    clienti = []
     corsiAggiornamento = []
     corsiDict = []
+    parcelle = []
+    udienze = []
 
     def __init__(self):
         pass

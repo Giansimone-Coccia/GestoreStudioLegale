@@ -9,20 +9,21 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaEliminaCliente(QWidget):
 
     id = ''
+    tool = Tools()
 
     def __init__(self,parent = None):
         super(VistaEliminaCliente, self).__init__(parent)
 
-        tool = Tools()
+
         gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText(f"Sei sicuro?")
         textLabel.setGeometry(QRect(100, 120, 350, 40))
         textLabel.setFont(QFont('Arial', 12))
         gLayout.addWidget(textLabel, 1,0)
-        button1 = tool.createButton("No", self.rewind)
-        button2 = tool.createButton("Sì",lambda: self.eliminaCliente(self.id))
+        button1 = self.tool.createButton("No", self.rewind)
+        button2 = self.tool.createButton("Sì",lambda: self.eliminaCliente(self.id))
         button1.setFont(QFont('Arial', 24))
         button2.setFont(QFont('Arial', 24))
         button1.setMaximumSize(160 * 2, 90 * 2)

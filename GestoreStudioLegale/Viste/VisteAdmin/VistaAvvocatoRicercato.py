@@ -11,12 +11,13 @@ from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVi
 class VistaAvvocatoRicercato(QWidget):
 
     avvocato = Avvocato()
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaAvvocatoRicercato, self).__init__(parent)
 
         self.vistaVis = VistaVisualizzaAvvocati()
-        self.tool = Tools()
+
         self.setWindowTitle('Ricerca avvocato')
         self.resize(500, 120)
         self.grifLayout = QGridLayout()
