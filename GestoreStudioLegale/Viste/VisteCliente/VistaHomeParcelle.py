@@ -7,8 +7,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaHomeParcelle(QMainWindow):
 
-    parcelleList = []
     clientiList = []
+    parcelleList = []
     tool = Tools()
 
     def __init__(self, parent=None):
@@ -16,7 +16,7 @@ class VistaHomeParcelle(QMainWindow):
         self.scroll = QScrollArea()
         self.widget = QWidget()
         self.gridLayout = QGridLayout()
-        self.gridLayout.addWidget(self.tool.rewindButton(self.rewind1), 0, 0)
+        self.gridLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel1 = QLabel()
         textLabel2 = QLabel()
         textLabel1.setText("Di seguito la lista delle parcelle con le informazioni relative al cliente")
@@ -59,12 +59,6 @@ class VistaHomeParcelle(QMainWindow):
             i += 1
 
 
-    def rimuoviParcella(self):
-        pass
-
-    def aggiornaParcella(self):
-        pass
-
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
@@ -72,7 +66,7 @@ class VistaHomeParcelle(QMainWindow):
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                     return cliente.getDatiCliente()
 
-    def rewind1(self):
+    def rewind(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente
         self.vistaHome = VistaHomeCliente()
         self.vistaHome.show()

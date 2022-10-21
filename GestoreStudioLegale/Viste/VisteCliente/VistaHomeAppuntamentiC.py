@@ -21,12 +21,11 @@ class VistaHomeAppuntamentiC (QWidget):
         self.show()
 
     def reachPrenotaAppuntamento(self):
-        tool = Tools()
-        self.avvocatiList=tool.loadAvvocati()
-        self.clientiList=tool.loadClienti()
+        self.avvocatiList=self.tool.loadAvvocati()
+        self.clientiList=self.tool.loadClienti()
         i = 0
         for cliente in self.clientiList:
-            if cliente.codiceFiscale == tool.leggi().rsplit()[0]:
+            if cliente.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 for avvocato in self.avvocatiList:
                     self.avvClientiList = avvocato.clienti
                     for avvCliente in self.avvClientiList:

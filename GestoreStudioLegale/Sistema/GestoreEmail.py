@@ -14,6 +14,7 @@ class GestoreEmail:
 
     def __init__(self):
         self.destinatario = ""
+        self.appuntamentiList = []
 
     def invioEmail(self):
         try:

@@ -8,9 +8,9 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaVisualizzaAppuntamento(QMainWindow):
 
-    tool = Tools()
-    clientiList = []
     appuntamentiList = []
+    clientiList = []
+    tool = Tools()
 
     def __init__(self, parent = None):
         super(VistaVisualizzaAppuntamento, self).__init__(parent)
@@ -46,7 +46,6 @@ class VistaVisualizzaAppuntamento(QMainWindow):
 
     def getDatiA(self):
         self.appuntamentiList = self.tool.loadAppuntamenti()
-
         i = 1
         appuntamentiL = []
 
@@ -90,10 +89,3 @@ class VistaVisualizzaAppuntamento(QMainWindow):
         self.vistaHome = VistaHomeAppuntamentiC()
         self.vistaHome.show()
         self.close()
-
-    def getNum(self):
-        n = 0
-        self.appuntamentiList = self.tool.loadAppuntamenti()
-        for appuntamento in self.appuntamentiList:
-            n+=1
-        return n

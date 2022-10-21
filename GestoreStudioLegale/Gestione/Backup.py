@@ -6,7 +6,7 @@ import os
 from PyQt5.QtWidgets import QMessageBox
 
 
-class Backup():
+class Backup:
 
     backup = {}
 

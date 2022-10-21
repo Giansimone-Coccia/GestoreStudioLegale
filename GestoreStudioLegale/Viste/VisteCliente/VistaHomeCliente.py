@@ -8,17 +8,19 @@ from GestoreStudioLegale.Viste.VisteCliente.VistaHomeUdienze import VistaHomeUdi
 
 class VistaHomeCliente(QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(VistaHomeCliente, self).__init__(parent)
-        tool = Tools()
-        gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(tool.createButton("Appuntamenti", self.reachAppuntamenti), 1, 0)
-        gLayout.addWidget(tool.createButton("Parcelle", self.reachParcelle), 2, 0)
-        gLayout.addWidget(tool.createButton("Udienze", self.reachUdienze), 3, 0)
 
-        self.clientiList = tool.loadClienti()
-        self.avvocatiList = tool.loadAvvocati()
+        gLayout = QGridLayout()
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.createButton("Appuntamenti", self.reachAppuntamenti), 1, 0)
+        gLayout.addWidget(self.tool.createButton("Parcelle", self.reachParcelle), 2, 0)
+        gLayout.addWidget(self.tool.createButton("Udienze", self.reachUdienze), 3, 0)
+
+        self.clientiList = self.tool.loadClienti()
+        self.avvocatiList = self.tool.loadAvvocati()
         self.appC = []
 
         self.setLayout(gLayout)

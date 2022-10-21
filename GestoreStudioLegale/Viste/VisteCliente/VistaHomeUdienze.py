@@ -7,8 +7,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaHomeUdienze(QMainWindow):
 
-    udienzeList = []
     clientiList = []
+    udienzeList = []
     tool = Tools()
 
     def __init__(self, parent=None):
@@ -42,7 +42,6 @@ class VistaHomeUdienze(QMainWindow):
         self.show()
 
     def getDatiU(self):
-        tool = Tools()
         self.udienzeList = self.tool.loadUdienze()
         udienzeL = []
         i=3
@@ -62,11 +61,6 @@ class VistaHomeUdienze(QMainWindow):
             self.gridLayout.addWidget(label, i, 1, 1, 2)
             i += 1
 
-    def aggiornaUdienza(self):
-        pass
-
-    def rimuoviUdienza(self):
-        pass
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()

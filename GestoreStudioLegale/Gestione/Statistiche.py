@@ -1,6 +1,6 @@
 import pickle
 import os.path
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta
 
 from PyQt5.QtWidgets import QMessageBox
 

@@ -7,16 +7,18 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class LoginCliente(QWidget):
 
+    tool = Tools()
+
     def __init__(self, parent=None):
         super(LoginCliente, self).__init__(parent)
         self.setWindowTitle('Accesso Cliente')
         self.resize(500, 120)
-        tool = Tools()
+
         layout = QGridLayout()
         self.labelName = QLabel('<font size="4"> Username </font>')
         self.lineEditUsername = QLineEdit()
         self.lineEditUsername.setPlaceholderText('Inserisci codice fiscale')
-        layout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        layout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         layout.addWidget(self.labelName, 1, 0)
         layout.addWidget(self.lineEditUsername, 1, 1)
         self.labelPassword = QLabel('<font size="4"> Password </font>')
@@ -32,11 +34,10 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def convalidaPassw(self):
-        tool = Tools()
         cc = self.lineEditUsername.text()
         pswrd = self.lineEditPassword.text()
         gestore = GestoreSistema()
-        tool.salva(str(self.lineEditUsername.text()))
+        self.tool.salva(str(self.lineEditUsername.text()))
 
         if gestore.loginCliente(pswrd, cc):
             self.show_new()
