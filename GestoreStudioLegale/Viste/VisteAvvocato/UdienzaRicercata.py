@@ -10,9 +10,9 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUd
 
 class UdienzaRicercata(QMainWindow):
 
-    udienzeList = []
     avvocatiList = []
     clientiList = []
+    udienzeList = []
     tool = Tools()
 
     def __init__(self, udienze,parent=None):
@@ -29,7 +29,7 @@ class UdienzaRicercata(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addWidget(self.scroll, 9)
         self.cWidget.setLayout(self.outerLayout)
 
@@ -99,9 +99,6 @@ class UdienzaRicercata(QMainWindow):
         self.subWindow.show()
         self.close()
 
-    def cercaUdienza(self):
-        pass
-
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
         tool = Tools()
@@ -109,7 +106,7 @@ class UdienzaRicercata(QMainWindow):
             if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
                     return cliente.getDatiCliente()
 
-    def rewind1(self):
+    def rewind(self):
         self.vistaHome = VistaHomeUdienze()
         self.vistaHome.show()
         self.close()

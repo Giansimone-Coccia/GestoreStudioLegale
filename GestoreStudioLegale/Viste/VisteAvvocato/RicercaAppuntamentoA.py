@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import (QDialog,
-                             QDialogButtonBox, QFormLayout, QGridLayout, QGroupBox,
+                             QDialogButtonBox, QFormLayout, QGroupBox,
                              QLineEdit,
                              QVBoxLayout, QMessageBox)
 
@@ -9,8 +9,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class RicercaAppuntamentoA(QDialog):
-    NumGridRows = 3
     NumButtons = 4
+    NumGridRows = 3
 
     def __init__(self):
         super(RicercaAppuntamentoA, self).__init__()

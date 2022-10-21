@@ -23,7 +23,7 @@ class VistaHomeUdienze(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
         self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiUdienza))
@@ -83,9 +83,8 @@ class VistaHomeUdienze(QMainWindow):
             i += 1
 
     def aggiungiUdienza(self):
-        tool = Tools()
         for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 self.avvClientiList = avvocato.clienti
                 if len(self.avvClientiList) == 0:
                     msg = QMessageBox()
@@ -119,12 +118,11 @@ class VistaHomeUdienze(QMainWindow):
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
-        tool = Tools()
         for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+            if cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
                     return cliente.getDatiCliente()
 
-    def rewind1(self):
+    def rewind(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
         self.vistaHome = VistaHomeAvvocato()
         self.vistaHome.show()

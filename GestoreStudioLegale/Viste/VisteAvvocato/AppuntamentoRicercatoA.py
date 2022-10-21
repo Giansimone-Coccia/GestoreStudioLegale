@@ -8,11 +8,13 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaAppuntamentoA import Vi
 
 class AppuntamentoRicercatoA(QMainWindow):
 
+    tool = Tools()
+
     def __init__(self, parent = None):
         super(AppuntamentoRicercatoA, self).__init__(parent)
 
     def initUI(self, appuntamento):
-        tool = Tools()
+
         self.appuntamentoTrovato = appuntamento
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
@@ -21,8 +23,7 @@ class AppuntamentoRicercatoA(QMainWindow):
 
         self.grid = QGridLayout()
 
-
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addWidget(self.scroll, 9)
         self.cWidget.setLayout(self.outerLayout)
 
@@ -53,7 +54,6 @@ class AppuntamentoRicercatoA(QMainWindow):
         self.close()
 
     def getDatiAp(self):
-        tool = Tools()
         i = 0
         label = QLabel()
         self.vistaAggiorna = VistaAggiornaAppuntamentoA()
@@ -68,6 +68,6 @@ class AppuntamentoRicercatoA(QMainWindow):
         label.setStyleSheet("border: 1px solid black;")
         self.grid.addWidget(label, i, 1, 1, 2)
         i += 1
-        self.grid.addWidget(tool.createButton("Modifica",lambda: self.vistaAggiorna.show(),method2=self.close), i, 1)
+        self.grid.addWidget(self.tool.createButton("Modifica",lambda: self.vistaAggiorna.show(),method2=self.close), i, 1)
         self.grid.addWidget(
-            tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.appuntamentoTrovato.getDatiAppuntamento()['ID']),method2=self.close), i, 2)
+            self.tool.createButton("Elimina", lambda: self.rimuoviAppuntamento(self.appuntamentoTrovato.getDatiAppuntamento()['ID']),method2=self.close), i, 2)

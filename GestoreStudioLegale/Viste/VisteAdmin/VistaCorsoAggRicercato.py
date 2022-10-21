@@ -18,7 +18,6 @@ class VistaCorsoAggRicercato(QMainWindow):
         for corso in corsiAgg:
             self.corsiTrovati.append(corso)
 
-
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.scroll = QScrollArea()

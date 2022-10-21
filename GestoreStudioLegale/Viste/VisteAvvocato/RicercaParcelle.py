@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (QDialog,
                              QDialogButtonBox, QFormLayout, QGroupBox,
-                             QLabel, QLineEdit,
+                             QLineEdit,
                              QVBoxLayout, QMessageBox)
 
 from GestoreStudioLegale.Servizi.Cliente import Cliente
@@ -9,9 +9,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class RicercaParcelle(QDialog):
-    NumGridRows = 3
     NumButtons = 4
-
+    NumGridRows = 3
 
     def __init__(self):
         super(RicercaParcelle, self).__init__()

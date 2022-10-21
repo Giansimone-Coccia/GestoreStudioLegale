@@ -4,14 +4,15 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaAggiungiCliente(QWidget):
 
+    tool = Tools()
+
     def __init__(self,parent = None):
         super(VistaAggiungiCliente, self).__init__(parent)
 
-        tool = Tools()
         gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
-        gLayout.addWidget(tool.createButton("Aggiungi cliente esistente", self.reachAggiungiClienteEsistente), 1, 0)
-        gLayout.addWidget(tool.createButton("Crea nuovo cliente", self.reachCreaCliente), 2, 0)
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.createButton("Aggiungi cliente esistente", self.reachAggiungiClienteEsistente), 1, 0)
+        gLayout.addWidget(self.tool.createButton("Crea nuovo cliente", self.reachCreaCliente), 2, 0)
         self.setLayout(gLayout)
         self.resize(500, 400)
         self.setWindowTitle("Gestore Studio Legale")

@@ -10,13 +10,13 @@ import datetime
 
 class VistaInserisciUdienza(QWidget):
 
-    tool = Tools()
     clientiList = []
     nomi = []
     udienzeList = []
-    year = 0
-    month = 0
-    day = 0
+    tool = Tools()
+    year = None
+    month = None
+    day = None
 
     def __init__(self, parent=None):
         super(VistaInserisciUdienza, self).__init__(parent)

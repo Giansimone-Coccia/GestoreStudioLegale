@@ -7,9 +7,10 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeP
 
 
 class VistaInserisciParcellaA(QWidget):
-    tool = Tools()
+
     clientiList = []
     nomi = []
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaInserisciParcellaA, self).__init__(parent)
@@ -53,10 +54,9 @@ class VistaInserisciParcellaA(QWidget):
         self.close()
 
     def sceltaClienti(self):
-        tool=Tools()
-        self.avvocatiList = tool.loadAvvocati()
+        self.avvocatiList = self.tool.loadAvvocati()
         for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 self.clientiList = avvocato.clienti
 
         self.nomi = []

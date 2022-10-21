@@ -10,14 +10,13 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaEliminaParcelle import VistaEl
 
 class VistaHomeParcelle(QMainWindow):
 
-    parcelleList = []
     avvocatiList = []
     clientiList = []
+    parcelleList = []
     tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaHomeParcelle, self).__init__(parent)
-        tool = Tools()
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
@@ -27,11 +26,11 @@ class VistaHomeParcelle(QMainWindow):
 
         self.grifLayout = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind1), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
+        self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiParcella))
+        self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaParcella))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiP()
@@ -83,9 +82,8 @@ class VistaHomeParcelle(QMainWindow):
             i += 1
 
     def aggiungiParcella(self):
-        tool = Tools()
         for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 self.avvClientiList = avvocato.clienti
                 if len(self.avvClientiList) == 0:
                     msg = QMessageBox()
@@ -119,12 +117,11 @@ class VistaHomeParcelle(QMainWindow):
 
     def getDatiC(self):
         self.clientiList = self.tool.loadClienti()
-        tool = Tools()
         for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+            if cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
                     return cliente.getDatiCliente()
 
-    def rewind1(self):
+    def rewind(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
         self.vistaHome = VistaHomeAvvocato()
         self.vistaHome.show()

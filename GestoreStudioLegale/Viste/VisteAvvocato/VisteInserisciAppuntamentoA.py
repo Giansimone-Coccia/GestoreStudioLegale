@@ -57,10 +57,9 @@ class VisteInserisciAppuntamentoA(QWidget):
         self.show()
 
     def sceltaClienti(self):
-        tool=Tools()
-        self.avvocatiList = tool.loadAvvocati()
+        self.avvocatiList = self.tool.loadAvvocati()
         for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 self.clientiList = avvocato.clienti
 
         self.nomi = []

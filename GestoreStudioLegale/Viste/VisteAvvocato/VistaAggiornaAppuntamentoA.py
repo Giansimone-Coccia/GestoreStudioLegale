@@ -12,10 +12,11 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import Vista
 
 class VistaAggiornaAppuntamentoA(QWidget):
 
-    cliente = Cliente()
+
     tool = Tools()
     appuntamento = Appuntamento()
     appuntamentiList = tool.loadAppuntamenti()
+    cliente = Cliente()
 
     def __init__(self,parent = None):
         super(VistaAggiornaAppuntamentoA, self).__init__(parent)
@@ -59,7 +60,6 @@ class VistaAggiornaAppuntamentoA(QWidget):
         self.month = self.dataSelezionata.month()
 
     def confermaAppuntamento(self):
-        tool = Tools()
         for appuntamento in self.appuntamentiList:
             if appuntamento.ID == self.appuntamento.ID:
                 hour = self.ora.currentText()
@@ -76,9 +76,9 @@ class VistaAggiornaAppuntamentoA(QWidget):
                     if os.path.isfile('GestoreStudioLegale/Dati/Appuntamenti.pickle'):
                         with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'wb') as f1:
                             pickle.dump(self.appuntamentiList, f1, pickle.HIGHEST_PROTOCOL)
-                    self.avocatiList = tool.loadAvvocati()
+                    self.avocatiList = self.tool.loadAvvocati()
                     for avvocato in self.avocatiList:
-                        if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+                        if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                             for app in avvocato.appuntamentiAvvocato:
                                 if app.ID == self.appuntamento.ID:
                                     avvocato.appuntamentiAvvocato.remove(app)

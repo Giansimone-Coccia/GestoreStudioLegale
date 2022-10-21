@@ -9,22 +9,22 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaEliminaParcelle(QWidget):
 
     id = ''
+    tool = Tools()
 
     def __init__(self, parent = None):
         super(VistaEliminaParcelle, self).__init__(parent)
 
-        tool = Tools()
         gLayout = QGridLayout()
-        gLayout.addWidget(tool.rewindButton(self.rewind), 0, 0)
+        gLayout.addWidget(self.tool.rewindButton(self.rewind), 0, 0)
         textLabel = QLabel()
         textLabel.setText("Sei sicuro?")
         textLabel.setGeometry(QRect(100, 120, 350, 40))
         textLabel.setFont(QFont('Arial', 12))
         gLayout.addWidget(textLabel, 1,1,1,2)
-        button1 = tool.createButton("No", self.rewind)
+        button1 = self.tool.createButton("No", self.rewind)
         button1.setMaximumSize(500,200)
         gLayout.addWidget(button1, 2, 1)
-        gLayout.addWidget(tool.createButton("Sì",lambda checked: self.eliminaParcella(self.id)), 2, 0)
+        gLayout.addWidget(self.tool.createButton("Sì",lambda checked: self.eliminaParcella(self.id)), 2, 0)
         self.setLayout(gLayout)
         self.resize(300, 100)
         self.setWindowTitle("Eliminazione parcella")

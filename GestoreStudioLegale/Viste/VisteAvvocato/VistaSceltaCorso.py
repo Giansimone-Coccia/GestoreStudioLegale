@@ -1,5 +1,3 @@
-import os
-import pickle
 
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont

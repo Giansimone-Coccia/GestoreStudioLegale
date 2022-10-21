@@ -12,10 +12,10 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUd
 
 class VistaAggiornaUdienza(QWidget):
 
-    cliente = Cliente()
     tool = Tools()
     udienza = Udienza()
     udienzeList = tool.loadUdienze()
+    cliente = Cliente()
 
     def __init__(self,parent = None):
         super(VistaAggiornaUdienza, self).__init__(parent)

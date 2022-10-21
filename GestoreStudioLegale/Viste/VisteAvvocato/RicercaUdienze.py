@@ -9,9 +9,8 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 
 class RicercaUdienze(QDialog):
-    NumGridRows = 3
     NumButtons = 4
-
+    NumGridRows = 3
 
     def __init__(self):
         super(RicercaUdienze, self).__init__()

@@ -14,7 +14,9 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VisteInserisciAppuntamentoA import 
 
 
 class VistaHomeAppuntamentiA(QMainWindow):
+
     appuntamentiList = []
+    tool = Tools()
 
     def __init__(self, parent=None):
         super(VistaHomeAppuntamentiA, self).__init__(parent)
@@ -22,7 +24,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        tool = Tools()
+
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
@@ -31,11 +33,11 @@ class VistaHomeAppuntamentiA(QMainWindow):
 
         self.grid = QGridLayout()
 
-        self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
+        self.outerLayout.addWidget(self.tool.rewindButton(self.rewind), 1)
         self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 8)
-        self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiAppuntamento))
-        self.button_layout.addWidget(tool.createButton("Cerca", self.cercaAppuntamento))
+        self.button_layout.addWidget(self.tool.createButton("Inserisci", self.aggiungiAppuntamento))
+        self.button_layout.addWidget(self.tool.createButton("Cerca", self.cercaAppuntamento))
         self.cWidget.setLayout(self.outerLayout)
         self.getDatiAp()
 
@@ -53,9 +55,8 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.show()
 
     def aggiungiAppuntamento(self):
-        tool = Tools()
         for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == tool.leggi().rsplit()[0]:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 self.avvClientiList = avvocato.clienti
                 if len(self.avvClientiList) == 0:
                     msg = QMessageBox()
@@ -91,15 +92,8 @@ class VistaHomeAppuntamentiA(QMainWindow):
         self.vistaHome.show()
         self.close()
 
-    def loadDateAp(self):
-        if os.path.isfile('GestoreStudioLegale/Dati/Avvocati.pickle'):
-            with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'rb') as f:
-                self.avvocatiList = list(pickle.load(f))
-
     def getDatiAp(self):
-        self.tool =Tools()
-        self.loadDateAp()
-        tool = Tools()
+        self.avvocatiList =self.tool.loadAvvocati()
         for avvocato in self.avvocatiList:
             if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
                 i = 0
@@ -121,14 +115,7 @@ class VistaHomeAppuntamentiA(QMainWindow):
                             label.setStyleSheet("border: 1px solid black;")
                             self.grid.addWidget(label,i,1,1,2)
                             i += 1
-                            self.grid.addWidget(tool.createButton("Modifica", lambda checked,  a = appuntamento: self.aggiornaAppuntamento(a)), i, 1)
+                            self.grid.addWidget(self.tool.createButton("Modifica", lambda checked,  a = appuntamento: self.aggiornaAppuntamento(a)), i, 1)
                             self.grid.addWidget(
-                                    tool.createButton("Elimina", lambda checked, a = appuntamento.getDatiAppuntamento()['ID']: self.rimuoviAppuntamento(a)), i, 2)
+                                    self.tool.createButton("Elimina", lambda checked, a = appuntamento.getDatiAppuntamento()['ID']: self.rimuoviAppuntamento(a)), i, 2)
                             i += 1
-
-    def getNum(self):
-        n = 0
-        self.loadDateAp()
-        for appuntamento in self.appuntamentiList:
-            n += 1
-        return n

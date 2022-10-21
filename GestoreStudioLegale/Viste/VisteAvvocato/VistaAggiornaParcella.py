@@ -7,10 +7,10 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeP
 
 class VistaAggiornaParcella(QWidget):
 
-    cliente = Cliente()
     tool = Tools()
     parcella = Parcella()
     parcelleList = tool.loadParcelle()
+    cliente = Cliente()
 
     def __init__(self, parent = None):
         super(VistaAggiornaParcella, self).__init__(parent)
