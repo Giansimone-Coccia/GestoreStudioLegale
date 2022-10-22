@@ -1,10 +1,9 @@
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QGridLayout
 from GestoreStudioLegale.Utilities.Utilities import Tools
-from GestoreStudioLegale.Viste.VisteAvvocato.VistaAggiungiCliente import VistaAggiungiCliente
-from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeParcelle import VistaHomeParcelle
-from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeUdienze import VistaHomeUdienze
+from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoCliente.VistaAggiungiCliente import VistaAggiungiCliente
+from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoAppuntamento.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
+from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaHomeParcelle import VistaHomeParcelle
+from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaHomeUdienze import VistaHomeUdienze
 
 class VistaHomeAvvocato(QWidget):
 

@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout
 
-from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeCorsoAgg import VistaHomeCorsoAgg
-from GestoreStudioLegale.Viste.VisteAdmin.VistaModificaCredenziali import VistaModificaCredenziali
-from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
-from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaClienti import VistaVisualizzaClienti
+from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaHomeCorsoAgg import VistaHomeCorsoAgg
+from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCredenziali.VistaModificaCredenziali import VistaModificaCredenziali
+from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminAvvocato.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
+from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCliente.VistaVisualizzaClienti import VistaVisualizzaClienti
 from GestoreStudioLegale.Utilities.Utilities import Tools
 #from GestoreStudioLegale.Viste.VisteAdmin.VistaVisualizzaStatistiche import VistaVisualizzaStatistiche
 
