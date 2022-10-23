@@ -19,7 +19,7 @@ class GestoreEmail:
     def invioEmail(self):
         try:
             oggetto = "Si ricorda l'appuntamento presso lo studio legale \n"
-            contenuto = 'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiApp()['Tipo Procedimento']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiApp()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiApp()['Data e Ora Fine']}"
+            contenuto = 'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiAppuntamento()['Tipo Procedimento']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiApp()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiApp()['Data e Ora Fine']}"
             messaggio = oggetto + contenuto
 
             email = smtplib.SMTP("smtp.gmail.com", 587)
@@ -28,12 +28,12 @@ class GestoreEmail:
             email.starttls()
             email.login("ProgettoStudioLegale0@gmail.com", "bzpklkbsziismfdv")
 
-            email.sendmail("ProgettoStudioLegale0@gmail.com", self.getDatiApp()['Cliente'].email , messaggio.encode('utf-8'))
+            email.sendmail("ProgettoStudioLegale0@gmail.com", self.getDatiAppuntamento()['Cliente'].email , messaggio.encode('utf-8'))
             email.quit()
         except Exception:
             print("Non esiste un appuntamento fissato per domani")
 
-    def getDatiApp(self):
+    def getDatiAppuntamento(self):
         self.appuntamentiList = self.tool.loadAppuntamenti()
         for appuntamento in self.appuntamentiList:
             if appuntamento.getDatiAppuntamento()['Data e Ora Inizio'] == datetime.now().replace(second=0, microsecond=0) + timedelta(days=1):
