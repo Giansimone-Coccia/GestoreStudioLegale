@@ -10,6 +10,8 @@ class TestAvvocato(TestCase):
         self.avvocatoOk.creaAvvocato('CF', 'Verdi', 'Angelo', ['Economia politica','Rischi e pericoli'], '', 'av@gmail.com', '', 0, '', [], [])
 
     def testOggettoVuoto(self):
+        self.assertIsNotNone(self.avvocatoOk)
+        self.assertIsNotNone(self.avvocatoVuoto)
         self.assertEqual(self.avvocatoVuoto.getDatiAvvocato()['Nome'], '')
         self.assertEqual(self.avvocatoVuoto.getDatiAvvocato()['Codice fiscale'], '')
         self.assertEqual(len(self.avvocatoVuoto.getDatiAvvocato()['Corso aggiornamento']), 0)
