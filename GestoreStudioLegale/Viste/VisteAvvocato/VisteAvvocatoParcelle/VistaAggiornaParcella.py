@@ -8,9 +8,9 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaHomeParc
 class VistaAggiornaParcella(QWidget):
 
     tool = Tools()
+    cliente = Cliente()
     parcella = Parcella()
     parcelleList = tool.loadParcelle()
-    cliente = Cliente()
 
     def __init__(self, parent = None):
         super(VistaAggiornaParcella, self).__init__(parent)
@@ -36,9 +36,14 @@ class VistaAggiornaParcella(QWidget):
         self.layout.addWidget(self.labelImportoTex, 2, 2)
         self.setLayout(self.layout)
 
-    def rewind(self):
-        self.vistaHome = VistaHomeParcelle()
-        self.vistaHome.show()
+    def conferma(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Parcella confermata")
+        msg.setText("La sua parcella è stata modificata con successo")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+        self.vistaPrima = VistaHomeParcelle()
+        self.vistaPrima.show()
         self.close()
 
     def confermaParcella(self):
@@ -65,20 +70,14 @@ class VistaAggiornaParcella(QWidget):
                 else:
                     self.problema("Immessi gli stessi dati")
 
-
-    def conferma(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Parcella confermata")
-        msg.setText("La sua parcella è stata modificata con successo")
-        msg.setIcon(QMessageBox.Information)
-        msg.exec_()
-        self.vistaPrima = VistaHomeParcelle()
-        self.vistaPrima.show()
-        self.close()
-
     def problema(self, messaggio):
         msg = QMessageBox()
         msg.setWindowTitle("ERRORE")
         msg.setText(messaggio)
         msg.setIcon(QMessageBox.Critical)
         msg.exec_()
+
+    def rewind(self):
+        self.vistaHome = VistaHomeParcelle()
+        self.vistaHome.show()
+        self.close()

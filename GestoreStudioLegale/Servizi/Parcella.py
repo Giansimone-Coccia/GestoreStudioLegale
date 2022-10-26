@@ -76,19 +76,6 @@ class Parcella():
             return None
 
 
-    def ricercaParcellaIntestatario (self, intestatario):
-        listaParcelle = []
-        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
-            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
-                parcelle = pickle.load(f)
-                for parcella in parcelle:
-                    if parcella.intestatario == intestatario:
-                        listaParcelle.append(parcella)
-                return listaParcelle
-        else:
-            return None
-
-
     def ricercaParcellaIdentificativo(self, identificativo):
         if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
@@ -100,6 +87,18 @@ class Parcella():
         else:
             return None
 
+
+    def ricercaParcellaIntestatario (self, intestatario):
+        listaParcelle = []
+        if os.path.isfile('GestoreStudioLegale/Dati/Parcelle.pickle'):
+            with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'rb') as f:
+                parcelle = pickle.load(f)
+                for parcella in parcelle:
+                    if parcella.intestatario == intestatario:
+                        listaParcelle.append(parcella)
+                return listaParcelle
+        else:
+            return None
 
     @staticmethod
     def rimuoviParcella (ID):

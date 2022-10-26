@@ -12,10 +12,10 @@ from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaHomeUdien
 
 class VistaAggiornaUdienza(QWidget):
 
+    cliente = Cliente()
     tool = Tools()
     udienza = Udienza()
     udienzeList = tool.loadUdienze()
-    cliente = Cliente()
 
     def __init__(self,parent = None):
         super(VistaAggiornaUdienza, self).__init__(parent)
@@ -47,16 +47,15 @@ class VistaAggiornaUdienza(QWidget):
         self.resize(800, 400)
         self.setWindowTitle("Modifica udienza")
 
-    def rewind(self):
-        self.vistaHome = VistaHomeUdienze()
-        self.vistaHome.show()
+    def conferma(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Udienza confermata")
+        msg.setText("La sua udienza è stata modificata con successo")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+        self.vistaPrima = VistaHomeUdienze()
+        self.vistaPrima.show()
         self.close()
-
-    def selezionaData(self):
-        self.dataSelezionata = self.calendar.selectedDate()
-        self.year = self.dataSelezionata.year()
-        self.day = self.dataSelezionata.day()
-        self.month = self.dataSelezionata.month()
 
     def confermaUdienza(self):
         for udienza in self.udienzeList:
@@ -76,26 +75,6 @@ class VistaAggiornaUdienza(QWidget):
                         with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:
                             pickle.dump(self.udienzeList, f1, pickle.HIGHEST_PROTOCOL)
                     self.conferma()
-
-    def conferma(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Udienza confermata")
-        msg.setText("La sua udienza è stata modificata con successo")
-        msg.setIcon(QMessageBox.Information)
-        msg.exec_()
-        self.vistaPrima = VistaHomeUdienze()
-        self.vistaPrima.show()
-        self.close()
-
-    def problema(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("ERRORE")
-        msg.setText("Non è possibile modificarla per questo giorno, riprovi")
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
-        self.vistaPrec = VistaHomeUdienze()
-        self.vistaPrima.show()
-        self.close()
 
     def convalida(self):
         if self.year is None and self.month is None and self.day is None:
@@ -143,3 +122,24 @@ class VistaAggiornaUdienza(QWidget):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
             return
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("ERRORE")
+        msg.setText("Non è possibile modificarla per questo giorno, riprovi")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+        self.vistaPrec = VistaHomeUdienze()
+        self.vistaPrima.show()
+        self.close()
+
+    def rewind(self):
+        self.vistaHome = VistaHomeUdienze()
+        self.vistaHome.show()
+        self.close()
+
+    def selezionaData(self):
+        self.dataSelezionata = self.calendar.selectedDate()
+        self.year = self.dataSelezionata.year()
+        self.day = self.dataSelezionata.day()
+        self.month = self.dataSelezionata.month()

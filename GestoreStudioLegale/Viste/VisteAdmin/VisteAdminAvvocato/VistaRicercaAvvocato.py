@@ -36,6 +36,12 @@ class VistaRicercaAvvocato(QWidget):
         self.buttonLogin.clicked.connect(self.ricercaAvvocato)
         self.setLayout(layout)
 
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminAvvocato.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
+        self.vistaHome = VistaVisualizzaAvvocati()
+        self.vistaHome.show()
+        self.close()
+
     def ricercaAvvocato(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminAvvocato.VistaAvvocatoRicercato import VistaAvvocatoRicercato
         avvocato = Avvocato()
@@ -54,8 +60,3 @@ class VistaRicercaAvvocato(QWidget):
             self.close()
 
 
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminAvvocato.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
-        self.vistaHome = VistaVisualizzaAvvocati()
-        self.vistaHome.show()
-        self.close()

@@ -58,14 +58,14 @@ class VistaCorsoAggRicercato(QMainWindow):
             self.grifLayout.addWidget(tool.createButton("Elimina", lambda checked, a=corso.ID: self.rimuoviCorso(a)), i, 1)
             i += 1
 
+    def rewind(self):
+        self.vistaHome = VistaHomeCorsoAgg()
+        self.vistaHome.show()
+        self.close()
+
     def rimuoviCorso(self,id):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaEliminaCorsoAgg import VistaEliminaCorsoAgg
         self.vistaE = VistaEliminaCorsoAgg()
         self.vistaE.setData(id)
         self.vistaE.show()
-        self.close()
-
-    def rewind(self):
-        self.vistaHome = VistaHomeCorsoAgg()
-        self.vistaHome.show()
         self.close()

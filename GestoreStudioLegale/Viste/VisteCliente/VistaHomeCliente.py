@@ -48,4 +48,3 @@ class VistaHomeCliente(QWidget):
         self.vistaH = VistaHome()
         self.vistaH.show()
         self.close()
-

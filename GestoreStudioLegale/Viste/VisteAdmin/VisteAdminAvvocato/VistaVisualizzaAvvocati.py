@@ -44,6 +44,28 @@ class VistaVisualizzaAvvocati(QMainWindow):
         self.resize(800, 600)
         self.setWindowTitle("Avvocati")
 
+    def aggiornaAvvocato(self,avvocato):
+        self.subWindow = VistaAggiornaAvvocato()
+        self.subWindow.setData(avvocato)
+        self.subWindow.show()
+        self.close()
+
+    def aggiungiAvvocato(self):
+        self.subWindow = VistaAggiungiAvvocato()
+        self.subWindow.show()
+        self.close()
+
+    def cercaAvvocato(self):
+        self.subWindow = VistaRicercaAvvocato()
+        self.subWindow.show()
+        self.close()
+
+    def eliminaAvvocato(self,id):
+        self.subWindow = VistaEliminaAvvocato()
+        self.subWindow.setData(id)
+        self.subWindow.show()
+        self.close()
+
     def getDatiA(self):
         self.avvocatiList = self.tool.loadAvvocati()
         i=2
@@ -64,26 +86,4 @@ class VistaVisualizzaAvvocati(QMainWindow):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
         self.vistaHome = VistaHomeAdmin()
         self.vistaHome.show()
-        self.close()
-
-    def aggiungiAvvocato(self):
-        self.subWindow = VistaAggiungiAvvocato()
-        self.subWindow.show()
-        self.close()
-
-    def cercaAvvocato(self):
-        self.subWindow = VistaRicercaAvvocato()
-        self.subWindow.show()
-        self.close()
-
-    def eliminaAvvocato(self,id):
-        self.subWindow = VistaEliminaAvvocato()
-        self.subWindow.setData(id)
-        self.subWindow.show()
-        self.close()
-
-    def aggiornaAvvocato(self,avvocato):
-        self.subWindow = VistaAggiornaAvvocato()
-        self.subWindow.setData(avvocato)
-        self.subWindow.show()
         self.close()

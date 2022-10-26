@@ -18,10 +18,9 @@ class VistaAggiungiCliente(QWidget):
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
-
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaH = VistaHomeAvvocato()
+    def reachAggiungiClienteEsistente(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoCliente.VistaAggiungiClienteEsistente import VistaAggiungiClienteEsistente
+        self.vistaH = VistaAggiungiClienteEsistente()
         self.vistaH.show()
         self.close()
 
@@ -31,8 +30,8 @@ class VistaAggiungiCliente(QWidget):
         self.vistaH.show()
         self.close()
 
-    def reachAggiungiClienteEsistente(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoCliente.VistaAggiungiClienteEsistente import VistaAggiungiClienteEsistente
-        self.vistaH = VistaAggiungiClienteEsistente()
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
+        self.vistaH = VistaHomeAvvocato()
         self.vistaH.show()
         self.close()

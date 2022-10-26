@@ -53,5 +53,3 @@ class VistaHomeAppuntamentiC (QWidget):
         self.vistaHome = VistaHomeCliente()
         self.vistaHome.show()
         self.close()
-
-

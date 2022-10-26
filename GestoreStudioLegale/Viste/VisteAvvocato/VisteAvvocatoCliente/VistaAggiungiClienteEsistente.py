@@ -32,12 +32,6 @@ class VistaAggiungiClienteEsistente(QWidget):
         self.buttonLogin.clicked.connect(self.aggiungiCliente)
         self.setLayout(layout)
 
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoCliente.VistaAggiungiCliente import VistaAggiungiCliente
-        self.vistaH = VistaAggiungiCliente()
-        self.vistaH.show()
-        self.close()
-
     def aggiungiCliente(self):
         cliente = Cliente()
         self.tool =Tools()
@@ -59,3 +53,10 @@ class VistaAggiungiClienteEsistente(QWidget):
                     msg.setText('Cliente aggiunto con successo')
                     msg.exec()
                     return
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoCliente.VistaAggiungiCliente import \
+            VistaAggiungiCliente
+        self.vistaH = VistaAggiungiCliente()
+        self.vistaH.show()
+        self.close()

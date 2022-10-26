@@ -22,17 +22,13 @@ class ParcellaRicercata(QMainWindow):
 
         self.cWidget = QWidget()
         self.outerLayout = QVBoxLayout()
-        #self.button_layout = QHBoxLayout()
         self.scroll = QScrollArea()
         self.widget = QWidget()
 
         self.grifLayout = QGridLayout()
 
         self.outerLayout.addWidget(tool.rewindButton(self.rewind), 1)
-        #self.outerLayout.addLayout(self.button_layout, 1)
         self.outerLayout.addWidget(self.scroll, 9)
-        #self.button_layout.addWidget(tool.createButton("Inserisci", self.aggiungiParcella))
-        #self.button_layout.addWidget(tool.createButton("Cerca", self.cercaParcella))
         self.cWidget.setLayout(self.outerLayout)
 
         self.getDatiP()
@@ -46,6 +42,20 @@ class ParcellaRicercata(QMainWindow):
         self.resize(800, 600)
         self.setWindowTitle("Parcelle")
         self.show()
+
+    def aggiornaParcella(self, parcella):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaAggiornaParcella import VistaAggiornaParcella
+        self.vistaAggiorna = VistaAggiornaParcella()
+        self.vistaAggiorna.parcella = parcella
+        self.vistaAggiorna.show()
+        self.close()
+
+    def getDatiC(self):
+        self.clientiList = self.tool.loadClienti()
+        tool = Tools()
+        for cliente in self.clientiList:
+            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+                return cliente.getDatiCliente()
 
     def getDatiP(self):
         self.parcelleList = self.tool.loadParcelle()
@@ -75,27 +85,13 @@ class ParcellaRicercata(QMainWindow):
                 tool.createButton("Elimina", self.rimuoviParcella),i,2)
             i += 1
 
-    def aggiornaParcella(self, parcella):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaAggiornaParcella import VistaAggiornaParcella
-        self.vistaAggiorna = VistaAggiornaParcella()
-        self.vistaAggiorna.parcella = parcella
-        self.vistaAggiorna.show()
+    def rewind(self):
+        self.vistaHome = VistaHomeParcelle()
+        self.vistaHome.show()
         self.close()
 
     def rimuoviParcella(self):
         from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaEliminaParcelle import VistaEliminaParcelle
         self.elimina = VistaEliminaParcelle()
         self.elimina.show()
-        self.close()
-
-    def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        tool = Tools()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                    return cliente.getDatiCliente()
-
-    def rewind(self):
-        self.vistaHome = VistaHomeParcelle()
-        self.vistaHome.show()
         self.close()

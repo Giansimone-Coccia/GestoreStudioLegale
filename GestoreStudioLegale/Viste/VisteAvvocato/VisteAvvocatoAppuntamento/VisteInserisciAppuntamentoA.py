@@ -56,27 +56,16 @@ class VisteInserisciAppuntamentoA(QWidget):
         self.setWindowTitle("Prenotazione appuntamenti")
         self.show()
 
-    def sceltaClienti(self):
-        self.avvocatiList = self.tool.loadAvvocati()
-        for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-                self.clientiList = avvocato.clienti
-
-        self.nomi = []
-        for cliente in self.clientiList:
-            self.nomi.append(cliente.nome+' '+cliente.cognome)
-        return self.nomi
-
-    def selezionaData(self):
-        self.dataSelezionata = self.calendar.selectedDate()
-        self.year = self.dataSelezionata.year()
-        self.day = self.dataSelezionata.day()
-        self.month = self.dataSelezionata.month()
-
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoAppuntamento.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-        self.vistaAppuntameti = VistaHomeAppuntamentiA()
-        self.vistaAppuntameti.show()
+    def conferma(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Appuntamento confermato")
+        msg.setText("Il suo appuntamento è stato confermato")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoAppuntamento.VistaHomeAppuntamentiA import \
+            VistaHomeAppuntamentiA
+        self.vistaH = VistaHomeAppuntamentiA()
+        self.vistaH.show()
         self.close()
 
     def confermaAppuntamento(self):
@@ -120,24 +109,6 @@ class VisteInserisciAppuntamentoA(QWidget):
                             avvocato.aggiornaAvvocato()
                     self.conferma()
                     return
-
-    def conferma(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Appuntamento confermato")
-        msg.setText("Il suo appuntamento è stato confermato")
-        msg.setIcon(QMessageBox.Information)
-        msg.exec_()
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoAppuntamento.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
-        self.vistaH = VistaHomeAppuntamentiA()
-        self.vistaH.show()
-        self.close()
-
-    def problema(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Problema")
-        msg.setText("Range occupato, provare un orario o data differente")
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
 
     def convalida(self):
         if self.year is None and self.month is None and self.day is None:
@@ -185,3 +156,33 @@ class VisteInserisciAppuntamentoA(QWidget):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
             return
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Problema")
+        msg.setText("Range occupato, provare un orario o data differente")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoAppuntamento.VistaHomeAppuntamentiA import VistaHomeAppuntamentiA
+        self.vistaAppuntameti = VistaHomeAppuntamentiA()
+        self.vistaAppuntameti.show()
+        self.close()
+
+    def sceltaClienti(self):
+        self.avvocatiList = self.tool.loadAvvocati()
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
+                self.clientiList = avvocato.clienti
+
+        self.nomi = []
+        for cliente in self.clientiList:
+            self.nomi.append(cliente.nome+' '+cliente.cognome)
+        return self.nomi
+
+    def selezionaData(self):
+        self.dataSelezionata = self.calendar.selectedDate()
+        self.year = self.dataSelezionata.year()
+        self.day = self.dataSelezionata.day()
+        self.month = self.dataSelezionata.month()

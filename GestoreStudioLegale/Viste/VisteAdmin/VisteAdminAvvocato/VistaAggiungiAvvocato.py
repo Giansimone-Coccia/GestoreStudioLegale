@@ -134,8 +134,6 @@ class VistaAggiungiAvvocato(QWidget):
         self.msg.exec()
         self.rewind()
 
-
-
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminAvvocato.VistaVisualizzaAvvocati import VistaVisualizzaAvvocati
         self.vistaVisualizza = VistaVisualizzaAvvocati()

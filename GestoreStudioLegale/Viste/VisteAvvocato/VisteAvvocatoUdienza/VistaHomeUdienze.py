@@ -43,6 +43,43 @@ class VistaHomeUdienze(QMainWindow):
         self.setWindowTitle("Udienze")
         self.show()
 
+    def aggiornaUdienza(self, udienza):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaAggiornaUdienza import \
+            VistaAggiornaUdienza
+        self.vistaAggiorna = VistaAggiornaUdienza()
+        self.vistaAggiorna.udienza = udienza
+        self.vistaAggiorna.show()
+        self.close()
+
+    def aggiungiUdienza(self):
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
+                self.avvClientiList = avvocato.clienti
+                if len(self.avvClientiList) == 0:
+                    msg = QMessageBox()
+                    msg.setWindowTitle('Nessun cliente associato')
+                    msg.setText('Nessun cliente è associato a questo avvocato')
+                    msg.exec()
+                    return
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaIserisciUdienza import \
+            VistaInserisciUdienza
+        self.vistaInserimento = VistaInserisciUdienza()
+        self.vistaInserimento.show()
+        self.close()
+
+
+    def cercaUdienza(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.RicercaUdienze import RicercaUdienze
+        self.ricerca = RicercaUdienze()
+        self.ricerca.show()
+        self.close()
+
+    def getDatiC(self):
+        self.clientiList = self.tool.loadClienti()
+        for cliente in self.clientiList:
+            if cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
+                return cliente.getDatiCliente()
+
     def getDatiU(self):
         self.udienzeList = self.tool.loadUdienze()
         self.avvocatiList = self.tool.loadAvvocati()
@@ -82,48 +119,14 @@ class VistaHomeUdienze(QMainWindow):
                 tool.createButton("Elimina", lambda checked, a = u.getDatiUdienza()['ID']: self.rimuoviUdienza(a)),i,2)
             i += 1
 
-    def aggiungiUdienza(self):
-        for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-                self.avvClientiList = avvocato.clienti
-                if len(self.avvClientiList) == 0:
-                    msg = QMessageBox()
-                    msg.setWindowTitle('Nessun cliente associato')
-                    msg.setText('Nessun cliente è associato a questo avvocato')
-                    msg.exec()
-                    return
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaIserisciUdienza import VistaInserisciUdienza
-        self.vistaInserimento = VistaInserisciUdienza()
-        self.vistaInserimento.show()
-        self.close()
-
-    def aggiornaUdienza(self, udienza):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaAggiornaUdienza import VistaAggiornaUdienza
-        self.vistaAggiorna = VistaAggiornaUdienza()
-        self.vistaAggiorna.udienza = udienza
-        self.vistaAggiorna.show()
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
+        self.vistaHome = VistaHomeAvvocato()
+        self.vistaHome.show()
         self.close()
 
     def rimuoviUdienza(self, id):
         self.subWindow = VistaEliminaUdienze()
         self.subWindow.setData(id)
         self.subWindow.show()
-        self.close()
-
-    def cercaUdienza(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.RicercaUdienze import RicercaUdienze
-        self.ricerca = RicercaUdienze()
-        self.ricerca.show()
-        self.close()
-
-    def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
-                    return cliente.getDatiCliente()
-
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaHome = VistaHomeAvvocato()
-        self.vistaHome.show()
         self.close()

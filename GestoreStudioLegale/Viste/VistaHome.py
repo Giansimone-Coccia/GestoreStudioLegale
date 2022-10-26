@@ -28,6 +28,11 @@ class VistaHome(QWidget):
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
+    def reachAmministratore(self):
+        self.vistaAdmin = LoginAdmin()
+        self.vistaAdmin.show()
+        self.close()
+
     def reachAvvocato(self):
         self.vistaAvvocato = LoginAvvocato()
         self.vistaAvvocato.show()
@@ -38,7 +43,3 @@ class VistaHome(QWidget):
         self.vistaCliente.show()
         self.close()
 
-    def reachAmministratore(self):
-        self.vistaAdmin = LoginAdmin()
-        self.vistaAdmin.show()
-        self.close()

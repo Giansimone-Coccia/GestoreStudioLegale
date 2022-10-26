@@ -47,32 +47,6 @@ class VistaInserisciParcellaA(QWidget):
         self.setWindowTitle("Parcelle")
         self.show()
 
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaHomeParcelle import VistaHomeParcelle
-        self.vistaPHome = VistaHomeParcelle()
-        self.vistaPHome.show()
-        self.close()
-
-    def sceltaClienti(self):
-        self.avvocatiList = self.tool.loadAvvocati()
-        for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-                self.clientiList = avvocato.clienti
-
-        self.nomi = []
-        for cliente in self.clientiList:
-            self.nomi.append(cliente.nome+' '+cliente.cognome)
-        return self.nomi
-
-    def parcellaOK(self):
-        parcella = Parcella()
-        ID = self.tool.IdGenerator('PA')
-        cliente = self.ottieniCliente()
-        if not self.convalida():
-            parcella.creaParcella(cliente, ID, int(self.labelIdentText.text()), int(self.labelImportoText.text()), self.labelIntestText.text())
-            self.conferma()
-            return
-
     def conferma(self):
         msg = QMessageBox()
         msg.setWindowTitle("Parcella confermata")
@@ -82,20 +56,6 @@ class VistaInserisciParcellaA(QWidget):
         self.vistaH = VistaHomeParcelle()
         self.vistaH.show()
         self.close()
-
-    def problema(self, messaggio):
-        msg = QMessageBox()
-        msg.setWindowTitle("Problema")
-        msg.setText(messaggio)
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
-
-    def ottieniCliente(self):
-        cliente = Cliente()
-        nomeCognome = self.menuClienti.currentText()
-        nome = nomeCognome.rsplit()[0]
-        cognome = nomeCognome.rsplit()[1]
-        return cliente.ricercaUtilizzatoreNomeCognome(nome, cognome)
 
     def convalida(self):
         try:
@@ -121,3 +81,46 @@ class VistaInserisciParcellaA(QWidget):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
             return
+
+    def ottieniCliente(self):
+        cliente = Cliente()
+        nomeCognome = self.menuClienti.currentText()
+        nome = nomeCognome.rsplit()[0]
+        cognome = nomeCognome.rsplit()[1]
+        return cliente.ricercaUtilizzatoreNomeCognome(nome, cognome)
+
+    def parcellaOK(self):
+        parcella = Parcella()
+        ID = self.tool.IdGenerator('PA')
+        cliente = self.ottieniCliente()
+        if not self.convalida():
+            parcella.creaParcella(cliente, ID, int(self.labelIdentText.text()), int(self.labelImportoText.text()),
+                                  self.labelIntestText.text())
+            self.conferma()
+            return
+
+    def problema(self, messaggio):
+        msg = QMessageBox()
+        msg.setWindowTitle("Problema")
+        msg.setText(messaggio)
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaHomeParcelle import VistaHomeParcelle
+        self.vistaPHome = VistaHomeParcelle()
+        self.vistaPHome.show()
+        self.close()
+
+    def sceltaClienti(self):
+        self.avvocatiList = self.tool.loadAvvocati()
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
+                self.clientiList = avvocato.clienti
+
+        self.nomi = []
+        for cliente in self.clientiList:
+            self.nomi.append(cliente.nome+' '+cliente.cognome)
+        return self.nomi
+
+

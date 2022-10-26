@@ -41,11 +41,15 @@ class VistaSceltaCorso(QMainWindow):
         self.setWindowTitle("Scelta corso aggiornamento")
         self.show()
 
-
-    def rewind(self):
+    def conferma(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Corso confermato")
+        msg.setText("Ha selezionato correttamente il corso")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
         from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaH3 = VistaHomeAvvocato()
-        self.vistaH3.show()
+        self.vistaH4 = VistaHomeAvvocato()
+        self.vistaH4.show()
         self.close()
 
     def getDatiCorso(self):
@@ -66,6 +70,19 @@ class VistaSceltaCorso(QMainWindow):
                 self.tool.createButton("Seleziona", lambda checked, a=corso.getDatiCorso()['ID']: self.scegliCorso(a)), i, 2)
             i += 1
 
+    def problema(self, stringa):
+        msg = QMessageBox()
+        msg.setWindowTitle("Problema")
+        msg.setText(stringa)
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
+        self.vistaH3 = VistaHomeAvvocato()
+        self.vistaH3.show()
+        self.close()
+
     def scegliCorso(self, id):
         c = CorsoAggiornamento()
         avvocatiList = self.tool.loadAvvocati()
@@ -77,22 +94,3 @@ class VistaSceltaCorso(QMainWindow):
                     self.conferma()
                 else:
                     self.problema("Stai già seguendo un corso, terminalo prima di selezionarne uno nuovo")
-
-    def conferma(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Corso confermato")
-        msg.setText("Ha selezionato correttamente il corso")
-        msg.setIcon(QMessageBox.Information)
-        msg.exec_()
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaH4 = VistaHomeAvvocato()
-        self.vistaH4.show()
-        self.close()
-
-    def problema(self, stringa):
-        msg = QMessageBox()
-        msg.setWindowTitle("Problema")
-        msg.setText(stringa)
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
-

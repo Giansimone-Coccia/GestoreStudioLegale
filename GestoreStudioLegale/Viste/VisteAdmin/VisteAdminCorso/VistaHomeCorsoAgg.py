@@ -40,18 +40,6 @@ class VistaHomeCorsoAgg(QMainWindow):
         self.setWindowTitle("Corsi aggiornamento")
         self.show()
 
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
-        self.vistaHome = VistaHomeAdmin()
-        self.vistaHome.show()
-        self.close()
-
-    def inserisciCorso(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaInserisciCorso import VistaInserisciCorso
-        self.vistaIn = VistaInserisciCorso()
-        self.vistaIn.show()
-        self.close()
-
     def cercaCorso(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaRicercaCorsoAgg import VistaRicercaCorsoAgg
         self.vistaCorso = VistaRicercaCorsoAgg()
@@ -75,6 +63,17 @@ class VistaHomeCorsoAgg(QMainWindow):
             self.grifLayout.addWidget(self.tool.createButton("Elimina", lambda checked, a=corso.getDatiCorso()['ID']: self.rimuoviCorso(a)), i, 2)
             i += 1
 
+    def inserisciCorso(self):
+        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaInserisciCorso import VistaInserisciCorso
+        self.vistaIn = VistaInserisciCorso()
+        self.vistaIn.show()
+        self.close()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
+        self.vistaHome = VistaHomeAdmin()
+        self.vistaHome.show()
+        self.close()
 
     def rimuoviCorso(self, id):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaEliminaCorsoAgg import VistaEliminaCorsoAgg

@@ -35,6 +35,12 @@ class VistaRicercaCliente(QWidget):
         self.buttonLogin.clicked.connect(self.ricercaCliente)
         self.setLayout(layout)
 
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCliente.VistaVisualizzaClienti import VistaVisualizzaClienti
+        self.vistaHome = VistaVisualizzaClienti()
+        self.vistaHome.show()
+        self.close()
+
     def ricercaCliente(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCliente.VistaClienteRicercato import VistaClienteRicercato
         cliente = Cliente()
@@ -51,12 +57,3 @@ class VistaRicercaCliente(QWidget):
             self.subWindow.setData(cliente)
             self.subWindow.show()
             self.close()
-
-
-
-
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCliente.VistaVisualizzaClienti import VistaVisualizzaClienti
-        self.vistaHome = VistaVisualizzaClienti()
-        self.vistaHome.show()
-        self.close()

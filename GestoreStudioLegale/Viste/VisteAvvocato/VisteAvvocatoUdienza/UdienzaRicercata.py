@@ -12,8 +12,8 @@ class UdienzaRicercata(QMainWindow):
 
     avvocatiList = []
     clientiList = []
-    udienzeList = []
     tool = Tools()
+    udienzeList = []
 
     def __init__(self, udienze,parent=None):
         super(UdienzaRicercata, self).__init__(parent)
@@ -46,6 +46,26 @@ class UdienzaRicercata(QMainWindow):
         self.setWindowTitle("Udienze")
         self.show()
 
+    def aggiornaUdienza(self, udienza):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaAggiornaUdienza import VistaAggiornaUdienza
+        self.vistaAggiorna = VistaAggiornaUdienza()
+        self.vistaAggiorna.udienza = udienza
+        self.vistaAggiorna.show()
+        self.close()
+
+    def aggiungiUdienza(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaIserisciUdienza import VistaInserisciUdienza
+        self.vistaInserimento = VistaInserisciUdienza()
+        self.vistaInserimento.show()
+        self.close()
+
+    def getDatiC(self):
+        self.clientiList = self.tool.loadClienti()
+        tool = Tools()
+        for cliente in self.clientiList:
+            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+                return cliente.getDatiCliente()
+
     def getDatiU(self):
         self.udienzeList = self.tool.loadUdienze()
         self.avvocatiList = self.tool.loadAvvocati()
@@ -68,7 +88,7 @@ class UdienzaRicercata(QMainWindow):
             dataFin = u.getDatiUdienza()['Data e Ora Fine'].strftime("%m/%d/%Y, %H:%M:%S")
             label.setText(
                 #'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{dataIn}" + '\n' + 'DATA ORA FINE: ' + f"{dataFin}")
-               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{u.getDatiUdienza()['Data e Ora Inizio']}" + '\n' + 'DATA ORA FINE: ' + f"{u.getDatiUdienza()['Data e Ora Fine']}")
+               'Udienza: ' + '\n' + 'CITTA TRIBUNALE: ' + f"{u.getDatiUdienza()['Città Tribunale']}" + '\n' + 'TIPO TRIBUNALE: ' + f"{u.getDatiUdienza()['Tipo Tribunale']}" + '\n' + 'ID: ' + f"{u.getDatiUdienza()['ID']}" + '\n' + 'DATA ORA INIZIO: ' + f"{dataIn}" + '\n' + 'DATA ORA FINE: ' + f"{dataFin}")
 
             label.setGeometry(QRect(0, 0, 350, 20))
             label.setFont(QFont('Arial', 10))
@@ -80,33 +100,13 @@ class UdienzaRicercata(QMainWindow):
                 tool.createButton("Elimina", lambda checked, a = u.getDatiUdienza()['ID']: self.rimuoviUdienza(a)),i,2)
             i += 1
 
-    def aggiungiUdienza(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaIserisciUdienza import VistaInserisciUdienza
-        self.vistaInserimento = VistaInserisciUdienza()
-        self.vistaInserimento.show()
-        self.close()
-
-    def aggiornaUdienza(self, udienza):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoUdienza.VistaAggiornaUdienza import VistaAggiornaUdienza
-        self.vistaAggiorna = VistaAggiornaUdienza()
-        self.vistaAggiorna.udienza = udienza
-        self.vistaAggiorna.show()
+    def rewind(self):
+        self.vistaHome = VistaHomeUdienze()
+        self.vistaHome.show()
         self.close()
 
     def rimuoviUdienza(self, id):
         self.subWindow = VistaEliminaUdienze()
         self.subWindow.setData(id)
         self.subWindow.show()
-        self.close()
-
-    def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        tool = Tools()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                    return cliente.getDatiCliente()
-
-    def rewind(self):
-        self.vistaHome = VistaHomeUdienze()
-        self.vistaHome.show()
         self.close()

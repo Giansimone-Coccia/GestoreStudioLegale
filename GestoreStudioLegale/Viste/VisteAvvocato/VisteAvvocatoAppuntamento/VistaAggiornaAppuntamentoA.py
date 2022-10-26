@@ -48,16 +48,15 @@ class VistaAggiornaAppuntamentoA(QWidget):
         self.resize(800, 400)
         self.setWindowTitle("Modifica appuntamenti")
 
-    def rewind(self):
-        self.vistaHome = VistaHomeAppuntamentiA()
-        self.vistaHome.show()
+    def conferma(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Appuntamento confermato")
+        msg.setText("Il suo appuntamento è stato modificato con successo")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+        self.vistaPrima = VistaHomeAppuntamentiA()
+        self.vistaPrima.show()
         self.close()
-
-    def selezionaData(self):
-        self.dataSelezionata = self.calendar.selectedDate()
-        self.year = self.dataSelezionata.year()
-        self.day = self.dataSelezionata.day()
-        self.month = self.dataSelezionata.month()
 
     def confermaAppuntamento(self):
         for appuntamento in self.appuntamentiList:
@@ -85,26 +84,6 @@ class VistaAggiornaAppuntamentoA(QWidget):
                                     avvocato.appuntamentiAvvocato.append(appuntamento)
                             avvocato.aggiornaAvvocato()
                     self.conferma()
-
-    def conferma(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Appuntamento confermato")
-        msg.setText("Il suo appuntamento è stato modificato con successo")
-        msg.setIcon(QMessageBox.Information)
-        msg.exec_()
-        self.vistaPrima = VistaHomeAppuntamentiA()
-        self.vistaPrima.show()
-        self.close()
-
-    def problema(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("ERRORE")
-        msg.setText("Non è possibile modificarlo per questo giorno, riprovi")
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
-        self.vistaPrec = VistaHomeAppuntamentiA()
-        self.vistaPrima.show()
-        self.close()
 
     def convalida(self):
             if self.year is None and self.month is None and self.day is None:
@@ -152,3 +131,24 @@ class VistaAggiornaAppuntamentoA(QWidget):
                 msg.setIcon(QMessageBox.Critical)
                 msg.exec_()
                 return
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("ERRORE")
+        msg.setText("Non è possibile modificarlo per questo giorno, riprovi")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+        self.vistaPrec = VistaHomeAppuntamentiA()
+        self.vistaPrima.show()
+        self.close()
+
+    def rewind(self):
+        self.vistaHome = VistaHomeAppuntamentiA()
+        self.vistaHome.show()
+        self.close()
+
+    def selezionaData(self):
+        self.dataSelezionata = self.calendar.selectedDate()
+        self.year = self.dataSelezionata.year()
+        self.day = self.dataSelezionata.day()
+        self.month = self.dataSelezionata.month()

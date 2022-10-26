@@ -27,11 +27,6 @@ class VistaHomeAdmin(QWidget):
         self.setWindowTitle("Gestore Studio Legale")
         self.show()
 
-    def reachCredenziali(self):
-        self.vistaModC = VistaModificaCredenziali()
-        self.vistaModC.show()
-        self.close()
-
     def reachAvvocati(self):
         self.vistaVisualizzaA = VistaVisualizzaAvvocati()
         self.vistaVisualizzaA.show()
@@ -42,15 +37,21 @@ class VistaHomeAdmin(QWidget):
         self.vistaVisualizzaC.show()
         self.close()
 
+    def reachCorsiAgg(self):
+        self.vistaCorsi = VistaHomeCorsoAgg()
+        self.vistaCorsi.show()
+        self.close()
+
+    def reachCredenziali(self):
+        self.vistaModC = VistaModificaCredenziali()
+        self.vistaModC.show()
+        self.close()
+
     def reachStatistiche(self):
         self.vistaVisualizzaS = VistaVisualizzaStatistiche()
         self.vistaVisualizzaS.show()
         #self.close()
 
-    def reachCorsiAgg(self):
-        self.vistaCorsi = VistaHomeCorsoAgg()
-        self.vistaCorsi.show()
-        self.close()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.LoginAdmin import LoginAdmin

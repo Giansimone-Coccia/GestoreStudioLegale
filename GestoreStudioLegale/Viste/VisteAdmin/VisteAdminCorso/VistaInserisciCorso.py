@@ -7,9 +7,9 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 
 class VistaInserisciCorso(QWidget):
 
-    tool = Tools()
     avvocatiList = []
     corsoAvv = {}
+    tool = Tools()
     year = None
     month = None
     day = None
@@ -58,28 +58,6 @@ class VistaInserisciCorso(QWidget):
         self.setWindowTitle("Inserimento corso")
         self.show()
 
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaHomeCorsoAgg import VistaHomeCorsoAgg
-        self.vistaHome1 = VistaHomeCorsoAgg()
-        self.vistaHome1.show()
-        self.close()
-
-    def corsoOK(self):
-        corsoA = CorsoAggiornamento()
-        hour = self.ora.currentText()
-        if not self.convalida():
-            hourDT = datetime.datetime.strptime(hour, "%H:%M")
-            oraFine = hourDT + datetime.timedelta(hours=1)
-            self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
-            dateF = self.pyDate + datetime.timedelta(weeks=4)
-            dateIS = self.pyDate.strftime("%d/%m/%Y")
-            dataOraInizio = dateIS + ',' + hour
-            dataOraFine = dateF.strftime("%d/%m/%Y") + ',' + oraFine.strftime("%H:%M")
-            corsoA.creaCorso(self.labelNomeText.text(), self.labelCRText.text(), self.tool.IdGenerator('CO'), dataOraInizio, dataOraFine, self.labelTypeText.text())
-            self.conferma()
-        else:
-            self.problema()
-
     def conferma(self):
         msg = QMessageBox()
         msg.setWindowTitle("Corso confermato")
@@ -90,20 +68,6 @@ class VistaInserisciCorso(QWidget):
         self.vistaH2 = VistaHomeCorsoAgg()
         self.vistaH2.show()
         self.close()
-
-    def problema(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Problema")
-        msg.setText("Qualcosa è andato storto, riprova")
-        msg.setIcon(QMessageBox.Critical)
-        msg.exec_()
-
-
-    def selezionaData(self):
-        self.dataSelezionata = self.calendar.selectedDate()
-        self.year = self.dataSelezionata.year()
-        self.day = self.dataSelezionata.day()
-        self.month = self.dataSelezionata.month()
 
     def convalida(self):
         if self.year is None and self.month is None and self.day is None:
@@ -151,3 +115,38 @@ class VistaInserisciCorso(QWidget):
             msg.setIcon(QMessageBox.Critical)
             msg.exec_()
             return
+
+    def corsoOK(self):
+        corsoA = CorsoAggiornamento()
+        hour = self.ora.currentText()
+        if not self.convalida():
+            hourDT = datetime.datetime.strptime(hour, "%H:%M")
+            oraFine = hourDT + datetime.timedelta(hours=1)
+            self.pyDate = datetime.datetime(int(self.year), int(self.month), int(self.day))
+            dateF = self.pyDate + datetime.timedelta(weeks=4)
+            dateIS = self.pyDate.strftime("%d/%m/%Y")
+            dataOraInizio = dateIS + ',' + hour
+            dataOraFine = dateF.strftime("%d/%m/%Y") + ',' + oraFine.strftime("%H:%M")
+            corsoA.creaCorso(self.labelNomeText.text(), self.labelCRText.text(), self.tool.IdGenerator('CO'), dataOraInizio, dataOraFine, self.labelTypeText.text())
+            self.conferma()
+        else:
+            self.problema()
+
+    def problema(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Problema")
+        msg.setText("Qualcosa è andato storto, riprova")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCorso.VistaHomeCorsoAgg import VistaHomeCorsoAgg
+        self.vistaHome1 = VistaHomeCorsoAgg()
+        self.vistaHome1.show()
+        self.close()
+
+    def selezionaData(self):
+        self.dataSelezionata = self.calendar.selectedDate()
+        self.year = self.dataSelezionata.year()
+        self.day = self.dataSelezionata.day()
+        self.month = self.dataSelezionata.month()

@@ -52,13 +52,12 @@ class LoginAvvocato(QWidget):
             msg.exec()
             return
 
-
-    def show_new(self):
-        self.vistaAvvocatoH = VistaHomeAvvocato()
-        self.vistaAvvocatoH.show()
-
     def rewind(self):
         from GestoreStudioLegale.Viste.VistaHome import VistaHome
         self.vistaH = VistaHome()
         self.vistaH.show()
         self.close()
+
+    def show_new(self):
+        self.vistaAvvocatoH = VistaHomeAvvocato()
+        self.vistaAvvocatoH.show()

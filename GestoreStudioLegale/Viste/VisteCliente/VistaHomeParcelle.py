@@ -40,6 +40,13 @@ class VistaHomeParcelle(QMainWindow):
         self.setWindowTitle("Parcelle")
         self.show()
 
+    def getDatiC(self):
+        self.clientiList = self.tool.loadClienti()
+        tool = Tools()
+        for cliente in self.clientiList:
+            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
+                    return cliente.getDatiCliente()
+
     def getDatiP(self):
         self.parcelleList = self.tool.loadParcelle()
         tool = Tools()
@@ -57,14 +64,6 @@ class VistaHomeParcelle(QMainWindow):
             label.setStyleSheet("border: 1px solid black;")
             self.gridLayout.addWidget(label, i, 1, 1, 2)
             i += 1
-
-
-    def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        tool = Tools()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(tool.leggi()).rsplit()[0]:
-                    return cliente.getDatiCliente()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente

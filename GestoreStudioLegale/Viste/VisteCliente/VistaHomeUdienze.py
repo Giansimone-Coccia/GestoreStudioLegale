@@ -8,8 +8,9 @@ from GestoreStudioLegale.Utilities.Utilities import Tools
 class VistaHomeUdienze(QMainWindow):
 
     clientiList = []
-    udienzeList = []
     tool = Tools()
+    udienzeList = []
+
 
     def __init__(self, parent=None):
         super(VistaHomeUdienze, self).__init__(parent)
@@ -41,6 +42,12 @@ class VistaHomeUdienze(QMainWindow):
         self.resize(800, 600)
         self.show()
 
+    def getDatiC(self):
+        self.clientiList = self.tool.loadClienti()
+        for cliente in self.clientiList:
+            if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
+                return cliente.getDatiCliente()
+
     def getDatiU(self):
         self.udienzeList = self.tool.loadUdienze()
         udienzeL = []
@@ -60,13 +67,6 @@ class VistaHomeUdienze(QMainWindow):
             label.setStyleSheet("border: 1px solid black;")
             self.gridLayout.addWidget(label, i, 1, 1, 2)
             i += 1
-
-
-    def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(self.tool.leggi(n=0)).rsplit()[0]:
-                return cliente.getDatiCliente()
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteCliente.VistaHomeCliente import VistaHomeCliente

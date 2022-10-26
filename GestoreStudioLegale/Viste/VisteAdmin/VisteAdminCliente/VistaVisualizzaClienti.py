@@ -43,6 +43,27 @@ class VistaVisualizzaClienti(QMainWindow):
         self.resize(800, 600)
         self.setWindowTitle("Clienti")
 
+    def aggiornaCliente(self,cliente):
+        self.subWindow = VistaAggiornaCliente()
+        self.subWindow.setData(cliente)
+        self.subWindow.show()
+        self.close()
+
+    def aggiungiCliente(self):
+        self.subWindow = VistaAggiungiCliente()
+        self.subWindow.show()
+        self.close()
+
+    def cercaCliente(self):
+        self.subWindow = VistaRicercaCliente()
+        self.subWindow.show()
+        self.close()
+
+    def eliminaCliente(self,id):
+        self.subWindow = VistaEliminaCliente()
+        self.subWindow.setData(id)
+        self.subWindow.show()
+        self.close()
 
     def getDatiC(self):
         self.clientiList=self.tool.loadClienti()
@@ -64,26 +85,4 @@ class VistaVisualizzaClienti(QMainWindow):
         from GestoreStudioLegale.Viste.VisteAdmin.VistaHomeAdmin import VistaHomeAdmin
         self.vistaHome = VistaHomeAdmin()
         self.vistaHome.show()
-        self.close()
-
-    def aggiungiCliente(self):
-        self.subWindow = VistaAggiungiCliente()
-        self.subWindow.show()
-        self.close()
-
-    def eliminaCliente(self,id):
-        self.subWindow = VistaEliminaCliente()
-        self.subWindow.setData(id)
-        self.subWindow.show()
-        self.close()
-
-    def cercaCliente(self):
-        self.subWindow = VistaRicercaCliente()
-        self.subWindow.show()
-        self.close()
-
-    def aggiornaCliente(self,cliente):
-        self.subWindow = VistaAggiornaCliente()
-        self.subWindow.setData(cliente)
-        self.subWindow.show()
         self.close()

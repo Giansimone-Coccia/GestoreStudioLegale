@@ -33,12 +33,29 @@ class VistaAggiornaCliente(QWidget):
         self.buttonLogin.clicked.connect(self.invio)
         self.setLayout(self.layout)
 
+    def breve(self, nome, obj, n, l):
+        item = self.layout.itemAtPosition(n, 1).widget()
+        if obj == item.text():
+            self.error(f"Hai inseirto l{l} stess{l} {nome}")
+            return False
+        elif obj != item.text() and item.text()!="":
+            self.string += f"{nome}, "
+            return item.text()
+        if item.text() == "":
+            return obj
+
     def createLine(self,name,n,l):
         self.labelName = QLabel(f'<font size="4"> {name} </font>')
         self.lineEdit = QLineEdit()
         self.lineEdit.setPlaceholderText(f'Inserisci nuov{l} {name.lower()}')
         self.layout.addWidget(self.labelName, n, 0)
         self.layout.addWidget(self.lineEdit, n, 1)
+
+    def error(self, name):
+        self.msg = QMessageBox()
+        self.msg.setWindowTitle('ERRORE')
+        self.msg.setText(name)
+        self.msg.exec()
 
     def invio(self):
 
@@ -206,17 +223,6 @@ class VistaAggiornaCliente(QWidget):
         self.msg.exec()
         self.rewind()
 
-    def breve(self, nome, obj, n, l):
-        item = self.layout.itemAtPosition(n, 1).widget()
-        if obj == item.text():
-            self.error(f"Hai inseirto l{l} stess{l} {nome}")
-            return False
-        elif obj != item.text() and item.text()!="":
-            self.string += f"{nome}, "
-            return item.text()
-        if item.text() == "":
-            return obj
-
 
     def rewind(self):
         from GestoreStudioLegale.Viste.VisteAdmin.VisteAdminCliente.VistaVisualizzaClienti import VistaVisualizzaClienti
@@ -226,9 +232,3 @@ class VistaAggiornaCliente(QWidget):
 
     def setData(self, cliente):
         self.cliente = cliente
-
-    def error(self, name):
-        self.msg = QMessageBox()
-        self.msg.setWindowTitle('ERRORE')
-        self.msg.setText(name)
-        self.msg.exec()

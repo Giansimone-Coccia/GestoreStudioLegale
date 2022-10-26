@@ -45,6 +45,40 @@ class VistaHomeParcelle(QMainWindow):
         self.setWindowTitle("Parcelle")
         self.show()
 
+    def aggiornaParcella(self, parcella):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaAggiornaParcella import VistaAggiornaParcella
+        self.vistaAggiorna = VistaAggiornaParcella()
+        self.vistaAggiorna.parcella = parcella
+        self.vistaAggiorna.show()
+        self.close()
+
+    def aggiungiParcella(self):
+        for avvocato in self.avvocatiList:
+            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
+                self.avvClientiList = avvocato.clienti
+                if len(self.avvClientiList) == 0:
+                    msg = QMessageBox()
+                    msg.setWindowTitle('Nessun cliente associato')
+                    msg.setText('Nessun cliente è associato a questo avvocato')
+                    msg.exec()
+                    return
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaInserisciParcellaA import VistaInserisciParcellaA
+        self.aggiunta = VistaInserisciParcellaA()
+        self.aggiunta.show()
+        self.close()
+
+    def cercaParcella(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.RicercaParcelle import RicercaParcelle
+        self.vistaAvvocatoR = RicercaParcelle()
+        self.vistaAvvocatoR.show()
+        self.close()
+
+    def getDatiC(self):
+        self.clientiList = self.tool.loadClienti()
+        for cliente in self.clientiList:
+            if cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
+                return cliente.getDatiCliente()
+
     def getDatiP(self):
         self.parcelleList = self.tool.loadParcelle()
         self.avvocatiList = self.tool.loadAvvocati()
@@ -81,48 +115,14 @@ class VistaHomeParcelle(QMainWindow):
                 self.tool.createButton("Elimina", lambda checked, a = p.getDatiParcellaCliente()['ID']: self.rimuoviParcella(a)),i,2)
             i += 1
 
-    def aggiungiParcella(self):
-        for avvocato in self.avvocatiList:
-            if avvocato.codiceFiscale == self.tool.leggi().rsplit()[0]:
-                self.avvClientiList = avvocato.clienti
-                if len(self.avvClientiList) == 0:
-                    msg = QMessageBox()
-                    msg.setWindowTitle('Nessun cliente associato')
-                    msg.setText('Nessun cliente è associato a questo avvocato')
-                    msg.exec()
-                    return
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaInserisciParcellaA import VistaInserisciParcellaA
-        self.aggiunta = VistaInserisciParcellaA()
-        self.aggiunta.show()
-        self.close()
-
-    def cercaParcella(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.RicercaParcelle import RicercaParcelle
-        self.vistaAvvocatoR = RicercaParcelle()
-        self.vistaAvvocatoR.show()
-        self.close()
-
-    def aggiornaParcella(self, parcella):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VisteAvvocatoParcelle.VistaAggiornaParcella import VistaAggiornaParcella
-        self.vistaAggiorna = VistaAggiornaParcella()
-        self.vistaAggiorna.parcella = parcella
-        self.vistaAggiorna.show()
+    def rewind(self):
+        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
+        self.vistaHome = VistaHomeAvvocato()
+        self.vistaHome.show()
         self.close()
 
     def rimuoviParcella(self, id):
         self.subWindow = VistaEliminaParcelle()
         self.subWindow.setData(id)
         self.subWindow.show()
-        self.close()
-
-    def getDatiC(self):
-        self.clientiList = self.tool.loadClienti()
-        for cliente in self.clientiList:
-            if cliente.codiceFiscale == str(self.tool.leggi()).rsplit()[0]:
-                    return cliente.getDatiCliente()
-
-    def rewind(self):
-        from GestoreStudioLegale.Viste.VisteAvvocato.VistaHomeAvvocato import VistaHomeAvvocato
-        self.vistaHome = VistaHomeAvvocato()
-        self.vistaHome.show()
         self.close()
