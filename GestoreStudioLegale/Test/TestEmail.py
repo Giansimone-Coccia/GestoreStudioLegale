@@ -9,6 +9,6 @@ class TestStatistiche(TestCase):
         self.appuntamento = Appuntamento()
 
     def testException(self):
-        #self.gestoreE.invioEmail()
+        self.gestoreE.invioEmail()
         if self.appuntamento == None:
             self.assertRaises(Exception, self.gestoreE.invioEmail())

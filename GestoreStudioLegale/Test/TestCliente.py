@@ -14,6 +14,8 @@ class TestCliente(TestCase):
         self.clienteOk.creaCliente('CF', 'Rossi', [corso1, corso2], '', 'mr@gmail.com', '', 3334445556, '', [], [], 'Mario')
 
     def testOggettoVuoto(self):
+        self.assertIsNotNone(self.clienteOk)
+        self.assertIsNotNone(self.clienteVuoto)
         self.assertEqual(self.clienteVuoto.getDatiCliente()['Nome'], '')
         self.assertEqual(len(self.clienteVuoto.getDatiCliente()['Corso aggiornamento']), 0)
         self.assertEqual(len(self.clienteOk.getDatiCliente()['Corso aggiornamento']), 2)
