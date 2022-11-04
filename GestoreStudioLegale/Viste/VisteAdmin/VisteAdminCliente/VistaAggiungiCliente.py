@@ -102,10 +102,9 @@ class VistaAggiungiCliente(QWidget):
             return
 
         item = self.layout.itemAtPosition(5, 1).widget()
-        lenght = len(item.text())
         email = str(item.text())
 
-        if not ( tool.check(email)):
+        if not (tool.check(email)):
             self.error("Erore formato email, questa non può contenere caratteri speciali e deve  concludere con \"@gmail.com\"")
             return
 
@@ -123,7 +122,6 @@ class VistaAggiungiCliente(QWidget):
         corsiAgg = []
         appuntamenti = []
         parcelle = []
-        #udienze = []
 
         cliente.creaCliente(self.layout.itemAtPosition(3, 1).widget().text(), self.layout.itemAtPosition(2, 1).widget().text(),
                             corsiAgg,date.strftime("%d/%m/%Y"), self.layout.itemAtPosition(5, 1).widget().text(),

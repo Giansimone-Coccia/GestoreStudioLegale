@@ -65,11 +65,6 @@ class VistaAggiornaAvvocato(QWidget):
 
         nome = self.layout.itemAtPosition(1, 1).widget().text()
         cognome = self.layout.itemAtPosition(2, 1).widget().text()
-        appuntamenti = self.avvocato.appuntamentiAvvocato
-        clienti = self.avvocato.clienti
-        #licenza =self.avvocato.licenza
-        corsiAgg = self.avvocato.corsoAggiornamento
-        #udienza= self.avvocato.udienza
 
         if str(self.avvocato.getDatiAvvocato()["Nome"]) == nome:
             self.error("Hai inserito lo stesso Nome")
@@ -97,7 +92,7 @@ class VistaAggiornaAvvocato(QWidget):
             if self.avvocato.ricercaUtilizzatoreCC(cd) is None:
                 self.string += f"codice fiscale, "
             else:
-                self.error("Hai inserito l'id di un cliente già esistente")
+                self.error("Hai inserito il codice fiscale di un cliente già esistente")
                 return
 
         item = self.layout.itemAtPosition(4, 1).widget()

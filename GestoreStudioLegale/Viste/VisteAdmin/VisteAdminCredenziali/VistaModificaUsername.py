@@ -38,7 +38,7 @@ class VistaModificaUsername(QWidget):
         if self.lineEditNewUser.text() == self.lineEditOldUser.text():
             msg = QMessageBox()
             msg.setWindowTitle('ERRORE')
-            msg.setText('La nuova password coincide con la vecchia password')
+            msg.setText('Il nuovo username coincide con il vecchio username')
             msg.exec()
             return
 
@@ -53,7 +53,7 @@ class VistaModificaUsername(QWidget):
         else:
             msg = QMessageBox()
             msg.setWindowTitle('ERRORE')
-            msg.setText('Vecchia Password errata')
+            msg.setText('Vecchio username errato')
             msg.exec()
             return
 

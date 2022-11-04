@@ -19,7 +19,7 @@ class GestoreEmail:
     def invioEmail(self):
         try:
             oggetto = "Si ricorda l'appuntamento presso lo studio legale \n"
-            contenuto = 'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiAppuntamento()['Tipo Procedimento']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiApp()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiApp()['Data e Ora Fine']}"
+            contenuto = 'Appuntamento: '+'\n'+ 'TIPO PROCEDIMENTO: '+f"{self.getDatiAppuntamento()['Tipo Procedimento']}"+'\n'+'DATA E ORA INIZIO: '+f"{self.getDatiAppuntamento()['Data e Ora Inizio']}"+'\n'+'DATA E ORA FINE: '+f"{self.getDatiAppuntamento()['Data e Ora Fine']}"
             messaggio = oggetto + contenuto
 
             email = smtplib.SMTP("smtp.gmail.com", 587)

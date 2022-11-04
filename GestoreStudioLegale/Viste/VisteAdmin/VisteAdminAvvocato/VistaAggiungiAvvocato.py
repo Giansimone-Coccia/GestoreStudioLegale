@@ -101,7 +101,6 @@ class VistaAggiungiAvvocato(QWidget):
             return
 
         item = self.layout.itemAtPosition(5, 1).widget()
-        lenght = len(item.text())
         email = str(item.text())
 
         if not (tool.check(email)):

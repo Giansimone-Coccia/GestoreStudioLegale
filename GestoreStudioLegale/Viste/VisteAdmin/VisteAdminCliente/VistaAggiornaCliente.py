@@ -65,9 +65,6 @@ class VistaAggiornaCliente(QWidget):
 
         nome = self.layout.itemAtPosition(1, 1).widget().text()
         cognome = self.layout.itemAtPosition(2, 1).widget().text()
-        appuntamenti = self.cliente.appuntamentoCliente
-        parcelle = self.cliente.parcelle
-        corsiAgg = self.cliente.corsoAggiornamento
 
         if str(self.cliente.getDatiCliente()["Nome"]) == nome:
             self.error("Hai inseirto lo stesso Nome")
