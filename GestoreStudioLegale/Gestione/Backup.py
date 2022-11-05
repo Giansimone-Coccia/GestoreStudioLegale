@@ -20,6 +20,7 @@ class Backup:
             f.write('')
         self.salvaDatiAppuntamento()
         self.salvaDatiParcella()
+        self.salvaDatiUdienza()
         self.salvaDatiCorsoAggiornamento()
         self.salvaDatiUtilizzatore()
 

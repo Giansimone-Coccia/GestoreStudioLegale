@@ -113,8 +113,6 @@ class Avvocato(Utilizzatore):
             for avvocato in avvocati:
                 if avvocato.Id == Id:
                     avvocati.remove(avvocato)
-                else:
-                    print("Avvocato non trovato")
             with open('GestoreStudioLegale/Dati/Avvocati.pickle', 'wb') as f1:
                 pickle.dump(avvocati, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:

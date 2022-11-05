@@ -111,8 +111,6 @@ class Appuntamento:
             for appuntamento in appuntamenti:
                 if appuntamento.ID == ID:
                     appuntamenti.remove(appuntamento)
-                else:
-                    print("Appuntamento non trovato")
             with open('GestoreStudioLegale/Dati/Appuntamenti.pickle', 'wb') as f1:
                 pickle.dump(appuntamenti, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:

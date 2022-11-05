@@ -110,8 +110,6 @@ class Parcella():
             for parcella in parcelle:
                 if parcella.ID == ID:
                     parcelle.remove(parcella)
-                else:
-                    print("Parcella non trovata")
             with open('GestoreStudioLegale/Dati/Parcelle.pickle', 'wb') as f1:
                 pickle.dump(parcelle, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:

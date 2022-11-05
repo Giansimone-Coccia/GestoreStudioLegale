@@ -127,8 +127,6 @@ class Udienza:
             for udienza in udienze:
                 if udienza.ID == ID:
                     udienze.remove(udienza)
-                else:
-                    print("Udienza non trovato")
             with open('GestoreStudioLegale/Dati/Udienze.pickle', 'wb') as f1:
                 pickle.dump(udienze, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:

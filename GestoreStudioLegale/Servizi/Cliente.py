@@ -110,8 +110,6 @@ class Cliente(Utilizzatore):
             for cliente in clienti:
                 if cliente.Id == Id:
                     clienti.remove(cliente)
-                else:
-                    print("Cliente non trovato")
             with open('GestoreStudioLegale/Dati/Clienti.pickle', 'wb') as f1:
                 pickle.dump(clienti, f1, pickle.HIGHEST_PROTOCOL)
         except Exception as e:

@@ -33,22 +33,22 @@ class Statistiche:
                     self.problema()
 
             for udienza in udienze:
-                if udienza.tipoTribunale == 'amministrativa':
+                if udienza.tipoTribunale == 'Amministrativo':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzeAmminsitrative += 1
             for udienza in udienze:
-                if udienza.tipoTribunale == 'civile':
+                if udienza.tipoTribunale == 'Civile':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzeCivili += 1
             for udienza in udienze:
-                if udienza.tipoTribunale == 'penale':
+                if udienza.tipoTribunale == 'Penale':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzePenali += 1
             for udienza in udienze:
-                if udienza.tipoTribunale == 'minorile':
+                if udienza.tipoTribunale == 'Minorile':
                     date = datetime.now() - timedelta(days=365)
                     if udienza.dataOraInizio > date:
                         nUdienzeMinorili += 1
