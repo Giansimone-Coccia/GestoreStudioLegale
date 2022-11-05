@@ -14,6 +14,8 @@ Il primo inserimento dei clienti o degli avvocati avviene tramite l'amministrato
 
   - **username:** user
   - **password:** password
+  
+Inizialmente, a titolo di esempio, sono già presenti vari dati riguardanti clienti, avvocati e relativi appuntamenti, udienze e parcelle. E' possibile utilizzare questi oppure aggiungerne altri a proprio piacimento.
 
 ## 1.2 STRUTTURA DEL SOFTWARE
 Le informazioni raccolte hanno evidenziato i possibili utenti di un software per uno studio legale: gli avvocati, i clienti e l’amministratore dello studio. Per rispettare questa esigenza il nostro software si suddivide principalmente in tre sezioni una per ogni utente. Altra caratteristica che risultava importante era avere la possibilità di visualizzare e gestire agilmente le informazioni relative alle parcelle, alle udienze, agli appuntamenti e ai corsi di aggiornamento. 
